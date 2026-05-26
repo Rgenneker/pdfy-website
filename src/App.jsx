@@ -367,11 +367,41 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
               <p className="mt-3 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm">{file ? file.name : "Choose file"}</p>
               <input ref={inputRef} hidden type="file" accept={tool.accepts} onChange={(e) => setFile(e.target.files?.[0] || null)} />
             </div>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <label className="block"><span className="mb-2 block text-sm font-black text-slate-700">Notes, text, instructions or PDF content</span><textarea value={note} onChange={(e) => setNote(e.target.value)} className="h-40 w-full rounded-3xl border border-slate-200 p-4 outline-none focus:border-rose-300" /></label>
-              <label className="block"><span className="mb-2 block text-sm font-black text-slate-700">Recipient email for signing workflows</span><input value={recipient} onChange={(e) => setRecipient(e.target.value)} placeholder="name@example.com" className="w-full rounded-full border border-slate-200 px-5 py-4 outline-none focus:border-rose-300" /><div className="mt-5 rounded-3xl bg-slate-50 p-5 text-sm leading-6 text-slate-600"><Info className="mb-2 text-rose-500" /> Tools that convert Word, LibreOffice, PPT, HTML, CSV, locked PDFs and OCR-based editable PDFs need a secure backend conversion engine in production. This interface is ready for API integration.</div></label>
+            <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
+              <label className="block">
+                <span className="mb-3 block text-sm font-black text-slate-700">Notes, text, instructions or PDF content</span>
+                <textarea
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  className="min-h-44 w-full rounded-3xl border border-slate-200 bg-white p-5 text-base leading-7 text-slate-700 outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+                  placeholder="Add notes, text, instructions or document content here..."
+                />
+              </label>
+
+              <div className="grid gap-4">
+                <label className="block">
+                  <span className="mb-3 block text-sm font-black text-slate-700">Recipient email for signing</span>
+                  <input
+                    value={recipient}
+                    onChange={(e) => setRecipient(e.target.value)}
+                    placeholder="name@example.com"
+                    className="w-full rounded-3xl border border-slate-200 bg-white px-5 py-4 text-base outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+                  />
+                </label>
+
+                <div className="rounded-3xl border border-rose-100 bg-rose-50/60 p-5 text-sm leading-6 text-slate-600">
+                  <Info className="mb-3 text-rose-500" />
+                  <p>
+                    Conversion tools for Word, LibreOffice, PPT, HTML, CSV, locked PDFs and OCR-based editable PDFs require a secure backend processor in production.
+                  </p>
+                </div>
+              </div>
             </div>
-            <button onClick={processTool} className="mt-6 inline-flex items-center gap-2 rounded-full bg-rose-500 px-7 py-4 font-black text-white shadow-xl shadow-rose-100 hover:bg-rose-600"><Download size={18} /> Process with {tool.name}</button>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <button onClick={processTool} className="inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 px-7 py-4 font-black text-white shadow-xl shadow-rose-100 transition hover:-translate-y-0.5 hover:bg-rose-600"><Download size={18} /> Process with {tool.name}</button>
+              <p className="text-sm text-slate-500">Upload → Review → Process → Download</p>
+            </div>
           </div>
           <aside className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
             <h3 className="text-xl font-black text-slate-950">Tool status</h3>
