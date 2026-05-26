@@ -19,6 +19,7 @@ import {
   ShieldCheck,
   Menu,
   X,
+  XCircle,
   ChevronDown,
   ArrowRight,
   Sparkles,
@@ -180,54 +181,136 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
 
+  function openTool(toolName) {
+    setActivePage("Tools");
+    setSelectedTool(toolName);
+    setOpen(false);
+    setMobile(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   const nav = (
     <>
-      {pages.map((page) => (
+      {pages.map((page) =>
         page === "Tools" ? (
-          <div key={page} className="relative group">
-            <button onClick={() => setOpen(!open)} className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition ${activePage === "Tools" ? "bg-rose-50 text-rose-600" : "text-slate-700 hover:bg-slate-100"}`}>
+          <div key={page} className="relative">
+            <button
+              onClick={() => setOpen(!open)}
+              className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                activePage === "Tools"
+                  ? "bg-rose-50 text-rose-600"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
               Tools <ChevronDown size={16} />
             </button>
-            <div className={`${open ? "block" : "hidden"} group-hover:block absolute left-0 top-11 z-50 w-[740px] max-w-[calc(100vw-2rem)] rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl`}>
-              <div className="grid gap-4 md:grid-cols-2">
-                {toolGroups.map((group) => (
-                  <div key={group.title}>
-                    <h4 className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-slate-400">{group.title}</h4>
-                    <div className="grid gap-1">
-                      {group.tools.map((tool) => {
-                        const Icon = tool.icon;
-                        return (
-                          <button key={tool.name} onClick={() => { setActivePage("Tools"); setSelectedTool(tool.name); setOpen(false); setMobile(false); }} className="flex items-center gap-3 rounded-2xl p-3 text-left hover:bg-slate-50">
-                            <span className="rounded-xl bg-rose-50 p-2 text-rose-600"><Icon size={18} /></span>
-                            <span><span className="block text-sm font-bold text-slate-800">{tool.name}</span><span className="line-clamp-1 text-xs text-slate-500">{tool.description}</span></span>
-                          </button>
-                        );
-                      })}
+
+            {open && (
+              <div className="fixed left-1/2 top-20 z-50 w-[min(980px,calc(100vw-2rem))] -translate-x-1/2 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
+                <div className="grid gap-6 lg:grid-cols-2">
+                  {toolGroups.map((group) => (
+                    <div key={group.title} className="min-w-0">
+                      <h4 className="mb-4 text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+                        {group.title}
+                      </h4>
+
+                      <div className="divide-y divide-slate-100 rounded-3xl bg-white">
+                        {group.tools.map((tool) => {
+                          const Icon = tool.icon;
+                          return (
+                            <button
+                              key={tool.name}
+                              onClick={() => openTool(tool.name)}
+                              className="flex w-full items-start gap-4 rounded-2xl p-4 text-left transition hover:bg-rose-50"
+                            >
+                              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-rose-50 text-rose-600">
+                                <Icon size={20} />
+                              </span>
+                              <span className="min-w-0">
+                                <span className="block text-base font-black leading-5 text-slate-950">
+                                  {tool.name}
+                                </span>
+                                <span className="mt-1 block text-sm leading-6 text-slate-500">
+                                  {tool.description}
+                                </span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         ) : (
-          <button key={page} onClick={() => { setActivePage(page); setMobile(false); }} className={`rounded-full px-4 py-2 text-sm font-semibold transition ${activePage === page ? "bg-rose-50 text-rose-600" : "text-slate-700 hover:bg-slate-100"}`}>{page}</button>
+          <button
+            key={page}
+            onClick={() => {
+              setActivePage(page);
+              setMobile(false);
+              setOpen(false);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              activePage === page
+                ? "bg-rose-50 text-rose-600"
+                : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            {page}
+          </button>
         )
-      ))}
+      )}
     </>
   );
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
-        <button onClick={() => setActivePage("Home")} className="flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 text-white shadow-lg shadow-rose-200"><FileText /></span>
-          <span className="text-2xl font-black tracking-tight text-slate-950">PDFy<span className="text-rose-500">.</span></span>
+        <button
+          onClick={() => {
+            setActivePage("Home");
+            setOpen(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="flex items-center gap-3"
+        >
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 text-white shadow-lg shadow-rose-200">
+            <FileText />
+          </span>
+          <span className="text-2xl font-black tracking-tight text-slate-950">
+            PDFy<span className="text-rose-500">.</span>
+          </span>
         </button>
+
         <nav className="hidden items-center gap-1 lg:flex">{nav}</nav>
-        <button onClick={() => setActivePage("Tools")} className="hidden rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-slate-200 lg:block">Start converting</button>
-        <button onClick={() => setMobile(!mobile)} className="rounded-2xl border border-slate-200 p-3 lg:hidden">{mobile ? <X /> : <Menu />}</button>
+
+        <button
+          onClick={() => {
+            setActivePage("Tools");
+            setOpen(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="hidden rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-slate-200 lg:block"
+        >
+          Start converting
+        </button>
+
+        <button
+          onClick={() => setMobile(!mobile)}
+          className="rounded-2xl border border-slate-200 p-3 lg:hidden"
+        >
+          {mobile ? <X /> : <Menu />}
+        </button>
       </div>
-      {mobile && <div className="border-t border-slate-100 bg-white px-4 pb-4 lg:hidden"><div className="grid gap-2">{nav}</div></div>}
+
+      {mobile && (
+        <div className="border-t border-slate-100 bg-white px-4 pb-4 lg:hidden">
+          <div className="grid gap-2">{nav}</div>
+        </div>
+      )}
     </header>
   );
 }
@@ -404,10 +487,58 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
             </div>
           </div>
           <aside className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 className="text-xl font-black text-slate-950">Tool status</h3>
-            <div className="mt-4 rounded-3xl bg-slate-50 p-5"><p className="flex items-center gap-2 font-bold text-slate-800"><CheckCircle2 className="text-emerald-500" /> {status}</p><p className="mt-3 text-sm leading-6 text-slate-600">Designed for fast use on phone screens, tablets, kiosks, touchscreen displays, laptops and desktop PCs.</p></div>
-            <div className="mt-6"><h4 className="mb-3 font-black text-slate-950">Best used for</h4><div className="grid gap-2 text-sm text-slate-600"><p>• Applications and forms</p><p>• Contracts and signing</p><p>• Reports and statements</p><p>• School and business submissions</p><p>• Customer service document support</p></div></div>
-          </aside>
+  <h3 className="text-xl font-black text-slate-950">
+    Tool status
+  </h3>
+
+  <div className="mt-4 rounded-3xl bg-slate-50 p-5">
+    <div className="flex items-start gap-4">
+      {status.toLowerCase().includes("failed") ? (
+        <XCircle
+          className="mt-1 text-rose-500"
+          size={42}
+        />
+      ) : (
+        <CheckCircle2
+          className="mt-1 text-emerald-500"
+          size={42}
+        />
+      )}
+
+      <div>
+        <h4 className="text-lg font-black text-slate-950">
+          {status.toLowerCase().includes("failed")
+            ? "Processing Failed"
+            : "Ready"}
+        </h4>
+
+        <p className="mt-2 text-sm leading-6 text-slate-600">
+          {status}
+        </p>
+
+        <p className="mt-4 text-sm leading-6 text-slate-500">
+          Designed for fast use on phone screens,
+          tablets, kiosks, touchscreen displays,
+          laptops and desktop PCs.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div className="mt-6">
+    <h4 className="mb-3 font-black text-slate-950">
+      Best used for
+    </h4>
+
+    <div className="grid gap-2 text-sm text-slate-600">
+      <p>• Applications and forms</p>
+      <p>• Contracts and signing</p>
+      <p>• Reports and statements</p>
+      <p>• School and business submissions</p>
+      <p>• Customer service document support</p>
+    </div>
+  </div>
+</aside>
         </div>
       </section>
     </main>
