@@ -43,7 +43,7 @@ app.post("/txt-to-pdf", upload.single("file"), async (req, res) => {
     const pdfBytes = await pdfDoc.save();
 
     res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", "attachment; filename=PDFy-converted.pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-converted.pdf");
     res.send(Buffer.from(pdfBytes));
   } catch (error) {
     console.error(error);
@@ -83,7 +83,7 @@ app.post("/jpg-to-pdf", upload.single("file"), async (req, res) => {
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      "attachment; filename=PDFy-image.pdf"
+      "attachment; filename=PDFShuffl-image.pdf"
     );
 
     res.send(Buffer.from(pdfBytes));
@@ -94,5 +94,5 @@ app.post("/jpg-to-pdf", upload.single("file"), async (req, res) => {
 });
 
 app.listen(5000, () => {
-  console.log("PDFy backend running on http://localhost:5000");
+  console.log("PDFShuffl backend running on http://localhost:5000");
 });

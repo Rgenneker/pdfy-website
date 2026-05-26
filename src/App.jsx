@@ -145,8 +145,8 @@ function downloadTextFile(filename, text, type = "text/plain") {
 }
 
 function createSimplePdf(text) {
-  const safeText = (text || "Created with PDFy").replace(/[()\\]/g, "\\$&").slice(0, 2500);
-  const content = `BT /F1 18 Tf 72 760 Td (PDFy Document) Tj /F1 11 Tf 0 -32 Td (${safeText}) Tj ET`;
+  const safeText = (text || "Created with PDFShuffl").replace(/[()\\]/g, "\\$&").slice(0, 2500);
+  const content = `BT /F1 18 Tf 72 760 Td (PDFShuffl Document) Tj /F1 11 Tf 0 -32 Td (${safeText}) Tj ET`;
   const objects = [
     "1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj",
     "2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj",
@@ -170,7 +170,7 @@ function createSimplePdf(text) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "PDFy-created-document.pdf";
+  a.download = "PDFShuffl-created-document.pdf";
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -281,7 +281,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
             <FileText />
           </span>
           <span className="text-2xl font-black tracking-tight text-slate-950">
-            PDFy<span className="text-rose-500">.</span>
+            PDFShuffl<span className="text-rose-500">.</span>
           </span>
         </button>
 
@@ -322,7 +322,7 @@ function Hero({ setActivePage }) {
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-rose-100 bg-white px-4 py-2 text-sm font-bold text-rose-600 shadow-sm"><Sparkles size={16} /> Premium document work, made effortless</div>
           <h1 className="max-w-4xl text-5xl font-black tracking-tight text-slate-950 md:text-7xl">Create, convert, edit, sign and compress PDFs in one sleek workspace.</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">PDFy brings everyday document work into a fast, elegant experience for mobile phones, tablets, touchscreen displays, laptops and PCs.</p>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">PDFShuffl brings everyday document work into a fast, elegant experience for mobile phones, tablets, touchscreen displays, laptops and PCs.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button onClick={() => setActivePage("Tools")} className="rounded-full bg-rose-500 px-7 py-4 text-base font-black text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-rose-600">Choose a PDF tool</button>
             <button onClick={() => document.getElementById("learn")?.scrollIntoView({ behavior: "smooth" })} className="rounded-full border border-slate-200 bg-white px-7 py-4 text-base font-black text-slate-800 shadow-sm">Learn why PDF matters</button>
@@ -337,7 +337,7 @@ function Hero({ setActivePage }) {
           <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-rose-200 to-orange-100 blur-3xl" />
           <div className="relative rounded-[2.5rem] border border-white bg-white/90 p-4 shadow-2xl">
             <div className="rounded-[2rem] bg-slate-950 p-5 text-white">
-              <div className="mb-5 flex items-center justify-between"><span className="font-black">PDFy Tools</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Live workspace</span></div>
+              <div className="mb-5 flex items-center justify-between"><span className="font-black">PDFShuffl Tools</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Live workspace</span></div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {allTools.slice(0, 8).map((tool) => {
                   const Icon = tool.icon;
@@ -357,7 +357,7 @@ function Home({ setActivePage }) {
     <main>
       <Hero setActivePage={setActivePage} />
       <section id="learn" className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
-        <div className="mb-10 max-w-3xl"><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDF knowledge hub</p><h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Understand the what, why, when, where and how of PDF.</h2><p className="mt-4 text-slate-600">Each thumbnail opens a reliable educational resource in a new tab, so users stay in PDFy while learning from trusted sources.</p></div>
+        <div className="mb-10 max-w-3xl"><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDF knowledge hub</p><h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Understand the what, why, when, where and how of PDF.</h2><p className="mt-4 text-slate-600">Each thumbnail opens a reliable educational resource in a new tab, so users stay in PDFShuffl while learning from trusted sources.</p></div>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {educationCards.map((card) => {
             const Icon = card.icon;
@@ -375,7 +375,7 @@ function Home({ setActivePage }) {
       <section className="bg-slate-950 py-16 text-white">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr]">
-            <div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-300">Built for every document moment</p><h2 className="mt-3 text-4xl font-black">Why people will return to PDFy.</h2><p className="mt-4 text-slate-300">One home for applications, school submissions, customer forms, HR packs, contracts, reports, statements, invoices, branch support, travel documents, and signed approvals.</p></div>
+            <div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-300">Built for every document moment</p><h2 className="mt-3 text-4xl font-black">Why people will return to PDFShuffl.</h2><p className="mt-4 text-slate-300">One home for applications, school submissions, customer forms, HR packs, contracts, reports, statements, invoices, branch support, travel documents, and signed approvals.</p></div>
             <div className="grid gap-4 sm:grid-cols-2">
               {audiences.map((item) => {
                 const Icon = item.icon;
@@ -404,7 +404,7 @@ function ToolShowcase({ setActivePage }) {
 function ToolsPage({ selectedTool, setSelectedTool }) {
   const tool = allTools.find((t) => t.name === selectedTool) || allTools[0];
   const [file, setFile] = useState(null);
-  const [note, setNote] = useState("This document was created inside PDFy. Replace this text with your content, notes, instructions, or form details.");
+  const [note, setNote] = useState("This document was created inside PDFShuffl. Replace this text with your content, notes, instructions, or form details.");
   const [recipient, setRecipient] = useState("");
   const [status, setStatus] = useState("Ready");
   const inputRef = useRef(null);
@@ -423,18 +423,18 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
       return;
     }
     if (tool.name.includes("Sign") || tool.name === "Request Signing") {
-      downloadTextFile("PDFy-signing-request.txt", `PDFy signing workflow\nTool: ${tool.name}\nFile: ${file?.name || "No file selected"}\nRecipient: ${recipient || "Not provided"}\nInstructions: ${note}`);
+      downloadTextFile("PDFShuffl-signing-request.txt", `PDFShuffl signing workflow\nTool: ${tool.name}\nFile: ${file?.name || "No file selected"}\nRecipient: ${recipient || "Not provided"}\nInstructions: ${note}`);
       setStatus("A signing workflow file was generated. Connect this flow to e-signature services for production use.");
       return;
     }
-    downloadTextFile("PDFy-processing-summary.txt", `PDFy processing summary\nTool: ${tool.name}\nFile: ${file?.name || "No file selected"}\nStatus: Ready for backend conversion engine\nNotes: ${note}`);
+    downloadTextFile("PDFShuffl-processing-summary.txt", `PDFShuffl processing summary\nTool: ${tool.name}\nFile: ${file?.name || "No file selected"}\nStatus: Ready for backend conversion engine\nNotes: ${note}`);
     setStatus("Workflow completed as a front-end handoff. Production conversion requires a secure backend processor.");
   }
 
   return (
     <main className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[340px_1fr] lg:px-8">
       <aside className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:overflow-auto">
-        <h2 className="mb-4 px-2 text-xl font-black text-slate-950">PDFy Tools</h2>
+        <h2 className="mb-4 px-2 text-xl font-black text-slate-950">PDFShuffl Tools</h2>
         {toolGroups.map((group) => <div key={group.title} className="mb-5"><h3 className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-slate-400">{group.title}</h3>{group.tools.map((item) => { const Icon = item.icon; return <button key={item.name} onClick={() => { setSelectedTool(item.name); setFile(null); setStatus("Ready"); }} className={`mb-1 flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${tool.name === item.name ? "bg-rose-500 text-white shadow-lg shadow-rose-100" : "hover:bg-slate-50"}`}><Icon size={18} /><span className="text-sm font-bold">{item.name}</span></button>; })}</div>)}
       </aside>
       <section>
@@ -550,43 +550,43 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
 
   const copy = {
     About: [
-      "PDFy is a premium all-in-one document management and PDF productivity platform designed to simplify how people create, convert, edit, organise, compress, review and sign documents across modern digital environments. PDFy solves everyday document challenges by providing a secure, intuitive and accessible workspace for students, professionals, businesses, consultants, public users, customer service environments and enterprise teams.",
-      "PDFy helps users save time, improve document accuracy, reduce compatibility issues, simplify sharing, and maintain professional document standards across work, education, government, legal, financial and personal use cases. The platform is designed to support modern digital workflows including applications, contracts, onboarding, reporting, compliance documentation, customer support processing, academic submissions, archival preparation and secure document exchange."
+      "PDFShuffl is a premium all-in-one document management and PDF productivity platform designed to simplify how people create, convert, edit, organise, compress, review and sign documents across modern digital environments. PDFShuffl solves everyday document challenges by providing a secure, intuitive and accessible workspace for students, professionals, businesses, consultants, public users, customer service environments and enterprise teams.",
+      "PDFShuffl helps users save time, improve document accuracy, reduce compatibility issues, simplify sharing, and maintain professional document standards across work, education, government, legal, financial and personal use cases. The platform is designed to support modern digital workflows including applications, contracts, onboarding, reporting, compliance documentation, customer support processing, academic submissions, archival preparation and secure document exchange."
     ],
     "Privacy Policy": [
-      "PDFy respects and protects the privacy of every user who visits and uses the platform. This Privacy Policy explains how information is collected, used, stored, processed and protected when users access PDFy services, including PDF creation, document conversion, editing, compression, formatting, signing, sharing and related workflow tools. By using PDFy, users consent to the practices described in this Privacy Policy.",
-      "PDFy may collect limited technical and usage information necessary for the operation, security and improvement of the platform. This may include IP address, browser type, device information, operating system, internet service provider, referring pages, timestamps, session duration, clickstream activity, file processing activity, upload/download events, diagnostic information and general geographic region. This information is used solely for system administration, performance optimisation, analytics, fraud prevention, troubleshooting, abuse monitoring and improving user experience.",
-      "PDFy uses cookies, local storage technologies and similar technologies to improve functionality, remember user preferences, maintain session security, personalise interface settings and analyse platform performance. Users may disable cookies within their browser settings; however, certain platform features and functionality may become limited or unavailable.",
-      "Documents uploaded to PDFy for conversion, editing, signing, compression or processing are handled securely and are used solely for the purpose of completing the requested document workflow. PDFy does not claim ownership of user documents or uploaded content. Uploaded files are not reviewed, shared, sold, rented, distributed or used for advertising or marketing purposes. PDFy does not sell personal information, uploaded documents or user activity data to third parties under any circumstances.",
-      "PDFy may temporarily store uploaded files and processed outputs on secure systems solely for operational purposes including conversion processing, caching, download generation, troubleshooting, recovery, abuse prevention and system reliability. Files may be automatically deleted after a defined retention period or immediately after processing depending on platform configuration and infrastructure policies.",
-      "Where applicable, PDFy may use third-party infrastructure providers, cloud hosting providers, analytics services, security providers, payment processors or document processing engines to support operation of the platform. Such providers are contractually required to maintain confidentiality, implement reasonable security safeguards and process information only for authorised operational purposes. PDFy does not permit third-party providers to use uploaded files or personal information for independent advertising or marketing activities.",
-      "PDFy may use analytics technologies such as Google Analytics or equivalent analytics providers to better understand how users interact with the platform. Analytics may collect anonymous or aggregated information including page visits, session duration, feature usage, device type, browser information and performance metrics. This information is used exclusively to improve system usability, platform reliability and user experience.",
-      "PDFy implements commercially reasonable administrative, technical and organisational safeguards designed to protect user information and uploaded documents against unauthorised access, misuse, disclosure, alteration or destruction. Security measures may include encrypted data transmission, secure server infrastructure, access controls, monitoring systems, automated threat detection and infrastructure hardening. However, no internet-based service or electronic storage method can be guaranteed to be completely secure.",
-      "PDFy does not knowingly collect personally identifiable information from children under the age of 13. If a parent or guardian believes that a child has provided personal information through the platform, they are encouraged to contact PDFy immediately so appropriate removal steps may be taken.",
-      "Users remain fully responsible for ensuring that they have the legal rights, permissions and authority to upload, process, edit, convert, sign or distribute any documents submitted through PDFy. Users should avoid uploading unlawful, malicious, infringing, confidential or unauthorised content that violates applicable laws, regulations or third-party rights.",
-      "PDFy may disclose information where required by law, legal process, court order, governmental request or regulatory obligation, or where disclosure is reasonably necessary to protect platform security, enforce legal rights, prevent fraud, investigate abuse, respond to security incidents or protect users and the public.",
+      "PDFShuffl respects and protects the privacy of every user who visits and uses the platform. This Privacy Policy explains how information is collected, used, stored, processed and protected when users access PDFShuffl services, including PDF creation, document conversion, editing, compression, formatting, signing, sharing and related workflow tools. By using PDFShuffl, users consent to the practices described in this Privacy Policy.",
+      "PDFShuffl may collect limited technical and usage information necessary for the operation, security and improvement of the platform. This may include IP address, browser type, device information, operating system, internet service provider, referring pages, timestamps, session duration, clickstream activity, file processing activity, upload/download events, diagnostic information and general geographic region. This information is used solely for system administration, performance optimisation, analytics, fraud prevention, troubleshooting, abuse monitoring and improving user experience.",
+      "PDFShuffl uses cookies, local storage technologies and similar technologies to improve functionality, remember user preferences, maintain session security, personalise interface settings and analyse platform performance. Users may disable cookies within their browser settings; however, certain platform features and functionality may become limited or unavailable.",
+      "Documents uploaded to PDFShuffl for conversion, editing, signing, compression or processing are handled securely and are used solely for the purpose of completing the requested document workflow. PDFShuffl does not claim ownership of user documents or uploaded content. Uploaded files are not reviewed, shared, sold, rented, distributed or used for advertising or marketing purposes. PDFShuffl does not sell personal information, uploaded documents or user activity data to third parties under any circumstances.",
+      "PDFShuffl may temporarily store uploaded files and processed outputs on secure systems solely for operational purposes including conversion processing, caching, download generation, troubleshooting, recovery, abuse prevention and system reliability. Files may be automatically deleted after a defined retention period or immediately after processing depending on platform configuration and infrastructure policies.",
+      "Where applicable, PDFShuffl may use third-party infrastructure providers, cloud hosting providers, analytics services, security providers, payment processors or document processing engines to support operation of the platform. Such providers are contractually required to maintain confidentiality, implement reasonable security safeguards and process information only for authorised operational purposes. PDFShuffl does not permit third-party providers to use uploaded files or personal information for independent advertising or marketing activities.",
+      "PDFShuffl may use analytics technologies such as Google Analytics or equivalent analytics providers to better understand how users interact with the platform. Analytics may collect anonymous or aggregated information including page visits, session duration, feature usage, device type, browser information and performance metrics. This information is used exclusively to improve system usability, platform reliability and user experience.",
+      "PDFShuffl implements commercially reasonable administrative, technical and organisational safeguards designed to protect user information and uploaded documents against unauthorised access, misuse, disclosure, alteration or destruction. Security measures may include encrypted data transmission, secure server infrastructure, access controls, monitoring systems, automated threat detection and infrastructure hardening. However, no internet-based service or electronic storage method can be guaranteed to be completely secure.",
+      "PDFShuffl does not knowingly collect personally identifiable information from children under the age of 13. If a parent or guardian believes that a child has provided personal information through the platform, they are encouraged to contact PDFShuffl immediately so appropriate removal steps may be taken.",
+      "Users remain fully responsible for ensuring that they have the legal rights, permissions and authority to upload, process, edit, convert, sign or distribute any documents submitted through PDFShuffl. Users should avoid uploading unlawful, malicious, infringing, confidential or unauthorised content that violates applicable laws, regulations or third-party rights.",
+      "PDFShuffl may disclose information where required by law, legal process, court order, governmental request or regulatory obligation, or where disclosure is reasonably necessary to protect platform security, enforce legal rights, prevent fraud, investigate abuse, respond to security incidents or protect users and the public.",
       "This Privacy Policy may be updated, revised or modified periodically to reflect legal, technical, operational or regulatory changes. Updated versions become effective immediately upon publication on the platform. Users are encouraged to review this Privacy Policy regularly to remain informed regarding how information is protected and handled.",
-      "By accessing or using PDFy, users acknowledge that they have read, understood and agreed to this Privacy Policy and the related Terms and Conditions governing use of the platform."
+      "By accessing or using PDFShuffl, users acknowledge that they have read, understood and agreed to this Privacy Policy and the related Terms and Conditions governing use of the platform."
     ],
     "Terms and Conditions": [
-      "Please read these Terms and Conditions carefully before accessing or using PDFy. By accessing, browsing, uploading documents to, or using PDFy and any associated services, tools, workflows, APIs, applications or features, users acknowledge that they have read, understood and agreed to be legally bound by these Terms and Conditions. If a user does not agree to these Terms and Conditions, they must immediately discontinue use of the platform.",
-      "PDFy provides document-related services including but not limited to PDF creation, document conversion, editing, formatting, compression, annotation, signing, document sharing, workflow automation and related informational tools. Services are provided for educational, informational, professional, business and productivity purposes only. PDFy does not provide legal, financial, compliance or professional advisory services, and users remain solely responsible for verifying the suitability, legality, completeness, security and accuracy of any processed documents or outputs.",
-      "Users agree to use PDFy only for lawful purposes and in compliance with all applicable laws, regulations, intellectual property rights, data protection requirements and third-party rights. Users may not upload, process, transmit, distribute or store unlawful, fraudulent, malicious, defamatory, infringing, harmful, confidential, deceptive or unauthorised content through the platform.",
-      "Users may not abuse, exploit, interfere with, reverse engineer, bypass security controls, scrape, overload, disrupt or attempt unauthorised access to PDFy systems, infrastructure, APIs, servers, databases, networks or associated technologies. Automated abuse, malicious uploads, malware distribution, denial-of-service activity, credential abuse, unlawful document processing and unauthorised commercial exploitation are strictly prohibited.",
-      "All content, branding, software, source code, interfaces, workflows, graphics, designs, logos, databases, functionality, trademarks, trade dress and intellectual property associated with PDFy are owned by or licensed to WordShuffl Trading and are protected under applicable intellectual property, copyright and trademark laws in South Africa and internationally. Users may not reproduce, republish, distribute, modify, copy, scrape, sell, license or commercially exploit any part of the platform without prior written consent from WordShuffl Trading.",
-      "Users remain solely and fully responsible for all documents, files, information, metadata, signatures, content, communications and activities processed, uploaded, converted, stored or transmitted through PDFy. Users acknowledge that PDFy does not verify document accuracy, legality, ownership, authenticity, enforceability or regulatory compliance.",
-      "By using PDFy, users expressly agree to fully indemnify, defend and hold harmless PDFy, WordShuffl Trading, its owners, directors, employees, affiliates, contractors, licensors, technology providers, infrastructure providers, cloud providers, payment processors, partners, stakeholders, successors and assigns from and against any and all claims, disputes, losses, liabilities, damages, penalties, fines, proceedings, legal actions, regulatory investigations, demands, judgments, costs and expenses of every nature whatsoever, including legal fees and attorney costs, arising directly or indirectly from the use of the platform, uploaded content, processed documents, misuse of services, violation of laws, infringement of rights, unauthorised activities, security incidents, fraudulent conduct, document distribution, reliance on outputs, third-party disputes or breach of these Terms and Conditions.",
-      "Users acknowledge and agree that all use of PDFy and related services is entirely at the user's own risk. PDFy and WordShuffl Trading make no warranties, guarantees or representations regarding uninterrupted availability, processing accuracy, conversion quality, compatibility, reliability, uptime, security, legality, performance, data retention, error-free operation or suitability for any particular purpose.",
-      "Under no circumstances shall PDFy, WordShuffl Trading, its owners, employees, partners, stakeholders, service providers or affiliates be liable for any direct, indirect, incidental, consequential, punitive, special or exemplary damages, including but not limited to loss of data, loss of profits, business interruption, reputational damage, document corruption, operational downtime, security breaches, contractual disputes or financial losses arising from the use of or inability to use the platform, regardless of legal theory, negligence, contract, strict liability or otherwise.",
-      "PDFy may integrate with or utilise third-party infrastructure, cloud hosting providers, analytics providers, payment processors, document engines, artificial intelligence services, security services or external technologies. PDFy does not accept responsibility or liability for the availability, security, accuracy or conduct of third-party services or websites accessed through or connected to the platform.",
-      "PDFy reserves the right to suspend, restrict, terminate, investigate or remove access to any user, account, document, activity or service at its sole discretion where misuse, unlawful conduct, abuse, security threats, policy violations or operational risks are suspected.",
-      "PDFy may update, revise, discontinue or modify any aspect of the platform, services, features, pricing structures, retention policies, security controls, APIs or these Terms and Conditions at any time without prior notice. Continued use of the platform following modifications constitutes acceptance of the revised Terms and Conditions.",
-      "Users acknowledge that electronic communications, uploads, downloads and internet-based processing may involve inherent technical risks. While commercially reasonable safeguards may be implemented, PDFy cannot guarantee absolute security, uninterrupted operation or protection against all cyber threats, data loss events or infrastructure failures.",
-      "These Terms and Conditions shall be governed by and interpreted in accordance with the laws of the Republic of South Africa. Any dispute, legal proceeding or claim arising from or relating to PDFy, its services or these Terms and Conditions shall be subject to the exclusive jurisdiction of the competent courts of South Africa.",
-      "By continuing to access or use PDFy, users acknowledge and agree that they fully understand, accept and consent to these Terms and Conditions, including all indemnification obligations, limitations of liability, jurisdiction provisions and operational conditions described herein."
+      "Please read these Terms and Conditions carefully before accessing or using PDFShuffl. By accessing, browsing, uploading documents to, or using PDFShuffl and any associated services, tools, workflows, APIs, applications or features, users acknowledge that they have read, understood and agreed to be legally bound by these Terms and Conditions. If a user does not agree to these Terms and Conditions, they must immediately discontinue use of the platform.",
+      "PDFShuffl provides document-related services including but not limited to PDF creation, document conversion, editing, formatting, compression, annotation, signing, document sharing, workflow automation and related informational tools. Services are provided for educational, informational, professional, business and productivity purposes only. PDFShuffl does not provide legal, financial, compliance or professional advisory services, and users remain solely responsible for verifying the suitability, legality, completeness, security and accuracy of any processed documents or outputs.",
+      "Users agree to use PDFShuffl only for lawful purposes and in compliance with all applicable laws, regulations, intellectual property rights, data protection requirements and third-party rights. Users may not upload, process, transmit, distribute or store unlawful, fraudulent, malicious, defamatory, infringing, harmful, confidential, deceptive or unauthorised content through the platform.",
+      "Users may not abuse, exploit, interfere with, reverse engineer, bypass security controls, scrape, overload, disrupt or attempt unauthorised access to PDFShuffl systems, infrastructure, APIs, servers, databases, networks or associated technologies. Automated abuse, malicious uploads, malware distribution, denial-of-service activity, credential abuse, unlawful document processing and unauthorised commercial exploitation are strictly prohibited.",
+      "All content, branding, software, source code, interfaces, workflows, graphics, designs, logos, databases, functionality, trademarks, trade dress and intellectual property associated with PDFShuffl are owned by or licensed to WordShuffl Trading and are protected under applicable intellectual property, copyright and trademark laws in South Africa and internationally. Users may not reproduce, republish, distribute, modify, copy, scrape, sell, license or commercially exploit any part of the platform without prior written consent from WordShuffl Trading.",
+      "Users remain solely and fully responsible for all documents, files, information, metadata, signatures, content, communications and activities processed, uploaded, converted, stored or transmitted through PDFShuffl. Users acknowledge that PDFShuffl does not verify document accuracy, legality, ownership, authenticity, enforceability or regulatory compliance.",
+      "By using PDFShuffl, users expressly agree to fully indemnify, defend and hold harmless PDFShuffl, WordShuffl Trading, its owners, directors, employees, affiliates, contractors, licensors, technology providers, infrastructure providers, cloud providers, payment processors, partners, stakeholders, successors and assigns from and against any and all claims, disputes, losses, liabilities, damages, penalties, fines, proceedings, legal actions, regulatory investigations, demands, judgments, costs and expenses of every nature whatsoever, including legal fees and attorney costs, arising directly or indirectly from the use of the platform, uploaded content, processed documents, misuse of services, violation of laws, infringement of rights, unauthorised activities, security incidents, fraudulent conduct, document distribution, reliance on outputs, third-party disputes or breach of these Terms and Conditions.",
+      "Users acknowledge and agree that all use of PDFShuffl and related services is entirely at the user's own risk. PDFShuffl and WordShuffl Trading make no warranties, guarantees or representations regarding uninterrupted availability, processing accuracy, conversion quality, compatibility, reliability, uptime, security, legality, performance, data retention, error-free operation or suitability for any particular purpose.",
+      "Under no circumstances shall PDFShuffl, WordShuffl Trading, its owners, employees, partners, stakeholders, service providers or affiliates be liable for any direct, indirect, incidental, consequential, punitive, special or exemplary damages, including but not limited to loss of data, loss of profits, business interruption, reputational damage, document corruption, operational downtime, security breaches, contractual disputes or financial losses arising from the use of or inability to use the platform, regardless of legal theory, negligence, contract, strict liability or otherwise.",
+      "PDFShuffl may integrate with or utilise third-party infrastructure, cloud hosting providers, analytics providers, payment processors, document engines, artificial intelligence services, security services or external technologies. PDFShuffl does not accept responsibility or liability for the availability, security, accuracy or conduct of third-party services or websites accessed through or connected to the platform.",
+      "PDFShuffl reserves the right to suspend, restrict, terminate, investigate or remove access to any user, account, document, activity or service at its sole discretion where misuse, unlawful conduct, abuse, security threats, policy violations or operational risks are suspected.",
+      "PDFShuffl may update, revise, discontinue or modify any aspect of the platform, services, features, pricing structures, retention policies, security controls, APIs or these Terms and Conditions at any time without prior notice. Continued use of the platform following modifications constitutes acceptance of the revised Terms and Conditions.",
+      "Users acknowledge that electronic communications, uploads, downloads and internet-based processing may involve inherent technical risks. While commercially reasonable safeguards may be implemented, PDFShuffl cannot guarantee absolute security, uninterrupted operation or protection against all cyber threats, data loss events or infrastructure failures.",
+      "These Terms and Conditions shall be governed by and interpreted in accordance with the laws of the Republic of South Africa. Any dispute, legal proceeding or claim arising from or relating to PDFShuffl, its services or these Terms and Conditions shall be subject to the exclusive jurisdiction of the competent courts of South Africa.",
+      "By continuing to access or use PDFShuffl, users acknowledge and agree that they fully understand, accept and consent to these Terms and Conditions, including all indemnification obligations, limitations of liability, jurisdiction provisions and operational conditions described herein."
     ],
     Contact: [
-      "For support, partnerships, product enquiries, privacy requests, legal notices or general platform assistance, contact the PDFy team through the details below."
+      "For support, partnerships, product enquiries, privacy requests, legal notices or general platform assistance, contact the PDFShuffl team through the details below."
     ]
   };
 
@@ -594,9 +594,9 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
     return (
       <main className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
         <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFy</p>
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl</p>
           <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">Interactive Sitemap</h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Navigate every major PDFy page, workflow and document tool visually. This sitemap helps users quickly jump to the exact service they need.</p>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Navigate every major PDFShuffl page, workflow and document tool visually. This sitemap helps users quickly jump to the exact service they need.</p>
 
           <div className="mt-12 grid gap-8 lg:grid-cols-3">
             <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
@@ -641,7 +641,7 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 lg:px-8">
       <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFy</p>
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl</p>
         <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">{page}</h1>
         <div className="mt-6 space-y-6 text-lg leading-8 text-slate-600">
           {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
@@ -652,7 +652,7 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
             <div className="rounded-3xl bg-slate-50 p-6">
               <Mail className="mb-3 text-rose-500" />
               <h3 className="font-black">Email</h3>
-              <a href="mailto:support@pdfy.com" className="text-slate-600 transition hover:text-rose-500 hover:underline">support@pdfy.com</a>
+              <a href="mailto:support@PDFShuffl.com" className="text-slate-600 transition hover:text-rose-500 hover:underline">support@PDFShuffl.com</a>
             </div>
             <div className="rounded-3xl bg-slate-50 p-6">
               <Map className="mb-3 text-rose-500" />
@@ -727,14 +727,14 @@ function Footer({ setActivePage }) {
   return (
     <footer className="border-t border-slate-200 bg-white">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 lg:grid-cols-[1fr_2fr] lg:px-8">
-        <div><div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-rose-500 text-white"><FileText size={20} /></span><span className="text-2xl font-black">PDFy</span></div><p className="mt-4 max-w-md text-sm leading-6 text-slate-600">A premium PDF conversion, editing and signing workspace for everyone.</p></div>
-        <div className="grid gap-6 sm:grid-cols-3"><div><h4 className="font-black">Pages</h4><div className="mt-3 grid gap-2">{pages.map((p) => <button key={p} onClick={() => setActivePage(p)} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div><h4 className="font-black">Popular tools</h4><div className="mt-3 grid gap-2">{["Create PDF", "PDF to Word", "Sign PDF", "Compress PDF"].map((p) => <button key={p} onClick={() => setActivePage("Tools")} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div><h4 className="font-black">Legal notice</h4><p className="mt-3 text-sm leading-6 text-slate-600">PDFy® is a registered trademark. All intellectual property rights in and to the game are owned in South Africa by WordShuffl Trading.<br />This site is for educational and informational purposes only.<br />© 2026 PDFy.com. ALL RIGHTS RESERVED</p></div></div>
+        <div><div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-rose-500 text-white"><FileText size={20} /></span><span className="text-2xl font-black">PDFShuffl</span></div><p className="mt-4 max-w-md text-sm leading-6 text-slate-600">A premium PDF conversion, editing and signing workspace for everyone.</p></div>
+        <div className="grid gap-6 sm:grid-cols-3"><div><h4 className="font-black">Pages</h4><div className="mt-3 grid gap-2">{pages.map((p) => <button key={p} onClick={() => setActivePage(p)} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div><h4 className="font-black">Popular tools</h4><div className="mt-3 grid gap-2">{["Create PDF", "PDF to Word", "Sign PDF", "Compress PDF"].map((p) => <button key={p} onClick={() => setActivePage("Tools")} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div><h4 className="font-black">Legal notice</h4><p className="mt-3 text-sm leading-6 text-slate-600">PDFShuffl® is a registered trademark. All intellectual property rights in and to the game are owned in South Africa by WordShuffl Trading.<br />This site is for educational and informational purposes only.<br />© 2026 PDFShuffl.com. ALL RIGHTS RESERVED</p></div></div>
       </div>
     </footer>
   );
 }
 
-export default function PDFyWebsite() {
+export default function PDFShufflWebsite() {
   const [activePage, setActivePage] = useState("Home");
   const [selectedTool, setSelectedTool] = useState("Create PDF");
   const page = useMemo(() => {
