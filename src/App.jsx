@@ -206,7 +206,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
             </button>
 
             {open && (
-              <div className="fixed left-1/2 top-20 z-50 w-[min(980px,calc(100vw-2rem))] -translate-x-1/2 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
+              <div className="fixed left-1/2 top-20 z-50 max-h-[70vh] w-[min(920px,calc(100vw-2rem))] -translate-x-1/2 overflow-y-auto overscroll-contain rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
                 <div className="grid gap-6 lg:grid-cols-2">
                   {toolGroups.map((group) => (
                     <div key={group.title} className="min-w-0">
