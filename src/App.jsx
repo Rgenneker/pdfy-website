@@ -59,6 +59,7 @@ const toolGroups = [
 },
       { name: "PPT to PDF", icon: Presentation, accepts: ".ppt,.pptx,.odp", description: "Turn slide decks into sharable, locked-layout PDF documents." },
       { name: "CSV to PDF", icon: Table, accepts: ".csv", description: "Convert spreadsheets and tabular data into readable PDF reports." },
+      { name: "Excel to PDF", icon: Table, accepts: ".xls,.xlsx,.ods", description: "Convert Microsoft Excel spreadsheets, financial statements, invoices, dashboards, charts, payroll sheets, business reports, school marksheets, data tables, and LibreOffice Calc workbooks into secure high-quality PDF documents for printing, sharing, presentations, compliance, and professional reporting." },
       { name: "TXT to PDF", icon: Type, accepts: ".txt", description: "Convert plain text files into polished PDF pages." },
     ],
   },
@@ -204,7 +205,13 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
     setSelectedTool(toolName);
     setOpen(false);
     setMobile(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    
+     setTimeout(() => {
+  document.getElementById("tools-workspace")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+}, 100);
   }
 
   const nav = (
@@ -572,6 +579,44 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
   return;
 }
 
+if (tool.name === "Excel to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/excel-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("Excel conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-excel.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("Excel document converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Excel to PDF conversion failed.");
+    });
+
+  return;
+}
+
 if (tool.name === "CSV to PDF" && file) {
 
   const formData = new FormData();
@@ -661,7 +706,10 @@ Notes: ${note}`
 }
 
   return (
-    <main className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[340px_1fr] lg:px-8">
+    <main
+  id="tools-workspace"
+  className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[340px_1fr] lg:px-8"
+>
       <aside className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:overflow-auto">
         <h2 className="mb-4 px-2 text-xl font-black text-slate-950">PDFShuffl Tools</h2>
         {toolGroups.map((group) => <div key={group.title} className="mb-5"><h3 className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-slate-400">{group.title}</h3>{group.tools.map((item) => { const Icon = item.icon; return <button key={item.name} onClick={() => { setSelectedTool(item.name); setFile(null); setStatus("Ready"); }} className={`mb-1 flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${tool.name === item.name ? "bg-rose-500 text-white shadow-lg shadow-rose-100" : "hover:bg-slate-50"}`}><Icon size={18} /><span className="text-sm font-bold">{item.name}</span></button>; })}</div>)}
