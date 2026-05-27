@@ -50,7 +50,7 @@ const toolGroups = [
   {
     title: "Office to PDF",
     tools: [
-      { name: "Word/Libre to PDF", icon: FileText, accepts: ".doc,.docx,.odt,.ott", description: "Convert Microsoft Word and LibreOffice Writer files into clean PDFs." },
+      { name: "Word to PDF", icon: FileText, accepts: ".doc,.docx,.odt,.ott", description: "Convert Microsoft Word and LibreOffice Writer files into clean PDFs." },
       { name: "Libre to PDF", icon: FileText, accepts: ".odt,.ods,.odp", description: "Convert LibreOffice Writer, Calc, or Impress files into PDF format." },
       { name: "PPT to PDF", icon: Presentation, accepts: ".ppt,.pptx,.odp", description: "Turn slide decks into sharable, locked-layout PDF documents." },
       { name: "CSV to PDF", icon: Table, accepts: ".csv", description: "Convert spreadsheets and tabular data into readable PDF reports." },
@@ -429,7 +429,7 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
     return;
   }
 
-  if (tool.name === "Word/Libre to PDF" && file) {
+  if (tool.name === "Word to PDF" && file) {
 
     const formData = new FormData();
     formData.append("file", file);
@@ -459,6 +459,44 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
 
     return;
   }
+
+  if (tool.name === "PPT to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/ppt-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("PPT conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-presentation.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("Presentation converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PPT to PDF conversion failed.");
+    });
+
+  return;
+}
 
   if (tool.name === "JPG to PDF" && file) {
 

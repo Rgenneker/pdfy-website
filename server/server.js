@@ -135,6 +135,60 @@ app.post("/word-to-pdf", upload.single("file"), async (req, res) => {
     res.status(500).send("Word to PDF conversion failed.");
   }
 });
+const fs = require("fs");
+const path = require("path");
+const { execFile } = require("child_process");
+
+app.post("/ppt-to-pdf", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send("No PPT file uploaded");
+    }
+
+    const tempDir = path.join(__dirname, "temp");
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+
+    const inputPath = path.join(tempDir, req.file.originalname);
+    fs.writeFileSync(inputPath, req.file.buffer);
+
+    execFile(
+      "soffice",
+      [
+        "--headless",
+        "--convert-to",
+        "pdf",
+        "--outdir",
+        tempDir,
+        inputPath,
+      ],
+      (error) => {
+        if (error) {
+          console.error(error);
+          return res.status(500).send("PPT to PDF conversion failed");
+        }
+
+        const outputFileName =
+          path.basename(req.file.originalname, path.extname(req.file.originalname)) + ".pdf";
+
+        const outputPath = path.join(tempDir, outputFileName);
+
+        if (!fs.existsSync(outputPath)) {
+          return res.status(500).send("Converted PDF not found");
+        }
+
+        res.download(outputPath, "PDFShuffl-presentation.pdf", () => {
+          fs.unlinkSync(inputPath);
+          fs.unlinkSync(outputPath);
+        });
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("PPT to PDF conversion failed");
+  }
+});
 app.listen(5000, () => {
   console.log("PDFShuffl backend running on http://localhost:5000");
 });
