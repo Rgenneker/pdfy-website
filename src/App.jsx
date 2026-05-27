@@ -51,7 +51,12 @@ const toolGroups = [
     title: "Office to PDF",
     tools: [
       { name: "Word to PDF", icon: FileText, accepts: ".doc,.docx,.odt,.ott", description: "Convert Microsoft Word and LibreOffice Writer files into clean PDFs." },
-      { name: "Libre to PDF", icon: FileText, accepts: ".odt,.ods,.odp", description: "Convert LibreOffice Writer, Calc, or Impress files into PDF format." },
+      { 
+  name: "Libre to PDF", 
+  icon: FileText, 
+  accepts: ".odt,.ods,.odp,.ott,.ots,.otp", 
+  description: "Convert LibreOffice Writer, Calc, Impress and template files into PDF format." 
+},
       { name: "PPT to PDF", icon: Presentation, accepts: ".ppt,.pptx,.odp", description: "Turn slide decks into sharable, locked-layout PDF documents." },
       { name: "CSV to PDF", icon: Table, accepts: ".csv", description: "Convert spreadsheets and tabular data into readable PDF reports." },
       { name: "TXT to PDF", icon: Type, accepts: ".txt", description: "Convert plain text files into polished PDF pages." },
@@ -219,7 +224,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
             </button>
 
             {open && (
-              <div className="fixed left-1/2 top-20 z-50 w-[min(980px,calc(100vw-2rem))] -translate-x-1/2 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
+              <div className="fixed left-1/2 top-20 z-50 max-h-[65vh] w-[min(900px,calc(100vw-2rem))] -translate-x-1/2 overflow-y-auto overscroll-contain rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
                 <div className="grid gap-6 lg:grid-cols-2">
                   {toolGroups.map((group) => (
                     <div key={group.title} className="min-w-0">
@@ -528,6 +533,82 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
 
     return;
   }
+
+  if (tool.name === "Libre to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/libre-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("Libre conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-libre.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("LibreOffice document converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Libre to PDF conversion failed.");
+    });
+
+  return;
+}
+
+if (tool.name === "CSV to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/csv-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("CSV conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-csv.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("CSV converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("CSV to PDF conversion failed.");
+    });
+
+  return;
+}
 
   if (tool.name === "TXT to PDF" && file) {
 
