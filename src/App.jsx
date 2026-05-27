@@ -496,12 +496,12 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
       {status.toLowerCase().includes("failed") ? (
         <XCircle
           className="mt-1 text-rose-500"
-          size={42}
+          size={64}
         />
       ) : (
         <CheckCircle2
           className="mt-1 text-emerald-500"
-          size={42}
+          size={64}
         />
       )}
 
