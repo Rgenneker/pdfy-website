@@ -19,6 +19,7 @@ import {
   ShieldCheck,
   Menu,
   X,
+  XCircle,
   ChevronDown,
   ArrowRight,
   Sparkles,
@@ -423,25 +424,122 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
 
   function processTool() {
     if (tool.name === "Create PDF") {
-      createSimplePdf(note);
-      setStatus("A simple PDF was created and downloaded.");
-      return;
-    }
-    if (tool.name === "TXT to PDF" && file) {
-      const reader = new FileReader();
-      reader.onload = () => createSimplePdf(String(reader.result || note));
-      reader.readAsText(file);
-      setStatus("Your text file was converted into a simple PDF download.");
-      return;
-    }
-    if (tool.name.includes("Sign") || tool.name === "Request Signing") {
-      downloadTextFile("PDFy-signing-request.txt", `PDFy signing workflow\nTool: ${tool.name}\nFile: ${file?.name || "No file selected"}\nRecipient: ${recipient || "Not provided"}\nInstructions: ${note}`);
-      setStatus("A signing workflow file was generated. Connect this flow to e-signature services for production use.");
-      return;
-    }
-    downloadTextFile("PDFy-processing-summary.txt", `PDFy processing summary\nTool: ${tool.name}\nFile: ${file?.name || "No file selected"}\nStatus: Ready for backend conversion engine\nNotes: ${note}`);
-    setStatus("Workflow completed as a front-end handoff. Production conversion requires a secure backend processor.");
+    createSimplePdf(note);
+    setStatus("A simple PDF was created and downloaded.");
+    return;
   }
+
+  if (tool.name === "Word/Libre to PDF" && file) {
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("http://localhost:5000/word-to-pdf", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "PDFShuffl-word.pdf";
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+
+        setStatus("Word document converted to PDF successfully.");
+      })
+      .catch((error) => {
+        console.error(error);
+        setStatus("Word to PDF conversion failed.");
+      });
+
+    return;
+  }
+
+  if (tool.name === "JPG to PDF" && file) {
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("http://localhost:5000/jpg-to-pdf", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "PDFShuffl-image.pdf";
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+
+        setStatus("JPG converted to PDF successfully.");
+      })
+      .catch((error) => {
+        console.error(error);
+        setStatus("JPG to PDF conversion failed.");
+      });
+
+    return;
+  }
+
+  if (tool.name === "TXT to PDF" && file) {
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      createSimplePdf(String(reader.result || note));
+    };
+
+    reader.readAsText(file);
+
+    setStatus("Your text file was converted into a simple PDF download.");
+
+    return;
+  }
+
+  if (
+    tool.name.includes("Sign") ||
+    tool.name === "Request Signing"
+  ) {
+
+    downloadTextFile(
+      "PDFShuffl-signing-request.txt",
+      `PDFShuffl signing workflow
+Tool: ${tool.name}
+File: ${file?.name || "No file selected"}
+Recipient: ${recipient || "Not provided"}
+Instructions: ${note}`
+    );
+
+    setStatus(
+      "A signing workflow file was generated. Connect this flow to e-signature services for production use."
+    );
+
+    return;
+  }
+
+  downloadTextFile(
+    "PDFShuffl-processing-summary.txt",
+    `PDFShuffl processing summary
+Tool: ${tool.name}
+File: ${file?.name || "No file selected"}
+Status: Ready for backend conversion engine
+Notes: ${note}`
+  );
+
+  setStatus(
+    "Workflow completed as a front-end handoff. Production conversion requires a secure backend processor."
+  );
+}
 
   return (
     <main className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[340px_1fr] lg:px-8">

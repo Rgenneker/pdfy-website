@@ -93,6 +93,48 @@ app.post("/jpg-to-pdf", upload.single("file"), async (req, res) => {
   }
 });
 
+app.post("/word-to-pdf", upload.single("file"), async (req, res) => {
+  try {
+    const mammoth = require("mammoth");
+
+    const result = await mammoth.extractRawText({
+      buffer: req.file.buffer,
+    });
+
+    const text = result.value || "Empty document";
+
+    const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
+
+    const pdfDoc = await PDFDocument.create();
+
+    const page = pdfDoc.addPage([595, 842]);
+
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    page.drawText(text.substring(0, 4000), {
+      x: 50,
+      y: 780,
+      size: 12,
+      font,
+      color: rgb(0, 0, 0),
+      maxWidth: 500,
+      lineHeight: 18,
+    });
+
+    const pdfBytes = await pdfDoc.save();
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader(
+      "Content-Disposition",
+      "attachment; filename=PDFShuffl-word.pdf"
+    );
+
+    res.send(Buffer.from(pdfBytes));
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Word to PDF conversion failed.");
+  }
+});
 app.listen(5000, () => {
   console.log("PDFShuffl backend running on http://localhost:5000");
 });
