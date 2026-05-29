@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -82,6 +82,38 @@ const toolGroups = [
 
 const allTools = toolGroups.flatMap((g) => g.tools);
 
+const knowledgeCards = [
+  {
+    name: "How to Create a PDF",
+    description: "Turn text, images, notes or forms into a professional PDF in minutes.",
+    icon: FilePlus2,
+    relatedTool: "Create PDF",
+  },
+  {
+    name: "How to Format a PDF",
+    description: "Adjust layout, spacing, pages and presentation so your PDF looks clean.",
+    icon: Wand2,
+    relatedTool: "Format PDF",
+  },
+  {
+    name: "How to Edit a PDF",
+    description: "Learn how to update text, add notes and improve PDF content.",
+    icon: PenLine,
+    relatedTool: "Edit PDF",
+  },
+  {
+    name: "How to Sign a PDF",
+    description: "Add a signature or prepare a signing workflow for document approval.",
+    icon: ShieldCheck,
+    relatedTool: "Sign PDF",
+  },
+  {
+    name: "How to Mark-up a PDF",
+    description: "Highlight, comment, review and annotate PDFs for collaboration.",
+    icon: MessageSquareText,
+    relatedTool: "PDF Comments",
+  },
+];
 const educationCards = [
   {
     question: "What is a PDF?",
@@ -191,6 +223,20 @@ function isAcceptedFile(file, accepts) {
 function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const menuRef = useRef(null);
+  useEffect(() => {
+  function handleClickOutside(event) {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
 
   function openTool(toolName) {
     setActivePage("Tools");
@@ -223,7 +269,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
             </button>
 
             {open && (
-              <div className="fixed left-1/2 top-20 z-50 max-h-[65vh] w-[min(900px,calc(100vw-2rem))] -translate-x-1/2 overflow-y-auto overscroll-contain rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
+              <div ref={menuRef}className="fixed left-1/2 top-20 z-50 max-h-[65vh] w-[min(900px,calc(100vw-2rem))] -translate-x-1/2 overflow-y-auto overscroll-contain rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
                 <div className="grid gap-6 lg:grid-cols-2">
                   {toolGroups.map((group) => (
                     <div key={group.title} className="min-w-0">
@@ -354,58 +400,21 @@ function Hero({ setActivePage }) {
           <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-rose-200 to-orange-100 blur-3xl" />
           <div className="relative rounded-[2.5rem] border border-white bg-white/90 p-4 shadow-2xl">
             <div className="rounded-[2rem] bg-slate-950 p-5 text-white">
-              <div className="mb-5 flex items-center justify-between"><span className="font-black">How to with PDFShuffl</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Knowledge Works</span></div>
+              <div className="mb-5 flex items-center justify-between"><span className="font-black">How to with PDFShuffl</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Knowledge Space</span></div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {[
-  ...allTools.slice(0, 8),
-
-  {
-    name: "How to Create a PDF",
-    description: "Learn how to create professional PDFs.",
-    icon: FileText,
-  },
-
-  {
-    name: "How to Format a PDF",
-    description: "Learn how to format PDF layouts and pages.",
-    icon: FileText,
-  },
-
-  {
-    name: "How to Edit a PDF",
-    description: "Learn how to edit PDF documents.",
-    icon: FileText,
-  },
-
-  {
-    name: "How to Sign a PDF",
-    description: "Learn how to sign PDF documents.",
-    icon: FileText,
-  },
-
-  {
-    name: "How to Mark-up a PDF",
-    description: "Learn how to review and annotate PDFs.",
-    icon: FileText,
-  },
-].map((tool) => {
+                {knowledgeCards.map((tool) => {
                   const Icon = tool.icon;
                   return (
   <button
     key={tool.name}
     onClick={() => {
-      if (tool.name.startsWith("How to")) {
-        setActivePage(tool.name);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        return;
-      }
-
-      setActivePage("Tools");
-      setSelectedTool(tool.name);
+      setActivePage(tool.name);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }}
-    className="rounded-3xl bg-white/10 p-4 text-left backdrop-blur transition hover:bg-white/20"
-  ><Icon className="mb-3 text-rose-300" /><p className="font-bold">{tool.name}</p><p className="mt-1 text-xs text-slate-300">{tool.description}</p>
+    className="rounded-3xl bg-white/10 p-4 text-left backdrop-blur transition hover:-translate-y-1 hover:bg-white/20 hover:shadow-xl"
+  >
+  <Icon className="mb-3 text-rose-300" /><p className="font-bold">{tool.name}</p><p className="mt-1 text-xs text-slate-300">{tool.description}</p>
+<p className="mt-3 text-xs font-black text-rose-300">Est. 3 min read</p>
 </button>
 );
                 })}
