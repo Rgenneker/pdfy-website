@@ -38,15 +38,7 @@ import {
 } from "lucide-react";
 
 const toolGroups = [
-  {
-    title: "Create & Build",
-    tools: [
-      { name: "Create PDF", icon: FilePlus2, accepts: ".txt,.jpg,.jpeg,.png", description: "Create a fresh PDF from text, images, notes, or scanned material." },
-      { name: "Format PDF", icon: Wand2, accepts: ".pdf", description: "Prepare page size, layout, margins, order, and presentation style." },
-      { name: "Edit PDF", icon: PenLine, accepts: ".pdf", description: "Add text, markups, highlights, images, shapes, and document notes." },
-      { name: "PDF Comments", icon: MessageSquareText, accepts: ".pdf", description: "Review documents with comments, replies, highlights, and approval notes." },
-    ],
-  },
+ 
   {
     title: "Office to PDF",
     tools: [
@@ -362,11 +354,60 @@ function Hero({ setActivePage }) {
           <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-rose-200 to-orange-100 blur-3xl" />
           <div className="relative rounded-[2.5rem] border border-white bg-white/90 p-4 shadow-2xl">
             <div className="rounded-[2rem] bg-slate-950 p-5 text-white">
-              <div className="mb-5 flex items-center justify-between"><span className="font-black">PDFShuffl Tools</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Live workspace</span></div>
+              <div className="mb-5 flex items-center justify-between"><span className="font-black">How to with PDFShuffl</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Knowledge Works</span></div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {allTools.slice(0, 8).map((tool) => {
+                {[
+  ...allTools.slice(0, 8),
+
+  {
+    name: "How to Create a PDF",
+    description: "Learn how to create professional PDFs.",
+    icon: FileText,
+  },
+
+  {
+    name: "How to Format a PDF",
+    description: "Learn how to format PDF layouts and pages.",
+    icon: FileText,
+  },
+
+  {
+    name: "How to Edit a PDF",
+    description: "Learn how to edit PDF documents.",
+    icon: FileText,
+  },
+
+  {
+    name: "How to Sign a PDF",
+    description: "Learn how to sign PDF documents.",
+    icon: FileText,
+  },
+
+  {
+    name: "How to Mark-up a PDF",
+    description: "Learn how to review and annotate PDFs.",
+    icon: FileText,
+  },
+].map((tool) => {
                   const Icon = tool.icon;
-                  return <div key={tool.name} className="rounded-3xl bg-white/10 p-4 backdrop-blur"><Icon className="mb-3 text-rose-300" /><p className="font-bold">{tool.name}</p><p className="mt-1 text-xs text-slate-300">Upload • Process • Download</p></div>;
+                  return (
+  <button
+    key={tool.name}
+    onClick={() => {
+      if (tool.name.startsWith("How to")) {
+        setActivePage(tool.name);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      setActivePage("Tools");
+      setSelectedTool(tool.name);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+    className="rounded-3xl bg-white/10 p-4 text-left backdrop-blur transition hover:bg-white/20"
+  ><Icon className="mb-3 text-rose-300" /><p className="font-bold">{tool.name}</p><p className="mt-1 text-xs text-slate-300">{tool.description}</p>
+</button>
+);
                 })}
               </div>
             </div>
@@ -436,10 +477,41 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
 
   function processTool() {
     if (tool.name === "Create PDF") {
-    createSimplePdf(note);
-    setStatus("A simple PDF was created and downloaded.");
-    return;
-  }
+  fetch("http://localhost:5000/create-pdf", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      text: note,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Create PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-created.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF created successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Create PDF failed.");
+    });
+
+  return;
+}
 
   if (tool.name === "Word to PDF" && file) {
 
@@ -654,6 +726,183 @@ if (tool.name === "CSV to PDF" && file) {
 
   return;
 }
+if (tool.name === "PDF to Libre" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/pdf-to-libre", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("PDF to Libre failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-converted-libre.odt";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF converted to Libre Writer successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to Libre conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "PDF to Word" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/pdf-to-word", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("PDF to Word failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-converted-word.docx";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF converted to Word successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to Word conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "HTML to PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/html-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTML to PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-html.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("HTML converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("HTML to PDF conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "PDF to HTML" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/pdf-to-html", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("PDF to HTML failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-export.html";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF converted to HTML successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to HTML conversion failed.");
+    });
+
+  return;
+}
+
+if (tool.name === "PDF to TXT" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/pdf-to-txt", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("PDF to TXT failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-extracted-text.txt";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF text extracted successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to TXT conversion failed.");
+    });
+
+  return;
+}
 
   if (tool.name === "TXT to PDF" && file) {
 
@@ -669,11 +918,122 @@ if (tool.name === "CSV to PDF" && file) {
 
     return;
   }
+  if (tool.name === "Request Signing" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("recipientEmail", recipient || "Not provided");
+  formData.append("instructions", note || "No instructions provided");
 
-  if (
-    tool.name.includes("Sign") ||
-    tool.name === "Request Signing"
-  ) {
+  fetch("http://localhost:5000/request-signing", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Request signing failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-signing-request.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("Signing request PDF generated successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Request signing failed.");
+    });
+
+  return;
+}
+if (tool.name === "Sign PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("signerName", recipient || "PDFShuffl User");
+
+  fetch("http://localhost:5000/sign-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Sign PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-signed.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF signed successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Sign PDF failed.");
+    });
+
+  return;
+}
+if (tool.name === "Sign PDF" && file) {
+
+  // REAL SIGN PDF CODE HERE
+
+  return;
+}
+if (tool.name === "Compress PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("http://localhost:5000/compress-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Compress PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-compressed.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF compressed successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Compress PDF failed.");
+    });
+
+  return;
+}
+
+if (
+  tool.name.includes("Sign") ||
+  tool.name === "Request Signing"
+){
 
     downloadTextFile(
       "PDFShuffl-signing-request.txt",
@@ -690,7 +1050,36 @@ Instructions: ${note}`
 
     return;
   }
+  if (tool.name === "Crop PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
 
+  fetch("http://localhost:5000/crop-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Crop PDF failed");
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-cropped.pdf";
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setStatus("PDF cropped successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Crop PDF failed.");
+    });
+
+  return;
+}
   downloadTextFile(
     "PDFShuffl-processing-summary.txt",
     `PDFShuffl processing summary
@@ -712,7 +1101,60 @@ Notes: ${note}`
 >
       <aside className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:overflow-auto">
         <h2 className="mb-4 px-2 text-xl font-black text-slate-950">PDFShuffl Tools</h2>
-        {toolGroups.map((group) => <div key={group.title} className="mb-5"><h3 className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-slate-400">{group.title}</h3>{group.tools.map((item) => { const Icon = item.icon; return <button key={item.name} onClick={() => { setSelectedTool(item.name); setFile(null); setStatus("Ready"); }} className={`mb-1 flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${tool.name === item.name ? "bg-rose-500 text-white shadow-lg shadow-rose-100" : "hover:bg-slate-50"}`}><Icon size={18} /><span className="text-sm font-bold">{item.name}</span></button>; })}</div>)}
+        {toolGroups.map((group) => (
+  <div key={group.title} className="mb-5">
+    <h3 className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+      {group.title}
+    </h3>
+
+    {group.tools.map((item) => {
+      const Icon = item.icon;
+
+      return (
+        <button
+          key={item.name}
+          onClick={() => {
+            if (item.name === "Create PDF") {
+              setActivePage("Create PDF Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            if (item.name === "Format PDF") {
+              setActivePage("Format PDF Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            if (item.name === "Edit PDF") {
+              setActivePage("Edit PDF Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            if (item.name === "PDF Comments") {
+              setActivePage("PDF Comments Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            setSelectedTool(item.name);
+            setFile(null);
+            setStatus("Ready");
+          }}
+          className={`mb-1 flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${
+            tool.name === item.name
+              ? "bg-rose-500 text-white shadow-lg shadow-rose-100"
+              : "hover:bg-slate-50"
+          }`}
+        >
+          <Icon size={18} />
+          <span className="text-sm font-bold">{item.name}</span>
+        </button>
+      );
+    })}
+  </div>
+))}
       </aside>
       <section>
         <div className="rounded-[2.5rem] bg-gradient-to-br from-slate-950 to-slate-800 p-8 text-white shadow-2xl">
@@ -841,6 +1283,63 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
       "These Terms and Conditions shall be governed by and interpreted in accordance with the laws of the Republic of South Africa. Any dispute, legal proceeding or claim arising from or relating to PDFShuffl, its services or these Terms and Conditions shall be subject to the exclusive jurisdiction of the competent courts of South Africa.",
       "By continuing to access or use PDFShuffl, users acknowledge and agree that they fully understand, accept and consent to these Terms and Conditions, including all indemnification obligations, limitations of liability, jurisdiction provisions and operational conditions described herein."
     ],
+    "Create PDF Guide": [
+  "Creating a PDF allows you to turn text, images, scanned material, notes, forms and business documents into a professional and shareable format.",
+  "PDFs preserve formatting across devices, improve compatibility, simplify sharing and provide a professional presentation standard for work, education and personal use.",
+  "To create a PDF using PDFShuffl, open the Tools page and select Create PDF. You can create PDFs from text, images, notes and other supported content."
+],
+
+"Format PDF Guide": [
+  "Formatting a PDF helps improve readability, presentation quality and document consistency.",
+  "Common formatting tasks include adjusting margins, page size, page orientation, page order, spacing and visual layout.",
+  "To format a PDF using PDFShuffl, open the Tools page and select Format PDF."
+],
+
+"Edit PDF Guide": [
+  "Editing a PDF allows users to update content, add information, correct mistakes and improve document accuracy.",
+  "PDF editing may include adding text, annotations, highlights, shapes, mark-ups and document notes.",
+  "To edit a PDF using PDFShuffl, open the Tools page and select Edit PDF."
+],
+
+"PDF Comments Guide": [
+  "PDF comments provide a collaborative review process for teams, clients, students and professionals.",
+  "Comments can be used to provide feedback, approvals, review notes, change requests and document observations.",
+  "To comment on a PDF using PDFShuffl, open the Tools page and select PDF Comments."
+],
+"How to Create a PDF": [
+  "Creating a PDF means turning text, images, notes, forms or document content into a fixed professional file that keeps its layout across phones, tablets, laptops and desktops.",
+  "Use PDFShuffl when you need to prepare a clean document for sharing, printing, uploading to portals, submitting applications, sending business information or keeping a record that should not easily lose its formatting.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Create PDF. Step 3: Add your notes, text or document content. Step 4: Click Process. Step 5: Download your new PDF and review it before sharing.",
+  "A created PDF is useful for schoolwork, letters, forms, invoices, business documents, personal records, customer service documents and professional submissions."
+],
+
+"How to Format a PDF": [
+  "Formatting a PDF helps make a document easier to read, more professional and better prepared for sharing or printing.",
+  "Good formatting includes clean spacing, correct page order, readable layout, consistent margins, appropriate page size and a structure that makes the document look complete.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Format PDF. Step 3: Upload the PDF you want to improve. Step 4: Review the formatting options. Step 5: Process and download the improved file.",
+  "Formatting is useful when preparing reports, proposals, contracts, application packs, statements, school submissions and business documents."
+],
+
+"How to Edit a PDF": [
+  "Editing a PDF allows you to improve or update a document without recreating it from the beginning.",
+  "PDF editing may include adding text, correcting information, inserting notes, highlighting important sections, adding shapes or making document changes before sharing.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Edit PDF. Step 3: Upload your PDF. Step 4: Add the changes or notes required. Step 5: Process and download the updated version.",
+  "Editing is useful when you need to correct mistakes, update forms, add missing information, prepare documents for approval or improve a file before sending it."
+],
+
+"How to Sign a PDF": [
+  "Signing a PDF helps confirm that a document has been reviewed, accepted or approved by the person signing it.",
+  "A signed PDF is useful for agreements, approvals, forms, letters, confirmations, internal documents and business workflows where a visible signature record is needed.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Sign PDF. Step 3: Upload the PDF document. Step 4: Add the signer name or signing details. Step 5: Process and download the signed PDF.",
+  "For formal legal or regulated digital signatures, PDFShuffl should later be connected to a production e-signature provider such as DocuSign, Adobe Sign or another approved signing platform."
+],
+
+"How to Mark-up a PDF": [
+  "Marking up a PDF means adding review notes, comments, highlights, corrections or visual guidance to help others understand what must be changed, approved or reviewed.",
+  "Mark-ups are useful when teams, students, clients, managers or service desks need to review documents without changing the original meaning of the file.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select PDF Comments or Edit PDF. Step 3: Upload the PDF. Step 4: Add comments, highlights or notes. Step 5: Process and download the reviewed document.",
+  "Mark-up tools are useful for feedback, approval notes, document corrections, academic reviews, contract discussions, service requests and internal quality checks."
+],
     Contact: [
       "For support, partnerships, product enquiries, privacy requests, legal notices or general platform assistance, contact the PDFShuffl team through the details below."
     ]
@@ -850,7 +1349,12 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
     return (
       <main className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
         <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
-          <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl</p>
+          <div className="mb-6">
+  <span className="text-4xl font-black tracking-tight text-slate-950">
+    PDFShuffl
+  </span>
+  <span className="ml-1 text-4xl font-black text-rose-500">.</span>
+</div>
           <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">Interactive Sitemap</h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Navigate every major PDFShuffl page, workflow and document tool visually. This sitemap helps users quickly jump to the exact service they need.</p>
 
@@ -897,7 +1401,12 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
   return (
     <main className="mx-auto max-w-5xl px-4 py-16 lg:px-8">
       <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl</p>
+        <div className="mb-6">
+  <span className="text-1.5xl font-black tracking-tight text-slate-500">
+    PDFShuffl
+  </span>
+  <span className="ml-0 text-2.5xl font-black text-rose-500">.</span>
+</div>
         <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">{page}</h1>
         <div className="mt-6 space-y-6 text-lg leading-8 text-slate-600">
           {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
