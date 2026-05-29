@@ -1244,6 +1244,20 @@ Notes: ${note}`
 }
 
 function SimplePage({ page, setActivePage, setSelectedTool }) {
+  const knowledgePages = [
+  "How to Create a PDF",
+  "How to Format a PDF",
+  "How to Edit a PDF",
+  "How to Sign a PDF",
+  "How to Mark-up a PDF",
+];
+
+const currentIndex = knowledgePages.indexOf(page);
+
+const nextPage =
+  currentIndex >= 0 && currentIndex < knowledgePages.length - 1
+    ? knowledgePages[currentIndex + 1]
+    : null;
   const [showSouthAfrica, setShowSouthAfrica] = useState(false);
 
   const copy = {
@@ -1411,7 +1425,20 @@ function SimplePage({ page, setActivePage, setSelectedTool }) {
         <div className="mt-6 space-y-6 text-lg leading-8 text-slate-600">
           {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
         </div>
-
+        {nextPage && (
+  <div className="mt-10 flex justify-end">
+    <button
+      onClick={() => {
+        setActivePage(nextPage);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+      className="inline-flex items-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-sm font-black text-white shadow-lg shadow-rose-100 transition hover:-translate-y-0.5 hover:bg-rose-600"
+    >
+      Next Knowledge Article
+      <ArrowRight size={18} />
+    </button>
+  </div>
+)}
         {page === "Contact" && (
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <div className="rounded-3xl bg-slate-50 p-6">
