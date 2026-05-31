@@ -340,7 +340,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
           }}
           className="flex items-center gap-3"
         >
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 text-white shadow-lg shadow-rose-200">
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-rose-400 text-white shadow-lg shadow-rose-200">
             <FileText />
           </span>
           <span className="text-2xl font-black tracking-tight text-slate-950">
@@ -356,9 +356,9 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
             setOpen(false);
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="hidden rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl shadow-slate-200 lg:block"
+          className="rounded-full bg-slate-950 px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:bg-rose-500 hover:shadow-xl hover:shadow-rose-200"
         >
-          Start converting
+          Get Started
         </button>
 
         <button
@@ -468,7 +468,7 @@ function Home({ setActivePage }) {
 function ToolShowcase({ setActivePage }) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
-      <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">All-in-one tools</p><h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Everything PDF, logically organised.</h2></div><button onClick={() => setActivePage("Tools")} className="rounded-full bg-slate-950 px-6 py-3 font-black text-white">Open tools</button></div>
+      <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">All-in-one tools</p><h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Everything PDF, logically organised.</h2></div><button onClick={() => setActivePage("Tools")} className="rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl transition-all duration-300 hover:bg-rose-500 hover:scale-105 hover:shadow-2xl hover:shadow-rose-300">Open tools</button></div>
       <div className="grid gap-5 lg:grid-cols-4">
         {toolGroups.map((group) => <div key={group.title} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm"><h3 className="mb-4 font-black text-slate-950">{group.title}</h3><div className="grid gap-2">{group.tools.map((tool) => { const Icon = tool.icon; return <div key={tool.name} className="flex items-center gap-3 rounded-2xl bg-slate-50 p-3"><Icon size={18} className="text-rose-500" /><span className="text-sm font-bold text-slate-700">{tool.name}</span></div>; })}</div></div>)}
       </div>
@@ -1536,7 +1536,9 @@ function Footer({ setActivePage }) {
 }
 
 export default function PDFShufflWebsite() {
-  const [activePage, setActivePage] = useState("Home");
+  const [activePage, setActivePage] = useState("Home");useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activePage]);
   const [selectedTool, setSelectedTool] = useState("Create PDF");
   const page = useMemo(() => {
     if (activePage === "Home") return <Home setActivePage={setActivePage} />;
