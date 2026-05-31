@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -1575,5 +1576,108 @@ export default function PDFShufflWebsite() {
     if (activePage === "Tools") return <ToolsPage selectedTool={selectedTool} setSelectedTool={setSelectedTool} />;
     return <SimplePage page={activePage} setActivePage={setActivePage} setSelectedTool={setSelectedTool} />;
   }, [activePage, selectedTool]);
-  return <div className="min-h-screen bg-slate-50 font-sans text-slate-900"><Header activePage={activePage} setActivePage={setActivePage} selectedTool={selectedTool} setSelectedTool={setSelectedTool} />{page}<Footer setActivePage={setActivePage}setSelectedTool={setSelectedTool} /></div>;
+  const AboutPage = () => (
+  <SimplePage
+    page="About"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ContactPage = () => (
+  <SimplePage
+    page="Contact"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+
+const PrivacyPage = () => (
+  <SimplePage
+    page="Privacy Policy"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+
+const TermsPage = () => (
+  <SimplePage
+    page="Terms and Conditions"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+
+const SiteMapPage = () => (
+  <SimplePage
+    page="Sitemap"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ToolsLandingPage = () => (
+  <ToolsPage
+    selectedTool={selectedTool}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const PdfToWordPage = () => (
+  <ToolsPage
+    selectedTool="PDF to Word"
+    setSelectedTool={setSelectedTool}
+  />
+);
+const toolRoutes = [
+  { path: "/tools/word-to-pdf", name: "Word to PDF" },
+  { path: "/tools/libre-to-pdf", name: "Libre to PDF" },
+  { path: "/tools/ppt-to-pdf", name: "PPT to PDF" },
+  { path: "/tools/csv-to-pdf", name: "CSV to PDF" },
+  { path: "/tools/excel-to-pdf", name: "Excel to PDF" },
+  { path: "/tools/jpg-to-pdf", name: "JPG to PDF" },
+  { path: "/tools/html-to-pdf", name: "HTML to PDF" },
+  { path: "/tools/txt-to-pdf", name: "TXT to PDF" },
+  { path: "/tools/pdf-to-word", name: "PDF to Word" },
+  { path: "/tools/pdf-to-libre", name: "PDF to Libre" },
+  { path: "/tools/pdf-to-html", name: "PDF to HTML" },
+  { path: "/tools/pdf-to-txt", name: "PDF to TXT" },
+  { path: "/tools/sign-pdf", name: "Sign PDF" },
+  { path: "/tools/request-signing", name: "Request Signing" },
+  { path: "/tools/crop-pdf", name: "Crop PDF" },
+  { path: "/tools/compress-pdf", name: "Compress PDF" },
+];
+  return ( <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+    <Header
+      activePage={activePage}
+      setActivePage={setActivePage}
+      selectedTool={selectedTool}
+      setSelectedTool={setSelectedTool}
+    />
+
+    <Routes>
+  <Route path="/about" element={<AboutPage />} />
+  <Route path="/contact" element={<ContactPage />} />
+  <Route path="/tools" element={<ToolsLandingPage />} />
+  <Route path="/privacy-policy" element={<PrivacyPage />} />
+  <Route path="/terms-and-conditions" element={<TermsPage />} />
+  <Route path="/sitemap" element={<SiteMapPage />} />
+  <Route path="/tools/pdf-to-word" element={<PdfToWordPage />} />
+  {toolRoutes.map((route) => (
+  <Route
+    key={route.path}
+    path={route.path}
+    element={
+      <ToolsPage
+        selectedTool={route.name}
+        setSelectedTool={setSelectedTool}
+      />
+    }
+  />
+))}
+  <Route path="*" element={page} />
+</Routes>
+    <Footer
+      setActivePage={setActivePage}
+      setSelectedTool={setSelectedTool}
+    />
+  </div>
+);
 }
