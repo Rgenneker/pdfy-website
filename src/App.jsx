@@ -1524,12 +1524,42 @@ const nextPage =
   );
 }
 
-function Footer({ setActivePage }) {
+function Footer({ setActivePage,setSelectedTool }) {
   return (
     <footer className="border-t border-slate-200 bg-white">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 lg:grid-cols-[1fr_2fr] lg:px-8">
         <div><div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-rose-500 text-white"><FileText size={20} /></span><span className="text-2xl font-black">PDFShuffl</span></div><p className="mt-4 max-w-md text-sm leading-6 text-slate-600">A premium PDF conversion, editing and signing workspace for everyone.</p></div>
-        <div className="grid gap-6 sm:grid-cols-3"><div><h4 className="font-black">Pages</h4><div className="mt-3 grid gap-2">{pages.map((p) => <button key={p} onClick={() => setActivePage(p)} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div><h4 className="font-black">Popular tools</h4><div className="mt-3 grid gap-2">{["Create PDF", "PDF to Word", "Sign PDF", "Compress PDF"].map((p) => <button key={p} onClick={() => setActivePage("Tools")} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div><h4 className="font-black">Legal notice</h4><p className="mt-3 text-sm leading-6 text-slate-600">PDFShuffl® is a registered trademark. All intellectual property rights in and to the game are owned in South Africa by WordShuffl Trading.<br />This site is for educational and informational purposes only.<br />© 2026 PDFShuffl.com. ALL RIGHTS RESERVED</p></div></div>
+        <div className="grid gap-6 sm:grid-cols-3"><div><h4 className="font-black">Pages</h4><div className="mt-3 grid gap-2">{pages.map((p) => <button key={p} onClick={() => setActivePage(p)} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div>
+  <h4 className="mb-4 font-black text-slate-950">Popular tools</h4>
+
+  <div className="grid gap-3 text-sm text-slate-600">
+    <button onClick={() => setActivePage("How to Create a PDF")} className="text-left hover:text-rose-500">
+      Create PDF
+    </button>
+
+    <button onClick={() => {
+    setSelectedTool("PDF to Word");
+    setActivePage("Tools");
+     window.scrollTo(0, 0);
+  }}
+  className="text-left text-sm text-slate-600 hover:text-rose-500">
+      PDF to Word
+    </button>
+
+    <button onClick={() => {
+    setSelectedTool("Sign PDF");
+    setActivePage("Tools");
+     window.scrollTo(0, 0);
+  }}
+  className="text-left text-sm text-slate-600 hover:text-rose-500">
+      Sign PDF
+    </button>
+
+    <button onClick={() => { setActivePage("Tools"); setSelectedTool("Compress PDF");  window.scrollTo(0, 0);}} className="text-left hover:text-rose-500">
+      Compress PDF
+    </button>
+  </div>
+</div><div><h4 className="font-black">Legal notice</h4><p className="mt-3 text-sm leading-6 text-slate-600">PDFShuffl® is a registered trademark. All intellectual property rights in and to the game are owned in South Africa by WordShuffl Trading.<br />This site is for educational and informational purposes only.<br />© 2026 PDFShuffl.com. ALL RIGHTS RESERVED</p></div></div>
       </div>
     </footer>
   );
@@ -1545,5 +1575,5 @@ export default function PDFShufflWebsite() {
     if (activePage === "Tools") return <ToolsPage selectedTool={selectedTool} setSelectedTool={setSelectedTool} />;
     return <SimplePage page={activePage} setActivePage={setActivePage} setSelectedTool={setSelectedTool} />;
   }, [activePage, selectedTool]);
-  return <div className="min-h-screen bg-slate-50 font-sans text-slate-900"><Header activePage={activePage} setActivePage={setActivePage} selectedTool={selectedTool} setSelectedTool={setSelectedTool} />{page}<Footer setActivePage={setActivePage} /></div>;
+  return <div className="min-h-screen bg-slate-50 font-sans text-slate-900"><Header activePage={activePage} setActivePage={setActivePage} selectedTool={selectedTool} setSelectedTool={setSelectedTool} />{page}<Footer setActivePage={setActivePage}setSelectedTool={setSelectedTool} /></div>;
 }
