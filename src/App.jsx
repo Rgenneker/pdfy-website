@@ -1655,10 +1655,10 @@ const toolRoutes = [
     <Routes>
   <Route path="/about" element={<AboutPage />} />
   <Route path="/contact" element={<ContactPage />} />
+<Route path="/privacy-policy" element={<PrivacyPage />} />
+<Route path="/terms-and-conditions" element={<TermsPage />} />
+<Route path="/sitemap" element={<SiteMapPage />} />
   <Route path="/tools" element={<ToolsLandingPage />} />
-  <Route path="/privacy-policy" element={<PrivacyPage />} />
-  <Route path="/terms-and-conditions" element={<TermsPage />} />
-  <Route path="/sitemap" element={<SiteMapPage />} />
   <Route path="/tools/pdf-to-word" element={<PdfToWordPage />} />
   {toolRoutes.map((route) => (
   <Route
