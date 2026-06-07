@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Analytics } from '@vercel/analytics/react';
 import { motion } from "framer-motion";
 import {
   FileText,
@@ -1678,6 +1679,7 @@ const toolRoutes = [
       setActivePage={setActivePage}
       setSelectedTool={setSelectedTool}
     />
+    <Analytics />
   </div>
 );
 }
