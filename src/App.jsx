@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   FileText,
   FilePlus2,
@@ -82,7 +84,333 @@ const toolGroups = [
 ];
 
 const allTools = toolGroups.flatMap((g) => g.tools);
+const toolContent = {
+  "PDF to Word": {
+    intro:
+      "Convert PDF documents into editable Microsoft Word files while preserving structure, formatting and usability.",
+    benefits: [
+      "Easy document editing",
+      "Preserves document structure",
+      "Supports business workflows",
+      "Improves productivity"
+    ],
+    faq: [
+      {
+        q: "Will my formatting be preserved?",
+        a: "PDFShuffl aims to retain document structure, headings, tables and layout wherever possible."
+      },
+      {
+        q: "Can I edit the converted Word file?",
+        a: "Yes. The converted document can be edited using Microsoft Word or compatible word processors."
+      }
+    ]
+  },
 
+  "Word to PDF": {
+    intro:
+      "Convert Word documents into professional PDF files suitable for sharing, printing and archiving.",
+    benefits: [
+      "Professional presentation",
+      "Consistent formatting",
+      "Easy sharing",
+      "Broad compatibility"
+    ],
+    faq: [
+      {
+        q: "Why convert Word to PDF?",
+        a: "PDF files preserve formatting and display consistently across devices."
+      },
+      {
+        q: "Can I print the converted PDF?",
+        a: "Yes. PDFs are ideal for printing and distribution."
+      }
+    ]
+  },
+
+  "Compress PDF": {
+    intro:
+      "Reduce PDF file size while maintaining document quality for easier sharing and storage.",
+    benefits: [
+      "Smaller file sizes",
+      "Faster uploads",
+      "Easier email sharing",
+      "Reduced storage requirements"
+    ],
+    faq: [
+      {
+        q: "Will compression reduce quality?",
+        a: "Compression aims to reduce size while maintaining usability and readability."
+      },
+      {
+        q: "Why compress PDFs?",
+        a: "Smaller files are easier to email, upload and store."
+      }
+    ]
+  },
+
+  "Sign PDF": {
+    intro:
+      "Prepare PDF documents for electronic signatures and approval workflows.",
+    benefits: [
+      "Faster approvals",
+      "Reduced paperwork",
+      "Improved workflows",
+      "Professional document handling"
+    ],
+    faq: [
+      {
+        q: "Can I sign business documents?",
+        a: "Yes. PDF signing workflows are commonly used in business environments."
+      },
+      {
+        q: "Are electronic signatures useful?",
+        a: "They speed up approvals and document processing."
+      }
+    ]
+  },
+
+  "Crop PDF": {
+    intro:
+      "Remove unwanted page edges, whitespace and margins from PDF documents.",
+    benefits: [
+      "Cleaner presentation",
+      "Improved readability",
+      "Better printing results",
+      "Professional layouts"
+    ],
+    faq: [
+      {
+        q: "Why crop a PDF?",
+        a: "Cropping removes unwanted content and improves presentation quality."
+      },
+      {
+        q: "Can I remove excess margins?",
+        a: "Yes. Cropping is commonly used to reduce blank areas."
+      }
+          ]
+  },
+  "Create PDF": {
+  intro: "Create professional PDF documents from text, notes, forms and content for sharing, printing and archiving.",
+  benefits: [
+    "Professional documents",
+    "Consistent formatting",
+    "Easy sharing",
+    "Improved compatibility"
+  ],
+  faq: [
+    {
+      q: "Why create a PDF?",
+      a: "PDFs provide a professional and widely accepted document format."
+    },
+    {
+      q: "Can I share the created PDF?",
+      a: "Yes. PDFs are ideal for sharing across devices and platforms."
+    }
+  ]
+},
+
+"Edit PDF": {
+  intro: "Modify PDF documents by updating content, correcting information and improving document accuracy.",
+  benefits: [
+    "Correct document errors",
+    "Update information",
+    "Improve accuracy",
+    "Save time"
+  ],
+  faq: [
+    {
+      q: "Can I update existing documents?",
+      a: "Yes. Editing allows information to be changed and improved."
+    },
+    {
+      q: "Why edit a PDF?",
+      a: "Editing helps keep documents accurate and up to date."
+    }
+  ]
+},
+"PDF to TXT": {
+  intro: "Extract readable text from PDF files for research, editing, copying, analysis and document review.",
+  benefits: ["Fast text extraction", "Useful for research", "Easy copying", "Improves accessibility"],
+  faq: [
+    { q: "Can I extract text from any PDF?", a: "Text-based PDFs work best. Scanned PDFs may need OCR support." },
+    { q: "Is the output editable?", a: "Yes. The extracted TXT file can be opened and edited in any text editor." }
+  ]
+},
+
+"TXT to PDF": {
+  intro: "Convert plain text files into clean PDF documents for sharing, printing and archiving.",
+  benefits: ["Cleaner presentation", "Easy sharing", "Printable documents", "Better document structure"],
+  faq: [
+    { q: "Why convert TXT to PDF?", a: "PDF makes plain text easier to present, print and share professionally." },
+    { q: "Can I use this for notes?", a: "Yes. TXT to PDF is useful for notes, drafts, lists and simple documents." }
+  ]
+},
+
+"Excel to PDF": {
+  intro: "Convert spreadsheet files into PDF reports that are easier to share, print and archive.",
+  benefits: ["Professional reports", "Preserves spreadsheet layout", "Easy distribution", "Better record keeping"],
+  faq: [
+    { q: "Why convert Excel to PDF?", a: "PDF prevents accidental spreadsheet edits and makes reports easier to share." },
+    { q: "Can I share financial reports as PDF?", a: "Yes. PDF is commonly used for business and financial reporting." }
+  ]
+},
+
+"CSV to PDF": {
+  intro: "Convert CSV data into readable PDF documents for reporting, review and structured sharing.",
+  benefits: ["Readable data output", "Useful for reports", "Easy sharing", "Better presentation"],
+  faq: [
+    { q: "What is a CSV file?", a: "A CSV file stores table-style data in plain text format." },
+    { q: "Why convert CSV to PDF?", a: "PDF makes data easier to read, print and share with non-technical users." }
+  ]
+},
+
+"HTML to PDF": {
+  intro: "Convert HTML pages, invoices, layouts and web content into PDF documents.",
+  benefits: ["Web-ready conversion", "Preserves layouts", "Useful for invoices", "Printable output"],
+  faq: [
+    { q: "Can I convert web layouts to PDF?", a: "Yes. HTML to PDF is useful for saving web-based layouts and documents." },
+    { q: "Does styling remain visible?", a: "PDFShuffl aims to preserve visible HTML styling where possible." }
+  ]
+},
+
+"PDF to HTML": {
+  intro: "Convert PDF content into HTML format for web viewing, content reuse and online workflows.",
+  benefits: ["Web-friendly output", "Content reuse", "Supports online publishing", "Improves accessibility"],
+  faq: [
+    { q: "Why convert PDF to HTML?", a: "HTML is useful when content needs to be reused on websites or digital platforms." },
+    { q: "Will the layout be exact?", a: "The output depends on the PDF structure and source formatting." }
+  ]
+},
+
+"JPG to PDF": {
+  intro: "Convert JPG and image files into PDF documents for easier sharing, archiving and printing.",
+  benefits: ["Combines images", "Easy sharing", "Printable output", "Professional document format"],
+  faq: [
+    { q: "Can I convert images to PDF?", a: "Yes. JPG and image files can be converted into PDF format." },
+    { q: "Why use PDF for images?", a: "PDF makes images easier to share, print and organise as documents." }
+  ]
+},
+
+"Libre to PDF": {
+  intro: "Convert LibreOffice documents into PDF files for professional sharing, printing and compatibility.",
+  benefits: ["LibreOffice compatibility", "Professional PDF output", "Consistent layout", "Easy sharing"],
+  faq: [
+    { q: "Can LibreOffice files become PDFs?", a: "Yes. LibreOffice documents can be converted into PDF format." },
+    { q: "Why convert Libre documents to PDF?", a: "PDF improves compatibility and keeps the document layout consistent." }
+  ]
+},
+
+"PDF to Libre": {
+  intro: "Convert PDF content into LibreOffice-friendly editable documents for review and document reuse.",
+  benefits: ["Editable output", "LibreOffice friendly", "Improves reuse", "Supports open document workflows"],
+  faq: [
+    { q: "Can I edit the converted Libre file?", a: "Yes. The output is designed for editing in compatible LibreOffice applications." },
+    { q: "Is formatting always perfect?", a: "Complex PDFs may require manual review after conversion." }
+  ]
+},
+
+"PPT to PDF": {
+  intro: "Convert PowerPoint presentations into PDF files for sharing, printing and presentation distribution.",
+  benefits: ["Easy presentation sharing", "Printable slides", "Consistent layout", "Professional handouts"],
+  faq: [
+    { q: "Why convert PPT to PDF?", a: "PDF makes presentations easier to share and view without presentation software." },
+    { q: "Can I print the converted slides?", a: "Yes. PDF presentation files are suitable for printing and distribution." }
+  ]
+},
+
+"Request Signing": {
+  intro: "Prepare a PDF document for signing by creating a signing request workflow with recipient details.",
+  benefits: ["Organised signing workflow", "Clear recipient details", "Better approval tracking", "Professional process"],
+  faq: [
+    { q: "What is request signing?", a: "It prepares a document workflow for another person to review and sign." },
+    { q: "Is this a full e-signature service?", a: "Production e-signature workflows may require integration with a recognised signing provider." }
+  ]
+},
+
+"Sign a Locked PDF": {
+  intro: "Start a secure signing workflow for PDFs that may require permission handling or controlled review.",
+  benefits: ["Secure workflow support", "Controlled document handling", "Better signing preparation", "Useful for sensitive files"],
+  faq: [
+    { q: "Can locked PDFs always be signed?", a: "Locked PDFs may require permission or password access before processing." },
+    { q: "Why use a locked PDF signing workflow?", a: "It helps manage documents that need controlled access and signing steps." }
+  ]
+},
+
+"Format PDF": {
+  intro: "Format PDF documents to improve layout, readability, presentation and professional appearance.",
+  benefits: ["Cleaner layout", "Improved readability", "Better presentation", "Professional document output"],
+  faq: [
+    { q: "Why format a PDF?", a: "Formatting helps make documents easier to read, share and present." },
+    { q: "Can formatting improve business documents?", a: "Yes. Good formatting improves professionalism and readability." }
+  ]
+},
+
+"PDF Comments": {
+  intro: "Add review comments, feedback notes and document observations to support collaboration and approvals.",
+  benefits: ["Better collaboration", "Clear review notes", "Useful feedback workflow", "Improved approvals"],
+  faq: [
+    { q: "Why add comments to a PDF?", a: "Comments help reviewers explain changes, questions and approval notes." },
+    { q: "Who uses PDF comments?", a: "Teams, teachers, editors, managers and clients often use comments for review workflows." }
+  ]
+},
+"PDF to CSV": {
+  intro: "Extract structured data from PDF documents and convert it into CSV format for spreadsheets, reporting and data analysis.",
+  benefits: [
+    "Structured data extraction",
+    "Spreadsheet compatibility",
+    "Improved reporting",
+    "Supports data analysis"
+  ],
+  faq: [
+    {
+      q: "Why convert PDF to CSV?",
+      a: "CSV files make tabular data easier to analyse, sort, filter and import into spreadsheet applications."
+    },
+    {
+      q: "Can I use the CSV file in Excel?",
+      a: "Yes. CSV files can be opened in Excel, Google Sheets and most spreadsheet applications."
+    }
+  ]
+},
+
+"PDF to Editable PDF": {
+  intro: "Convert printable documents into editable PDF files that can be reviewed, updated and reused in future workflows.",
+  benefits: [
+    "Editable document output",
+    "Supports document updates",
+    "Improves workflow efficiency",
+    "Reduces document recreation"
+  ],
+  faq: [
+    {
+      q: "What is an editable PDF?",
+      a: "An editable PDF allows users to modify content, update information and make changes without recreating the document."
+    },
+    {
+      q: "Why convert print documents to editable PDFs?",
+      a: "Editable PDFs help organisations update forms, reports and documents more efficiently."
+    }
+  ]
+},
+  };
+
+const articleCards = [
+  { title: "How Businesses Use PDFs for Secure Document Management", audience: "Business", readTime: "6 min read" },
+  { title: "Why Managers Prefer PDFs for Reporting and Compliance", audience: "Managers", readTime: "6 min read" },
+  { title: "The Complete Student Guide to Working with PDFs", audience: "Students", readTime: "6 min read" },
+  { title: "How Teachers Create and Share Learning Materials Using PDFs", audience: "Teachers", readTime: "6 min read" },
+  { title: "Why Parents Use PDFs for School and Family Records", audience: "Parents", readTime: "6 min read" },
+  { title: "How Authors Prepare Manuscripts Using PDF Documents", audience: "Authors", readTime: "6 min read" },
+  { title: "PDF Best Practices for Editors and Publishers", audience: "Editors", readTime: "6 min read" },
+  { title: "How to Digitally Sign Documents in Minutes", audience: "Signing", readTime: "6 min read" },
+  { title: "The Benefits of Converting Documents to PDF Format", audience: "Conversion", readTime: "6 min read" },
+  { title: "PDF Security and Password Protection Explained", audience: "Security", readTime: "6 min read" },
+  { title: "How to Compress Large PDF Files Without Losing Quality", audience: "Compression", readTime: "6 min read" },
+  { title: "The Role of PDFs in Modern Remote Work", audience: "Remote Work", readTime: "6 min read" },
+  { title: "Organising Business Records with PDFs", audience: "Records", readTime: "6 min read" },
+  { title: "How Schools Use PDFs for Assignments and Assessments", audience: "Schools", readTime: "6 min read" },
+  { title: "Choosing the Right PDF Tool for Your Workflow", audience: "Productivity", readTime: "6 min read" },
+];
 const knowledgeCards = [
   {
     name: "How to Create a PDF",
@@ -161,7 +489,7 @@ const audiences = [
   { icon: Building2, title: "Branches & service desks", text: "Support walk-in document needs across mobile, tablet, touchscreen, laptop, and PC." },
 ];
 
-const pages = ["Home", "About", "Tools", "Privacy Policy", "Terms and Conditions", "Contact", "Sitemap"];
+const pages = ["Home", "About", "Tools","Articles", "Privacy Policy", "Terms and Conditions", "Contact", "Sitemap"];
 
 function downloadTextFile(filename, text, type = "text/plain") {
   const blob = new Blob([text], { type });
@@ -224,6 +552,7 @@ function isAcceptedFile(file, accepts) {
 function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
   const [open, setOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
+  const navigate = useNavigate();
   const menuRef = useRef(null);
   useEffect(() => {
   function handleClickOutside(event) {
@@ -312,11 +641,22 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
           <button
             key={page}
             onClick={() => {
-              setActivePage(page);
-              setMobile(false);
-              setOpen(false);
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+  const paths = {
+    Home: "/",
+    About: "/about",
+    Articles: "/articles",
+    "Privacy Policy": "/privacy-policy",
+    "Terms and Conditions": "/terms-and-conditions",
+    Contact: "/contact",
+    Sitemap: "/sitemap",
+  };
+
+  navigate(paths[page] || "/");
+  setActivePage(page);
+  setMobile(false);
+  setOpen(false);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}}
             className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
               activePage === page
                 ? "bg-rose-50 text-rose-600"
@@ -335,6 +675,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
         <button
           onClick={() => {
+              navigate("/");
             setActivePage("Home");
             setOpen(false);
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -353,6 +694,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
 
         <button
           onClick={() => {
+              navigate("/tools");
             setActivePage("Tools");
             setOpen(false);
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -479,6 +821,7 @@ function ToolShowcase({ setActivePage }) {
 
 function ToolsPage({ selectedTool, setSelectedTool }) {
   const tool = allTools.find((t) => t.name === selectedTool) || allTools[0];
+  const seo = toolContent[tool.name];
   const [file, setFile] = useState(null);
   const [note, setNote] = useState("This document was created inside PDFShuffl. Replace this text with your content, notes, instructions, or form details.");
   const [recipient, setRecipient] = useState("");
@@ -1170,6 +1513,56 @@ Notes: ${note}`
         <div className="rounded-[2.5rem] bg-gradient-to-br from-slate-950 to-slate-800 p-8 text-white shadow-2xl">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start"><div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-300">Selected tool</p><h1 className="mt-3 text-5xl font-black tracking-tight">{tool.name}</h1><p className="mt-4 max-w-2xl text-slate-300">{tool.description}</p></div><div className="rounded-3xl bg-white/10 p-4 text-sm"><p className="font-black">How to use</p><ol className="mt-2 list-decimal space-y-1 pl-4 text-slate-300"><li>Upload or create content.</li><li>Review the options.</li><li>Process and download.</li></ol></div></div>
         </div>
+        {seo && (
+  <div className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+    <h2 className="text-3xl font-black text-slate-950">
+      {tool.name} Converter
+    </h2>
+
+    <p className="mt-4 text-lg leading-8 text-slate-600">
+      {seo.intro}
+    </p>
+
+    <h3 className="mt-8 text-xl font-black text-slate-950">
+      Benefits
+    </h3>
+    <ul className="mt-4 grid gap-2 text-slate-600">
+  {seo.benefits.map((benefit) => (
+    <li key={benefit}>• {benefit}</li>
+  ))}
+</ul>
+
+    <h3 className="mt-8 text-xl font-black text-slate-950">
+  How to Use
+</h3>
+
+<ol className="mt-4 space-y-2 text-slate-600">
+  <li>1. Upload your file.</li>
+  <li>2. Select the required PDFShuffl tool.</li>
+  <li>3. Review your settings and options.</li>
+  <li>4. Click Process.</li>
+  <li>5. Download your completed document.</li>
+</ol>
+
+    <ul className="mt-4 grid gap-2 text-slate-600">
+      {seo.benefits.map((benefit) => (
+        <li key={benefit}>• {benefit}</li>
+      ))}
+    </ul>
+  </div>
+)}
+<h3 className="mt-8 text-xl font-black text-slate-950">
+  Frequently Asked Questions
+</h3>
+
+<div className="mt-4 space-y-4 text-slate-600">
+  {seo?.faq?.map((item) => (
+    <div key={item.q}>
+      <p className="font-bold">{item.q}</p>
+      <p>{item.a}</p>
+    </div>
+  ))}
+</div>
         <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
           <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
             <div onClick={() => inputRef.current?.click()} className="grid cursor-pointer place-items-center rounded-[2rem] border-2 border-dashed border-slate-200 bg-slate-50 p-10 text-center transition hover:border-rose-300 hover:bg-rose-50/40">
@@ -1364,10 +1757,378 @@ const nextPage =
   "Step 1: Open PDFShuffl and go to Tools. Step 2: Select PDF Comments or Edit PDF. Step 3: Upload the PDF. Step 4: Add comments, highlights or notes. Step 5: Process and download the reviewed document.",
   "Mark-up tools are useful for feedback, approval notes, document corrections, academic reviews, contract discussions, service requests and internal quality checks."
 ],
+Articles: [
+  "PDFShuffl Articles is a knowledge hub for practical PDF guidance, document productivity, business workflows, education, editing, signing, compression and secure digital document handling.",
+  "This section will include useful PDF articles for managers, students, parents, teachers, authors, editors, businesses and everyday users who want to work smarter with PDF documents."
+],
+"How Businesses Use PDFs for Secure Document Management": [
+"Introduction",
+"PDF documents have become one of the most widely used business file formats in the world. Organisations rely on PDFs to distribute contracts, proposals, financial reports, compliance records, policies, customer communications and operational documents because PDFs preserve formatting across different devices and operating systems. Whether a document is opened on a desktop computer, tablet or mobile phone, the content remains consistent and professional.",
+
+"Why Businesses Prefer PDFs",
+"Businesses require documents that are reliable, secure and easy to share. Unlike editable formats, PDFs reduce the risk of accidental changes while maintaining the intended layout and structure. This makes PDFs ideal for communicating information between departments, customers, suppliers, regulators and external stakeholders.",
+
+"Common Business Uses",
+"Companies use PDFs for invoices, quotations, customer onboarding packs, employment contracts, financial reports, compliance documentation, operating procedures, board reports, project plans and legal agreements. Many organisations also use PDFs as part of digital transformation initiatives because the format supports electronic workflows and document archiving.",
+
+"Security Advantages",
+"PDFs support password protection, controlled access, digital signatures and secure document distribution. These features help organisations reduce risk and improve document governance. Sensitive information such as financial data, customer information and legal documentation can be managed more effectively using secure PDF workflows.",
+
+"Benefits of Using PDFs in Business",
+"• Professional presentation across devices",
+"• Reduced formatting issues",
+"• Easier sharing and collaboration",
+"• Better compliance and governance support",
+"• Improved document security",
+"• Long-term document archiving",
+
+"Best Practices",
+"Businesses should maintain a consistent naming convention for PDF documents, organise files into logical folders, secure sensitive documents where appropriate and implement document retention standards. Teams should also ensure that important PDFs are backed up and accessible when needed.",
+
+"Real-World Example",
+"A financial services company may generate thousands of customer documents every month. By converting customer statements, contracts and disclosures into PDF format, the organisation ensures consistency, reduces operational errors and improves the customer experience. Staff can quickly retrieve documents while customers receive information in a familiar and accessible format.",
+
+"Frequently Asked Questions",
+"Q: Why are PDFs commonly used in business?",
+"A: PDFs preserve formatting, improve consistency and support professional document management.",
+
+"Q: Are PDFs suitable for compliance records?",
+"A: Yes. Many organisations use PDFs for regulatory, governance and audit-related documentation.",
+
+"Q: Can PDFs be secured?",
+"A: Yes. PDFs support password protection, controlled permissions and digital signature workflows.",
+
+"Q: Are PDFs suitable for long-term storage?",
+"A: Yes. PDFs are commonly used for document retention and archival purposes.",
+
+"Related PDFShuffl Tools",
+"Businesses often use PDF to Word, Word to PDF, Compress PDF, Sign PDF, Request Signing and Create PDF to support their document workflows."
+],
+
+"Why Managers Prefer PDFs for Reporting and Compliance": [
+  "Introduction",
+  "Managers depend on accurate, consistent and professional documents when preparing reports, approvals, compliance packs and business updates. PDFs are widely used because they preserve formatting and reduce the risk of accidental changes.",
+  "Why It Matters",
+  "A report that changes layout between devices can create confusion. PDFs help managers present information clearly to executives, teams, auditors and stakeholders.",
+  "Key Benefits",
+  "• Consistent reporting format",
+  "• Professional presentation",
+  "• Better audit support",
+  "• Easier document sharing",
+  "Best Practices",
+  "Managers should convert final reports to PDF, compress large files before sharing and use signing workflows for approvals.",
+  "Frequently Asked Questions",
+  "Q: Why do managers use PDFs?",
+  "A: PDFs preserve formatting and support professional reporting.",
+  "Q: Are PDFs useful for compliance?",
+  "A: Yes. PDFs are commonly used for audit, governance and compliance records.",
+  "Related PDFShuffl Tools",
+  "PDF to Word, Word to PDF, Compress PDF, Sign PDF and Request Signing."
+],
+
+"The Complete Student Guide to Working with PDFs": [
+  "Introduction",
+  "Students use PDFs for assignments, lecture notes, application forms, study guides and academic submissions. PDFs help keep documents organised and easy to share.",
+  "Why It Matters",
+  "Universities, schools and online platforms often request documents in PDF format because PDFs are easy to open and preserve layout.",
+  "Key Benefits",
+  "• Easy assignment submission",
+  "• Better study organisation",
+  "• Compatible across devices",
+  "• Useful for research",
+  "Best Practices",
+  "Students should convert final assignments to PDF, compress large files and keep clear file names for each subject or module.",
+  "Frequently Asked Questions",
+  "Q: Why submit work as PDF?",
+  "A: PDFs preserve formatting and are accepted by most learning platforms.",
+  "Q: Can students compress PDFs?",
+  "A: Yes. Compression helps with upload limits.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, PDF to TXT, Compress PDF and Create PDF."
+],
+
+"How Teachers Create and Share Learning Materials Using PDFs": [
+  "Introduction",
+  "Teachers use PDFs to distribute worksheets, lesson plans, notices, reading material and assessments. PDFs help ensure learners receive the same layout and content.",
+  "Why It Matters",
+  "Teaching materials must be clear, printable and accessible across devices. PDFs make this easier for classrooms, parents and online learning.",
+  "Key Benefits",
+  "• Consistent lesson materials",
+  "• Easy sharing with learners",
+  "• Printable worksheets",
+  "• Better classroom organisation",
+  "Best Practices",
+  "Teachers should organise resources by class, compress large files and use comments or mark-ups when reviewing learner work.",
+  "Frequently Asked Questions",
+  "Q: Why do teachers use PDFs?",
+  "A: PDFs preserve formatting and are easy to print or share.",
+  "Q: Can PDFs be used for assessments?",
+  "A: Yes. PDFs are useful for tests, worksheets and instructions.",
+  "Related PDFShuffl Tools",
+  "Create PDF, Compress PDF, PDF Comments and Word to PDF."
+],
+
+"Why Parents Use PDFs for School and Family Records": [
+  "Introduction",
+  "Parents manage school forms, medical documents, permission slips, reports, receipts and family records. PDFs help keep these documents organised and easy to share.",
+  "Why It Matters",
+  "Important family documents must be easy to find, send and print when needed. PDFs provide a practical format for long-term record keeping.",
+  "Key Benefits",
+  "• Better family record organisation",
+  "• Easy school communication",
+  "• Secure sharing",
+  "• Simple printing",
+  "Best Practices",
+  "Parents should keep folders for school, medical, finance and travel documents and convert important records to PDF.",
+  "Frequently Asked Questions",
+  "Q: Are PDFs useful for school records?",
+  "A: Yes. Schools commonly use PDFs for notices, forms and reports.",
+  "Q: Can parents sign PDF forms?",
+  "A: Yes. Signing tools can help complete approval forms.",
+  "Related PDFShuffl Tools",
+  "Create PDF, Sign PDF, Compress PDF and PDF to Word."
+],
+
+"How Authors Prepare Manuscripts Using PDF Documents": [
+  "Introduction",
+  "Authors use PDFs to share manuscripts, review drafts and prepare documents for editors, publishers and proofreaders.",
+  "Why It Matters",
+  "Manuscripts must be presented clearly during review. PDFs help preserve page layout, chapter structure and formatting.",
+  "Key Benefits",
+  "• Professional manuscript sharing",
+  "• Easier review process",
+  "• Preserved formatting",
+  "• Better collaboration",
+  "Best Practices",
+  "Authors should convert final drafts to PDF, keep version names clear and use comments for editor feedback.",
+  "Frequently Asked Questions",
+  "Q: Why do authors send PDFs?",
+  "A: PDFs preserve the manuscript layout during review.",
+  "Q: Can editors comment on PDFs?",
+  "A: Yes. PDF comments support editing and review workflows.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, PDF Comments, PDF to Word and Compress PDF."
+],
+
+"PDF Best Practices for Editors and Publishers": [
+  "Introduction",
+  "Editors and publishers rely on PDFs for reviewing layouts, marking corrections and preparing publication-ready files.",
+  "Why It Matters",
+  "Publishing workflows require accuracy. PDFs help teams review the same version of a document without layout changes.",
+  "Key Benefits",
+  "• Clear review workflow",
+  "• Accurate layout checking",
+  "• Easier collaboration",
+  "• Professional publishing process",
+  "Best Practices",
+  "Use version control, comment clearly, compress large proofs and archive approved versions.",
+  "Frequently Asked Questions",
+  "Q: Why are PDFs important in publishing?",
+  "A: PDFs preserve layout and make review more reliable.",
+  "Q: Can PDFs be marked up?",
+  "A: Yes. Comments and annotations are useful for editorial review.",
+  "Related PDFShuffl Tools",
+  "PDF Comments, Edit PDF, Compress PDF and Create PDF."
+],
+
+"How to Digitally Sign Documents in Minutes": [
+  "Introduction",
+  "Digital signing helps users approve forms, agreements, confirmations and business documents without printing and scanning.",
+  "Why It Matters",
+  "Signing workflows save time, reduce paperwork and support faster approvals.",
+  "Key Benefits",
+  "• Faster approvals",
+  "• Less printing",
+  "• Professional document handling",
+  "• Better workflow tracking",
+  "Best Practices",
+  "Review the document before signing, confirm recipient details and keep a copy of the signed PDF.",
+  "Frequently Asked Questions",
+  "Q: Can I sign a PDF online?",
+  "A: Yes. PDF signing tools help prepare signed documents.",
+  "Q: Are all signatures legally binding?",
+  "A: Formal legal requirements may depend on jurisdiction and signing provider.",
+  "Related PDFShuffl Tools",
+  "Sign PDF, Request Signing and Compress PDF."
+],
+
+"The Benefits of Converting Documents to PDF Format": [
+  "Introduction",
+  "Converting documents to PDF helps preserve formatting and makes files easier to share, print and archive.",
+  "Why It Matters",
+  "Different devices and apps may display editable files differently. PDFs provide a more consistent experience.",
+  "Key Benefits",
+  "• Preserved formatting",
+  "• Easy sharing",
+  "• Professional presentation",
+  "• Better compatibility",
+  "Best Practices",
+  "Convert final versions to PDF before sending, printing or uploading to portals.",
+  "Frequently Asked Questions",
+  "Q: Why convert files to PDF?",
+  "A: PDFs preserve layout and are widely accepted.",
+  "Q: Can PDFs be shared easily?",
+  "A: Yes. PDFs work across most devices and platforms.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, Excel to PDF, JPG to PDF, HTML to PDF and TXT to PDF."
+],
+
+"PDF Security and Password Protection Explained": [
+  "Introduction",
+  "PDF security helps protect sensitive documents such as contracts, reports, financial records and personal information.",
+  "Why It Matters",
+  "Businesses and individuals often need to control access to documents. Security features help reduce risk.",
+  "Key Benefits",
+  "• Better document protection",
+  "• Controlled access",
+  "• Safer sharing",
+  "• Improved confidentiality",
+  "Best Practices",
+  "Use strong passwords, share files only with trusted recipients and avoid sending sensitive documents through insecure channels.",
+  "Frequently Asked Questions",
+  "Q: Can PDFs be protected?",
+  "A: Yes. PDFs can support password protection and permission controls.",
+  "Q: Should sensitive documents be compressed?",
+  "A: Compression is useful, but sensitive files should also be handled securely.",
+  "Related PDFShuffl Tools",
+  "Sign PDF, Request Signing, Compress PDF and PDF to Word."
+],
+
+"How to Compress Large PDF Files Without Losing Quality": [
+  "Introduction",
+  "Large PDF files can be difficult to email, upload or store. Compression helps reduce file size while keeping the document usable.",
+  "Why It Matters",
+  "Many portals and email systems have file size limits. Smaller PDFs are easier to send and manage.",
+  "Key Benefits",
+  "• Smaller file sizes",
+  "• Faster uploads",
+  "• Easier email sharing",
+  "• Better storage efficiency",
+  "Best Practices",
+  "Compress files before email submission, check readability after compression and keep the original file when needed.",
+  "Frequently Asked Questions",
+  "Q: Will compression reduce quality?",
+  "A: Compression aims to reduce file size while keeping the file readable.",
+  "Q: When should I compress a PDF?",
+  "A: Compress PDFs before uploading, emailing or storing large documents.",
+  "Related PDFShuffl Tools",
+  "Compress PDF, PDF to Word and JPG to PDF."
+],
+
+"The Role of PDFs in Modern Remote Work": [
+  "Introduction",
+  "Remote teams use PDFs to share reports, contracts, policies, presentations and approvals across locations.",
+  "Why It Matters",
+  "Remote work depends on documents that are easy to open, review and share from any device.",
+  "Key Benefits",
+  "• Consistent document sharing",
+  "• Better remote collaboration",
+  "• Easy approvals",
+  "• Reliable formatting",
+  "Best Practices",
+  "Use PDFs for final documents, compress large files and use signing workflows for approvals.",
+  "Frequently Asked Questions",
+  "Q: Why are PDFs useful for remote teams?",
+  "A: PDFs are easy to share and keep formatting consistent.",
+  "Q: Can remote teams sign PDFs?",
+  "A: Yes. Signing workflows support remote approvals.",
+  "Related PDFShuffl Tools",
+  "Sign PDF, Request Signing, Compress PDF and PDF Comments."
+],
+
+"Organising Business Records with PDFs": [
+  "Introduction",
+  "Business records include invoices, contracts, reports, customer files, policies and compliance documents. PDFs help keep these records organised.",
+  "Why It Matters",
+  "Organised records improve efficiency, compliance and customer service.",
+  "Key Benefits",
+  "• Better document control",
+  "• Easier retrieval",
+  "• Improved compliance support",
+  "• Professional archiving",
+  "Best Practices",
+  "Use clear file names, archive by date or department and convert final documents to PDF.",
+  "Frequently Asked Questions",
+  "Q: Are PDFs good for archiving?",
+  "A: Yes. PDFs are commonly used for long-term business records.",
+  "Q: Can PDFs support audits?",
+  "A: Yes. PDFs are useful for audit packs and compliance files.",
+  "Related PDFShuffl Tools",
+  "Create PDF, Compress PDF, PDF to Word and Word to PDF."
+],
+
+"How Schools Use PDFs for Assignments and Assessments": [
+  "Introduction",
+  "Schools use PDFs for worksheets, assignments, assessments, notices and learning resources.",
+  "Why It Matters",
+  "PDFs help schools distribute consistent learning materials to students and parents.",
+  "Key Benefits",
+  "• Consistent formatting",
+  "• Easy printing",
+  "• Simple sharing",
+  "• Better academic organisation",
+  "Best Practices",
+  "Teachers and students should use clear file names, compress large documents and convert final submissions to PDF.",
+  "Frequently Asked Questions",
+  "Q: Why do schools use PDFs?",
+  "A: PDFs are easy to share, print and open across devices.",
+  "Q: Can students submit PDFs?",
+  "A: Yes. Many schools and platforms accept PDF submissions.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, Compress PDF, PDF Comments and Create PDF."
+],
+
+"Choosing the Right PDF Tool for Your Workflow": [
+  "Introduction",
+  "Different PDF tasks require different tools. Choosing the right tool helps users save time and produce better documents.",
+  "Why It Matters",
+  "A user who needs to edit a document should not use the same workflow as someone who needs to compress, sign or convert a file.",
+  "Key Benefits",
+  "• Faster document processing",
+  "• Better results",
+  "• Less confusion",
+  "• Improved productivity",
+  "Best Practices",
+  "Choose conversion tools for format changes, compression tools for large files, signing tools for approvals and editing tools for document changes.",
+  "Frequently Asked Questions",
+  "Q: Which PDF tool should I use first?",
+  "A: Start with the task you need: convert, edit, sign, compress or extract content.",
+  "Q: Can one workflow use multiple tools?",
+  "A: Yes. Many users convert, edit, compress and sign documents in one workflow.",
+  "Related PDFShuffl Tools",
+  "PDF to Word, Word to PDF, Compress PDF, Sign PDF, PDF Comments and Create PDF."
+],
     Contact: [
       "For support, partnerships, product enquiries, privacy requests, legal notices or general platform assistance, contact the PDFShuffl team through the details below."
     ]
   };
+if (page === "Articles") {
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl Articles</p>
+        <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">PDF Guides, Tips and Knowledge Articles</h1>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+          Practical PDF articles for businesses, managers, students, teachers, parents, authors, editors and everyday users.
+        </p>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {articleCards.map((article) => (
+            <Link
+  key={article.title}
+  to={`/articles/${article.title.toLowerCase().replaceAll(" ", "-")}`} 
+    className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-left transition hover:-translate-y-1 hover:border-rose-200 hover:bg-rose-50 hover:shadow-lg"
+>
+  <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-500">{article.audience}</p>
+  <h2 className="mt-3 text-xl font-black text-slate-950">{article.title}</h2>
+  <p className="mt-4 text-sm font-bold text-slate-500">{article.readTime}</p>
+</Link>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
 
   if (page === "Sitemap") {
     return (
@@ -1386,7 +2147,7 @@ const nextPage =
             <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
               <h2 className="mb-5 text-2xl font-black text-slate-950">Main Pages</h2>
               <div className="grid gap-3">
-                {["Home", "About", "Privacy Policy", "Terms and Conditions", "Contact"].map((item) => (
+                {["Home", "About", "Articles","Privacy Policy", "Terms and Conditions", "Contact"].map((item) => (
                   <button key={item} onClick={() => { setActivePage(item); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex items-center justify-between rounded-2xl bg-white p-4 text-left font-bold text-slate-700 shadow-sm transition hover:-translate-y-1 hover:bg-rose-50 hover:text-rose-600">
                     {item}
                     <ArrowRight size={18} />
@@ -1572,11 +2333,15 @@ export default function PDFShufflWebsite() {
   }, [activePage]);
   const [selectedTool, setSelectedTool] = useState("Create PDF");
   const page = useMemo(() => {
-    if (activePage === "Home") return <Home setActivePage={setActivePage} />;
-    if (activePage === "Tools") return <ToolsPage selectedTool={selectedTool} setSelectedTool={setSelectedTool} />;
-    return <SimplePage page={activePage} setActivePage={setActivePage} setSelectedTool={setSelectedTool} />;
-  }, [activePage, selectedTool]);
-  const AboutPage = () => (
+  if (activePage === "Home")
+    return <Home setActivePage={setActivePage} />;
+
+  if (activePage === "Tools")
+    return <ToolsPage selectedTool={selectedTool} setSelectedTool={setSelectedTool} />;
+ 
+  return <SimplePage page={activePage} setActivePage={setActivePage} setSelectedTool={setSelectedTool} />;
+}, [activePage, selectedTool]);
+    const AboutPage = () => (
   <SimplePage
     page="About"
     setActivePage={setActivePage}
@@ -1590,6 +2355,38 @@ const ContactPage = () => (
     setSelectedTool={setSelectedTool}
   />
 );
+const ArticlesPage = () => (
+  <SimplePage
+    page="Articles"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ArticlePage = () => {
+  const { slug } = useParams();
+
+  const article = articleCards.find(
+    (item) => item.title.toLowerCase().replaceAll(" ", "-") === slug
+  );
+
+  if (!article) {
+    return (
+      <SimplePage
+        page="Articles"
+        setActivePage={setActivePage}
+        setSelectedTool={setSelectedTool}
+      />
+    );
+  }
+
+  return (
+    <SimplePage
+      page={article.title}
+      setActivePage={setActivePage}
+      setSelectedTool={setSelectedTool}
+    />
+  );
+};
 
 const PrivacyPage = () => (
   <SimplePage
@@ -1655,6 +2452,8 @@ const toolRoutes = [
     <Routes>
   <Route path="/about" element={<AboutPage />} />
   <Route path="/contact" element={<ContactPage />} />
+  <Route path="/articles" element={<ArticlesPage />} />
+  <Route path="/articles/:slug" element={<ArticlePage />} />
 <Route path="/privacy-policy" element={<PrivacyPage />} />
 <Route path="/terms-and-conditions" element={<TermsPage />} />
 <Route path="/sitemap" element={<SiteMapPage />} />
@@ -1672,6 +2471,7 @@ const toolRoutes = [
     }
   />
 ))}
+
   <Route path="*" element={page} />
 </Routes>
     <Footer
