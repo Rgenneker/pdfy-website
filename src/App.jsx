@@ -1,4 +1,4 @@
-import NativeBannerAd from "./components/NativeBannerAd";
+import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
