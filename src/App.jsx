@@ -1,3 +1,4 @@
+import NativeBannerAd from "./components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -569,18 +570,15 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
 }, []);
 
   function openTool(toolName) {
-    setActivePage("Tools");
-    setSelectedTool(toolName);
-    setOpen(false);
-    setMobile(false);
-    
-     setTimeout(() => {
-  document.getElementById("tools-workspace")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}, 100);
-  }
+  const slug = toolName.toLowerCase().replace(/\s+/g, "-");
+
+  navigate(`/tools/${slug}`);
+  setActivePage("Tools");
+  setSelectedTool(toolName);
+  setOpen(false);
+  setMobile(false);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
   const nav = (
     <>
@@ -2474,6 +2472,8 @@ const toolRoutes = [
 
   <Route path="*" element={page} />
 </Routes>
+
+    <NativeBannerAd />
     <Footer
       setActivePage={setActivePage}
       setSelectedTool={setSelectedTool}
