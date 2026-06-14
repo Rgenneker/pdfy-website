@@ -2,12 +2,6 @@ import { useEffect } from "react";
 
 export default function NativeBannerAd() {
   useEffect(() => {
-    const existing = document.querySelector(
-      'script[src="https://pl29741920.effectivecpmnetwork.com/f3cd17a6141bd5a667e4309a986aafc3/invoke.js"]'
-    );
-
-    if (existing) return;
-
     const script = document.createElement("script");
     script.src =
       "https://pl29741920.effectivecpmnetwork.com/f3cd17a6141bd5a667e4309a986aafc3/invoke.js";
