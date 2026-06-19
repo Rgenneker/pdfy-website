@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import keywords from "../data/pdf-keywords.json";
+
 
 export default function PdfKeywordPage() {
   const { slug } = useParams();
@@ -19,15 +21,30 @@ const relatedKeywords = keywords
 
   if (!page) {
     return (
-      <main className="max-w-4xl mx-auto px-6 py-12">
+              <main className="max-w-4xl mx-auto px-6 py-12">
         <h1 className="text-3xl font-bold mb-4">PDF Tool Page Not Found</h1>
         <Link to="/" className="text-blue-600 underline">Back to PDFShuffl</Link>
       </main>
     );
   }
+useEffect(() => {
+  document.title = `${page.keyword} | PDFShuffl`;
 
+  const description = `Use PDFShuffl for ${page.keyword}. Convert, edit, compress, merge and manage PDF files online.`;
+
+  let meta = document.querySelector('meta[name="description"]');
+
+  if (!meta) {
+    meta = document.createElement("meta");
+    meta.name = "description";
+    document.head.appendChild(meta);
+  }
+
+  meta.content = description;
+}, [page.keyword]);
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12">
+<>
+       <main className="max-w-4xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-bold mb-4">
         {page.keyword}
       </h1>
@@ -73,5 +90,6 @@ const relatedKeywords = keywords
         </ul>
       </section>
     </main>
+  </>
   );
 }
