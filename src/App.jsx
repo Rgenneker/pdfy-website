@@ -1,5 +1,6 @@
 import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import PdfKeywordPage from "./pages/PdfKeywordPage";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -2457,6 +2458,7 @@ const toolRoutes = [
 <Route path="/sitemap" element={<SiteMapPage />} />
   <Route path="/tools" element={<ToolsLandingPage />} />
   <Route path="/tools/pdf-to-word" element={<PdfToWordPage />} />
+  <Route path="/pdf/:slug" element={<PdfKeywordPage />} />
   {toolRoutes.map((route) => (
   <Route
     key={route.path}
