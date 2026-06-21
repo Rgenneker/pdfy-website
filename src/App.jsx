@@ -2,6 +2,7 @@ import PdfKeywordPage from "./pages/PdfKeywordPage";
 import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import { Analytics } from '@vercel/analytics/react';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
@@ -2480,6 +2481,7 @@ const toolRoutes = [
       setActivePage={setActivePage}
       setSelectedTool={setSelectedTool}
     />
+    <Analytics />
   </div>
 );
 }
