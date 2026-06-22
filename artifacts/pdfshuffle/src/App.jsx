@@ -1,0 +1,2485 @@
+import PdfKeywordPage from "./pages/PdfKeywordPage";
+import NativeBannerAd from "./Components/NativeBannerAd";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  FileText,
+  FilePlus2,
+  Wand2,
+  UploadCloud,
+  Download,
+  LockKeyhole,
+  PenLine,
+  Image,
+  Presentation,
+  Code2,
+  Table,
+  Type,
+  Scissors,
+  Minimize2,
+  MessageSquareText,
+  ShieldCheck,
+  Menu,
+  X,
+  XCircle,
+  ChevronDown,
+  ArrowRight,
+  Sparkles,
+  Globe2,
+  Users,
+  BriefcaseBusiness,
+  GraduationCap,
+  Building2,
+  Smartphone,
+  Laptop,
+  MonitorSmartphone,
+  CheckCircle2,
+  Info,
+  Mail,
+  Map,
+} from "lucide-react";
+
+const toolGroups = [
+ 
+  {
+    title: "Office to PDF",
+    tools: [
+      { name: "Word to PDF", icon: FileText, accepts: ".doc,.docx,.odt,.ott", description: "Convert Microsoft Word and LibreOffice Writer files into clean PDFs." },
+      { 
+  name: "Libre to PDF", 
+  icon: FileText, 
+  accepts: ".odt,.ods,.odp,.ott,.ots,.otp", 
+  description: "Convert LibreOffice Writer, Calc, Impress and template files into PDF format." 
+},
+      { name: "PPT to PDF", icon: Presentation, accepts: ".ppt,.pptx,.odp", description: "Turn slide decks into sharable, locked-layout PDF documents." },
+      { name: "CSV to PDF", icon: Table, accepts: ".csv", description: "Convert spreadsheets and tabular data into readable PDF reports." },
+      { name: "Excel to PDF", icon: Table, accepts: ".xls,.xlsx,.ods", description: "Convert Microsoft Excel spreadsheets, financial statements, invoices, dashboards, charts, payroll sheets, business reports, school marksheets, data tables, and LibreOffice Calc workbooks into secure high-quality PDF documents for printing, sharing, presentations, compliance, and professional reporting." },
+      { name: "TXT to PDF", icon: Type, accepts: ".txt", description: "Convert plain text files into polished PDF pages." },
+    ],
+  },
+  {
+    title: "PDF to Editable Formats",
+    tools: [
+      { name: "PDF to Word", icon: FileText, accepts: ".pdf", description: "Extract PDF content into an editable Word-style document." },
+      { name: "PDF to Libre", icon: FileText, accepts: ".pdf", description: "Convert PDF content into LibreOffice-friendly editable files." },
+      { name: "PDF to Editable PDF", icon: Wand2, accepts: ".pdf", description: "Make scanned or flat PDFs searchable, fillable, and easier to edit." },
+      { name: "PDF to HTML", icon: Code2, accepts: ".pdf", description: "Convert PDF content into structured web-ready HTML." },
+      { name: "PDF to CSV", icon: Table, accepts: ".pdf", description: "Extract tables and rows from PDF into CSV data." },
+      { name: "PDF to TXT", icon: Type, accepts: ".pdf", description: "Extract readable text from PDF into plain text format." },
+    ],
+  },
+  {
+    title: "Web, Image & Secure Workflows",
+    tools: [
+      { name: "JPG to PDF", icon: Image, accepts: ".jpg,.jpeg,.png", description: "Combine images into one tidy PDF for sharing or archiving." },
+      { name: "HTML to PDF", icon: Code2, accepts: ".html,.htm", description: "Convert web pages, invoices, and HTML layouts into PDF." },
+      { name: "Sign PDF", icon: PenLine, accepts: ".pdf", description: "Apply a simple typed or drawn signature workflow to your PDF." },
+      { name: "Sign a Locked PDF", icon: LockKeyhole, accepts: ".pdf", description: "Start a secure signing request for PDFs that require permission handling." },
+      { name: "Request Signing", icon: ShieldCheck, accepts: ".pdf", description: "Send a document for review and signature with recipient details." },
+      { name: "Crop PDF", icon: Scissors, accepts: ".pdf", description: "Trim page edges, remove excess whitespace, and prepare final layouts." },
+      { name: "Compress PDF", icon: Minimize2, accepts: ".pdf", description: "Reduce PDF file size for email, portals, mobile sharing, or storage." },
+    ],
+  },
+];
+
+const allTools = toolGroups.flatMap((g) => g.tools);
+const toolContent = {
+  "PDF to Word": {
+    intro:
+      "Convert PDF documents into editable Microsoft Word files while preserving structure, formatting and usability.",
+    benefits: [
+      "Easy document editing",
+      "Preserves document structure",
+      "Supports business workflows",
+      "Improves productivity"
+    ],
+    faq: [
+      {
+        q: "Will my formatting be preserved?",
+        a: "PDFShuffl aims to retain document structure, headings, tables and layout wherever possible."
+      },
+      {
+        q: "Can I edit the converted Word file?",
+        a: "Yes. The converted document can be edited using Microsoft Word or compatible word processors."
+      }
+    ]
+  },
+
+  "Word to PDF": {
+    intro:
+      "Convert Word documents into professional PDF files suitable for sharing, printing and archiving.",
+    benefits: [
+      "Professional presentation",
+      "Consistent formatting",
+      "Easy sharing",
+      "Broad compatibility"
+    ],
+    faq: [
+      {
+        q: "Why convert Word to PDF?",
+        a: "PDF files preserve formatting and display consistently across devices."
+      },
+      {
+        q: "Can I print the converted PDF?",
+        a: "Yes. PDFs are ideal for printing and distribution."
+      }
+    ]
+  },
+
+  "Compress PDF": {
+    intro:
+      "Reduce PDF file size while maintaining document quality for easier sharing and storage.",
+    benefits: [
+      "Smaller file sizes",
+      "Faster uploads",
+      "Easier email sharing",
+      "Reduced storage requirements"
+    ],
+    faq: [
+      {
+        q: "Will compression reduce quality?",
+        a: "Compression aims to reduce size while maintaining usability and readability."
+      },
+      {
+        q: "Why compress PDFs?",
+        a: "Smaller files are easier to email, upload and store."
+      }
+    ]
+  },
+
+  "Sign PDF": {
+    intro:
+      "Prepare PDF documents for electronic signatures and approval workflows.",
+    benefits: [
+      "Faster approvals",
+      "Reduced paperwork",
+      "Improved workflows",
+      "Professional document handling"
+    ],
+    faq: [
+      {
+        q: "Can I sign business documents?",
+        a: "Yes. PDF signing workflows are commonly used in business environments."
+      },
+      {
+        q: "Are electronic signatures useful?",
+        a: "They speed up approvals and document processing."
+      }
+    ]
+  },
+
+  "Crop PDF": {
+    intro:
+      "Remove unwanted page edges, whitespace and margins from PDF documents.",
+    benefits: [
+      "Cleaner presentation",
+      "Improved readability",
+      "Better printing results",
+      "Professional layouts"
+    ],
+    faq: [
+      {
+        q: "Why crop a PDF?",
+        a: "Cropping removes unwanted content and improves presentation quality."
+      },
+      {
+        q: "Can I remove excess margins?",
+        a: "Yes. Cropping is commonly used to reduce blank areas."
+      }
+          ]
+  },
+  "Create PDF": {
+  intro: "Create professional PDF documents from text, notes, forms and content for sharing, printing and archiving.",
+  benefits: [
+    "Professional documents",
+    "Consistent formatting",
+    "Easy sharing",
+    "Improved compatibility"
+  ],
+  faq: [
+    {
+      q: "Why create a PDF?",
+      a: "PDFs provide a professional and widely accepted document format."
+    },
+    {
+      q: "Can I share the created PDF?",
+      a: "Yes. PDFs are ideal for sharing across devices and platforms."
+    }
+  ]
+},
+
+"Edit PDF": {
+  intro: "Modify PDF documents by updating content, correcting information and improving document accuracy.",
+  benefits: [
+    "Correct document errors",
+    "Update information",
+    "Improve accuracy",
+    "Save time"
+  ],
+  faq: [
+    {
+      q: "Can I update existing documents?",
+      a: "Yes. Editing allows information to be changed and improved."
+    },
+    {
+      q: "Why edit a PDF?",
+      a: "Editing helps keep documents accurate and up to date."
+    }
+  ]
+},
+"PDF to TXT": {
+  intro: "Extract readable text from PDF files for research, editing, copying, analysis and document review.",
+  benefits: ["Fast text extraction", "Useful for research", "Easy copying", "Improves accessibility"],
+  faq: [
+    { q: "Can I extract text from any PDF?", a: "Text-based PDFs work best. Scanned PDFs may need OCR support." },
+    { q: "Is the output editable?", a: "Yes. The extracted TXT file can be opened and edited in any text editor." }
+  ]
+},
+
+"TXT to PDF": {
+  intro: "Convert plain text files into clean PDF documents for sharing, printing and archiving.",
+  benefits: ["Cleaner presentation", "Easy sharing", "Printable documents", "Better document structure"],
+  faq: [
+    { q: "Why convert TXT to PDF?", a: "PDF makes plain text easier to present, print and share professionally." },
+    { q: "Can I use this for notes?", a: "Yes. TXT to PDF is useful for notes, drafts, lists and simple documents." }
+  ]
+},
+
+"Excel to PDF": {
+  intro: "Convert spreadsheet files into PDF reports that are easier to share, print and archive.",
+  benefits: ["Professional reports", "Preserves spreadsheet layout", "Easy distribution", "Better record keeping"],
+  faq: [
+    { q: "Why convert Excel to PDF?", a: "PDF prevents accidental spreadsheet edits and makes reports easier to share." },
+    { q: "Can I share financial reports as PDF?", a: "Yes. PDF is commonly used for business and financial reporting." }
+  ]
+},
+
+"CSV to PDF": {
+  intro: "Convert CSV data into readable PDF documents for reporting, review and structured sharing.",
+  benefits: ["Readable data output", "Useful for reports", "Easy sharing", "Better presentation"],
+  faq: [
+    { q: "What is a CSV file?", a: "A CSV file stores table-style data in plain text format." },
+    { q: "Why convert CSV to PDF?", a: "PDF makes data easier to read, print and share with non-technical users." }
+  ]
+},
+
+"HTML to PDF": {
+  intro: "Convert HTML pages, invoices, layouts and web content into PDF documents.",
+  benefits: ["Web-ready conversion", "Preserves layouts", "Useful for invoices", "Printable output"],
+  faq: [
+    { q: "Can I convert web layouts to PDF?", a: "Yes. HTML to PDF is useful for saving web-based layouts and documents." },
+    { q: "Does styling remain visible?", a: "PDFShuffl aims to preserve visible HTML styling where possible." }
+  ]
+},
+
+"PDF to HTML": {
+  intro: "Convert PDF content into HTML format for web viewing, content reuse and online workflows.",
+  benefits: ["Web-friendly output", "Content reuse", "Supports online publishing", "Improves accessibility"],
+  faq: [
+    { q: "Why convert PDF to HTML?", a: "HTML is useful when content needs to be reused on websites or digital platforms." },
+    { q: "Will the layout be exact?", a: "The output depends on the PDF structure and source formatting." }
+  ]
+},
+
+"JPG to PDF": {
+  intro: "Convert JPG and image files into PDF documents for easier sharing, archiving and printing.",
+  benefits: ["Combines images", "Easy sharing", "Printable output", "Professional document format"],
+  faq: [
+    { q: "Can I convert images to PDF?", a: "Yes. JPG and image files can be converted into PDF format." },
+    { q: "Why use PDF for images?", a: "PDF makes images easier to share, print and organise as documents." }
+  ]
+},
+
+"Libre to PDF": {
+  intro: "Convert LibreOffice documents into PDF files for professional sharing, printing and compatibility.",
+  benefits: ["LibreOffice compatibility", "Professional PDF output", "Consistent layout", "Easy sharing"],
+  faq: [
+    { q: "Can LibreOffice files become PDFs?", a: "Yes. LibreOffice documents can be converted into PDF format." },
+    { q: "Why convert Libre documents to PDF?", a: "PDF improves compatibility and keeps the document layout consistent." }
+  ]
+},
+
+"PDF to Libre": {
+  intro: "Convert PDF content into LibreOffice-friendly editable documents for review and document reuse.",
+  benefits: ["Editable output", "LibreOffice friendly", "Improves reuse", "Supports open document workflows"],
+  faq: [
+    { q: "Can I edit the converted Libre file?", a: "Yes. The output is designed for editing in compatible LibreOffice applications." },
+    { q: "Is formatting always perfect?", a: "Complex PDFs may require manual review after conversion." }
+  ]
+},
+
+"PPT to PDF": {
+  intro: "Convert PowerPoint presentations into PDF files for sharing, printing and presentation distribution.",
+  benefits: ["Easy presentation sharing", "Printable slides", "Consistent layout", "Professional handouts"],
+  faq: [
+    { q: "Why convert PPT to PDF?", a: "PDF makes presentations easier to share and view without presentation software." },
+    { q: "Can I print the converted slides?", a: "Yes. PDF presentation files are suitable for printing and distribution." }
+  ]
+},
+
+"Request Signing": {
+  intro: "Prepare a PDF document for signing by creating a signing request workflow with recipient details.",
+  benefits: ["Organised signing workflow", "Clear recipient details", "Better approval tracking", "Professional process"],
+  faq: [
+    { q: "What is request signing?", a: "It prepares a document workflow for another person to review and sign." },
+    { q: "Is this a full e-signature service?", a: "Production e-signature workflows may require integration with a recognised signing provider." }
+  ]
+},
+
+"Sign a Locked PDF": {
+  intro: "Start a secure signing workflow for PDFs that may require permission handling or controlled review.",
+  benefits: ["Secure workflow support", "Controlled document handling", "Better signing preparation", "Useful for sensitive files"],
+  faq: [
+    { q: "Can locked PDFs always be signed?", a: "Locked PDFs may require permission or password access before processing." },
+    { q: "Why use a locked PDF signing workflow?", a: "It helps manage documents that need controlled access and signing steps." }
+  ]
+},
+
+"Format PDF": {
+  intro: "Format PDF documents to improve layout, readability, presentation and professional appearance.",
+  benefits: ["Cleaner layout", "Improved readability", "Better presentation", "Professional document output"],
+  faq: [
+    { q: "Why format a PDF?", a: "Formatting helps make documents easier to read, share and present." },
+    { q: "Can formatting improve business documents?", a: "Yes. Good formatting improves professionalism and readability." }
+  ]
+},
+
+"PDF Comments": {
+  intro: "Add review comments, feedback notes and document observations to support collaboration and approvals.",
+  benefits: ["Better collaboration", "Clear review notes", "Useful feedback workflow", "Improved approvals"],
+  faq: [
+    { q: "Why add comments to a PDF?", a: "Comments help reviewers explain changes, questions and approval notes." },
+    { q: "Who uses PDF comments?", a: "Teams, teachers, editors, managers and clients often use comments for review workflows." }
+  ]
+},
+"PDF to CSV": {
+  intro: "Extract structured data from PDF documents and convert it into CSV format for spreadsheets, reporting and data analysis.",
+  benefits: [
+    "Structured data extraction",
+    "Spreadsheet compatibility",
+    "Improved reporting",
+    "Supports data analysis"
+  ],
+  faq: [
+    {
+      q: "Why convert PDF to CSV?",
+      a: "CSV files make tabular data easier to analyse, sort, filter and import into spreadsheet applications."
+    },
+    {
+      q: "Can I use the CSV file in Excel?",
+      a: "Yes. CSV files can be opened in Excel, Google Sheets and most spreadsheet applications."
+    }
+  ]
+},
+
+"PDF to Editable PDF": {
+  intro: "Convert printable documents into editable PDF files that can be reviewed, updated and reused in future workflows.",
+  benefits: [
+    "Editable document output",
+    "Supports document updates",
+    "Improves workflow efficiency",
+    "Reduces document recreation"
+  ],
+  faq: [
+    {
+      q: "What is an editable PDF?",
+      a: "An editable PDF allows users to modify content, update information and make changes without recreating the document."
+    },
+    {
+      q: "Why convert print documents to editable PDFs?",
+      a: "Editable PDFs help organisations update forms, reports and documents more efficiently."
+    }
+  ]
+},
+  };
+
+const articleCards = [
+  { title: "How Businesses Use PDFs for Secure Document Management", audience: "Business", readTime: "6 min read" },
+  { title: "Why Managers Prefer PDFs for Reporting and Compliance", audience: "Managers", readTime: "6 min read" },
+  { title: "The Complete Student Guide to Working with PDFs", audience: "Students", readTime: "6 min read" },
+  { title: "How Teachers Create and Share Learning Materials Using PDFs", audience: "Teachers", readTime: "6 min read" },
+  { title: "Why Parents Use PDFs for School and Family Records", audience: "Parents", readTime: "6 min read" },
+  { title: "How Authors Prepare Manuscripts Using PDF Documents", audience: "Authors", readTime: "6 min read" },
+  { title: "PDF Best Practices for Editors and Publishers", audience: "Editors", readTime: "6 min read" },
+  { title: "How to Digitally Sign Documents in Minutes", audience: "Signing", readTime: "6 min read" },
+  { title: "The Benefits of Converting Documents to PDF Format", audience: "Conversion", readTime: "6 min read" },
+  { title: "PDF Security and Password Protection Explained", audience: "Security", readTime: "6 min read" },
+  { title: "How to Compress Large PDF Files Without Losing Quality", audience: "Compression", readTime: "6 min read" },
+  { title: "The Role of PDFs in Modern Remote Work", audience: "Remote Work", readTime: "6 min read" },
+  { title: "Organising Business Records with PDFs", audience: "Records", readTime: "6 min read" },
+  { title: "How Schools Use PDFs for Assignments and Assessments", audience: "Schools", readTime: "6 min read" },
+  { title: "Choosing the Right PDF Tool for Your Workflow", audience: "Productivity", readTime: "6 min read" },
+];
+const knowledgeCards = [
+  {
+    name: "How to Create a PDF",
+    description: "Turn text, images, notes or forms into a professional PDF in minutes.",
+    icon: FilePlus2,
+    relatedTool: "Create PDF",
+  },
+  {
+    name: "How to Format a PDF",
+    description: "Adjust layout, spacing, pages and presentation so your PDF looks clean.",
+    icon: Wand2,
+    relatedTool: "Format PDF",
+  },
+  {
+    name: "How to Edit a PDF",
+    description: "Learn how to update text, add notes and improve PDF content.",
+    icon: PenLine,
+    relatedTool: "Edit PDF",
+  },
+  {
+    name: "How to Sign a PDF",
+    description: "Add a signature or prepare a signing workflow for document approval.",
+    icon: ShieldCheck,
+    relatedTool: "Sign PDF",
+  },
+  {
+    name: "How to Mark-up a PDF",
+    description: "Highlight, comment, review and annotate PDFs for collaboration.",
+    icon: MessageSquareText,
+    relatedTool: "PDF Comments",
+  },
+];
+const educationCards = [
+  {
+    question: "What is a PDF?",
+    answer: "A Portable Document Format keeps text, images, layout, signatures, forms, and pages consistent across devices.",
+    icon: FileText,
+    link: "https://www.adobe.com/za/acrobat/about-adobe-pdf.html",
+  },
+  {
+    question: "Why use PDF?",
+    answer: "PDF is ideal when your document must look professional, travel safely, and remain readable on phones, tablets, laptops, and PCs.",
+    icon: Globe2,
+    link: "https://www.loc.gov/preservation/digital/formats/",
+  },
+  {
+    question: "Why is PDF important?",
+    answer: "PDF is used for contracts, forms, certificates, invoices, policies, statements, schoolwork, identity documents, and long-term records.",
+    icon: ShieldCheck,
+    link: "https://pdfa.org/",
+  },
+  {
+    question: "Why make PDF easy?",
+    answer: "Simple tools save time, reduce errors, and help everyone complete document work without needing technical skills.",
+    icon: Sparkles,
+    link: "https://www.adobe.com/za/acrobat/resources.html",
+  },
+  {
+    question: "Where to use PDF?",
+    answer: "Use PDF at school, work, home, bank branches, government portals, HR onboarding, applications, legal workflows, and customer service desks.",
+    icon: Building2,
+    link: "https://www.loc.gov/preservation/resources/rfs/",
+  },
+  {
+    question: "How to use PDF?",
+    answer: "Upload, convert, edit, sign, compress, comment, crop, download, and share from one clean workspace.",
+    icon: MonitorSmartphone,
+    link: "https://pdfa.org/resource/iso-32000-pdf/",
+  },
+];
+
+const audiences = [
+  { icon: Users, title: "Everyone", text: "For students, parents, entrepreneurs, employees, consultants, teachers, and public users." },
+  { icon: BriefcaseBusiness, title: "Business teams", text: "Prepare tenders, contracts, reports, proposals, invoices, and compliance packs." },
+  { icon: GraduationCap, title: "Education", text: "Submit assignments, combine notes, compress files, and sign forms quickly." },
+  { icon: Building2, title: "Branches & service desks", text: "Support walk-in document needs across mobile, tablet, touchscreen, laptop, and PC." },
+];
+
+const pages = ["Home", "About", "Tools","Articles", "Privacy Policy", "Terms and Conditions", "Contact", "Sitemap"];
+
+function downloadTextFile(filename, text, type = "text/plain") {
+  const blob = new Blob([text], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function createSimplePdf(text) {
+  const safeText = (text || "Created with PDFShuffl").replace(/[()\\]/g, "\\$&").slice(0, 2500);
+  const content = `BT /F1 18 Tf 72 760 Td (PDFShuffl Document) Tj /F1 11 Tf 0 -32 Td (${safeText}) Tj ET`;
+  const objects = [
+    "1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj",
+    "2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj",
+    "3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >> endobj",
+    "4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj",
+    `5 0 obj << /Length ${content.length} >> stream\n${content}\nendstream endobj`,
+  ];
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+  objects.forEach((obj) => {
+    offsets.push(pdf.length);
+    pdf += obj + "\n";
+  });
+  const xrefStart = pdf.length;
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+  offsets.slice(1).forEach((offset) => {
+    pdf += String(offset).padStart(10, "0") + " 00000 n \n";
+  });
+  pdf += `trailer << /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`;
+  const blob = new Blob([pdf], { type: "application/pdf" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "PDFShuffl-created-document.pdf";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function isAcceptedFile(file, accepts) {
+  if (!file || !accepts) return false;
+
+  const acceptedTypes = accepts
+    .split(",")
+    .map((type) => type.trim().toLowerCase());
+
+  const fileName = file.name.toLowerCase();
+  const fileExtension = "." + fileName.split(".").pop();
+
+  return acceptedTypes.includes(fileExtension);
+}
+
+function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
+  const [open, setOpen] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
+  useEffect(() => {
+  function handleClickOutside(event) {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
+
+  function openTool(toolName) {
+  const slug = toolName.toLowerCase().replace(/\s+/g, "-");
+
+  navigate(`/tools/${slug}`);
+  setActivePage("Tools");
+  setSelectedTool(toolName);
+  setOpen(false);
+  setMobile(false);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+  const nav = (
+    <>
+      {pages.map((page) =>
+        page === "Tools" ? (
+          <div key={page} className="relative">
+            <button
+              onClick={() => setOpen(!open)}
+              className={`flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                activePage === "Tools"
+                  ? "bg-rose-50 text-rose-600"
+                  : "text-slate-700 hover:bg-slate-100"
+              }`}
+            >
+              Tools <ChevronDown size={16} />
+            </button>
+
+            {open && (
+              <div ref={menuRef}className="fixed left-1/2 top-20 z-50 max-h-[65vh] w-[min(900px,calc(100vw-2rem))] -translate-x-1/2 overflow-y-auto overscroll-contain rounded-[2rem] border border-slate-200 bg-white p-6 shadow-2xl">
+                <div className="grid gap-6 lg:grid-cols-2">
+                  {toolGroups.map((group) => (
+                    <div key={group.title} className="min-w-0">
+                      <h4 className="mb-4 text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+                        {group.title}
+                      </h4>
+
+                      <div className="divide-y divide-slate-100 rounded-3xl bg-white">
+                        {group.tools.map((tool) => {
+                          const Icon = tool.icon;
+                          return (
+                            <button
+                              key={tool.name}
+                              onClick={() => openTool(tool.name)}
+                              className="flex w-full items-start gap-4 rounded-2xl p-4 text-left transition hover:bg-rose-50"
+                            >
+                              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-rose-50 text-rose-600">
+                                <Icon size={20} />
+                              </span>
+                              <span className="min-w-0">
+                                <span className="block text-base font-black leading-5 text-slate-950">
+                                  {tool.name}
+                                </span>
+                                <span className="mt-1 block text-sm leading-6 text-slate-500">
+                                  {tool.description}
+                                </span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ) : (
+          <button
+            key={page}
+            onClick={() => {
+  const paths = {
+    Home: "/",
+    About: "/about",
+    Articles: "/articles",
+    "Privacy Policy": "/privacy-policy",
+    "Terms and Conditions": "/terms-and-conditions",
+    Contact: "/contact",
+    Sitemap: "/sitemap",
+  };
+
+  navigate(paths[page] || "/");
+  setActivePage(page);
+  setMobile(false);
+  setOpen(false);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              activePage === page
+                ? "bg-rose-50 text-rose-600"
+                : "text-slate-700 hover:bg-slate-100"
+            }`}
+          >
+            {page}
+          </button>
+        )
+      )}
+    </>
+  );
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/85 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+        <button
+          onClick={() => {
+              navigate("/");
+            setActivePage("Home");
+            setOpen(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="flex items-center gap-3"
+        >
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-rose-500 to-rose-400 text-white shadow-lg shadow-rose-200">
+            <FileText />
+          </span>
+          <span className="text-2xl font-black tracking-tight text-slate-950">
+            PDFShuffl<span className="text-rose-500">.</span>
+          </span>
+        </button>
+
+        <nav className="hidden items-center gap-1 lg:flex">{nav}</nav>
+
+        <button
+          onClick={() => {
+              navigate("/tools");
+            setActivePage("Tools");
+            setOpen(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="rounded-full bg-slate-950 px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:bg-rose-500 hover:shadow-xl hover:shadow-rose-200"
+        >
+          Get Started
+        </button>
+
+        <button
+          onClick={() => setMobile(!mobile)}
+          className="rounded-2xl border border-slate-200 p-3 lg:hidden"
+        >
+          {mobile ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {mobile && (
+        <div className="border-t border-slate-100 bg-white px-4 pb-4 lg:hidden">
+          <div className="grid gap-2">{nav}</div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+function Hero({ setActivePage }) {
+  return (
+    <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top_left,#fff1f2,transparent_38%),linear-gradient(180deg,#ffffff,#f8fafc)]">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 lg:grid-cols-[1.1fr_.9fr] lg:px-8 lg:py-24">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-rose-100 bg-white px-4 py-2 text-sm font-bold text-rose-600 shadow-sm"><Sparkles size={16} /> Premium document work, made effortless</div>
+          <h1 className="max-w-4xl text-5xl font-black tracking-tight text-slate-950 md:text-7xl">Create, convert, edit, sign and compress PDFs in one sleek workspace.</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">PDFShuffl brings everyday document work into a fast, elegant experience for mobile phones, tablets, touchscreen displays, laptops and PCs.</p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <button onClick={() => setActivePage("Tools")} className="rounded-full bg-rose-500 px-7 py-4 text-base font-black text-white shadow-xl shadow-rose-200 transition hover:-translate-y-0.5 hover:bg-rose-600">Choose a PDF tool</button>
+            <button onClick={() => document.getElementById("learn")?.scrollIntoView({ behavior: "smooth" })} className="rounded-full border border-slate-200 bg-white px-7 py-4 text-base font-black text-slate-800 shadow-sm">Learn why PDF matters</button>
+          </div>
+          <div className="mt-8 grid max-w-xl grid-cols-3 gap-3 text-sm font-bold text-slate-600">
+            <span className="flex items-center gap-2"><Smartphone size={18} /> Mobile</span>
+            <span className="flex items-center gap-2"><MonitorSmartphone size={18} /> Touchscreen</span>
+            <span className="flex items-center gap-2"><Laptop size={18} /> Desktop</span>
+          </div>
+        </motion.div>
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7 }} className="relative">
+          <div className="absolute -inset-6 rounded-[3rem] bg-gradient-to-br from-rose-200 to-orange-100 blur-3xl" />
+          <div className="relative rounded-[2.5rem] border border-white bg-white/90 p-4 shadow-2xl">
+            <div className="rounded-[2rem] bg-slate-950 p-5 text-white">
+              <div className="mb-5 flex items-center justify-between"><span className="font-black">How to with PDFShuffl</span><span className="rounded-full bg-white/10 px-3 py-1 text-xs">Knowledge Space</span></div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {knowledgeCards.map((tool) => {
+                  const Icon = tool.icon;
+                  return (
+  <button
+    key={tool.name}
+    onClick={() => {
+      setActivePage(tool.name);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }}
+    className="rounded-3xl bg-white/10 p-4 text-left backdrop-blur transition hover:-translate-y-1 hover:bg-white/20 hover:shadow-xl"
+  >
+  <Icon className="mb-3 text-rose-300" /><p className="font-bold">{tool.name}</p><p className="mt-1 text-xs text-slate-300">{tool.description}</p>
+<p className="mt-3 text-xs font-black text-rose-300">Est. 3 min read</p>
+</button>
+);
+                })}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function Home({ setActivePage }) {
+  return (
+    <main>
+      <Hero setActivePage={setActivePage} />
+      <section id="learn" className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+        <div className="mb-10 max-w-3xl"><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDF knowledge hub</p><h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Understand the what, why, when, where and how of PDF.</h2><p className="mt-4 text-slate-600">Each thumbnail opens a reliable educational resource in a new tab, so users stay in PDFShuffl while learning from trusted sources.</p></div>
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {educationCards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <a key={card.question} href={card.link} target="_blank" rel="noreferrer" className="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-200">
+                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-3xl bg-rose-50 text-rose-600 transition group-hover:bg-rose-500 group-hover:text-white"><Icon size={30} /></div>
+                <h3 className="text-xl font-black text-slate-950">{card.question}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{card.answer}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-rose-600">Open educational source <ArrowRight size={16} /></span>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+      <section className="bg-slate-950 py-16 text-white">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr]">
+            <div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-300">Built for every document moment</p><h2 className="mt-3 text-4xl font-black">Why people will return to PDFShuffl.</h2><p className="mt-4 text-slate-300">One home for applications, school submissions, customer forms, HR packs, contracts, reports, statements, invoices, branch support, travel documents, and signed approvals.</p></div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {audiences.map((item) => {
+                const Icon = item.icon;
+                return <div key={item.title} className="rounded-[2rem] bg-white/10 p-6"><Icon className="mb-4 text-rose-300" /><h3 className="font-black">{item.title}</h3><p className="mt-2 text-sm leading-6 text-slate-300">{item.text}</p></div>;
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+      <ToolShowcase setActivePage={setActivePage} />
+    </main>
+  );
+}
+
+function ToolShowcase({ setActivePage }) {
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">All-in-one tools</p><h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">Everything PDF, logically organised.</h2></div><button onClick={() => setActivePage("Tools")} className="rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-xl transition-all duration-300 hover:bg-rose-500 hover:scale-105 hover:shadow-2xl hover:shadow-rose-300">Open tools</button></div>
+      <div className="grid gap-5 lg:grid-cols-4">
+        {toolGroups.map((group) => <div key={group.title} className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm"><h3 className="mb-4 font-black text-slate-950">{group.title}</h3><div className="grid gap-2">{group.tools.map((tool) => { const Icon = tool.icon; return <div key={tool.name} className="flex items-center gap-3 rounded-2xl bg-slate-50 p-3"><Icon size={18} className="text-rose-500" /><span className="text-sm font-bold text-slate-700">{tool.name}</span></div>; })}</div></div>)}
+      </div>
+    </section>
+  );
+}
+
+function ToolsPage({ selectedTool, setSelectedTool }) {
+  const tool = allTools.find((t) => t.name === selectedTool) || allTools[0];
+  const seo = toolContent[tool.name];
+  const [file, setFile] = useState(null);
+  const [note, setNote] = useState("This document was created inside PDFShuffl. Replace this text with your content, notes, instructions, or form details.");
+  const [recipient, setRecipient] = useState("");
+  const [status, setStatus] = useState("Ready");
+  const inputRef = useRef(null);
+
+  function processTool() {
+    if (tool.name === "Create PDF") {
+  fetch("/api/create-pdf", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      text: note,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Create PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-created.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF created successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Create PDF failed.");
+    });
+
+  return;
+}
+
+  if (tool.name === "Word to PDF" && file) {
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/api/word-to-pdf", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "PDFShuffl-word.pdf";
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+
+        setStatus("Word document converted to PDF successfully.");
+      })
+      .catch((error) => {
+        console.error(error);
+        setStatus("Word to PDF conversion failed.");
+      });
+
+    return;
+  }
+
+  if (tool.name === "PPT to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/ppt-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("PPT conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-presentation.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("Presentation converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PPT to PDF conversion failed.");
+    });
+
+  return;
+}
+
+  if (tool.name === "JPG to PDF" && file) {
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch("/api/jpg-to-pdf", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.blob())
+      .then((blob) => {
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "PDFShuffl-image.pdf";
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+
+        setStatus("JPG converted to PDF successfully.");
+      })
+      .catch((error) => {
+        console.error(error);
+        setStatus("JPG to PDF conversion failed.");
+      });
+
+    return;
+  }
+
+  if (tool.name === "Libre to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/libre-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("Libre conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-libre.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("LibreOffice document converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Libre to PDF conversion failed.");
+    });
+
+  return;
+}
+
+if (tool.name === "Excel to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/excel-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("Excel conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-excel.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("Excel document converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Excel to PDF conversion failed.");
+    });
+
+  return;
+}
+
+if (tool.name === "CSV to PDF" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/csv-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("CSV conversion failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-csv.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("CSV converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("CSV to PDF conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "PDF to Libre" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/pdf-to-libre", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("PDF to Libre failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-converted-libre.odt";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF converted to Libre Writer successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to Libre conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "PDF to Word" && file) {
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/pdf-to-word", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+
+      if (!response.ok) {
+        throw new Error("PDF to Word failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-converted-word.docx";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF converted to Word successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to Word conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "HTML to PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/html-to-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("HTML to PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-html.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("HTML converted to PDF successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("HTML to PDF conversion failed.");
+    });
+
+  return;
+}
+if (tool.name === "PDF to HTML" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/pdf-to-html", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("PDF to HTML failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-export.html";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF converted to HTML successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to HTML conversion failed.");
+    });
+
+  return;
+}
+
+if (tool.name === "PDF to TXT" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/pdf-to-txt", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("PDF to TXT failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-extracted-text.txt";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF text extracted successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("PDF to TXT conversion failed.");
+    });
+
+  return;
+}
+
+  if (tool.name === "TXT to PDF" && file) {
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      createSimplePdf(String(reader.result || note));
+    };
+
+    reader.readAsText(file);
+
+    setStatus("Your text file was converted into a simple PDF download.");
+
+    return;
+  }
+  if (tool.name === "Request Signing" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("recipientEmail", recipient || "Not provided");
+  formData.append("instructions", note || "No instructions provided");
+
+  fetch("/api/request-signing", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Request signing failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-signing-request.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("Signing request PDF generated successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Request signing failed.");
+    });
+
+  return;
+}
+if (tool.name === "Sign PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("signerName", recipient || "PDFShuffl User");
+
+  fetch("/api/sign-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Sign PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-signed.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF signed successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Sign PDF failed.");
+    });
+
+  return;
+}
+if (tool.name === "Sign PDF" && file) {
+
+  // REAL SIGN PDF CODE HERE
+
+  return;
+}
+if (tool.name === "Compress PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/compress-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Compress PDF failed");
+      }
+
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-compressed.pdf";
+      a.click();
+
+      window.URL.revokeObjectURL(url);
+
+      setStatus("PDF compressed successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Compress PDF failed.");
+    });
+
+  return;
+}
+
+if (
+  tool.name.includes("Sign") ||
+  tool.name === "Request Signing"
+){
+
+    downloadTextFile(
+      "PDFShuffl-signing-request.txt",
+      `PDFShuffl signing workflow
+Tool: ${tool.name}
+File: ${file?.name || "No file selected"}
+Recipient: ${recipient || "Not provided"}
+Instructions: ${note}`
+    );
+
+    setStatus(
+      "A signing workflow file was generated. Connect this flow to e-signature services for production use."
+    );
+
+    return;
+  }
+  if (tool.name === "Crop PDF" && file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  fetch("/api/crop-pdf", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Crop PDF failed");
+      }
+      return response.blob();
+    })
+    .then((blob) => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "PDFShuffl-cropped.pdf";
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setStatus("PDF cropped successfully.");
+    })
+    .catch((error) => {
+      console.error(error);
+      setStatus("Crop PDF failed.");
+    });
+
+  return;
+}
+  downloadTextFile(
+    "PDFShuffl-processing-summary.txt",
+    `PDFShuffl processing summary
+Tool: ${tool.name}
+File: ${file?.name || "No file selected"}
+Status: Ready for backend conversion engine
+Notes: ${note}`
+  );
+
+  setStatus(
+    "Workflow completed as a front-end handoff. Production conversion requires a secure backend processor."
+  );
+}
+
+  return (
+    <main
+  id="tools-workspace"
+  className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[340px_1fr] lg:px-8"
+>
+      <aside className="rounded-[2rem] border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:overflow-auto">
+        <h2 className="mb-4 px-2 text-xl font-black text-slate-950">PDFShuffl Tools</h2>
+        {toolGroups.map((group) => (
+  <div key={group.title} className="mb-5">
+    <h3 className="mb-2 px-2 text-xs font-black uppercase tracking-[0.18em] text-slate-400">
+      {group.title}
+    </h3>
+
+    {group.tools.map((item) => {
+      const Icon = item.icon;
+
+      return (
+        <button
+          key={item.name}
+          onClick={() => {
+            if (item.name === "Create PDF") {
+              setActivePage("Create PDF Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            if (item.name === "Format PDF") {
+              setActivePage("Format PDF Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            if (item.name === "Edit PDF") {
+              setActivePage("Edit PDF Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            if (item.name === "PDF Comments") {
+              setActivePage("PDF Comments Guide");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              return;
+            }
+
+            setSelectedTool(item.name);
+            setFile(null);
+            setStatus("Ready");
+          }}
+          className={`mb-1 flex w-full items-center gap-3 rounded-2xl p-3 text-left transition ${
+            tool.name === item.name
+              ? "bg-rose-500 text-white shadow-lg shadow-rose-100"
+              : "hover:bg-slate-50"
+          }`}
+        >
+          <Icon size={18} />
+          <span className="text-sm font-bold">{item.name}</span>
+        </button>
+      );
+    })}
+  </div>
+))}
+      </aside>
+      <section>
+        <div className="rounded-[2.5rem] bg-gradient-to-br from-slate-950 to-slate-800 p-8 text-white shadow-2xl">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-start"><div><p className="text-sm font-black uppercase tracking-[0.2em] text-rose-300">Selected tool</p><h1 className="mt-3 text-5xl font-black tracking-tight">{tool.name}</h1><p className="mt-4 max-w-2xl text-slate-300">{tool.description}</p></div><div className="rounded-3xl bg-white/10 p-4 text-sm"><p className="font-black">How to use</p><ol className="mt-2 list-decimal space-y-1 pl-4 text-slate-300"><li>Upload or create content.</li><li>Review the options.</li><li>Process and download.</li></ol></div></div>
+        </div>
+        {seo && (
+  <div className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+    <h2 className="text-3xl font-black text-slate-950">
+      {tool.name} Converter
+    </h2>
+
+    <p className="mt-4 text-lg leading-8 text-slate-600">
+      {seo.intro}
+    </p>
+
+    <h3 className="mt-8 text-xl font-black text-slate-950">
+      Benefits
+    </h3>
+    <ul className="mt-4 grid gap-2 text-slate-600">
+  {seo.benefits.map((benefit) => (
+    <li key={benefit}>• {benefit}</li>
+  ))}
+</ul>
+
+    <h3 className="mt-8 text-xl font-black text-slate-950">
+  How to Use
+</h3>
+
+<ol className="mt-4 space-y-2 text-slate-600">
+  <li>1. Upload your file.</li>
+  <li>2. Select the required PDFShuffl tool.</li>
+  <li>3. Review your settings and options.</li>
+  <li>4. Click Process.</li>
+  <li>5. Download your completed document.</li>
+</ol>
+
+    <ul className="mt-4 grid gap-2 text-slate-600">
+      {seo.benefits.map((benefit) => (
+        <li key={benefit}>• {benefit}</li>
+      ))}
+    </ul>
+  </div>
+)}
+<h3 className="mt-8 text-xl font-black text-slate-950">
+  Frequently Asked Questions
+</h3>
+
+<div className="mt-4 space-y-4 text-slate-600">
+  {seo?.faq?.map((item) => (
+    <div key={item.q}>
+      <p className="font-bold">{item.q}</p>
+      <p>{item.a}</p>
+    </div>
+  ))}
+</div>
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_360px]">
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <div onClick={() => inputRef.current?.click()} className="grid cursor-pointer place-items-center rounded-[2rem] border-2 border-dashed border-slate-200 bg-slate-50 p-10 text-center transition hover:border-rose-300 hover:bg-rose-50/40">
+              <UploadCloud className="mb-4 text-rose-500" size={46} />
+              <h3 className="text-2xl font-black text-slate-950">Drop your file here</h3>
+              <p className="mt-2 text-sm text-slate-500">Accepted formats: {tool.accepts}</p>
+              <p className="mt-3 rounded-full bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm">{file ? file.name : "Choose file"}</p>
+              <input
+                ref={inputRef}
+                hidden
+                type="file"
+                accept={tool.accepts}
+                onChange={(e) => {
+                  const selectedFile = e.target.files?.[0] || null;
+
+                  if (!selectedFile) {
+                    setFile(null);
+                    return;
+                  }
+
+                  if (!isAcceptedFile(selectedFile, tool.accepts)) {
+                    setFile(null);
+                    setStatus(`Upload failed: incorrect file format. Accepted formats are ${tool.accepts}.`);
+                    e.target.value = "";
+                    return;
+                  }
+
+                  setFile(selectedFile);
+                  setStatus("File accepted. Ready to process.");
+                }}
+              />
+            </div>
+            <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
+              <label className="block">
+                <span className="mb-3 block text-sm font-black text-slate-700">Notes, text, instructions or PDF content</span>
+                <textarea
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  className="min-h-44 w-full rounded-3xl border border-slate-200 bg-white p-5 text-base leading-7 text-slate-700 outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+                  placeholder="Add notes, text, instructions or document content here..."
+                />
+              </label>
+
+              <div className="grid gap-4">
+                <label className="block">
+                  <span className="mb-3 block text-sm font-black text-slate-700">Recipient email for signing</span>
+                  <input
+                    value={recipient}
+                    onChange={(e) => setRecipient(e.target.value)}
+                    placeholder="name@example.com"
+                    className="w-full rounded-3xl border border-slate-200 bg-white px-5 py-4 text-base outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+                  />
+                </label>
+
+                <div className="rounded-3xl border border-rose-100 bg-rose-50/60 p-5 text-sm leading-6 text-slate-600">
+                  <Info className="mb-3 text-rose-500" />
+                  <p>
+                    Conversion tools for Word, LibreOffice, PPT, HTML, CSV, locked PDFs and OCR-based editable PDFs require a secure backend processor in production.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <button onClick={processTool} className="inline-flex items-center justify-center gap-2 rounded-full bg-rose-500 px-7 py-4 font-black text-white shadow-xl shadow-rose-100 transition hover:-translate-y-0.5 hover:bg-rose-600"><Download size={18} /> Process with {tool.name}</button>
+              <p className="text-sm text-slate-500">Upload → Review → Process → Download</p>
+            </div>
+          </div>
+          <aside className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 className="text-xl font-black text-slate-950">Tool status</h3>
+            <div className="mt-4 rounded-3xl bg-slate-50 p-5"><p className="flex items-center gap-2 font-bold text-slate-800">{status.toLowerCase().includes("failed") ? (
+      <XCircle className="mt-1 text-rose-500" size={28} />
+    ) : (
+      <CheckCircle2 className="mt-1 text-emerald-500" size={28} />
+    )} {status}</p><p className="mt-3 text-sm leading-6 text-slate-600">Designed for fast use on phone screens, tablets, kiosks, touchscreen displays, laptops and desktop PCs.</p></div>
+            <div className="mt-6"><h4 className="mb-3 font-black text-slate-950">Best used for</h4><div className="grid gap-2 text-sm text-slate-600"><p>• Applications and forms</p><p>• Contracts and signing</p><p>• Reports and statements</p><p>• School and business submissions</p><p>• Customer service document support</p></div></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function SimplePage({ page, setActivePage, setSelectedTool }) {
+  const knowledgePages = [
+  "How to Create a PDF",
+  "How to Format a PDF",
+  "How to Edit a PDF",
+  "How to Sign a PDF",
+  "How to Mark-up a PDF",
+];
+
+const currentIndex = knowledgePages.indexOf(page);
+
+const nextPage =
+  currentIndex >= 0 && currentIndex < knowledgePages.length - 1
+    ? knowledgePages[currentIndex + 1]
+    : null;
+  const [showSouthAfrica, setShowSouthAfrica] = useState(false);
+
+  const copy = {
+    About: [
+      "PDFShuffl is a premium all-in-one document management and PDF productivity platform designed to simplify how people create, convert, edit, organise, compress, review and sign documents across modern digital environments. PDFShuffl solves everyday document challenges by providing a secure, intuitive and accessible workspace for students, professionals, businesses, consultants, public users, customer service environments and enterprise teams.",
+      "PDFShuffl helps users save time, improve document accuracy, reduce compatibility issues, simplify sharing, and maintain professional document standards across work, education, government, legal, financial and personal use cases. The platform is designed to support modern digital workflows including applications, contracts, onboarding, reporting, compliance documentation, customer support processing, academic submissions, archival preparation and secure document exchange."
+    ],
+    "Privacy Policy": [
+      "PDFShuffl respects and protects the privacy of every user who visits and uses the platform. This Privacy Policy explains how information is collected, used, stored, processed and protected when users access PDFShuffl services, including PDF creation, document conversion, editing, compression, formatting, signing, sharing and related workflow tools. By using PDFShuffl, users consent to the practices described in this Privacy Policy.",
+      "PDFShuffl may collect limited technical and usage information necessary for the operation, security and improvement of the platform. This may include IP address, browser type, device information, operating system, internet service provider, referring pages, timestamps, session duration, clickstream activity, file processing activity, upload/download events, diagnostic information and general geographic region. This information is used solely for system administration, performance optimisation, analytics, fraud prevention, troubleshooting, abuse monitoring and improving user experience.",
+      "PDFShuffl uses cookies, local storage technologies and similar technologies to improve functionality, remember user preferences, maintain session security, personalise interface settings and analyse platform performance. Users may disable cookies within their browser settings; however, certain platform features and functionality may become limited or unavailable.",
+      "Documents uploaded to PDFShuffl for conversion, editing, signing, compression or processing are handled securely and are used solely for the purpose of completing the requested document workflow. PDFShuffl does not claim ownership of user documents or uploaded content. Uploaded files are not reviewed, shared, sold, rented, distributed or used for advertising or marketing purposes. PDFShuffl does not sell personal information, uploaded documents or user activity data to third parties under any circumstances.",
+      "PDFShuffl may temporarily store uploaded files and processed outputs on secure systems solely for operational purposes including conversion processing, caching, download generation, troubleshooting, recovery, abuse prevention and system reliability. Files may be automatically deleted after a defined retention period or immediately after processing depending on platform configuration and infrastructure policies.",
+      "Where applicable, PDFShuffl may use third-party infrastructure providers, cloud hosting providers, analytics services, security providers, payment processors or document processing engines to support operation of the platform. Such providers are contractually required to maintain confidentiality, implement reasonable security safeguards and process information only for authorised operational purposes. PDFShuffl does not permit third-party providers to use uploaded files or personal information for independent advertising or marketing activities.",
+      "PDFShuffl may use analytics technologies such as Google Analytics or equivalent analytics providers to better understand how users interact with the platform. Analytics may collect anonymous or aggregated information including page visits, session duration, feature usage, device type, browser information and performance metrics. This information is used exclusively to improve system usability, platform reliability and user experience.",
+      "PDFShuffl implements commercially reasonable administrative, technical and organisational safeguards designed to protect user information and uploaded documents against unauthorised access, misuse, disclosure, alteration or destruction. Security measures may include encrypted data transmission, secure server infrastructure, access controls, monitoring systems, automated threat detection and infrastructure hardening. However, no internet-based service or electronic storage method can be guaranteed to be completely secure.",
+      "PDFShuffl does not knowingly collect personally identifiable information from children under the age of 13. If a parent or guardian believes that a child has provided personal information through the platform, they are encouraged to contact PDFShuffl immediately so appropriate removal steps may be taken.",
+      "Users remain fully responsible for ensuring that they have the legal rights, permissions and authority to upload, process, edit, convert, sign or distribute any documents submitted through PDFShuffl. Users should avoid uploading unlawful, malicious, infringing, confidential or unauthorised content that violates applicable laws, regulations or third-party rights.",
+      "PDFShuffl may disclose information where required by law, legal process, court order, governmental request or regulatory obligation, or where disclosure is reasonably necessary to protect platform security, enforce legal rights, prevent fraud, investigate abuse, respond to security incidents or protect users and the public.",
+      "This Privacy Policy may be updated, revised or modified periodically to reflect legal, technical, operational or regulatory changes. Updated versions become effective immediately upon publication on the platform. Users are encouraged to review this Privacy Policy regularly to remain informed regarding how information is protected and handled.",
+      "By accessing or using PDFShuffl, users acknowledge that they have read, understood and agreed to this Privacy Policy and the related Terms and Conditions governing use of the platform."
+    ],
+    "Terms and Conditions": [
+      "Please read these Terms and Conditions carefully before accessing or using PDFShuffl. By accessing, browsing, uploading documents to, or using PDFShuffl and any associated services, tools, workflows, APIs, applications or features, users acknowledge that they have read, understood and agreed to be legally bound by these Terms and Conditions. If a user does not agree to these Terms and Conditions, they must immediately discontinue use of the platform.",
+      "PDFShuffl provides document-related services including but not limited to PDF creation, document conversion, editing, formatting, compression, annotation, signing, document sharing, workflow automation and related informational tools. Services are provided for educational, informational, professional, business and productivity purposes only. PDFShuffl does not provide legal, financial, compliance or professional advisory services, and users remain solely responsible for verifying the suitability, legality, completeness, security and accuracy of any processed documents or outputs.",
+      "Users agree to use PDFShuffl only for lawful purposes and in compliance with all applicable laws, regulations, intellectual property rights, data protection requirements and third-party rights. Users may not upload, process, transmit, distribute or store unlawful, fraudulent, malicious, defamatory, infringing, harmful, confidential, deceptive or unauthorised content through the platform.",
+      "Users may not abuse, exploit, interfere with, reverse engineer, bypass security controls, scrape, overload, disrupt or attempt unauthorised access to PDFShuffl systems, infrastructure, APIs, servers, databases, networks or associated technologies. Automated abuse, malicious uploads, malware distribution, denial-of-service activity, credential abuse, unlawful document processing and unauthorised commercial exploitation are strictly prohibited.",
+      "All content, branding, software, source code, interfaces, workflows, graphics, designs, logos, databases, functionality, trademarks, trade dress and intellectual property associated with PDFShuffl are owned by or licensed to WordShuffl Trading and are protected under applicable intellectual property, copyright and trademark laws in South Africa and internationally. Users may not reproduce, republish, distribute, modify, copy, scrape, sell, license or commercially exploit any part of the platform without prior written consent from WordShuffl Trading.",
+      "Users remain solely and fully responsible for all documents, files, information, metadata, signatures, content, communications and activities processed, uploaded, converted, stored or transmitted through PDFShuffl. Users acknowledge that PDFShuffl does not verify document accuracy, legality, ownership, authenticity, enforceability or regulatory compliance.",
+      "By using PDFShuffl, users expressly agree to fully indemnify, defend and hold harmless PDFShuffl, WordShuffl Trading, its owners, directors, employees, affiliates, contractors, licensors, technology providers, infrastructure providers, cloud providers, payment processors, partners, stakeholders, successors and assigns from and against any and all claims, disputes, losses, liabilities, damages, penalties, fines, proceedings, legal actions, regulatory investigations, demands, judgments, costs and expenses of every nature whatsoever, including legal fees and attorney costs, arising directly or indirectly from the use of the platform, uploaded content, processed documents, misuse of services, violation of laws, infringement of rights, unauthorised activities, security incidents, fraudulent conduct, document distribution, reliance on outputs, third-party disputes or breach of these Terms and Conditions.",
+      "Users acknowledge and agree that all use of PDFShuffl and related services is entirely at the user's own risk. PDFShuffl and WordShuffl Trading make no warranties, guarantees or representations regarding uninterrupted availability, processing accuracy, conversion quality, compatibility, reliability, uptime, security, legality, performance, data retention, error-free operation or suitability for any particular purpose.",
+      "Under no circumstances shall PDFShuffl, WordShuffl Trading, its owners, employees, partners, stakeholders, service providers or affiliates be liable for any direct, indirect, incidental, consequential, punitive, special or exemplary damages, including but not limited to loss of data, loss of profits, business interruption, reputational damage, document corruption, operational downtime, security breaches, contractual disputes or financial losses arising from the use of or inability to use the platform, regardless of legal theory, negligence, contract, strict liability or otherwise.",
+      "PDFShuffl may integrate with or utilise third-party infrastructure, cloud hosting providers, analytics providers, payment processors, document engines, artificial intelligence services, security services or external technologies. PDFShuffl does not accept responsibility or liability for the availability, security, accuracy or conduct of third-party services or websites accessed through or connected to the platform.",
+      "PDFShuffl reserves the right to suspend, restrict, terminate, investigate or remove access to any user, account, document, activity or service at its sole discretion where misuse, unlawful conduct, abuse, security threats, policy violations or operational risks are suspected.",
+      "PDFShuffl may update, revise, discontinue or modify any aspect of the platform, services, features, pricing structures, retention policies, security controls, APIs or these Terms and Conditions at any time without prior notice. Continued use of the platform following modifications constitutes acceptance of the revised Terms and Conditions.",
+      "Users acknowledge that electronic communications, uploads, downloads and internet-based processing may involve inherent technical risks. While commercially reasonable safeguards may be implemented, PDFShuffl cannot guarantee absolute security, uninterrupted operation or protection against all cyber threats, data loss events or infrastructure failures.",
+      "These Terms and Conditions shall be governed by and interpreted in accordance with the laws of the Republic of South Africa. Any dispute, legal proceeding or claim arising from or relating to PDFShuffl, its services or these Terms and Conditions shall be subject to the exclusive jurisdiction of the competent courts of South Africa.",
+      "By continuing to access or use PDFShuffl, users acknowledge and agree that they fully understand, accept and consent to these Terms and Conditions, including all indemnification obligations, limitations of liability, jurisdiction provisions and operational conditions described herein."
+    ],
+    "Create PDF Guide": [
+  "Creating a PDF allows you to turn text, images, scanned material, notes, forms and business documents into a professional and shareable format.",
+  "PDFs preserve formatting across devices, improve compatibility, simplify sharing and provide a professional presentation standard for work, education and personal use.",
+  "To create a PDF using PDFShuffl, open the Tools page and select Create PDF. You can create PDFs from text, images, notes and other supported content."
+],
+
+"Format PDF Guide": [
+  "Formatting a PDF helps improve readability, presentation quality and document consistency.",
+  "Common formatting tasks include adjusting margins, page size, page orientation, page order, spacing and visual layout.",
+  "To format a PDF using PDFShuffl, open the Tools page and select Format PDF."
+],
+
+"Edit PDF Guide": [
+  "Editing a PDF allows users to update content, add information, correct mistakes and improve document accuracy.",
+  "PDF editing may include adding text, annotations, highlights, shapes, mark-ups and document notes.",
+  "To edit a PDF using PDFShuffl, open the Tools page and select Edit PDF."
+],
+
+"PDF Comments Guide": [
+  "PDF comments provide a collaborative review process for teams, clients, students and professionals.",
+  "Comments can be used to provide feedback, approvals, review notes, change requests and document observations.",
+  "To comment on a PDF using PDFShuffl, open the Tools page and select PDF Comments."
+],
+"How to Create a PDF": [
+  "Creating a PDF means turning text, images, notes, forms or document content into a fixed professional file that keeps its layout across phones, tablets, laptops and desktops.",
+  "Use PDFShuffl when you need to prepare a clean document for sharing, printing, uploading to portals, submitting applications, sending business information or keeping a record that should not easily lose its formatting.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Create PDF. Step 3: Add your notes, text or document content. Step 4: Click Process. Step 5: Download your new PDF and review it before sharing.",
+  "A created PDF is useful for schoolwork, letters, forms, invoices, business documents, personal records, customer service documents and professional submissions."
+],
+
+"How to Format a PDF": [
+  "Formatting a PDF helps make a document easier to read, more professional and better prepared for sharing or printing.",
+  "Good formatting includes clean spacing, correct page order, readable layout, consistent margins, appropriate page size and a structure that makes the document look complete.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Format PDF. Step 3: Upload the PDF you want to improve. Step 4: Review the formatting options. Step 5: Process and download the improved file.",
+  "Formatting is useful when preparing reports, proposals, contracts, application packs, statements, school submissions and business documents."
+],
+
+"How to Edit a PDF": [
+  "Editing a PDF allows you to improve or update a document without recreating it from the beginning.",
+  "PDF editing may include adding text, correcting information, inserting notes, highlighting important sections, adding shapes or making document changes before sharing.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Edit PDF. Step 3: Upload your PDF. Step 4: Add the changes or notes required. Step 5: Process and download the updated version.",
+  "Editing is useful when you need to correct mistakes, update forms, add missing information, prepare documents for approval or improve a file before sending it."
+],
+
+"How to Sign a PDF": [
+  "Signing a PDF helps confirm that a document has been reviewed, accepted or approved by the person signing it.",
+  "A signed PDF is useful for agreements, approvals, forms, letters, confirmations, internal documents and business workflows where a visible signature record is needed.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select Sign PDF. Step 3: Upload the PDF document. Step 4: Add the signer name or signing details. Step 5: Process and download the signed PDF.",
+  "For formal legal or regulated digital signatures, PDFShuffl should later be connected to a production e-signature provider such as DocuSign, Adobe Sign or another approved signing platform."
+],
+
+"How to Mark-up a PDF": [
+  "Marking up a PDF means adding review notes, comments, highlights, corrections or visual guidance to help others understand what must be changed, approved or reviewed.",
+  "Mark-ups are useful when teams, students, clients, managers or service desks need to review documents without changing the original meaning of the file.",
+  "Step 1: Open PDFShuffl and go to Tools. Step 2: Select PDF Comments or Edit PDF. Step 3: Upload the PDF. Step 4: Add comments, highlights or notes. Step 5: Process and download the reviewed document.",
+  "Mark-up tools are useful for feedback, approval notes, document corrections, academic reviews, contract discussions, service requests and internal quality checks."
+],
+Articles: [
+  "PDFShuffl Articles is a knowledge hub for practical PDF guidance, document productivity, business workflows, education, editing, signing, compression and secure digital document handling.",
+  "This section will include useful PDF articles for managers, students, parents, teachers, authors, editors, businesses and everyday users who want to work smarter with PDF documents."
+],
+"How Businesses Use PDFs for Secure Document Management": [
+"Introduction",
+"PDF documents have become one of the most widely used business file formats in the world. Organisations rely on PDFs to distribute contracts, proposals, financial reports, compliance records, policies, customer communications and operational documents because PDFs preserve formatting across different devices and operating systems. Whether a document is opened on a desktop computer, tablet or mobile phone, the content remains consistent and professional.",
+
+"Why Businesses Prefer PDFs",
+"Businesses require documents that are reliable, secure and easy to share. Unlike editable formats, PDFs reduce the risk of accidental changes while maintaining the intended layout and structure. This makes PDFs ideal for communicating information between departments, customers, suppliers, regulators and external stakeholders.",
+
+"Common Business Uses",
+"Companies use PDFs for invoices, quotations, customer onboarding packs, employment contracts, financial reports, compliance documentation, operating procedures, board reports, project plans and legal agreements. Many organisations also use PDFs as part of digital transformation initiatives because the format supports electronic workflows and document archiving.",
+
+"Security Advantages",
+"PDFs support password protection, controlled access, digital signatures and secure document distribution. These features help organisations reduce risk and improve document governance. Sensitive information such as financial data, customer information and legal documentation can be managed more effectively using secure PDF workflows.",
+
+"Benefits of Using PDFs in Business",
+"• Professional presentation across devices",
+"• Reduced formatting issues",
+"• Easier sharing and collaboration",
+"• Better compliance and governance support",
+"• Improved document security",
+"• Long-term document archiving",
+
+"Best Practices",
+"Businesses should maintain a consistent naming convention for PDF documents, organise files into logical folders, secure sensitive documents where appropriate and implement document retention standards. Teams should also ensure that important PDFs are backed up and accessible when needed.",
+
+"Real-World Example",
+"A financial services company may generate thousands of customer documents every month. By converting customer statements, contracts and disclosures into PDF format, the organisation ensures consistency, reduces operational errors and improves the customer experience. Staff can quickly retrieve documents while customers receive information in a familiar and accessible format.",
+
+"Frequently Asked Questions",
+"Q: Why are PDFs commonly used in business?",
+"A: PDFs preserve formatting, improve consistency and support professional document management.",
+
+"Q: Are PDFs suitable for compliance records?",
+"A: Yes. Many organisations use PDFs for regulatory, governance and audit-related documentation.",
+
+"Q: Can PDFs be secured?",
+"A: Yes. PDFs support password protection, controlled permissions and digital signature workflows.",
+
+"Q: Are PDFs suitable for long-term storage?",
+"A: Yes. PDFs are commonly used for document retention and archival purposes.",
+
+"Related PDFShuffl Tools",
+"Businesses often use PDF to Word, Word to PDF, Compress PDF, Sign PDF, Request Signing and Create PDF to support their document workflows."
+],
+
+"Why Managers Prefer PDFs for Reporting and Compliance": [
+  "Introduction",
+  "Managers depend on accurate, consistent and professional documents when preparing reports, approvals, compliance packs and business updates. PDFs are widely used because they preserve formatting and reduce the risk of accidental changes.",
+  "Why It Matters",
+  "A report that changes layout between devices can create confusion. PDFs help managers present information clearly to executives, teams, auditors and stakeholders.",
+  "Key Benefits",
+  "• Consistent reporting format",
+  "• Professional presentation",
+  "• Better audit support",
+  "• Easier document sharing",
+  "Best Practices",
+  "Managers should convert final reports to PDF, compress large files before sharing and use signing workflows for approvals.",
+  "Frequently Asked Questions",
+  "Q: Why do managers use PDFs?",
+  "A: PDFs preserve formatting and support professional reporting.",
+  "Q: Are PDFs useful for compliance?",
+  "A: Yes. PDFs are commonly used for audit, governance and compliance records.",
+  "Related PDFShuffl Tools",
+  "PDF to Word, Word to PDF, Compress PDF, Sign PDF and Request Signing."
+],
+
+"The Complete Student Guide to Working with PDFs": [
+  "Introduction",
+  "Students use PDFs for assignments, lecture notes, application forms, study guides and academic submissions. PDFs help keep documents organised and easy to share.",
+  "Why It Matters",
+  "Universities, schools and online platforms often request documents in PDF format because PDFs are easy to open and preserve layout.",
+  "Key Benefits",
+  "• Easy assignment submission",
+  "• Better study organisation",
+  "• Compatible across devices",
+  "• Useful for research",
+  "Best Practices",
+  "Students should convert final assignments to PDF, compress large files and keep clear file names for each subject or module.",
+  "Frequently Asked Questions",
+  "Q: Why submit work as PDF?",
+  "A: PDFs preserve formatting and are accepted by most learning platforms.",
+  "Q: Can students compress PDFs?",
+  "A: Yes. Compression helps with upload limits.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, PDF to TXT, Compress PDF and Create PDF."
+],
+
+"How Teachers Create and Share Learning Materials Using PDFs": [
+  "Introduction",
+  "Teachers use PDFs to distribute worksheets, lesson plans, notices, reading material and assessments. PDFs help ensure learners receive the same layout and content.",
+  "Why It Matters",
+  "Teaching materials must be clear, printable and accessible across devices. PDFs make this easier for classrooms, parents and online learning.",
+  "Key Benefits",
+  "• Consistent lesson materials",
+  "• Easy sharing with learners",
+  "• Printable worksheets",
+  "• Better classroom organisation",
+  "Best Practices",
+  "Teachers should organise resources by class, compress large files and use comments or mark-ups when reviewing learner work.",
+  "Frequently Asked Questions",
+  "Q: Why do teachers use PDFs?",
+  "A: PDFs preserve formatting and are easy to print or share.",
+  "Q: Can PDFs be used for assessments?",
+  "A: Yes. PDFs are useful for tests, worksheets and instructions.",
+  "Related PDFShuffl Tools",
+  "Create PDF, Compress PDF, PDF Comments and Word to PDF."
+],
+
+"Why Parents Use PDFs for School and Family Records": [
+  "Introduction",
+  "Parents manage school forms, medical documents, permission slips, reports, receipts and family records. PDFs help keep these documents organised and easy to share.",
+  "Why It Matters",
+  "Important family documents must be easy to find, send and print when needed. PDFs provide a practical format for long-term record keeping.",
+  "Key Benefits",
+  "• Better family record organisation",
+  "• Easy school communication",
+  "• Secure sharing",
+  "• Simple printing",
+  "Best Practices",
+  "Parents should keep folders for school, medical, finance and travel documents and convert important records to PDF.",
+  "Frequently Asked Questions",
+  "Q: Are PDFs useful for school records?",
+  "A: Yes. Schools commonly use PDFs for notices, forms and reports.",
+  "Q: Can parents sign PDF forms?",
+  "A: Yes. Signing tools can help complete approval forms.",
+  "Related PDFShuffl Tools",
+  "Create PDF, Sign PDF, Compress PDF and PDF to Word."
+],
+
+"How Authors Prepare Manuscripts Using PDF Documents": [
+  "Introduction",
+  "Authors use PDFs to share manuscripts, review drafts and prepare documents for editors, publishers and proofreaders.",
+  "Why It Matters",
+  "Manuscripts must be presented clearly during review. PDFs help preserve page layout, chapter structure and formatting.",
+  "Key Benefits",
+  "• Professional manuscript sharing",
+  "• Easier review process",
+  "• Preserved formatting",
+  "• Better collaboration",
+  "Best Practices",
+  "Authors should convert final drafts to PDF, keep version names clear and use comments for editor feedback.",
+  "Frequently Asked Questions",
+  "Q: Why do authors send PDFs?",
+  "A: PDFs preserve the manuscript layout during review.",
+  "Q: Can editors comment on PDFs?",
+  "A: Yes. PDF comments support editing and review workflows.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, PDF Comments, PDF to Word and Compress PDF."
+],
+
+"PDF Best Practices for Editors and Publishers": [
+  "Introduction",
+  "Editors and publishers rely on PDFs for reviewing layouts, marking corrections and preparing publication-ready files.",
+  "Why It Matters",
+  "Publishing workflows require accuracy. PDFs help teams review the same version of a document without layout changes.",
+  "Key Benefits",
+  "• Clear review workflow",
+  "• Accurate layout checking",
+  "• Easier collaboration",
+  "• Professional publishing process",
+  "Best Practices",
+  "Use version control, comment clearly, compress large proofs and archive approved versions.",
+  "Frequently Asked Questions",
+  "Q: Why are PDFs important in publishing?",
+  "A: PDFs preserve layout and make review more reliable.",
+  "Q: Can PDFs be marked up?",
+  "A: Yes. Comments and annotations are useful for editorial review.",
+  "Related PDFShuffl Tools",
+  "PDF Comments, Edit PDF, Compress PDF and Create PDF."
+],
+
+"How to Digitally Sign Documents in Minutes": [
+  "Introduction",
+  "Digital signing helps users approve forms, agreements, confirmations and business documents without printing and scanning.",
+  "Why It Matters",
+  "Signing workflows save time, reduce paperwork and support faster approvals.",
+  "Key Benefits",
+  "• Faster approvals",
+  "• Less printing",
+  "• Professional document handling",
+  "• Better workflow tracking",
+  "Best Practices",
+  "Review the document before signing, confirm recipient details and keep a copy of the signed PDF.",
+  "Frequently Asked Questions",
+  "Q: Can I sign a PDF online?",
+  "A: Yes. PDF signing tools help prepare signed documents.",
+  "Q: Are all signatures legally binding?",
+  "A: Formal legal requirements may depend on jurisdiction and signing provider.",
+  "Related PDFShuffl Tools",
+  "Sign PDF, Request Signing and Compress PDF."
+],
+
+"The Benefits of Converting Documents to PDF Format": [
+  "Introduction",
+  "Converting documents to PDF helps preserve formatting and makes files easier to share, print and archive.",
+  "Why It Matters",
+  "Different devices and apps may display editable files differently. PDFs provide a more consistent experience.",
+  "Key Benefits",
+  "• Preserved formatting",
+  "• Easy sharing",
+  "• Professional presentation",
+  "• Better compatibility",
+  "Best Practices",
+  "Convert final versions to PDF before sending, printing or uploading to portals.",
+  "Frequently Asked Questions",
+  "Q: Why convert files to PDF?",
+  "A: PDFs preserve layout and are widely accepted.",
+  "Q: Can PDFs be shared easily?",
+  "A: Yes. PDFs work across most devices and platforms.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, Excel to PDF, JPG to PDF, HTML to PDF and TXT to PDF."
+],
+
+"PDF Security and Password Protection Explained": [
+  "Introduction",
+  "PDF security helps protect sensitive documents such as contracts, reports, financial records and personal information.",
+  "Why It Matters",
+  "Businesses and individuals often need to control access to documents. Security features help reduce risk.",
+  "Key Benefits",
+  "• Better document protection",
+  "• Controlled access",
+  "• Safer sharing",
+  "• Improved confidentiality",
+  "Best Practices",
+  "Use strong passwords, share files only with trusted recipients and avoid sending sensitive documents through insecure channels.",
+  "Frequently Asked Questions",
+  "Q: Can PDFs be protected?",
+  "A: Yes. PDFs can support password protection and permission controls.",
+  "Q: Should sensitive documents be compressed?",
+  "A: Compression is useful, but sensitive files should also be handled securely.",
+  "Related PDFShuffl Tools",
+  "Sign PDF, Request Signing, Compress PDF and PDF to Word."
+],
+
+"How to Compress Large PDF Files Without Losing Quality": [
+  "Introduction",
+  "Large PDF files can be difficult to email, upload or store. Compression helps reduce file size while keeping the document usable.",
+  "Why It Matters",
+  "Many portals and email systems have file size limits. Smaller PDFs are easier to send and manage.",
+  "Key Benefits",
+  "• Smaller file sizes",
+  "• Faster uploads",
+  "• Easier email sharing",
+  "• Better storage efficiency",
+  "Best Practices",
+  "Compress files before email submission, check readability after compression and keep the original file when needed.",
+  "Frequently Asked Questions",
+  "Q: Will compression reduce quality?",
+  "A: Compression aims to reduce file size while keeping the file readable.",
+  "Q: When should I compress a PDF?",
+  "A: Compress PDFs before uploading, emailing or storing large documents.",
+  "Related PDFShuffl Tools",
+  "Compress PDF, PDF to Word and JPG to PDF."
+],
+
+"The Role of PDFs in Modern Remote Work": [
+  "Introduction",
+  "Remote teams use PDFs to share reports, contracts, policies, presentations and approvals across locations.",
+  "Why It Matters",
+  "Remote work depends on documents that are easy to open, review and share from any device.",
+  "Key Benefits",
+  "• Consistent document sharing",
+  "• Better remote collaboration",
+  "• Easy approvals",
+  "• Reliable formatting",
+  "Best Practices",
+  "Use PDFs for final documents, compress large files and use signing workflows for approvals.",
+  "Frequently Asked Questions",
+  "Q: Why are PDFs useful for remote teams?",
+  "A: PDFs are easy to share and keep formatting consistent.",
+  "Q: Can remote teams sign PDFs?",
+  "A: Yes. Signing workflows support remote approvals.",
+  "Related PDFShuffl Tools",
+  "Sign PDF, Request Signing, Compress PDF and PDF Comments."
+],
+
+"Organising Business Records with PDFs": [
+  "Introduction",
+  "Business records include invoices, contracts, reports, customer files, policies and compliance documents. PDFs help keep these records organised.",
+  "Why It Matters",
+  "Organised records improve efficiency, compliance and customer service.",
+  "Key Benefits",
+  "• Better document control",
+  "• Easier retrieval",
+  "• Improved compliance support",
+  "• Professional archiving",
+  "Best Practices",
+  "Use clear file names, archive by date or department and convert final documents to PDF.",
+  "Frequently Asked Questions",
+  "Q: Are PDFs good for archiving?",
+  "A: Yes. PDFs are commonly used for long-term business records.",
+  "Q: Can PDFs support audits?",
+  "A: Yes. PDFs are useful for audit packs and compliance files.",
+  "Related PDFShuffl Tools",
+  "Create PDF, Compress PDF, PDF to Word and Word to PDF."
+],
+
+"How Schools Use PDFs for Assignments and Assessments": [
+  "Introduction",
+  "Schools use PDFs for worksheets, assignments, assessments, notices and learning resources.",
+  "Why It Matters",
+  "PDFs help schools distribute consistent learning materials to students and parents.",
+  "Key Benefits",
+  "• Consistent formatting",
+  "• Easy printing",
+  "• Simple sharing",
+  "• Better academic organisation",
+  "Best Practices",
+  "Teachers and students should use clear file names, compress large documents and convert final submissions to PDF.",
+  "Frequently Asked Questions",
+  "Q: Why do schools use PDFs?",
+  "A: PDFs are easy to share, print and open across devices.",
+  "Q: Can students submit PDFs?",
+  "A: Yes. Many schools and platforms accept PDF submissions.",
+  "Related PDFShuffl Tools",
+  "Word to PDF, Compress PDF, PDF Comments and Create PDF."
+],
+
+"Choosing the Right PDF Tool for Your Workflow": [
+  "Introduction",
+  "Different PDF tasks require different tools. Choosing the right tool helps users save time and produce better documents.",
+  "Why It Matters",
+  "A user who needs to edit a document should not use the same workflow as someone who needs to compress, sign or convert a file.",
+  "Key Benefits",
+  "• Faster document processing",
+  "• Better results",
+  "• Less confusion",
+  "• Improved productivity",
+  "Best Practices",
+  "Choose conversion tools for format changes, compression tools for large files, signing tools for approvals and editing tools for document changes.",
+  "Frequently Asked Questions",
+  "Q: Which PDF tool should I use first?",
+  "A: Start with the task you need: convert, edit, sign, compress or extract content.",
+  "Q: Can one workflow use multiple tools?",
+  "A: Yes. Many users convert, edit, compress and sign documents in one workflow.",
+  "Related PDFShuffl Tools",
+  "PDF to Word, Word to PDF, Compress PDF, Sign PDF, PDF Comments and Create PDF."
+],
+    Contact: [
+      "For support, partnerships, product enquiries, privacy requests, legal notices or general platform assistance, contact the PDFShuffl team through the details below."
+    ]
+  };
+if (page === "Articles") {
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl Articles</p>
+        <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">PDF Guides, Tips and Knowledge Articles</h1>
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+          Practical PDF articles for businesses, managers, students, teachers, parents, authors, editors and everyday users.
+        </p>
+
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {articleCards.map((article) => (
+            <Link
+  key={article.title}
+  to={`/articles/${article.title.toLowerCase().replaceAll(" ", "-")}`} 
+    className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-left transition hover:-translate-y-1 hover:border-rose-200 hover:bg-rose-50 hover:shadow-lg"
+>
+  <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-500">{article.audience}</p>
+  <h2 className="mt-3 text-xl font-black text-slate-950">{article.title}</h2>
+  <p className="mt-4 text-sm font-bold text-slate-500">{article.readTime}</p>
+</Link>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+  if (page === "Sitemap") {
+    return (
+      <main className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+        <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
+          <div className="mb-6">
+  <span className="text-4xl font-black tracking-tight text-slate-950">
+    PDFShuffl
+  </span>
+  <span className="ml-1 text-4xl font-black text-rose-500">.</span>
+</div>
+          <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">Interactive Sitemap</h1>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Navigate every major PDFShuffl page, workflow and document tool visually. This sitemap helps users quickly jump to the exact service they need.</p>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-3">
+            <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
+              <h2 className="mb-5 text-2xl font-black text-slate-950">Main Pages</h2>
+              <div className="grid gap-3">
+                {["Home", "About", "Articles","Privacy Policy", "Terms and Conditions", "Contact"].map((item) => (
+                  <button key={item} onClick={() => { setActivePage(item); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex items-center justify-between rounded-2xl bg-white p-4 text-left font-bold text-slate-700 shadow-sm transition hover:-translate-y-1 hover:bg-rose-50 hover:text-rose-600">
+                    {item}
+                    <ArrowRight size={18} />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {toolGroups.map((group) => (
+              <div key={group.title} className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">
+                <h2 className="mb-5 text-2xl font-black text-slate-950">{group.title}</h2>
+                <div className="grid gap-3">
+                  {group.tools.map((tool) => {
+                    const Icon = tool.icon;
+                    return (
+                      <button key={tool.name} onClick={() => { setActivePage("Tools"); setSelectedTool(tool.name); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex items-center gap-4 rounded-2xl border border-slate-100 p-4 text-left transition hover:-translate-y-1 hover:border-rose-200 hover:bg-rose-50">
+                        <span className="rounded-2xl bg-rose-100 p-3 text-rose-600"><Icon size={20} /></span>
+                        <div>
+                          <h3 className="font-black text-slate-900">{tool.name}</h3>
+                          <p className="text-sm text-slate-500">{tool.description}</p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const paragraphs = Array.isArray(copy[page]) ? copy[page] : [copy[page]];
+
+  return (
+    <main className="mx-auto max-w-5xl px-4 py-16 lg:px-8">
+      <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="mb-6">
+  <span className="text-1.5xl font-black tracking-tight text-slate-500">
+    PDFShuffl
+  </span>
+  <span className="ml-0 text-2.5xl font-black text-rose-500">.</span>
+</div>
+        <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">{page}</h1>
+        <div className="mt-6 space-y-6 text-lg leading-8 text-slate-600">
+          {paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+        </div>
+        {nextPage && (
+  <div className="mt-10 flex justify-end">
+    <button
+      onClick={() => {
+        setActivePage(nextPage);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+      className="inline-flex items-center gap-2 rounded-full bg-rose-500 px-6 py-3 text-sm font-black text-white shadow-lg shadow-rose-100 transition hover:-translate-y-0.5 hover:bg-rose-600"
+    >
+      Next Knowledge Article
+      <ArrowRight size={18} />
+    </button>
+  </div>
+)}
+        {page === "Contact" && (
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <div className="rounded-3xl bg-slate-50 p-6">
+              <Mail className="mb-3 text-rose-500" />
+              <h3 className="font-black">Email</h3>
+              <a href="mailto:support@PDFShuffl.com" className="text-slate-600 transition hover:text-rose-500 hover:underline">support@PDFShuffl.com</a>
+            </div>
+            <div className="rounded-3xl bg-slate-50 p-6">
+              <Map className="mb-3 text-rose-500" />
+              <h3 className="font-black">Location</h3>
+              <button onClick={() => setShowSouthAfrica(true)} className="text-left text-slate-600 transition hover:text-rose-500 hover:underline">South Africa</button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {showSouthAfrica && (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-slate-950/70 p-4 backdrop-blur-sm">
+          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="max-h-[90vh] w-full max-w-5xl overflow-auto rounded-[2rem] bg-white p-6 shadow-2xl">
+            <div className="mb-6 flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">Location spotlight</p>
+                <h2 className="mt-2 text-4xl font-black text-slate-950">South Africa</h2>
+                <p className="mt-2 text-slate-600">A country at the southern tip of Africa, bordered by the Atlantic and Indian Oceans.</p>
+              </div>
+              <button onClick={() => setShowSouthAfrica(false)} className="rounded-full bg-slate-100 p-3 text-slate-700 transition hover:bg-rose-100 hover:text-rose-600"><X size={22} /></button>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+              <div className="rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm">
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl font-black text-slate-950">World map location</h3>
+                    <p className="text-sm text-slate-500">South Africa marked on a real interactive map.</p>
+                  </div>
+                  <span className="rounded-full bg-rose-500 px-3 py-1 text-xs font-black text-white">SA</span>
+                </div>
+                <div className="relative h-[430px] overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-100 shadow-inner">
+                  <iframe title="World map showing South Africa" src="https://www.openstreetmap.org/export/embed.html?bbox=-180%2C-60%2C180%2C85&layer=mapnik&marker=-30.5595%2C22.9375" className="h-full w-full border-0" loading="lazy" />
+                  <div className="pointer-events-none absolute bottom-4 left-4 rounded-2xl bg-white/95 p-4 shadow-lg backdrop-blur">
+                    <p className="text-sm font-black text-slate-950">📍 South Africa</p>
+                    <p className="mt-1 text-xs text-slate-600">Southern tip of the African continent</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="mb-4 text-2xl font-black text-slate-950">10 interesting facts</h3>
+                <div className="grid gap-3">
+                  {[
+                    "South Africa has 11 official languages, making it one of the most linguistically diverse countries in the world.",
+                    "It is often called the Rainbow Nation because of its rich cultural diversity.",
+                    "South Africa has three capital cities: Pretoria, Cape Town and Bloemfontein.",
+                    "Table Mountain in Cape Town is one of the country’s most recognisable natural landmarks.",
+                    "The country is home to the Kruger National Park, one of Africa’s best-known wildlife reserves.",
+                    "South Africa is known for major industries including mining, finance, tourism, agriculture and technology.",
+                    "It has coastlines on both the Atlantic Ocean and the Indian Ocean.",
+                    "South Africa hosted the 2010 FIFA World Cup, the first held on the African continent.",
+                    "The country is famous for gold, diamonds, platinum and other mineral resources.",
+                    "South Africa has a strong constitution and a Constitutional Court that plays an important role in democracy."
+                  ].map((fact, index) => (
+                    <div key={fact} className="flex gap-3 rounded-2xl bg-slate-50 p-4">
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-rose-500 text-sm font-black text-white">{index + 1}</span>
+                      <p className="text-sm leading-6 text-slate-600">{fact}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </main>
+  );
+}
+
+function Footer({ setActivePage,setSelectedTool }) {
+  return (
+    <footer className="border-t border-slate-200 bg-white">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 lg:grid-cols-[1fr_2fr] lg:px-8">
+        <div><div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-2xl bg-rose-500 text-white"><FileText size={20} /></span><span className="text-2xl font-black">PDFShuffl</span></div><p className="mt-4 max-w-md text-sm leading-6 text-slate-600">A premium PDF conversion, editing and signing workspace for everyone.</p></div>
+        <div className="grid gap-6 sm:grid-cols-3"><div><h4 className="font-black">Pages</h4><div className="mt-3 grid gap-2">{pages.map((p) => <button key={p} onClick={() => setActivePage(p)} className="text-left text-sm text-slate-600 hover:text-rose-500">{p}</button>)}</div></div><div>
+  <h4 className="mb-4 font-black text-slate-950">Popular tools</h4>
+
+  <div className="grid gap-3 text-sm text-slate-600">
+    <button onClick={() => setActivePage("How to Create a PDF")} className="text-left hover:text-rose-500">
+      Create PDF
+    </button>
+
+    <button onClick={() => {
+    setSelectedTool("PDF to Word");
+    setActivePage("Tools");
+     window.scrollTo(0, 0);
+  }}
+  className="text-left text-sm text-slate-600 hover:text-rose-500">
+      PDF to Word
+    </button>
+
+    <button onClick={() => {
+    setSelectedTool("Sign PDF");
+    setActivePage("Tools");
+     window.scrollTo(0, 0);
+  }}
+  className="text-left text-sm text-slate-600 hover:text-rose-500">
+      Sign PDF
+    </button>
+
+    <button onClick={() => { setActivePage("Tools"); setSelectedTool("Compress PDF");  window.scrollTo(0, 0);}} className="text-left hover:text-rose-500">
+      Compress PDF
+    </button>
+  </div>
+</div><div><h4 className="font-black">Legal notice</h4><p className="mt-3 text-sm leading-6 text-slate-600">PDFShuffl® is a registered trademark. All intellectual property rights in and to the game are owned in South Africa by WordShuffl Trading.<br />This site is for educational and informational purposes only.<br />© 2026 PDFShuffl.com. ALL RIGHTS RESERVED</p></div></div>
+      </div>
+    </footer>
+  );
+}
+
+export default function PDFShufflWebsite() {
+  const [activePage, setActivePage] = useState("Home");useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activePage]);
+  const [selectedTool, setSelectedTool] = useState("Create PDF");
+  const page = useMemo(() => {
+  if (activePage === "Home")
+    return <Home setActivePage={setActivePage} />;
+
+  if (activePage === "Tools")
+    return <ToolsPage selectedTool={selectedTool} setSelectedTool={setSelectedTool} />;
+ 
+  return <SimplePage page={activePage} setActivePage={setActivePage} setSelectedTool={setSelectedTool} />;
+}, [activePage, selectedTool]);
+    const AboutPage = () => (
+  <SimplePage
+    page="About"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ContactPage = () => (
+  <SimplePage
+    page="Contact"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ArticlesPage = () => (
+  <SimplePage
+    page="Articles"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ArticlePage = () => {
+  const { slug } = useParams();
+
+  const article = articleCards.find(
+    (item) => item.title.toLowerCase().replaceAll(" ", "-") === slug
+  );
+
+  if (!article) {
+    return (
+      <SimplePage
+        page="Articles"
+        setActivePage={setActivePage}
+        setSelectedTool={setSelectedTool}
+      />
+    );
+  }
+
+  return (
+    <SimplePage
+      page={article.title}
+      setActivePage={setActivePage}
+      setSelectedTool={setSelectedTool}
+    />
+  );
+};
+
+const PrivacyPage = () => (
+  <SimplePage
+    page="Privacy Policy"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+
+const TermsPage = () => (
+  <SimplePage
+    page="Terms and Conditions"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+
+const SiteMapPage = () => (
+  <SimplePage
+    page="Sitemap"
+    setActivePage={setActivePage}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const ToolsLandingPage = () => (
+  <ToolsPage
+    selectedTool={selectedTool}
+    setSelectedTool={setSelectedTool}
+  />
+);
+const PdfToWordPage = () => (
+  <ToolsPage
+    selectedTool="PDF to Word"
+    setSelectedTool={setSelectedTool}
+  />
+);
+const toolRoutes = [
+  { path: "/tools/word-to-pdf", name: "Word to PDF" },
+  { path: "/tools/libre-to-pdf", name: "Libre to PDF" },
+  { path: "/tools/ppt-to-pdf", name: "PPT to PDF" },
+  { path: "/tools/csv-to-pdf", name: "CSV to PDF" },
+  { path: "/tools/excel-to-pdf", name: "Excel to PDF" },
+  { path: "/tools/jpg-to-pdf", name: "JPG to PDF" },
+  { path: "/tools/html-to-pdf", name: "HTML to PDF" },
+  { path: "/tools/txt-to-pdf", name: "TXT to PDF" },
+  { path: "/tools/pdf-to-word", name: "PDF to Word" },
+  { path: "/tools/pdf-to-libre", name: "PDF to Libre" },
+  { path: "/tools/pdf-to-html", name: "PDF to HTML" },
+  { path: "/tools/pdf-to-txt", name: "PDF to TXT" },
+  { path: "/tools/sign-pdf", name: "Sign PDF" },
+  { path: "/tools/request-signing", name: "Request Signing" },
+  { path: "/tools/crop-pdf", name: "Crop PDF" },
+  { path: "/tools/compress-pdf", name: "Compress PDF" },
+];
+  return ( <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+    <Header
+      activePage={activePage}
+      setActivePage={setActivePage}
+      selectedTool={selectedTool}
+      setSelectedTool={setSelectedTool}
+    />
+
+    <Routes>
+  <Route path="/about" element={<AboutPage />} />
+  <Route path="/contact" element={<ContactPage />} />
+  <Route path="/articles" element={<ArticlesPage />} />
+  <Route path="/articles/:slug" element={<ArticlePage />} />
+<Route path="/privacy-policy" element={<PrivacyPage />} />
+<Route path="/terms-and-conditions" element={<TermsPage />} />
+<Route path="/sitemap" element={<SiteMapPage />} />
+  <Route path="/tools" element={<ToolsLandingPage />} />
+  <Route path="/tools/pdf-to-word" element={<PdfToWordPage />} />
+  <Route path="/pdf/:slug" element={<PdfKeywordPage />} />
+  {toolRoutes.map((route) => (
+  <Route
+    key={route.path}
+    path={route.path}
+    element={
+      <ToolsPage
+        selectedTool={route.name}
+        setSelectedTool={setSelectedTool}
+      />
+    }
+  />
+))}
+
+  <Route path="*" element={page} />
+</Routes>
+
+    <NativeBannerAd />
+    <Footer
+      setActivePage={setActivePage}
+      setSelectedTool={setSelectedTool}
+    />
+  </div>
+);
+}
