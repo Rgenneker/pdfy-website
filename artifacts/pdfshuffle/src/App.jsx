@@ -1,5 +1,15 @@
 import PdfKeywordPage from "./pages/PdfKeywordPage";
 import GeoKeywordPage from "./pages/GeoKeywordPage";
+import ArticlesIndexPage from "./pages/ArticlesPage";
+import ArticleView from "./pages/ArticleView";
+import {
+  getArticleBySlug,
+  getArticlesForTool,
+  getArticlesByCategory,
+  readTimeMinutes,
+  articleCategories,
+  articles as flagshipArticles,
+} from "./data/articles/index.js";
 import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -804,7 +814,147 @@ function Home({ setActivePage }) {
         </div>
       </section>
       <ToolShowcase setActivePage={setActivePage} />
+      <ExpertiseSection />
+      <CategoryExplorer />
+      <FeaturedArticles />
     </main>
+  );
+}
+
+function ExpertiseSection() {
+  const principles = [
+    {
+      title: "Layout you can trust",
+      text: "A PDF carries its own fonts and page geometry, so the document you send is the document people see — on any phone, browser or printer. Our converters are built to preserve that fidelity from the first page to the last.",
+    },
+    {
+      title: "Round-trip thinking",
+      text: "Editable formats are your workspace; PDF is your delivery format. We pair every 'to PDF' tool with a way back — PDF to Word, LibreOffice, HTML, CSV and text — so content is never trapped.",
+    },
+    {
+      title: "Security handled with care",
+      text: "Sensitive documents deserve real protection. We cover signing, locked PDFs and signing requests, and our guides explain how to share passwords and credentials safely, not just how to apply them.",
+    },
+  ];
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div className="mb-10 max-w-3xl">
+        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">
+          Why PDFShuffl
+        </p>
+        <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
+          Document expertise built into every tool.
+        </h2>
+        <p className="mt-4 text-slate-600">
+          PDFShuffl is more than a set of converters. Each tool reflects how documents
+          are actually used — finished and shared, reopened and revised, captured,
+          compressed, signed and secured. The principles below run through everything we
+          build, and through the in-depth guides written by our {/* author */}
+          <span className="font-bold text-slate-700"> Lexigenz Authors</span> editorial desk.
+        </p>
+      </div>
+      <div className="grid gap-5 md:grid-cols-3">
+        {principles.map((item) => (
+          <div
+            key={item.title}
+            className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm"
+          >
+            <h3 className="text-xl font-black text-slate-950">{item.title}</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function CategoryExplorer() {
+  return (
+    <section className="bg-slate-950 py-16 text-white">
+      <div className="mx-auto max-w-7xl px-4 lg:px-8">
+        <div className="mb-10 max-w-3xl">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-300">
+            Explore by category
+          </p>
+          <h2 className="mt-3 text-4xl font-black">
+            Three families of tools, one document workflow.
+          </h2>
+          <p className="mt-4 text-slate-300">
+            Every category pairs hands-on tools with flagship guides, so you can do the
+            task and understand it. Browse a category to jump straight to its articles.
+          </p>
+        </div>
+        <div className="grid gap-5 lg:grid-cols-3">
+          {articleCategories.map((category) => {
+            const count = getArticlesByCategory(category.id).length;
+            return (
+              <Link
+                key={category.id}
+                to={`/articles#${category.slug}`}
+                className="flex flex-col rounded-[2rem] bg-white/10 p-7 transition hover:-translate-y-1 hover:bg-white/15"
+              >
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-300">
+                  {category.tagline}
+                </p>
+                <h3 className="mt-3 text-2xl font-black">{category.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-7 text-slate-300">
+                  {category.description}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-black text-white">
+                  {count} guides <ArrowRight size={16} />
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FeaturedArticles() {
+  const featured = articleCategories
+    .map((category) => getArticlesByCategory(category.id)[0])
+    .filter(Boolean);
+  if (featured.length === 0) return null;
+  return (
+    <section className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div className="max-w-2xl">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">
+            From the knowledge library
+          </p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight text-slate-950">
+            Featured PDF guides.
+          </h2>
+        </div>
+        <Link
+          to="/articles"
+          className="rounded-full bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-rose-500"
+        >
+          Browse all articles
+        </Link>
+      </div>
+      <div className="grid gap-5 md:grid-cols-3">
+        {featured.map((article) => (
+          <Link
+            key={article.slug}
+            to={`/articles/${article.slug}`}
+            className="flex flex-col rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-rose-200 hover:shadow-2xl hover:shadow-slate-200"
+          >
+            <h3 className="text-xl font-black leading-snug text-slate-950">
+              {article.title}
+            </h3>
+            <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
+              {article.excerpt}
+            </p>
+            <p className="mt-5 text-xs font-bold text-slate-500">
+              Lexigenz Authors • {readTimeMinutes(article)} min read
+            </p>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -1642,7 +1792,55 @@ Notes: ${note}`
           </aside>
         </div>
       </section>
+
+      <RelatedArticles toolName={tool.name} />
     </main>
+  );
+}
+
+function RelatedArticles({ toolName }) {
+  const related = getArticlesForTool(toolName, 3);
+  if (!related || related.length === 0) return null;
+  return (
+    <section className="mx-auto max-w-7xl px-4 pb-16 lg:px-8">
+      <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm">
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+          <div>
+            <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">
+              Learn more
+            </p>
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950">
+              Guides related to {toolName}
+            </h2>
+          </div>
+          <Link
+            to="/articles"
+            className="text-sm font-black text-rose-600 hover:text-rose-700"
+          >
+            All articles →
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {related.map((article) => (
+            <Link
+              key={article.slug}
+              to={`/articles/${article.slug}`}
+              className="flex flex-col rounded-3xl border border-slate-200 bg-slate-50 p-5 text-left transition hover:-translate-y-1 hover:border-rose-200 hover:bg-rose-50 hover:shadow-lg"
+            >
+              <h3 className="text-lg font-black leading-snug text-slate-950">
+                {article.title}
+              </h3>
+              <p className="mt-3 flex-1 text-sm leading-6 text-slate-600">
+                {article.excerpt}
+              </p>
+              <p className="mt-4 text-xs font-bold text-slate-500">
+                {readTimeMinutes(article)} min read
+              </p>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -2103,31 +2301,7 @@ Articles: [
     ]
   };
 if (page === "Articles") {
-  return (
-    <main className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
-      <div className="rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-rose-500">PDFShuffl Articles</p>
-        <h1 className="mt-3 text-5xl font-black tracking-tight text-slate-950">PDF Guides, Tips and Knowledge Articles</h1>
-        <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
-          Practical PDF articles for businesses, managers, students, teachers, parents, authors, editors and everyday users.
-        </p>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {articleCards.map((article) => (
-            <Link
-  key={article.title}
-  to={`/articles/${article.title.toLowerCase().replaceAll(" ", "-")}`} 
-    className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-left transition hover:-translate-y-1 hover:border-rose-200 hover:bg-rose-50 hover:shadow-lg"
->
-  <p className="text-xs font-black uppercase tracking-[0.18em] text-rose-500">{article.audience}</p>
-  <h2 className="mt-3 text-xl font-black text-slate-950">{article.title}</h2>
-  <p className="mt-4 text-sm font-bold text-slate-500">{article.readTime}</p>
-</Link>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
+  return <ArticlesIndexPage />;
 }
 
   if (page === "Sitemap") {
@@ -2355,28 +2529,21 @@ const ContactPage = () => (
     setSelectedTool={setSelectedTool}
   />
 );
-const ArticlesPage = () => (
-  <SimplePage
-    page="Articles"
-    setActivePage={setActivePage}
-    setSelectedTool={setSelectedTool}
-  />
-);
+const ArticlesPage = () => <ArticlesIndexPage />;
 const ArticlePage = () => {
   const { slug } = useParams();
+
+  const flagship = getArticleBySlug(slug);
+  if (flagship) {
+    return <ArticleView article={flagship} />;
+  }
 
   const article = articleCards.find(
     (item) => item.title.toLowerCase().replaceAll(" ", "-") === slug
   );
 
   if (!article) {
-    return (
-      <SimplePage
-        page="Articles"
-        setActivePage={setActivePage}
-        setSelectedTool={setSelectedTool}
-      />
-    );
+    return <ArticlesIndexPage />;
   }
 
   return (
@@ -2436,7 +2603,10 @@ const toolRoutes = [
   { path: "/tools/pdf-to-libre", name: "PDF to Libre" },
   { path: "/tools/pdf-to-html", name: "PDF to HTML" },
   { path: "/tools/pdf-to-txt", name: "PDF to TXT" },
+  { path: "/tools/pdf-to-csv", name: "PDF to CSV" },
+  { path: "/tools/pdf-to-editable-pdf", name: "PDF to Editable PDF" },
   { path: "/tools/sign-pdf", name: "Sign PDF" },
+  { path: "/tools/sign-a-locked-pdf", name: "Sign a Locked PDF" },
   { path: "/tools/request-signing", name: "Request Signing" },
   { path: "/tools/crop-pdf", name: "Crop PDF" },
   { path: "/tools/compress-pdf", name: "Compress PDF" },

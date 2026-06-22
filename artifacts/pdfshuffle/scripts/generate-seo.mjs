@@ -24,6 +24,7 @@ import {
   GEO_SITEMAP_START,
   URLS_PER_SITEMAP,
 } from "../src/data/geo-config.js";
+import { articles } from "../src/data/articles/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -106,6 +107,24 @@ geoChunks.forEach((slugs, i) => {
   sitemapFiles.push(file);
   console.log(`Wrote ${file} (${slugs.length.toLocaleString()} URLs)`);
 });
+
+// ---------------------------------------------------------------------------
+// 2b. Articles sitemap (articles index + every flagship article)
+// ---------------------------------------------------------------------------
+const articlesSitemapIndex = geoStart + geoChunks.length;
+const articlesFile = `sitemap-${articlesSitemapIndex}.xml`;
+const articleBlocks = [
+  urlBlock(`${SITE_URL}/articles`, { changefreq: "weekly", priority: "0.8" }),
+  ...articles.map((article) =>
+    urlBlock(`${SITE_URL}/articles/${article.slug}`, {
+      changefreq: "monthly",
+      priority: "0.7",
+    })
+  ),
+];
+writeUrlset(resolve(PUBLIC, articlesFile), articleBlocks);
+sitemapFiles.push(articlesFile);
+console.log(`Wrote ${articlesFile} (${articleBlocks.length.toLocaleString()} URLs)`);
 
 // ---------------------------------------------------------------------------
 // 3. Sitemap index (landing sitemap + all keyword sitemaps)

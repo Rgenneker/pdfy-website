@@ -1,0 +1,1 @@
+- [PDFShuffl article library](pdfshuffle-articles.md) — flagship article authoring: measure word count with articleWordCount() not JSON proxy; 1500-word floor; subagent batching quirks.
