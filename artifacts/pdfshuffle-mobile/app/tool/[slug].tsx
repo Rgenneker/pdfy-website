@@ -1,7 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system";
+import { documentDirectory, EncodingType, writeAsStringAsync } from "expo-file-system/legacy";
 import * as Haptics from "expo-haptics";
+import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import * as Sharing from "expo-sharing";
@@ -30,6 +31,8 @@ type PickedFile = {
   size?: number;
 };
 
+const IMAGE_TOOLS = ["jpg-to-pdf"];
+
 export default function ToolScreen() {
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const colors = useColors();
@@ -44,6 +47,11 @@ export default function ToolScreen() {
   const [loading, setLoading] = useState(false);
   const [resultPath, setResultPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const [cameraPermission, requestCameraPermission] =
+    ImagePicker.useCameraPermissions();
+
+  const isImageTool = IMAGE_TOOLS.includes(slug ?? "");
 
   if (!tool) {
     return (
@@ -75,6 +83,51 @@ export default function ToolScreen() {
       }
     } catch {
       setError("Could not pick file. Please try again.");
+    }
+  };
+
+  const scanFromCamera = async () => {
+    if (Platform.OS === "web") {
+      setError("Camera scanning is not available on web. Please select a file.");
+      return;
+    }
+
+    if (!cameraPermission?.granted) {
+      const result = await requestCameraPermission();
+      if (!result.granted) {
+        if (!result.canAskAgain) {
+          Alert.alert(
+            "Camera Access Required",
+            "Please enable camera access in your device settings to scan documents.",
+            [{ text: "OK" }]
+          );
+        }
+        return;
+      }
+    }
+
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ["images"],
+        quality: 0.92,
+        allowsEditing: false,
+      });
+
+      if (!result.canceled && result.assets.length > 0) {
+        const asset = result.assets[0];
+        const fileName = `scan-${Date.now()}.jpg`;
+        setPickedFile({
+          uri: asset.uri,
+          name: fileName,
+          mimeType: "image/jpeg",
+          size: asset.fileSize,
+        });
+        setResultPath(null);
+        setError(null);
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      }
+    } catch {
+      setError("Could not open camera. Please try again.");
     }
   };
 
@@ -158,9 +211,9 @@ export default function ToolScreen() {
         const blob = await response.blob();
         const base64 = await blobToBase64(blob);
         const fileName = `PDFShuffl-result-${Date.now()}.${tool.outputExtension}`;
-        const filePath = `${FileSystem.documentDirectory}${fileName}`;
-        await FileSystem.writeAsStringAsync(filePath, base64, {
-          encoding: FileSystem.EncodingType.Base64,
+        const filePath = `${documentDirectory}${fileName}`;
+        await writeAsStringAsync(filePath, base64, {
+          encoding: EncodingType.Base64,
         });
         setResultPath(filePath);
       }
@@ -302,6 +355,44 @@ export default function ToolScreen() {
       fontSize: 12,
       color: colors.mutedForeground,
       fontFamily: "Inter_400Regular",
+    },
+    filePickerRow: {
+      flexDirection: "row",
+      gap: 10,
+    },
+    filePickerHalf: {
+      flex: 1,
+      borderWidth: 1.5,
+      borderColor: colors.border,
+      borderStyle: "dashed",
+      borderRadius: colors.radius,
+      paddingVertical: 20,
+      alignItems: "center",
+      gap: 6,
+      backgroundColor: colors.background,
+    },
+    filePickerHalfText: {
+      fontSize: 12,
+      color: colors.primary,
+      fontFamily: "Inter_600SemiBold",
+      textAlign: "center",
+    },
+    scanButton: {
+      flex: 1,
+      borderWidth: 1.5,
+      borderColor: colors.primary,
+      borderStyle: "dashed",
+      borderRadius: colors.radius,
+      paddingVertical: 20,
+      alignItems: "center",
+      gap: 6,
+      backgroundColor: `${colors.primary}10`,
+    },
+    scanButtonText: {
+      fontSize: 12,
+      color: colors.primary,
+      fontFamily: "Inter_700Bold",
+      textAlign: "center",
     },
     selectedFile: {
       flexDirection: "row",
@@ -464,48 +555,118 @@ export default function ToolScreen() {
               Select File ({tool.fileExtensions?.join(", ") ?? "any"})
             </Text>
             {!pickedFile ? (
-              <Pressable
-                style={({ pressed }) => [
-                  styles.filePicker,
-                  { opacity: pressed ? 0.7 : 1 },
-                ]}
-                onPress={pickFile}
-              >
-                <Ionicons
-                  name="cloud-upload-outline"
-                  size={32}
-                  color={colors.primary}
-                />
-                <Text style={styles.filePickerText}>Tap to select file</Text>
-                <Text style={styles.filePickerHint}>
-                  {tool.fileExtensions?.join(", ") ?? "Any file"} · Max 20 MB
-                </Text>
-              </Pressable>
-            ) : (
-              <Pressable onPress={pickFile}>
-                <View style={styles.selectedFile}>
-                  <Ionicons
-                    name="document"
-                    size={22}
-                    color={colors.accentForeground}
-                  />
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.selectedFileName} numberOfLines={1}>
-                      {pickedFile.name}
+              isImageTool && Platform.OS !== "web" ? (
+                <View style={styles.filePickerRow}>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.filePickerHalf,
+                      { opacity: pressed ? 0.7 : 1 },
+                    ]}
+                    onPress={pickFile}
+                    testID="pick-file-button"
+                  >
+                    <Ionicons
+                      name="images-outline"
+                      size={26}
+                      color={colors.primary}
+                    />
+                    <Text style={styles.filePickerHalfText}>
+                      Choose Photo
                     </Text>
-                    {pickedFile.size !== undefined && (
-                      <Text style={styles.selectedFileSize}>
-                        {formatBytes(pickedFile.size)}
-                      </Text>
-                    )}
-                  </View>
-                  <Ionicons
-                    name="refresh-outline"
-                    size={18}
-                    color={colors.accentForeground}
-                  />
+                  </Pressable>
+                  <Pressable
+                    style={({ pressed }) => [
+                      styles.scanButton,
+                      { opacity: pressed ? 0.7 : 1 },
+                    ]}
+                    onPress={scanFromCamera}
+                    testID="scan-camera-button"
+                  >
+                    <Ionicons
+                      name="camera"
+                      size={26}
+                      color={colors.primary}
+                    />
+                    <Text style={styles.scanButtonText}>
+                      Scan Document
+                    </Text>
+                  </Pressable>
                 </View>
-              </Pressable>
+              ) : (
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.filePicker,
+                    { opacity: pressed ? 0.7 : 1 },
+                  ]}
+                  onPress={pickFile}
+                  testID="pick-file-button"
+                >
+                  <Ionicons
+                    name="cloud-upload-outline"
+                    size={32}
+                    color={colors.primary}
+                  />
+                  <Text style={styles.filePickerText}>Tap to select file</Text>
+                  <Text style={styles.filePickerHint}>
+                    {tool.fileExtensions?.join(", ") ?? "Any file"} · Max 20 MB
+                  </Text>
+                </Pressable>
+              )
+            ) : (
+              <View style={{ gap: 8 }}>
+                <Pressable onPress={pickFile}>
+                  <View style={styles.selectedFile}>
+                    <Ionicons
+                      name={pickedFile.name.startsWith("scan-") ? "camera" : "document"}
+                      size={22}
+                      color={colors.accentForeground}
+                    />
+                    <View style={{ flex: 1 }}>
+                      <Text style={styles.selectedFileName} numberOfLines={1}>
+                        {pickedFile.name.startsWith("scan-")
+                          ? "Scanned document"
+                          : pickedFile.name}
+                      </Text>
+                      {pickedFile.size !== undefined && (
+                        <Text style={styles.selectedFileSize}>
+                          {formatBytes(pickedFile.size)}
+                        </Text>
+                      )}
+                    </View>
+                    <Ionicons
+                      name="refresh-outline"
+                      size={18}
+                      color={colors.accentForeground}
+                    />
+                  </View>
+                </Pressable>
+                {isImageTool && Platform.OS !== "web" && (
+                  <Pressable
+                    style={({ pressed }) => [
+                      {
+                        flexDirection: "row" as const,
+                        alignItems: "center" as const,
+                        justifyContent: "center" as const,
+                        gap: 6,
+                        paddingVertical: 8,
+                        opacity: pressed ? 0.6 : 1,
+                      },
+                    ]}
+                    onPress={scanFromCamera}
+                  >
+                    <Ionicons name="camera-outline" size={15} color={colors.primary} />
+                    <Text
+                      style={{
+                        fontSize: 13,
+                        color: colors.primary,
+                        fontFamily: "Inter_600SemiBold",
+                      }}
+                    >
+                      Scan a different document
+                    </Text>
+                  </Pressable>
+                )}
+              </View>
             )}
           </View>
         )}

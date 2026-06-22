@@ -1,9 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
+import { documentDirectory, EncodingType, writeAsStringAsync } from "expo-file-system/legacy";
 import * as Haptics from "expo-haptics";
+import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React from "react";
+import * as Sharing from "expo-sharing";
+import React, { useState } from "react";
 import {
+  ActivityIndicator,
+  Alert,
   Platform,
   Pressable,
   ScrollView,
@@ -17,6 +22,7 @@ import Animated, {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useColors } from "@/hooks/useColors";
+import { apiUrl } from "@/lib/api";
 import { FEATURED_SLUGS, TOOLS, getToolBySlug } from "@/lib/tools";
 
 function FeaturedToolCard({ slug, index }: { slug: string; index: number }) {
@@ -77,11 +83,106 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const isWeb = Platform.OS === "web";
 
+  const [scanLoading, setScanLoading] = useState(false);
+  const [cameraPermission, requestCameraPermission] =
+    ImagePicker.useCameraPermissions();
+
   const stats = [
     { label: "Tools", value: String(TOOLS.filter((t) => t.available).length) },
     { label: "Formats", value: "8+" },
     { label: "Free", value: "100%" },
   ];
+
+  const blobToBase64 = (blob: Blob): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        resolve(result.split(",")[1] ?? "");
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+
+  const scanAndConvert = async () => {
+    if (Platform.OS === "web") {
+      router.push("/tool/jpg-to-pdf" as any);
+      return;
+    }
+
+    if (!cameraPermission?.granted) {
+      const result = await requestCameraPermission();
+      if (!result.granted) {
+        if (!result.canAskAgain) {
+          Alert.alert(
+            "Camera Access Required",
+            "Please enable camera access in your device settings to scan documents.",
+            [{ text: "OK" }]
+          );
+        }
+        return;
+      }
+    }
+
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ["images"],
+        quality: 0.92,
+        allowsEditing: false,
+      });
+
+      if (result.canceled || !result.assets.length) return;
+
+      const asset = result.assets[0];
+      setScanLoading(true);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
+      const formData = new FormData();
+      formData.append("file", {
+        uri: asset.uri,
+        type: "image/jpeg",
+        name: `scan-${Date.now()}.jpg`,
+      } as any);
+
+      const response = await fetch(apiUrl("/jpg-to-pdf"), {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const msg = await response.text();
+        throw new Error(msg || `Server error ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const base64 = await blobToBase64(blob);
+      const fileName = `PDFShuffl-scan-${Date.now()}.pdf`;
+      const filePath = `${documentDirectory}${fileName}`;
+      await writeAsStringAsync(filePath, base64, {
+        encoding: EncodingType.Base64,
+      });
+
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+      const canShare = await Sharing.isAvailableAsync();
+      if (canShare) {
+        await Sharing.shareAsync(filePath, {
+          mimeType: "application/pdf",
+          dialogTitle: "Save scanned PDF",
+        });
+      } else {
+        Alert.alert("Scan complete!", "Your scanned PDF has been saved.");
+      }
+    } catch (err: any) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      Alert.alert(
+        "Scan failed",
+        err?.message ?? "Could not convert the photo to PDF. Please try again."
+      );
+    } finally {
+      setScanLoading(false);
+    }
+  };
 
   const styles = StyleSheet.create({
     container: {
@@ -138,6 +239,11 @@ export default function HomeScreen() {
       lineHeight: 22,
       marginBottom: 24,
     },
+    ctaRow: {
+      flexDirection: "row",
+      gap: 10,
+      flexWrap: "wrap",
+    },
     ctaButton: {
       flexDirection: "row",
       alignItems: "center",
@@ -145,13 +251,30 @@ export default function HomeScreen() {
       gap: 8,
       borderRadius: 50,
       paddingVertical: 14,
-      paddingHorizontal: 28,
-      alignSelf: "flex-start",
+      paddingHorizontal: 24,
     },
     ctaText: {
       fontSize: 15,
       fontWeight: "800" as const,
       color: "#ffffff",
+      fontFamily: "Inter_700Bold",
+    },
+    scanButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      borderRadius: 50,
+      paddingVertical: 14,
+      paddingHorizontal: 24,
+      backgroundColor: colors.card,
+      borderWidth: 1.5,
+      borderColor: colors.primary,
+    },
+    scanButtonText: {
+      fontSize: 15,
+      fontWeight: "800" as const,
+      color: colors.primary,
       fontFamily: "Inter_700Bold",
     },
     statsRow: {
@@ -276,23 +399,44 @@ export default function HomeScreen() {
             Create, convert, edit and sign PDFs right from your phone.
           </Text>
 
-          <Pressable
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-              router.push("/(tabs)/tools" as any);
-            }}
-            style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }]}
-          >
-            <LinearGradient
-              colors={["#f43f5e", "#fb7185"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.ctaButton}
+          <View style={styles.ctaRow}>
+            <Pressable
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                router.push("/(tabs)/tools" as any);
+              }}
+              style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }]}
             >
-              <Ionicons name="flash" size={16} color="#fff" />
-              <Text style={styles.ctaText}>Explore All Tools</Text>
-            </LinearGradient>
-          </Pressable>
+              <LinearGradient
+                colors={["#f43f5e", "#fb7185"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.ctaButton}
+              >
+                <Ionicons name="flash" size={16} color="#fff" />
+                <Text style={styles.ctaText}>All Tools</Text>
+              </LinearGradient>
+            </Pressable>
+
+            <Pressable
+              onPress={scanAndConvert}
+              disabled={scanLoading}
+              style={({ pressed }) => [
+                styles.scanButton,
+                { opacity: pressed || scanLoading ? 0.7 : 1 },
+              ]}
+              testID="scan-document-button"
+            >
+              {scanLoading ? (
+                <ActivityIndicator size="small" color={colors.primary} />
+              ) : (
+                <Ionicons name="camera" size={16} color={colors.primary} />
+              )}
+              <Text style={styles.scanButtonText}>
+                {scanLoading ? "Converting…" : "Scan Document"}
+              </Text>
+            </Pressable>
+          </View>
 
           <View style={styles.statsRow}>
             {stats.map((s) => (
@@ -333,8 +477,8 @@ export default function HomeScreen() {
             <View style={{ flex: 1 }}>
               <Text style={styles.tipTitle}>Pro tip</Text>
               <Text style={styles.tipBody}>
-                Use "Create PDF" to draft documents from scratch, then "Sign
-                PDF" to add your signature before sharing.
+                Tap "Scan Document" to photograph a paper document and instantly
+                convert it to PDF — no file needed.
               </Text>
             </View>
           </View>

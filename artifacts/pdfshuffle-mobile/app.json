@@ -31,7 +31,14 @@
         }
       ],
       "expo-font",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow PDFShuffl to access your photos to convert them to PDF.",
+          "cameraPermission": "Allow PDFShuffl to use the camera to scan documents and convert them to PDF."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
