@@ -979,6 +979,7 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
   const [note, setNote] = useState("This document was created inside PDFShuffl. Replace this text with your content, notes, instructions, or form details.");
   const [recipient, setRecipient] = useState("");
   const [status, setStatus] = useState("Ready");
+  const isSigningTool = ["Sign PDF", "Sign a Locked PDF", "Request Signing"].includes(tool.name);
   const inputRef = useRef(null);
 
   function formatFileSize(bytes) {
@@ -1771,33 +1772,37 @@ Notes: ${note}`
                 }}
               />
             </div>
-            <div className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
+            <div className="mt-6 grid gap-5">
               <label className="block">
                 <span className="mb-3 block text-sm font-black text-slate-700">Notes, text, instructions or PDF content</span>
                 <textarea
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  className="min-h-44 w-full rounded-3xl border border-slate-200 bg-white p-5 text-base leading-7 text-slate-700 outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
+                  className="min-h-48 w-full rounded-3xl border border-slate-200 bg-white p-5 text-base leading-7 text-slate-700 outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
                   placeholder="Add notes, text, instructions or document content here..."
                 />
               </label>
 
-              <div className="grid gap-4">
+              {isSigningTool && (
                 <label className="block">
                   <span className="mb-3 block text-sm font-black text-slate-700">Recipient email for signing</span>
                   <input
+                    type="email"
                     value={recipient}
                     onChange={(e) => setRecipient(e.target.value)}
                     placeholder="name@example.com"
                     className="w-full rounded-3xl border border-slate-200 bg-white px-5 py-4 text-base outline-none transition focus:border-rose-300 focus:ring-4 focus:ring-rose-100"
                   />
                 </label>
+              )}
 
-                <div className="rounded-3xl border border-rose-100 bg-rose-50/60 p-5 text-sm leading-6 text-slate-600">
-                  <Info className="mb-3 text-rose-500" />
-                  <p>
-                    Conversion tools for Word, LibreOffice, PPT, HTML, CSV, locked PDFs and OCR-based editable PDFs require a secure backend processor in production.
-                  </p>
+              <div className="flex items-start gap-4 rounded-3xl border border-rose-100 bg-gradient-to-br from-rose-50 to-white p-5">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-500/10 text-rose-500">
+                  <ShieldCheck size={22} />
+                </div>
+                <div>
+                  <p className="text-sm font-black text-slate-900">Private and secure by default</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">Your files are processed securely, are never shared, and are cleared once your download is ready. Everything runs straight from your browser on any device.</p>
                 </div>
               </div>
             </div>
