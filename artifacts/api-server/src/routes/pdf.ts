@@ -9,6 +9,63 @@ const upload = multer({
   limits: { fileSize: 20 * 1024 * 1024 },
 });
 
+// Strip XML tags and decode the common entities so OpenDocument text content
+// renders as plain readable text.
+function decodeXmlText(s: string): string {
+  return s
+    .replace(/<[^>]+>/g, "")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&");
+}
+
+// Escape text for safe inclusion in generated XML.
+function escapeXmlText(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/'/g, "&apos;")
+    .replace(/"/g, "&quot;");
+}
+
+// pdf-lib's standard fonts only support WinAnsi encoding, so replace anything
+// outside that range to avoid runtime encode errors.
+function sanitizeForPdf(s: string): string {
+  return s.replace(/[\u0000-\u001F]/g, " ").replace(/[^\x20-\xFF]/g, "?");
+}
+
+// Word-aware line wrapping with a hard fallback for very long tokens.
+function wrapText(text: string, maxChars: number): string[] {
+  const lines: string[] = [];
+  for (const rawLine of text.split(/\r?\n/)) {
+    const words = rawLine.split(/\s+/).filter((w) => w.length > 0);
+    if (words.length === 0) {
+      lines.push("");
+      continue;
+    }
+    let current = "";
+    for (const word of words) {
+      if (word.length > maxChars) {
+        if (current) { lines.push(current); current = ""; }
+        const chunks = word.match(new RegExp(`.{1,${maxChars}}`, "g")) || [word];
+        chunks.forEach((c) => lines.push(c));
+        continue;
+      }
+      if (current.length + word.length + (current ? 1 : 0) > maxChars) {
+        lines.push(current);
+        current = word;
+      } else {
+        current = current ? `${current} ${word}` : word;
+      }
+    }
+    if (current) lines.push(current);
+  }
+  return lines;
+}
+
 router.post("/txt-to-pdf", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) return res.status(400).send("No file uploaded");
@@ -357,17 +414,211 @@ router.post("/compress-pdf", upload.single("file"), async (req, res) => {
   }
 });
 
-router.post("/libre-to-pdf", upload.single("file"), (_req, res) => {
-  res.status(501).send("Libre to PDF requires LibreOffice — not available in this environment.");
+// LibreOffice / OpenDocument formats (.odt, .ods, .odp) are ZIP archives that
+// contain a content.xml — so we can read them directly with JSZip, no system
+// LibreOffice binary required.
+router.post("/libre-to-pdf", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).send("No file uploaded");
+    // @ts-ignore
+    const JSZip = (await import("jszip")).default;
+    let zip;
+    try {
+      zip = await JSZip.loadAsync(req.file.buffer);
+    } catch {
+      return res.status(400).send("Not a valid OpenDocument file (.odt, .ods, .odp).");
+    }
+    const contentFile = zip.file("content.xml");
+    if (!contentFile) return res.status(400).send("Not a valid OpenDocument file (.odt, .ods, .odp).");
+    const xml: string = await contentFile.async("string");
+    const mimeFile = zip.file("mimetype");
+    const mimetype: string = mimeFile ? (await mimeFile.async("string")).trim() : "";
+
+    const pdfDoc = await PDFDocument.create();
+    const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    if (mimetype.includes("spreadsheet")) {
+      // ODS — render each table as a grid, mirroring the Excel handler.
+      const tableRe = /<table:table\b[^>]*>([\s\S]*?)<\/table:table>/g;
+      let tableMatch: RegExpExecArray | null;
+      let any = false;
+      while ((tableMatch = tableRe.exec(xml)) !== null) {
+        const tableXml = tableMatch[1];
+        const rows: string[][] = [];
+        const rowRe = /<table:table-row\b[^>]*>([\s\S]*?)<\/table:table-row>/g;
+        let rowMatch: RegExpExecArray | null;
+        while ((rowMatch = rowRe.exec(tableXml)) !== null) {
+          const rowXml = rowMatch[1];
+          const cells: string[] = [];
+          const cellRe = /<table:(?:table-cell|covered-table-cell)\b([^>]*?)(?:\/>|>([\s\S]*?)<\/table:(?:table-cell|covered-table-cell)>)/g;
+          let cellMatch: RegExpExecArray | null;
+          while ((cellMatch = cellRe.exec(rowXml)) !== null) {
+            const attrs = cellMatch[1] || "";
+            const inner = cellMatch[2] || "";
+            const text = decodeXmlText(inner).trim();
+            let repeat = 1;
+            const repAttr = attrs.match(/table:number-columns-repeated="(\d+)"/);
+            if (repAttr) repeat = Math.min(parseInt(repAttr[1], 10) || 1, text ? 20 : 5);
+            for (let r = 0; r < repeat && cells.length < 50; r++) cells.push(text);
+          }
+          while (cells.length > 0 && cells[cells.length - 1] === "") cells.pop();
+          rows.push(cells);
+        }
+        while (rows.length > 0 && rows[rows.length - 1].length === 0) rows.pop();
+        if (rows.length === 0) continue;
+        any = true;
+        let page = pdfDoc.addPage([842, 595]);
+        let y = 530;
+        const colCount = Math.max(...rows.map((r) => r.length), 1);
+        const colWidth = Math.min(130, Math.floor(760 / colCount));
+        const startX = 40;
+        for (let ri = 0; ri < rows.length; ri++) {
+          if (y < 40) { page = pdfDoc.addPage([842, 595]); y = 560; }
+          const rowFont = ri === 0 ? titleFont : font;
+          const color = ri === 0 ? rgb(0.1, 0.1, 0.5) : rgb(0.1, 0.1, 0.1);
+          rows[ri].slice(0, Math.floor(760 / colWidth)).forEach((cell, ci) => {
+            page.drawText(sanitizeForPdf(String(cell)).slice(0, 18), { x: startX + ci * colWidth, y, size: 9, font: rowFont, color });
+          });
+          y -= 18;
+        }
+      }
+      if (!any) {
+        const page = pdfDoc.addPage([842, 595]);
+        page.drawText("No spreadsheet data found.", { x: 50, y: 300, size: 14, font, color: rgb(0.3, 0.3, 0.3) });
+      }
+    } else if (mimetype.includes("presentation")) {
+      // ODP — one PDF page per slide.
+      const pageRe = /<draw:page\b[^>]*>([\s\S]*?)<\/draw:page>/g;
+      let pageMatch: RegExpExecArray | null;
+      let slideNum = 0;
+      while ((pageMatch = pageRe.exec(xml)) !== null) {
+        slideNum++;
+        const slideXml = pageMatch[1];
+        const texts: string[] = [];
+        const textRe = /<text:(?:p|h)\b[^>]*>([\s\S]*?)<\/text:(?:p|h)>/g;
+        let tm: RegExpExecArray | null;
+        while ((tm = textRe.exec(slideXml)) !== null) {
+          const t = decodeXmlText(tm[1]).trim();
+          if (t) texts.push(t);
+        }
+        const page = pdfDoc.addPage([842, 595]);
+        page.drawText(`Slide ${slideNum}`, { x: 40, y: 560, size: 14, font: titleFont, color: rgb(0.88, 0.08, 0.24) });
+        let y = 530;
+        for (const line of texts) {
+          for (const chunk of wrapText(line, 100)) {
+            if (y < 40) break;
+            page.drawText(sanitizeForPdf(chunk), { x: 50, y, size: 11, font, color: rgb(0.1, 0.1, 0.1) });
+            y -= 18;
+          }
+          if (y < 40) break;
+        }
+      }
+      if (slideNum === 0) {
+        const page = pdfDoc.addPage([842, 595]);
+        page.drawText("No slides found in this presentation.", { x: 50, y: 300, size: 14, font, color: rgb(0.3, 0.3, 0.3) });
+      }
+    } else {
+      // ODT (text document) and anything else — flow paragraphs and headings.
+      const blockRe = /<text:(h|p)\b[^>]*>([\s\S]*?)<\/text:(?:h|p)>/g;
+      let page = pdfDoc.addPage([595, 842]);
+      let y = 790;
+      let bm: RegExpExecArray | null;
+      let drewAnything = false;
+      while ((bm = blockRe.exec(xml)) !== null) {
+        const isHeading = bm[1] === "h";
+        const text = decodeXmlText(bm[2]).trim();
+        if (!text) { y -= 10; continue; }
+        drewAnything = true;
+        const size = isHeading ? 15 : 11;
+        const useFont = isHeading ? titleFont : font;
+        const lines = wrapText(text, isHeading ? 70 : 90);
+        if (isHeading) y -= 6;
+        for (const line of lines) {
+          if (y < 50) { page = pdfDoc.addPage([595, 842]); y = 790; }
+          page.drawText(sanitizeForPdf(line), { x: 50, y, size, font: useFont, color: isHeading ? rgb(0.1, 0.1, 0.1) : rgb(0.15, 0.15, 0.15) });
+          y -= isHeading ? 22 : 16;
+        }
+      }
+      if (!drewAnything) {
+        page.drawText("No readable text found in this document.", { x: 50, y: 760, size: 12, font, color: rgb(0.3, 0.3, 0.3) });
+      }
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-libre.pdf");
+    res.send(Buffer.from(pdfBytes));
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Libre to PDF conversion failed");
+  }
 });
+
+// Build a real, editable OpenDocument Text (.odt) file from a PDF's text.
+// .odt is a ZIP — the "mimetype" entry must be first and stored uncompressed.
+router.post("/pdf-to-libre", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).send("No PDF file uploaded");
+    // @ts-ignore
+    const { PDFParse } = await import("pdf-parse");
+    // @ts-ignore
+    const JSZip = (await import("jszip")).default;
+    const parser = new PDFParse({ data: new Uint8Array(req.file.buffer) });
+    const parsed = await parser.getText();
+    const text: string = parsed.text || "No readable text found in this PDF.";
+
+    const paragraphs = text
+      .split(/\r?\n/)
+      .map((line) => {
+        const trimmed = line.trim();
+        return trimmed
+          ? `<text:p text:style-name="Standard">${escapeXmlText(trimmed)}</text:p>`
+          : `<text:p text:style-name="Standard"/>`;
+      })
+      .join("");
+
+    const contentXml = `<?xml version="1.0" encoding="UTF-8"?>
+<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" office:version="1.2">
+ <office:body><office:text>${paragraphs}</office:text></office:body>
+</office:document-content>`;
+
+    const stylesXml = `<?xml version="1.0" encoding="UTF-8"?>
+<office:document-styles xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" office:version="1.2"><office:styles/></office:document-styles>`;
+
+    const metaXml = `<?xml version="1.0" encoding="UTF-8"?>
+<office:document-meta xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" office:version="1.2"><office:meta><meta:generator>PDFShuffl</meta:generator></office:meta></office:document-meta>`;
+
+    const manifestXml = `<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2">
+ <manifest:file-entry manifest:full-path="/" manifest:version="1.2" manifest:media-type="application/vnd.oasis.opendocument.text"/>
+ <manifest:file-entry manifest:full-path="content.xml" manifest:media-type="text/xml"/>
+ <manifest:file-entry manifest:full-path="styles.xml" manifest:media-type="text/xml"/>
+ <manifest:file-entry manifest:full-path="meta.xml" manifest:media-type="text/xml"/>
+</manifest:manifest>`;
+
+    const zip = new JSZip();
+    zip.file("mimetype", "application/vnd.oasis.opendocument.text", { compression: "STORE" });
+    zip.file("META-INF/manifest.xml", manifestXml);
+    zip.file("content.xml", contentXml);
+    zip.file("styles.xml", stylesXml);
+    zip.file("meta.xml", metaXml);
+    const odtBuffer: Buffer = await zip.generateAsync({ type: "nodebuffer" });
+
+    res.setHeader("Content-Type", "application/vnd.oasis.opendocument.text");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-converted-libre.odt");
+    res.send(odtBuffer);
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("PDF to Libre conversion failed");
+  }
+});
+
 router.post("/html-to-pdf", upload.single("file"), (_req, res) => {
   res.status(501).send("HTML to PDF requires Puppeteer — not available in this environment.");
 });
 router.post("/pdf-to-html", upload.single("file"), (_req, res) => {
   res.status(501).send("PDF to HTML conversion not available in this environment.");
-});
-router.post("/pdf-to-libre", upload.single("file"), (_req, res) => {
-  res.status(501).send("PDF to Libre requires LibreOffice — not available in this environment.");
 });
 
 export default router;
