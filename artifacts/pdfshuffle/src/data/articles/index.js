@@ -35,7 +35,7 @@ export const articleCategories = [
     slug: "pdf-to-editable-formats",
     tagline: "Unlock the content trapped inside finished PDFs.",
     description:
-      "Reopen and reuse PDF content by converting it back into editable Word, LibreOffice, HTML, CSV and text formats — without retyping a single line.",
+      "Reopen and reuse PDF content by converting it back into editable Word, LibreOffice, HTML, CSV and text formats, without retyping a single line.",
     tools: [
       "PDF to Word",
       "PDF to Libre",

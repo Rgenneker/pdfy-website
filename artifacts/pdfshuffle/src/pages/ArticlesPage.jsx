@@ -48,7 +48,7 @@ export default function ArticlesPage() {
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
             Practical, in-depth articles written by the {ARTICLE_AUTHOR} editorial
-            desk. Every guide is grounded in real document work — how to do the task,
+            desk. Every guide is grounded in real document work, how to do the task,
             where it matters, why it beats the alternatives, and the benefits you can
             expect. Articles are organised by the three PDFShuffl tool categories.
           </p>

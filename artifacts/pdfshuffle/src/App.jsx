@@ -2,6 +2,8 @@ import PdfKeywordPage from "./pages/PdfKeywordPage";
 import GeoKeywordPage from "./pages/GeoKeywordPage";
 import ArticlesIndexPage from "./pages/ArticlesPage";
 import ArticleView from "./pages/ArticleView";
+import PlaybookPage from "./pages/PlaybookPage";
+import HomeGuide from "./Components/HomeGuide";
 import {
   getArticleBySlug,
   getArticlesForTool,
@@ -10,7 +12,6 @@ import {
   articleCategories,
   articles as flagshipArticles,
 } from "./data/articles/index.js";
-import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -502,7 +503,7 @@ const audiences = [
   { icon: Building2, title: "Branches & service desks", text: "Support walk-in document needs across mobile, tablet, touchscreen, laptop, and PC." },
 ];
 
-const pages = ["Home", "About", "Tools","Articles", "Privacy Policy", "Terms and Conditions", "Contact", "Sitemap"];
+const pages = ["Home", "About", "Tools","Articles", "Playbook", "Privacy Policy", "Terms and Conditions", "Contact", "Sitemap"];
 
 function downloadTextFile(filename, text, type = "text/plain") {
   const blob = new Blob([text], { type });
@@ -655,6 +656,7 @@ function Header({ activePage, setActivePage, selectedTool, setSelectedTool }) {
     Home: "/",
     About: "/about",
     Articles: "/articles",
+    Playbook: "/playbook",
     "Privacy Policy": "/privacy-policy",
     "Terms and Conditions": "/terms-and-conditions",
     Contact: "/contact",
@@ -800,6 +802,7 @@ function Home({ setActivePage }) {
           })}
         </div>
       </section>
+      <HomeGuide />
       <section className="bg-slate-950 py-16 text-white">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr]">
@@ -825,11 +828,11 @@ function ExpertiseSection() {
   const principles = [
     {
       title: "Layout you can trust",
-      text: "A PDF carries its own fonts and page geometry, so the document you send is the document people see — on any phone, browser or printer. Our converters are built to preserve that fidelity from the first page to the last.",
+      text: "A PDF carries its own fonts and page geometry, so the document you send is the document people see, on any phone, browser or printer. Our converters are built to preserve that fidelity from the first page to the last.",
     },
     {
       title: "Round-trip thinking",
-      text: "Editable formats are your workspace; PDF is your delivery format. We pair every 'to PDF' tool with a way back — PDF to Word, LibreOffice, HTML, CSV and text — so content is never trapped.",
+      text: "Editable formats are your workspace; PDF is your delivery format. We pair every 'to PDF' tool with a way back, PDF to Word, LibreOffice, HTML, CSV and text, so content is never trapped.",
     },
     {
       title: "Security handled with care",
@@ -847,7 +850,7 @@ function ExpertiseSection() {
         </h2>
         <p className="mt-4 text-slate-600">
           PDFShuffl is more than a set of converters. Each tool reflects how documents
-          are actually used — finished and shared, reopened and revised, captured,
+          are actually used, finished and shared, reopened and revised, captured,
           compressed, signed and secured. The principles below run through everything we
           build, and through the in-depth guides written by our {/* author */}
           <span className="font-bold text-slate-700"> Lexigenz Authors</span> editorial desk.
@@ -2512,7 +2515,10 @@ export default function PDFShufflWebsite() {
 
   if (activePage === "Tools")
     return <ToolsPage selectedTool={selectedTool} setSelectedTool={setSelectedTool} />;
- 
+
+  if (activePage === "Playbook")
+    return <PlaybookPage />;
+
   return <SimplePage page={activePage} setActivePage={setActivePage} setSelectedTool={setSelectedTool} />;
 }, [activePage, selectedTool]);
     const AboutPage = () => (
@@ -2624,6 +2630,7 @@ const toolRoutes = [
   <Route path="/contact" element={<ContactPage />} />
   <Route path="/articles" element={<ArticlesPage />} />
   <Route path="/articles/:slug" element={<ArticlePage />} />
+  <Route path="/playbook" element={<PlaybookPage />} />
 <Route path="/privacy-policy" element={<PrivacyPage />} />
 <Route path="/terms-and-conditions" element={<TermsPage />} />
 <Route path="/sitemap" element={<SiteMapPage />} />
@@ -2647,7 +2654,6 @@ const toolRoutes = [
   <Route path="*" element={page} />
 </Routes>
 
-    <NativeBannerAd />
     <Footer
       setActivePage={setActivePage}
       setSelectedTool={setSelectedTool}

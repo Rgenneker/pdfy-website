@@ -73,14 +73,14 @@ const articles = [
       {
         h: "From the Lexigenz desk: a field note on fonts",
         p: [
-          "In our own testing across dozens of office machines, font substitution was by far the largest source of layout drift in Word files — larger than image placement, larger than table width, larger than margins. A document set in a licensed corporate typeface would silently fall back to a default font on any computer that lacked it, and because the replacement font had different letter widths, every line break moved.",
+          "In our own testing across dozens of office machines, font substitution was by far the largest source of layout drift in Word files, larger than image placement, larger than table width, larger than margins. A document set in a licensed corporate typeface would silently fall back to a default font on any computer that lacked it, and because the replacement font had different letter widths, every line break moved.",
           "The practical lesson is simple: the safest moment to lock a document is the moment it is finished, on the machine where it was designed. Converting to PDF there captures the exact fonts and spacing you intended, so the drift never gets a chance to happen downstream.",
         ],
       },
       {
         h: "What actually happens when your document is converted",
         p: [
-          "It helps to understand what conversion is doing, because it explains why the result is so dependable. When PDFShuffl processes a .docx file, it reads the document's structure — paragraphs, styles, tables, inline images, page breaks — and renders each page exactly as the layout describes, then bakes that rendered page into the PDF along with the fonts it needed. The output is no longer a set of instructions to be interpreted; it is a finished description of where every glyph sits on every page.",
+          "It helps to understand what conversion is doing, because it explains why the result is so dependable. When PDFShuffl processes a .docx file, it reads the document's structure, paragraphs, styles, tables, inline images, page breaks, and renders each page exactly as the layout describes, then bakes that rendered page into the PDF along with the fonts it needed. The output is no longer a set of instructions to be interpreted; it is a finished description of where every glyph sits on every page.",
           "This is the difference between a reflowable format and a fixed-layout one. A Word file reflows to fit its environment, which is wonderful while you are writing and dangerous once you are sharing. A PDF, by design, does not reflow. The page geometry is settled at the moment of export, which is why two readers on completely different devices see character-for-character the same document.",
           "The fonts deserve special mention. Where a typeface can be embedded, the PDF carries the actual letterforms inside the file, so the reader's computer never has to guess or substitute. That single mechanism is responsible for most of the reliability people notice after they switch from emailing .docx files to sending PDFs.",
         ],
@@ -163,7 +163,7 @@ const articles = [
         h: "The problem with sharing a raw spreadsheet",
         p: [
           "An Excel workbook is an interactive surface. It has hidden columns, frozen panes, multiple sheets, live formulas and a print area that may or may not be set. When you send the .xlsx file itself, you are handing the reader all of that complexity and trusting them to view it the way you intended. In practice they rarely do: a column gets dragged wider, a filter hides half the rows, or the recipient opens it in a phone app that shows only the first few cells.",
-          "There is a financial risk too. Spreadsheets contain the formulas behind your numbers, and sometimes the assumptions you would rather not expose. Sending a PDF shares the result — the report — without handing over the model that produced it.",
+          "There is a financial risk too. Spreadsheets contain the formulas behind your numbers, and sometimes the assumptions you would rather not expose. Sending a PDF shares the result, the report, without handing over the model that produced it.",
         ],
       },
       {
@@ -173,7 +173,7 @@ const articles = [
         ],
         ul: [
           "Step 1: In Excel, set your print area so only the cells you want to share are included.",
-          "Step 2: Choose a sensible orientation — landscape for wide tables — and use 'Fit to width' so columns do not spill onto stray pages.",
+          "Step 2: Choose a sensible orientation, landscape for wide tables, and use 'Fit to width' so columns do not spill onto stray pages.",
           "Step 3: Open PDFShuffl, go to Tools and select Excel to PDF, then upload your workbook.",
           "Step 4: Download the PDF and check that each page break lands between logical groups of rows, not through the middle of a section.",
           "Step 5: If the report is long, confirm that headers repeat so every page is readable on its own.",
@@ -190,14 +190,14 @@ const articles = [
         h: "Why a PDF is better than a screenshot",
         p: [
           "Many people try to share spreadsheet data by pasting a screenshot into an email. It is quick, but it is also low-resolution, impossible to print well, and it captures only what fits on screen. A PDF, by contrast, includes the full table at print quality, preserves the page structure, and can be searched, signed and archived.",
-          "Crucially, a PDF respects the layout decisions you made in Excel — the column widths, the number formatting, the repeated headers. A screenshot throws all of that away the moment you crop it.",
+          "Crucially, a PDF respects the layout decisions you made in Excel, the column widths, the number formatting, the repeated headers. A screenshot throws all of that away the moment you crop it.",
         ],
       },
       {
         h: "Benefits of converting Excel to PDF",
         ul: [
           "Page-aware layout, so wide tables break cleanly instead of being cut off.",
-          "Formulas and assumptions stay private — only the results are shared.",
+          "Formulas and assumptions stay private, only the results are shared.",
           "Consistent number, date and currency formatting for every reader.",
           "Print-ready output for meetings, audits and physical filing.",
           "Repeating headers that keep long tables readable across pages.",
@@ -221,9 +221,9 @@ const articles = [
       {
         h: "Choosing the right page setup before you export",
         p: [
-          "A spreadsheet has no inherent pages — it is a single, theoretically infinite grid — so the most important decisions you make before converting are about how that grid is sliced into a document. Get the page setup right and the PDF practically lays itself out; get it wrong and no amount of post-processing will rescue it.",
+          "A spreadsheet has no inherent pages, it is a single, theoretically infinite grid, so the most important decisions you make before converting are about how that grid is sliced into a document. Get the page setup right and the PDF practically lays itself out; get it wrong and no amount of post-processing will rescue it.",
           "Orientation is the first choice. Tables that are wider than they are tall almost always belong in landscape, while a narrow column of figures reads better in portrait. Next comes scaling: 'Fit all columns on one page' keeps a wide table intact horizontally while still letting it run across as many vertical pages as it needs, which is usually exactly what a reader expects. Reserve 'Fit sheet on one page' for genuinely small tables, because forcing a large grid onto a single sheet shrinks the text past the point of legibility.",
-          "Finally, set print titles so the header row repeats, add a footer with the page number and report date, and define the print area so blank trailing columns never produce phantom pages. These four settings — orientation, scaling, repeating titles and print area — account for the overwhelming majority of what makes a spreadsheet PDF look deliberate.",
+          "Finally, set print titles so the header row repeats, add a footer with the page number and report date, and define the print area so blank trailing columns never produce phantom pages. These four settings, orientation, scaling, repeating titles and print area, account for the overwhelming majority of what makes a spreadsheet PDF look deliberate.",
         ],
       },
       {
@@ -243,7 +243,7 @@ const articles = [
       {
         h: "A real-world scenario: the month-end board pack",
         p: [
-          "Picture a finance manager assembling the monthly numbers for a board meeting. The underlying workbook is a living model — dozens of tabs, linked formulas, scenario toggles and a few sheets of working notes that exist only to feed the headline figures. None of that belongs in front of directors, who want a clean snapshot they can read and discuss.",
+          "Picture a finance manager assembling the monthly numbers for a board meeting. The underlying workbook is a living model, dozens of tabs, linked formulas, scenario toggles and a few sheets of working notes that exist only to feed the headline figures. None of that belongs in front of directors, who want a clean snapshot they can read and discuss.",
           "The disciplined approach is to build a single 'report' tab that pulls through only the figures meant for the board, set its print area and titles, fit the columns to the page in landscape, and export just that sheet with the Excel to PDF tool. The result is a fixed, dated document that cannot be accidentally recalculated in the meeting and does not expose the assumptions behind the model.",
           "If the pack runs long or includes embedded charts as images, a final pass through Compress PDF keeps it small enough to circulate by email ahead of the meeting. The directors receive a polished report; the manager keeps the model private and intact for next month.",
         ],
@@ -251,7 +251,7 @@ const articles = [
       {
         h: "Spotlight: finance and accounting workflows",
         p: [
-          "Nowhere does Excel-to-PDF conversion earn its keep more reliably than in finance and accounting, where the spreadsheet is the workhorse and the PDF is the deliverable. Almost every recurring financial document begins life as a workbook — management accounts, budgets, forecasts, reconciliations, expense reports — and almost every one of them ends up needing to be shared with someone who must read the numbers but should never touch the model behind them.",
+          "Nowhere does Excel-to-PDF conversion earn its keep more reliably than in finance and accounting, where the spreadsheet is the workhorse and the PDF is the deliverable. Almost every recurring financial document begins life as a workbook, management accounts, budgets, forecasts, reconciliations, expense reports, and almost every one of them ends up needing to be shared with someone who must read the numbers but should never touch the model behind them.",
           "The reasons are partly about trust and partly about practicality. A board, an auditor or a client needs a figure they can rely on, which means a fixed snapshot rather than a file that recalculates the moment a cell is nudged. They also rarely want the formulas, the assumptions or the working tabs that produced the result; exposing those can invite second-guessing or, worse, accidental changes that quietly alter the conclusion. A PDF shares the answer while keeping the engine private.",
           "There is an archival dimension too. Financial records frequently need to be retained unchanged for years, and a workbook full of live formulas is a poor archive because its numbers can shift if a linked file or a setting changes. Converting the report to PDF at the moment it is finalised freezes it, so the figure filed today reads exactly the same when it is reopened long after the model has moved on.",
         ],
@@ -312,7 +312,7 @@ const articles = [
           "Step 1: Finish the deck in PowerPoint, including speaker-ready titles and final imagery.",
           "Step 2: Open PDFShuffl, go to Tools and choose PPT to PDF.",
           "Step 3: Upload your .ppt or .pptx file.",
-          "Step 4: Download the PDF — each slide becomes a fixed, full-page image of your content.",
+          "Step 4: Download the PDF, each slide becomes a fixed, full-page image of your content.",
           "Step 5: If the deck is image-heavy, run Compress PDF so it emails easily.",
         ],
       },
@@ -326,7 +326,7 @@ const articles = [
       {
         h: "Why convert instead of presenting live every time",
         p: [
-          "A live presentation depends on you being there. The moment the deck travels without you, it needs to stand on its own — and a PDF makes that possible. Every slide renders exactly as designed, the reading order is fixed, and there are no missing fonts or broken media to apologise for.",
+          "A live presentation depends on you being there. The moment the deck travels without you, it needs to stand on its own, and a PDF makes that possible. Every slide renders exactly as designed, the reading order is fixed, and there are no missing fonts or broken media to apologise for.",
           "There is a practical handout benefit too. Converting to PDF lets you produce a clean, printable version of a deck in seconds, which is far more reliable than asking a venue to print from PowerPoint on unfamiliar hardware.",
         ],
       },
@@ -351,14 +351,14 @@ const articles = [
       {
         h: "From the Lexigenz desk: design for the second audience",
         p: [
-          "The most useful habit we have seen among teams who share decks well is that they design for two audiences at once: the room, and everyone the deck reaches afterwards. The room sees the animated, narrated version. The second audience — the people who receive the PDF — sees a quiet, self-explanatory document.",
+          "The most useful habit we have seen among teams who share decks well is that they design for two audiences at once: the room, and everyone the deck reaches afterwards. The room sees the animated, narrated version. The second audience, the people who receive the PDF, sees a quiet, self-explanatory document.",
           "Teams that ignore the second audience produce decks full of single-word slides that meant something only with a speaker attached. Teams that respect it add just enough context to each slide that the PDF makes sense alone. Converting to PDF then becomes the natural final step rather than a downgrade.",
         ],
       },
       {
         h: "What happens to your slides under the hood",
         p: [
-          "When a deck is converted, each slide is rendered to its final visual state and placed on its own page, at the slide's full dimensions, in the original order. Everything that was a property of the live show — the build animations, the slide transitions, the timing, the embedded video and audio — is dropped, because a page cannot move. What survives is the picture the slide presents once all its animations have finished playing.",
+          "When a deck is converted, each slide is rendered to its final visual state and placed on its own page, at the slide's full dimensions, in the original order. Everything that was a property of the live show, the build animations, the slide transitions, the timing, the embedded video and audio, is dropped, because a page cannot move. What survives is the picture the slide presents once all its animations have finished playing.",
           "This is why the final state of a slide matters so much. If a slide was designed to reveal one bullet at a time, the PDF shows every bullet at once, exactly as the slide looks after the last click. If a chart was set to fly in, it simply appears in place. Understanding this removes the surprise: nothing is lost that a static page could have shown, and nothing is kept that only made sense in motion.",
           "Fonts behave the same way they do for any document. The typefaces the slides relied on are captured during rendering, so the title you set in a distinctive display font keeps that font in the PDF rather than collapsing to a default the way it might if someone opened your raw .pptx without that font installed.",
         ],
@@ -388,9 +388,9 @@ const articles = [
       {
         h: "Choosing the right layout for your PDF handout",
         p: [
-          "A deck destined to become a document gives you a choice that does not exist on stage: how many slides sit on each page. The default — one full slide per page — is the right call when the slides are visually rich and meant to be studied, such as a portfolio or a design review. It gives each slide room to breathe and prints at the largest, clearest size.",
+          "A deck destined to become a document gives you a choice that does not exist on stage: how many slides sit on each page. The default, one full slide per page, is the right call when the slides are visually rich and meant to be studied, such as a portfolio or a design review. It gives each slide room to breathe and prints at the largest, clearest size.",
           "When the deck is primarily a reference or a take-home summary, a multi-slide handout layout can serve the reader better, placing several slides per page so they can scan the whole argument quickly and annotate in the margins. Lecturers in particular favour this for study material, because it turns a fifty-slide deck into a handful of dense, reviewable pages rather than fifty separate sheets.",
-          "Orientation and aspect ratio matter too. Modern decks are usually 16:9, which sits naturally on a landscape page; older 4:3 decks waste less paper in portrait. The guiding question is always the same — how will this be read and used? — and answering it before you export produces a handout that feels designed for its purpose rather than dumped out of a slide tool.",
+          "Orientation and aspect ratio matter too. Modern decks are usually 16:9, which sits naturally on a landscape page; older 4:3 decks waste less paper in portrait. The guiding question is always the same, how will this be read and used?, and answering it before you export produces a handout that feels designed for its purpose rather than dumped out of a slide tool.",
         ],
       },
       {
@@ -417,7 +417,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "When a presentation needs to travel, convert it to PDF. You trade animation you no longer need for reliability you absolutely do — identical slides, clean printing and a deck that opens for everyone. Finish the deck, export it with PPT to PDF, and let it speak for itself.",
+          "When a presentation needs to travel, convert it to PDF. You trade animation you no longer need for reliability you absolutely do, identical slides, clean printing and a deck that opens for everyone. Finish the deck, export it with PPT to PDF, and let it speak for itself.",
         ],
       },
     ],
@@ -433,10 +433,10 @@ const articles = [
       "A CSV is a wall of commas that no one wants to read. Converting it to PDF gives raw data a structure, a layout and a purpose.",
     sections: [
       {
-        h: "What a CSV really is — and why people struggle with it",
+        h: "What a CSV really is, and why people struggle with it",
         p: [
           "CSV stands for comma-separated values, and that description is also its limitation. A CSV file is pure data with no formatting: no column widths, no fonts, no headers styled differently from rows, no page structure. It is the lowest common denominator that almost every system can export, which is exactly why it is so common and so unpleasant to read directly.",
-          "Open a CSV in a plain text editor and you see lines of values separated by commas. Open it in a spreadsheet and it becomes a grid, but it is still a working surface rather than a finished document. When you need to hand that data to someone as a record — a report, a receipt log, an export for an auditor — neither raw form is appropriate. That is the gap a PDF fills.",
+          "Open a CSV in a plain text editor and you see lines of values separated by commas. Open it in a spreadsheet and it becomes a grid, but it is still a working surface rather than a finished document. When you need to hand that data to someone as a record, a report, a receipt log, an export for an auditor, neither raw form is appropriate. That is the gap a PDF fills.",
         ],
       },
       {
@@ -452,7 +452,7 @@ const articles = [
       {
         h: "Where CSV-to-PDF conversion is genuinely useful",
         p: [
-          "Almost every business system can export to CSV — e-commerce platforms, accounting tools, CRMs, analytics dashboards, point-of-sale systems. The data lands as a CSV, but the people who need it often cannot work with raw data. A bookkeeper wants a readable transaction list. A manager wants a clean order summary. A customer wants a statement, not a database dump.",
+          "Almost every business system can export to CSV, e-commerce platforms, accounting tools, CRMs, analytics dashboards, point-of-sale systems. The data lands as a CSV, but the people who need it often cannot work with raw data. A bookkeeper wants a readable transaction list. A manager wants a clean order summary. A customer wants a statement, not a database dump.",
           "Converting the CSV to PDF bridges that divide. It takes the machine-readable export and turns it into a human-readable document that can be filed, printed, emailed and understood without any technical skill.",
         ],
       },
@@ -477,14 +477,14 @@ const articles = [
       {
         h: "Best practices for data exports",
         p: [
-          "Before converting, open the CSV once to sanity-check it. Confirm the first row is a header describing each column, remove any internal-only fields you do not want to share, and make sure the data is sorted in the order that makes sense to the reader — usually by date or by name. A small amount of tidying before conversion produces a far more professional document.",
+          "Before converting, open the CSV once to sanity-check it. Confirm the first row is a header describing each column, remove any internal-only fields you do not want to share, and make sure the data is sorted in the order that makes sense to the reader, usually by date or by name. A small amount of tidying before conversion produces a far more professional document.",
           "If your export is extremely wide, decide what the reader actually needs. A PDF with thirty columns squeezed onto a page helps no one. Trimming to the meaningful fields, or splitting the export into focused reports, almost always serves the reader better than dumping everything.",
         ],
       },
       {
         h: "From the Lexigenz desk: headers are not optional",
         p: [
-          "The single most common complaint we encountered with data PDFs was not about layout or size — it was that readers could not tell what the columns meant. An export labelled only by internal field codes is meaningless to the person receiving it. The fix is almost always upstream: give the CSV a clear header row in plain language before you convert it.",
+          "The single most common complaint we encountered with data PDFs was not about layout or size, it was that readers could not tell what the columns meant. An export labelled only by internal field codes is meaningless to the person receiving it. The fix is almost always upstream: give the CSV a clear header row in plain language before you convert it.",
           "We started treating the header row as the most important line in the whole file. When the headers are clear, even a dense table is usable. When they are missing or cryptic, no amount of formatting can rescue it. Spend the thirty seconds to name the columns properly, then convert.",
         ],
       },
@@ -514,7 +514,7 @@ const articles = [
         h: "A real-world scenario: the monthly customer statement",
         p: [
           "Take a small online retailer whose accounting platform exports each customer's transactions as a CSV. The raw file is perfect for the software but useless to hand to a customer: it is a wall of comma-separated values with cryptic column codes and the rows in whatever order the database returned them.",
-          "Preparing it properly turns the export into a real statement. The retailer opens the CSV, renames the columns to plain words like Date, Description, Amount and Balance, removes the internal account-reference field, sorts the rows by date, and then converts it with the CSV to PDF tool. What the customer receives is a clean, structured table on a proper page — a document that looks like a statement rather than a database dump.",
+          "Preparing it properly turns the export into a real statement. The retailer opens the CSV, renames the columns to plain words like Date, Description, Amount and Balance, removes the internal account-reference field, sorts the rows by date, and then converts it with the CSV to PDF tool. What the customer receives is a clean, structured table on a proper page, a document that looks like a statement rather than a database dump.",
           "Because the PDF is fixed, it doubles as the retailer's own record of what was sent, and it files neatly alongside invoices and receipts. If the underlying data already lived in a formatted workbook rather than a raw export, the Excel to PDF tool would be the better starting point; for a plain CSV straight from the system, this is the path that produces a shareable record with the least fuss.",
         ],
       },
@@ -573,7 +573,7 @@ const articles = [
       {
         h: "The open-source compatibility gap",
         p: [
-          "LibreOffice is an excellent, free office suite, and its native OpenDocument format (.odt for text, .ods for spreadsheets, .odp for presentations) is an open standard. But openness in the standard does not translate into openness on the recipient's computer. Most people still run Microsoft Office, and while modern Word can sometimes open .odt files, the result is frequently imperfect — spacing shifts, styles map incorrectly, and bullet formatting drifts.",
+          "LibreOffice is an excellent, free office suite, and its native OpenDocument format (.odt for text, .ods for spreadsheets, .odp for presentations) is an open standard. But openness in the standard does not translate into openness on the recipient's computer. Most people still run Microsoft Office, and while modern Word can sometimes open .odt files, the result is frequently imperfect, spacing shifts, styles map incorrectly, and bullet formatting drifts.",
           "This puts LibreOffice users in an awkward position. They have done nothing wrong, but the files they produce can land badly on the majority of machines they are sent to. Converting to PDF removes the entire problem by stepping outside the office-format compatibility question altogether.",
         ],
       },
@@ -597,7 +597,7 @@ const articles = [
       {
         h: "Why PDF is the great equaliser",
         p: [
-          "The beauty of PDF in a mixed-software world is that it belongs to no single vendor's ecosystem. It does not matter whether the reader uses Microsoft Office, Google Workspace, Apple's iWork or nothing at all — a PDF opens the same way in every browser and on every phone. For an open-source user, that universality is liberating.",
+          "The beauty of PDF in a mixed-software world is that it belongs to no single vendor's ecosystem. It does not matter whether the reader uses Microsoft Office, Google Workspace, Apple's iWork or nothing at all, a PDF opens the same way in every browser and on every phone. For an open-source user, that universality is liberating.",
           "It also protects the work itself. Because the PDF carries its own fonts and layout, none of the careful formatting done in LibreOffice is at the mercy of how well someone else's software interprets OpenDocument.",
         ],
       },
@@ -622,14 +622,14 @@ const articles = [
       {
         h: "From the Lexigenz desk: free software, professional output",
         p: [
-          "A persistent myth we have pushed back on is that documents produced with free software look less professional than those made in paid suites. In our experience the difference is not the software — it is whether the final document is shared in a stable format. A beautifully formatted LibreOffice document sent as .odt can arrive looking broken; the same document sent as PDF is indistinguishable from one produced in any commercial tool.",
+          "A persistent myth we have pushed back on is that documents produced with free software look less professional than those made in paid suites. In our experience the difference is not the software, it is whether the final document is shared in a stable format. A beautifully formatted LibreOffice document sent as .odt can arrive looking broken; the same document sent as PDF is indistinguishable from one produced in any commercial tool.",
           "The lesson for cost-conscious teams is encouraging: you do not need to buy expensive software to send polished documents. You need to finish your work in the tool you have and convert to PDF before it leaves the building.",
         ],
       },
       {
         h: "How style mapping works when you export",
         p: [
-          "The friction open-source users feel when sharing OpenDocument files comes down to style mapping, and understanding it makes the case for PDF obvious. A LibreOffice document does not store finished pages; it stores a description built from paragraph styles, character styles, list definitions and page styles. When another program opens that file, it has to translate every one of those definitions into its own internal model — and where its model differs, the translation is approximate.",
+          "The friction open-source users feel when sharing OpenDocument files comes down to style mapping, and understanding it makes the case for PDF obvious. A LibreOffice document does not store finished pages; it stores a description built from paragraph styles, character styles, list definitions and page styles. When another program opens that file, it has to translate every one of those definitions into its own internal model, and where its model differs, the translation is approximate.",
           "That approximation is where the trouble lives. A list style that LibreOffice defines precisely may map to a near-equivalent in another suite, shifting indents and bullet glyphs. A page style with specific margins may be rounded to the recipient's defaults. None of it is dramatic on its own, but together these small mismatches are exactly why an .odt file can look subtly wrong on a colleague's machine.",
           "Converting to PDF sidesteps the entire translation problem. Instead of asking another program to reinterpret your styles, you render them once, in LibreOffice, to a fixed page. The PDF carries the finished result, not the recipe, so there is nothing left for another suite to misread.",
         ],
@@ -652,7 +652,7 @@ const articles = [
         h: "A real-world scenario: the grant application",
         p: [
           "Consider a small non-profit that runs entirely on LibreOffice to keep costs down. A funding deadline is approaching, and the team has written a detailed grant application in Writer, complete with a budget table, the organisation's logo and carefully styled headings. The funder's portal accepts uploads, and like most portals it expects a PDF.",
-          "If the team submitted the .odt — or even tried to email it for review — they would be gambling on how the funder's software interprets OpenDocument, with no chance to fix a broken layout once it is uploaded. Exporting with the Libre to PDF tool removes the gamble entirely. The application arrives looking exactly as the team designed it: headings intact, budget table aligned, logo crisp, fonts embedded.",
+          "If the team submitted the .odt, or even tried to email it for review, they would be gambling on how the funder's software interprets OpenDocument, with no chance to fix a broken layout once it is uploaded. Exporting with the Libre to PDF tool removes the gamble entirely. The application arrives looking exactly as the team designed it: headings intact, budget table aligned, logo crisp, fonts embedded.",
           "The non-profit keeps the editable Writer file as its master copy for next year's revisions and submits only the fixed PDF. If the budget table started life as a Calc spreadsheet, that sheet can be exported separately and attached, and a final pass through Compress PDF keeps the whole submission within the portal's size limit. The team gets professional output without spending a penny on commercial software.",
         ],
       },
@@ -661,7 +661,7 @@ const articles = [
         p: [
           "Public-sector and education teams are among the heaviest users of open-source office software, and for good reason. Standardising on a free suite across hundreds or thousands of machines removes licensing costs that would otherwise consume budgets meant for services. The trade-off has always been the awkwardness of sharing OpenDocument files with the outside world, where almost everyone else runs different software.",
           "Converting to PDF resolves that tension cleanly, and it does so in a way that fits the sector's other obligations. Public bodies frequently need documents to be archived in a stable, vendor-neutral format for the long term, accessible to citizens regardless of what software they own, and identical for every recipient so that an official notice cannot appear to say different things to different people. A PDF satisfies all three needs at once.",
-          "The practical pattern that works is to keep the editable OpenDocument file as the internal working copy and publish only the PDF externally — on a website, in an email, or to a records system. The organisation keeps its cost savings and editing flexibility internally, while the public and partner organisations receive documents that open perfectly and look identical everywhere. It is a model that scales from a single school office to an entire department.",
+          "The practical pattern that works is to keep the editable OpenDocument file as the internal working copy and publish only the PDF externally, on a website, in an email, or to a records system. The organisation keeps its cost savings and editing flexibility internally, while the public and partner organisations receive documents that open perfectly and look identical everywhere. It is a model that scales from a single school office to an entire department.",
         ],
       },
       {
@@ -688,7 +688,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "LibreOffice gives you a capable, free office suite; converting to PDF gives you a way to share its output with the whole world. Finish your document, export it with Libre to PDF, and send a file that opens perfectly for everyone — no matter what software they use.",
+          "LibreOffice gives you a capable, free office suite; converting to PDF gives you a way to share its output with the whole world. Finish your document, export it with Libre to PDF, and send a file that opens perfectly for everyone, no matter what software they use.",
         ],
       },
     ],
@@ -706,7 +706,7 @@ const articles = [
       {
         h: "The humble but everywhere .txt file",
         p: [
-          "Plain text is the most universal format in computing. Every device can create and read a .txt file, which is exactly why so much useful content ends up there: meeting notes typed quickly, log files exported by software, code snippets, transcripts, configuration records, and the contents of countless 'Notes' apps. The format's strength is its simplicity — and that simplicity is also why a .txt file never looks like a finished document.",
+          "Plain text is the most universal format in computing. Every device can create and read a .txt file, which is exactly why so much useful content ends up there: meeting notes typed quickly, log files exported by software, code snippets, transcripts, configuration records, and the contents of countless 'Notes' apps. The format's strength is its simplicity, and that simplicity is also why a .txt file never looks like a finished document.",
           "A text file has no margins, no page boundaries, no font choices and no structure beyond the line breaks you typed. Shared as-is, it reads like a raw dump. Converting it to PDF wraps that content in an actual page, which is often all it needs to become something you can confidently send.",
         ],
       },
@@ -749,7 +749,7 @@ const articles = [
         h: "Best practices for text conversions",
         p: [
           "Tidy the text before converting. Remove stray blank lines, ensure paragraphs are separated clearly, and add a simple title line at the top so the document identifies itself. Because plain text has no headings, a few well-placed blank lines and capitalised section labels go a long way toward making the resulting PDF scannable.",
-          "If the content genuinely needs structure — headings, bold emphasis, lists — consider whether TXT is the right starting point at all. For richer documents, the Create PDF tool lets you build a structured file directly. TXT to PDF shines when you have existing plain text that simply needs a proper page.",
+          "If the content genuinely needs structure, headings, bold emphasis, lists, consider whether TXT is the right starting point at all. For richer documents, the Create PDF tool lets you build a structured file directly. TXT to PDF shines when you have existing plain text that simply needs a proper page.",
         ],
       },
       {
@@ -764,7 +764,7 @@ const articles = [
         p: [
           "Plain text looks deceptively simple, but two invisible decisions determine whether the resulting PDF is readable: how lines wrap, and how the characters are spaced. A .txt file contains hard line breaks only where you pressed Enter; everything else is one continuous run that the viewer wraps at whatever width its window happens to be. That is why the same file looks neat in one editor and ragged in another. Converting to PDF settles the question by wrapping the text to a fixed page width that never changes.",
           "Character width matters most for content that was meant to line up. Log files, code and tabular text rely on a monospaced layout, where every character occupies the same horizontal space so columns and timestamps align. If that content is rendered in a proportional font, the alignment collapses and a tidy log becomes a jagged mess. For anything where vertical alignment carries meaning, preserving a monospaced presentation is what keeps it legible.",
-          "Prose has the opposite need. Notes, transcripts and drafts read more comfortably with normal spacing and a sensible measure — a line length that is neither cramped nor sprawling. Knowing which kind of content you have tells you what to aim for before you convert: alignment for data, comfortable reading width for prose.",
+          "Prose has the opposite need. Notes, transcripts and drafts read more comfortably with normal spacing and a sensible measure, a line length that is neither cramped nor sprawling. Knowing which kind of content you have tells you what to aim for before you convert: alignment for data, comfortable reading width for prose.",
         ],
       },
       {
@@ -785,7 +785,7 @@ const articles = [
         h: "A real-world scenario: archiving a research interview",
         p: [
           "Imagine a researcher who has just finished transcribing a long interview into a plain-text file. The transcript is valuable, but as a bare .txt it is fragile: it has no title, no page numbers to cite in a write-up, and it will wrap differently on every device a collaborator opens it on. Six months later, referencing 'the part near the middle' is hopeless when the middle moves depending on the window.",
-          "Preparing it for the record is quick. The researcher adds a title line with the interviewee, date and project, separates the question-and-answer exchanges with clear blank lines, and converts it with the TXT to PDF tool. The transcript becomes a paginated document with stable line breaks and citable page numbers — exactly what an archive or a co-author needs.",
+          "Preparing it for the record is quick. The researcher adds a title line with the interviewee, date and project, separates the question-and-answer exchanges with clear blank lines, and converts it with the TXT to PDF tool. The transcript becomes a paginated document with stable line breaks and citable page numbers, exactly what an archive or a co-author needs.",
           "From there the file behaves like any other document. It can be filed alongside the project's PDFs, attached to a report, or refined further with Format PDF if the team wants headers and consistent spacing. The raw capture stays as plain text for easy editing; the PDF becomes the durable, shareable version of record.",
         ],
       },
@@ -795,9 +795,9 @@ const articles = [
           "Plain text arrives in a few distinct flavours, and the best conversion approach depends on which one you are holding. Recognising the type up front saves you from forcing one style of document onto content that needs another.",
         ],
         ul: [
-          "Machine output — logs, exports, configuration dumps — needs alignment preserved, so treat it as a fixed record and resist the urge to reformat it heavily.",
-          "Human notes — meeting minutes, to-do lists, captured ideas — benefit from a title, clear paragraph breaks and comfortable spacing before conversion.",
-          "Long-form prose — drafts, articles, transcripts — reads best with a sensible line width and page numbers for reference.",
+          "Machine output, logs, exports, configuration dumps, needs alignment preserved, so treat it as a fixed record and resist the urge to reformat it heavily.",
+          "Human notes, meeting minutes, to-do lists, captured ideas, benefit from a title, clear paragraph breaks and comfortable spacing before conversion.",
+          "Long-form prose, drafts, articles, transcripts, reads best with a sensible line width and page numbers for reference.",
           "Structured content that secretly wants headings and lists is often better built directly with the Create PDF tool than coerced from flat text.",
         ],
       },
@@ -848,7 +848,7 @@ const articles = [
       {
         h: "Your document is a brand asset",
         p: [
-          "It is easy to think of a quotation, a proposal or a report as just information. But every document you send is also a representation of your organisation — its attention to detail, its visual identity, its professionalism. The font you chose, the spacing, the logo placement and the colour of your headings all communicate something before a single word is read. When that formatting breaks in transit, the message it sends is carelessness, regardless of how strong the content is.",
+          "It is easy to think of a quotation, a proposal or a report as just information. But every document you send is also a representation of your organisation, its attention to detail, its visual identity, its professionalism. The font you chose, the spacing, the logo placement and the colour of your headings all communicate something before a single word is read. When that formatting breaks in transit, the message it sends is carelessness, regardless of how strong the content is.",
           "Editable office files put all of that at risk every time they travel. The recipient's software, fonts and settings decide how your document renders, and they are entirely outside your control. Converting to PDF takes that control back.",
         ],
       },
@@ -856,14 +856,14 @@ const articles = [
         h: "How formatting actually breaks",
         p: [
           "There are a handful of culprits, and they are predictable. Missing fonts force substitutions that change letter spacing and break line and page boundaries. Different software versions interpret styles and tables inconsistently. Printer drivers alter pagination. And screen sizes cause reflowable formats to wrap text in ways the author never saw.",
-          "None of these are exotic edge cases — they are the normal experience of sending an editable file to someone whose setup differs from yours, which is almost everyone. The only reliable defence is to stop sending a document that re-renders on arrival and start sending one that is already final.",
+          "None of these are exotic edge cases, they are the normal experience of sending an editable file to someone whose setup differs from yours, which is almost everyone. The only reliable defence is to stop sending a document that re-renders on arrival and start sending one that is already final.",
         ],
       },
       {
         h: "How to protect a document before sending",
         ul: [
           "Step 1: Finish all formatting in your office application on the machine where it was designed.",
-          "Step 2: Open PDFShuffl and choose the converter that matches your file — Word, Excel, PowerPoint, LibreOffice, CSV or TXT to PDF.",
+          "Step 2: Open PDFShuffl and choose the converter that matches your file, Word, Excel, PowerPoint, LibreOffice, CSV or TXT to PDF.",
           "Step 3: Upload and convert; the PDF captures your exact fonts, layout and branding.",
           "Step 4: Open the PDF once to confirm everything reads as intended.",
           "Step 5: Send only the PDF, and keep the editable file as your private master copy.",
@@ -872,7 +872,7 @@ const articles = [
       {
         h: "Where brand protection matters most",
         p: [
-          "Client-facing documents are the obvious priority: proposals, quotations, contracts and pitch decks are where formatting failures cost real money and credibility. But internal consistency matters too. Policies, templates and reports that render differently for different staff erode trust in the documents themselves. And anything destined for a portal — applications, submissions, compliance filings — must hold its layout exactly, because you rarely get a second chance to upload.",
+          "Client-facing documents are the obvious priority: proposals, quotations, contracts and pitch decks are where formatting failures cost real money and credibility. But internal consistency matters too. Policies, templates and reports that render differently for different staff erode trust in the documents themselves. And anything destined for a portal, applications, submissions, compliance filings, must hold its layout exactly, because you rarely get a second chance to upload.",
         ],
       },
       {
@@ -890,7 +890,7 @@ const articles = [
         h: "Best practices for an organisation-wide habit",
         p: [
           "Make 'convert before you send' a default rather than an afterthought. The simplest way to embed the habit is to draw a clear line: editable files are for collaborating internally, PDFs are for sharing externally. Once a team internalises that distinction, formatting complaints and version confusion drop sharply.",
-          "Pair the habit with a quick review step. The discipline of opening every PDF once before it goes out catches the rare layout issue and reinforces that the PDF — not the source file — is the document that represents you.",
+          "Pair the habit with a quick review step. The discipline of opening every PDF once before it goes out catches the rare layout issue and reinforces that the PDF, not the source file, is the document that represents you.",
         ],
       },
       {
@@ -927,14 +927,14 @@ const articles = [
         p: [
           "Picture a design agency pitching for a new account. The proposal is the agency's whole case, and it is assembled from several office files: a written narrative in Word, a budget in Excel, and a creative deck in PowerPoint. Every element carries the agency's fonts, colours and logo, because the document is itself a demonstration of the agency's eye for detail.",
           "If the agency sent those three editable files, it would be handing the prospect a gamble. The Word narrative might reflow on a different machine, the Excel budget might open with a filter applied, and the deck might lose its display font. For a business that sells visual craft, even a small layout slip undermines the pitch.",
-          "Instead, the agency converts each file with the matching tool — Word to PDF, Excel to PDF and PPT to PDF — reviews each one, and sends a set of fixed, on-brand documents that look identical for every reviewer. The editable masters stay private for revisions, and if the bundle is large, Compress PDF brings it to a size the prospect's inbox will accept. The proposal arrives looking exactly as intended, which is precisely the impression the agency is selling.",
+          "Instead, the agency converts each file with the matching tool, Word to PDF, Excel to PDF and PPT to PDF, reviews each one, and sends a set of fixed, on-brand documents that look identical for every reviewer. The editable masters stay private for revisions, and if the bundle is large, Compress PDF brings it to a size the prospect's inbox will accept. The proposal arrives looking exactly as intended, which is precisely the impression the agency is selling.",
         ],
       },
       {
         h: "Spotlight: regulated and compliance-driven industries",
         p: [
-          "In industries where documents carry legal or regulatory weight — finance, healthcare, law, insurance and the public sector — the case for converting office files to PDF moves beyond aesthetics into necessity. These fields need every recipient to see an identical document, need a fixed record that cannot be quietly altered, and often need to retain that record unchanged for years. An editable office file fails all three tests; a PDF passes them by design.",
-          "Consider what is at stake when a document is part of an audit trail. A policy that renders differently on two computers is not just untidy, it is ambiguous — and ambiguity is exactly what compliance processes exist to eliminate. Freezing the document to PDF at the moment it is approved means the version filed, the version distributed and the version produced for a regulator are provably the same.",
+          "In industries where documents carry legal or regulatory weight, finance, healthcare, law, insurance and the public sector, the case for converting office files to PDF moves beyond aesthetics into necessity. These fields need every recipient to see an identical document, need a fixed record that cannot be quietly altered, and often need to retain that record unchanged for years. An editable office file fails all three tests; a PDF passes them by design.",
+          "Consider what is at stake when a document is part of an audit trail. A policy that renders differently on two computers is not just untidy, it is ambiguous, and ambiguity is exactly what compliance processes exist to eliminate. Freezing the document to PDF at the moment it is approved means the version filed, the version distributed and the version produced for a regulator are provably the same.",
           "There is also the matter of what travels invisibly inside a file. Editable office documents can carry tracked changes, hidden comments and author metadata that no one intended to disclose. In a regulated context, that leakage can be a genuine problem. Converting to PDF flattens the visible content and leaves the editing history behind, which is one more reason these industries treat the PDF, not the source file, as the official document.",
         ],
       },
@@ -984,15 +984,15 @@ const articles = [
       {
         h: "When conversion becomes a process, not a task",
         p: [
-          "Converting a single document to PDF is a thirty-second job. But many real workflows are not about one file — they are about dozens or hundreds. A school issuing report cards, a finance team producing monthly statements, an HR department preparing onboarding packs, a law firm assembling a bundle of exhibits. At that scale, the way you approach conversion stops being a detail and starts being the difference between an afternoon and a morning.",
-          "Thinking about conversion as a repeatable process — with a clear order, consistent naming and a review step — is what turns a tedious chore into a reliable pipeline. This guide is about that mindset rather than any single click.",
+          "Converting a single document to PDF is a thirty-second job. But many real workflows are not about one file, they are about dozens or hundreds. A school issuing report cards, a finance team producing monthly statements, an HR department preparing onboarding packs, a law firm assembling a bundle of exhibits. At that scale, the way you approach conversion stops being a detail and starts being the difference between an afternoon and a morning.",
+          "Thinking about conversion as a repeatable process, with a clear order, consistent naming and a review step, is what turns a tedious chore into a reliable pipeline. This guide is about that mindset rather than any single click.",
         ],
       },
       {
         h: "A workflow for converting many documents",
         ul: [
           "Step 1: Finalise all source files first, so you are never converting drafts that will change.",
-          "Step 2: Standardise formatting across the batch — same template, fonts and page setup — so the PDFs are consistent.",
+          "Step 2: Standardise formatting across the batch, same template, fonts and page setup, so the PDFs are consistent.",
           "Step 3: Convert each file with the matching PDFShuffl tool, working through the set methodically.",
           "Step 4: Use a consistent naming convention so the PDFs sort and search predictably.",
           "Step 5: Spot-check a sample of the output and compress any oversized files before distribution.",
@@ -1002,13 +1002,13 @@ const articles = [
         h: "Where batch conversion shows up",
         p: [
           "High-volume document production is everywhere once you look for it. Payroll generates payslips. Education generates certificates and results. Sales generates proposals from a template. Compliance generates periodic reports. Each of these involves taking many similar office files and turning them into PDFs for distribution or archiving.",
-          "The organisations that handle this well are not necessarily the ones with the most software — they are the ones with the clearest process. A messy folder of inconsistently named, inconsistently formatted source files produces a messy batch of PDFs. A disciplined source produces a clean output.",
+          "The organisations that handle this well are not necessarily the ones with the most software, they are the ones with the clearest process. A messy folder of inconsistently named, inconsistently formatted source files produces a messy batch of PDFs. A disciplined source produces a clean output.",
         ],
       },
       {
         h: "Why consistency beats speed",
         p: [
-          "It is tempting to optimise a batch workflow purely for speed, but the bigger win is consistency. When every document in a batch shares the same template, page size and naming pattern, the resulting PDFs are interchangeable, searchable and easy to audit. When they do not, you inherit a long tail of small problems — a payslip in the wrong orientation, a certificate with a different font, a file no one can find because it was named ad hoc.",
+          "It is tempting to optimise a batch workflow purely for speed, but the bigger win is consistency. When every document in a batch shares the same template, page size and naming pattern, the resulting PDFs are interchangeable, searchable and easy to audit. When they do not, you inherit a long tail of small problems, a payslip in the wrong orientation, a certificate with a different font, a file no one can find because it was named ad hoc.",
           "Investing in consistency upstream, in the source documents, pays off many times over downstream. The conversion step then becomes mechanical, because every file is already in good shape before it reaches it.",
         ],
       },
@@ -1026,21 +1026,21 @@ const articles = [
       {
         h: "Best practices for high-volume conversion",
         p: [
-          "Start from templates. The more your source documents share a common structure, the more uniform and trustworthy your PDF output will be. Decide on a naming convention before you begin — something like 'YYYY-MM_Department_DocumentType_Name' — and apply it consistently, because renaming a hundred files after the fact is its own afternoon lost.",
-          "Build in a review checkpoint. You do not need to inspect every file, but checking a representative sample catches systematic problems — a template error that affects the whole batch, an orientation mistake, an oversized image. Catching it in the sample saves you from distributing the same flaw a hundred times.",
+          "Start from templates. The more your source documents share a common structure, the more uniform and trustworthy your PDF output will be. Decide on a naming convention before you begin, something like 'YYYY-MM_Department_DocumentType_Name', and apply it consistently, because renaming a hundred files after the fact is its own afternoon lost.",
+          "Build in a review checkpoint. You do not need to inspect every file, but checking a representative sample catches systematic problems, a template error that affects the whole batch, an orientation mistake, an oversized image. Catching it in the sample saves you from distributing the same flaw a hundred times.",
         ],
       },
       {
         h: "From the Lexigenz desk: the naming convention nobody regrets",
         p: [
           "If we could give one piece of advice to any team doing repeated document production, it would be to settle on a naming convention and never deviate. We have seen the alternative too many times: a shared drive full of files named 'final', 'final2', 'final_really', and 'Document(3)', where finding the right version is an archaeology project.",
-          "A consistent, front-loaded naming pattern — date first, so files sort chronologically — turns that chaos into something you can navigate at a glance months later. The conversion to PDF is the easy part; the discipline around it is what actually saves the hours.",
+          "A consistent, front-loaded naming pattern, date first, so files sort chronologically, turns that chaos into something you can navigate at a glance months later. The conversion to PDF is the easy part; the discipline around it is what actually saves the hours.",
         ],
       },
       {
         h: "Designing a folder structure that scales",
         p: [
-          "A naming convention solves half the organisation problem; the folder structure around it solves the other half. When you are producing dozens or hundreds of PDFs on a recurring cycle, the worst thing you can do is dump every file into one directory and rely on search. A shallow, predictable hierarchy — period, then department or category, then the files themselves — means anyone can find what they need without knowing the exact filename.",
+          "A naming convention solves half the organisation problem; the folder structure around it solves the other half. When you are producing dozens or hundreds of PDFs on a recurring cycle, the worst thing you can do is dump every file into one directory and rely on search. A shallow, predictable hierarchy, period, then department or category, then the files themselves, means anyone can find what they need without knowing the exact filename.",
           "The structure should mirror how the documents will actually be retrieved later. If people look things up by month, lead with the month. If they look up by client, lead with the client. Designing the folders around the retrieval question, rather than around how the files happened to be created, is what makes an archive usable a year after the fact.",
           "It also pays to separate sources from outputs. Keeping editable originals in one branch and finished PDFs in another prevents the common mess where someone reconverts the wrong file or distributes a draft by mistake. The sources are your working material; the PDFs are the record. A clear boundary between them keeps both clean.",
         ],
@@ -1048,7 +1048,7 @@ const articles = [
       {
         h: "Common batch conversion mistakes to avoid",
         p: [
-          "At volume, a single bad habit is not a one-off annoyance — it repeats across every file in the run. These are the mistakes that cost the most time when they slip through.",
+          "At volume, a single bad habit is not a one-off annoyance, it repeats across every file in the run. These are the mistakes that cost the most time when they slip through.",
         ],
         ul: [
           "Converting before the sources are final, so a late edit forces you to redo part or all of the batch.",
@@ -1064,13 +1064,13 @@ const articles = [
         p: [
           "Consider a school producing report cards at the end of a term. There are several hundred of them, each generated from the same template but populated with a different student's results and teacher comments. This is a batch in the truest sense: many near-identical documents that must all look consistent and arrive on time.",
           "The school that handles this smoothly does the work upstream. Every report starts from one approved template, so fonts, headers and the grading layout are identical across the whole year group. The source files are finalised before anything is converted, named with a pattern that puts the term and class first so they sort cleanly, and only then run through the Word to PDF tool one after another.",
-          "Before sending a single card to parents, the office checks a representative sample — a few from different classes — to catch any systematic problem, such as a comment box that overflows or a logo that prints faintly. A quick pass through Compress PDF keeps the files light enough to email home. The conversion itself is trivial; it is the template discipline, the naming and the sample check that turn a daunting pile into a calm afternoon.",
+          "Before sending a single card to parents, the office checks a representative sample, a few from different classes, to catch any systematic problem, such as a comment box that overflows or a logo that prints faintly. A quick pass through Compress PDF keeps the files light enough to email home. The conversion itself is trivial; it is the template discipline, the naming and the sample check that turn a daunting pile into a calm afternoon.",
         ],
       },
       {
         h: "Choosing the right cadence for recurring batches",
         p: [
-          "Many batches are not one-off events but recurring cycles — monthly statements, weekly reports, termly results — and the way you schedule the work is as important as how you convert it. A batch that is left until the deadline is a batch done under pressure, where the temptation to skip the sample check and the consistency pass is strongest precisely when mistakes are most expensive.",
+          "Many batches are not one-off events but recurring cycles, monthly statements, weekly reports, termly results, and the way you schedule the work is as important as how you convert it. A batch that is left until the deadline is a batch done under pressure, where the temptation to skip the sample check and the consistency pass is strongest precisely when mistakes are most expensive.",
           "The teams that handle recurring production calmly treat it as a routine with a fixed rhythm. They block out the same window each cycle, finalise sources a clear step ahead of conversion, and run the conversion as a distinct, unhurried task rather than something squeezed in alongside the deadline. The cadence removes the drama, and a predictable process is one that improves a little each time it runs.",
           "It also helps to capture the process itself as a short, written checklist that lives with the work: finalise sources, apply the template, convert with the matching tool, name to the convention, sample-check, compress, distribute. A documented routine means the batch does not depend on one person remembering every step, and it survives staff changes, holidays and busy periods without quietly degrading.",
         ],
@@ -1080,7 +1080,7 @@ const articles = [
         faq: [
           {
             q: "Can I convert different file types in the same workflow?",
-            a: "Yes. Use the matching tool for each type — Word, Excel, PowerPoint, LibreOffice, CSV or TXT to PDF — within the same overall process.",
+            a: "Yes. Use the matching tool for each type, Word, Excel, PowerPoint, LibreOffice, CSV or TXT to PDF, within the same overall process.",
           },
           {
             q: "How do I keep a large batch organised?",

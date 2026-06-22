@@ -6,6 +6,7 @@ import {
   getRelatedArticles,
   readTimeMinutes,
 } from "../data/articles/index.js";
+import LearningPrompt from "../Components/LearningPrompt";
 
 const SITE_URL = "https://pdfshuffl.com";
 
@@ -178,6 +179,8 @@ export default function ArticleView({ article }) {
             ))}
           </div>
         </article>
+
+        <LearningPrompt topic={article.slug} />
 
         {article.relatedTools && article.relatedTools.length > 0 && (
           <section className="mt-12 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm">

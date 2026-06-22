@@ -55,7 +55,7 @@ export default function PdfKeywordPage() {
     "@graph": [
       {
         "@type": "WebApplication",
-        name: `${page.keyword} — PDFShuffl`,
+        name: `${page.keyword}, PDFShuffl`,
         url: canonical,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",

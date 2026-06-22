@@ -15,12 +15,12 @@ const articles = [
     relatedTools: ["PDF to Editable PDF", "PDF to Word", "PDF to TXT"],
     datePublished: "2026-01-09",
     excerpt:
-      "A scanned PDF is just a picture of a page — your computer cannot read a word of it. OCR teaches it to recognise the letters and gives you real, searchable text.",
+      "A scanned PDF is just a picture of a page, your computer cannot read a word of it. OCR teaches it to recognise the letters and gives you real, searchable text.",
     sections: [
       {
         h: "Why a scanned PDF is not what you think it is",
         p: [
-          "Open a scanned document and it looks like text. You see paragraphs, headings, maybe a signature at the bottom. But to the software opening it, none of that exists. A scan is a photograph of a page, and the page happens to have ink on it shaped like letters. There is no underlying text at all — just pixels. That is why you cannot select a sentence, why search finds nothing, and why copying gives you an empty clipboard.",
+          "Open a scanned document and it looks like text. You see paragraphs, headings, maybe a signature at the bottom. But to the software opening it, none of that exists. A scan is a photograph of a page, and the page happens to have ink on it shaped like letters. There is no underlying text at all, just pixels. That is why you cannot select a sentence, why search finds nothing, and why copying gives you an empty clipboard.",
           "Optical character recognition, almost always shortened to OCR, is the technology that closes this gap. It examines the image, identifies the shapes that correspond to characters and words, and writes out the actual text those shapes represent. After OCR, the document stops being a silent picture and becomes something you can search, select, copy and edit. It is the single most important step for anyone working with scanned material.",
         ],
       },
@@ -30,7 +30,7 @@ const articles = [
           "The workflow is straightforward once you know which tool to reach for. The goal is to take an image-only PDF and produce a version that contains a real text layer underneath the picture, or an editable document built from the recognised words.",
         ],
         ul: [
-          "Step 1: Locate the scanned PDF — typically anything you received from a scanner, a phone camera or a fax.",
+          "Step 1: Locate the scanned PDF, typically anything you received from a scanner, a phone camera or a fax.",
           "Step 2: Open PDFShuffl, go to Tools and select PDF to Editable PDF to add a recognised text layer.",
           "Step 3: Upload the file and let the recognition pass run across every page.",
           "Step 4: If you need a fully editable document rather than a searchable PDF, follow up with PDF to Word.",
@@ -60,7 +60,7 @@ const articles = [
         h: "Best practices for accurate recognition",
         p: [
           "OCR quality depends enormously on the quality of the scan you feed it. A crisp, high-resolution, well-lit scan that sits square on the page recognises far more accurately than a faint, skewed photo taken at an angle in poor light. If you control the scanning, aim for at least 300 dots per inch, keep the page flat, and make sure the contrast between ink and paper is strong. A little care at the capture stage saves a lot of correcting later.",
-          "Set realistic expectations about accuracy, too. Clean printed text recognises extremely well; decorative fonts, faded photocopies, stamps over text and handwriting are much harder, and these are exactly the spots where errors cluster. After recognition, always do a proofreading pass and pay closest attention to the high-stakes details — a misread digit in an account number or a date is the kind of mistake that quietly causes real trouble downstream.",
+          "Set realistic expectations about accuracy, too. Clean printed text recognises extremely well; decorative fonts, faded photocopies, stamps over text and handwriting are much harder, and these are exactly the spots where errors cluster. After recognition, always do a proofreading pass and pay closest attention to the high-stakes details, a misread digit in an account number or a date is the kind of mistake that quietly causes real trouble downstream.",
         ],
       },
       {
@@ -75,7 +75,7 @@ const articles = [
         p: [
           "It helps to know what the software is doing, because it explains both why OCR is so capable and where it stumbles. The first stage is preprocessing: the engine cleans up the image, straightens a page that was scanned at a slight angle, evens out lighting, and sharpens the contrast between ink and paper. A page that arrives crooked or grey gets quietly nudged toward the crisp, high-contrast ideal the recogniser was trained on, which is why a good capture pays off long before any letters are identified.",
           "Next comes segmentation, where the engine works out the structure of the page. It separates blocks of text from images, finds the lines within each block, and then isolates individual characters within each line. Only after the page has been carved up this way does the recognition stage begin, matching each isolated shape against the patterns it knows and proposing the most likely letter. This is also where a smudge or an overlapping stamp can derail things, because the engine cannot cleanly cut out a character that the layout never presented cleanly.",
-          "The final stage is the part people underestimate: language modelling. A good engine does not judge each letter in isolation; it weighs whether the resulting word and sentence are plausible, nudging an ambiguous reading toward something that makes linguistic sense. That is why clean printed prose recognises so well and why isolated codes, part numbers and unusual names recognise worse — there is no surrounding language for the model to lean on, so the guess stands or falls on the shape alone.",
+          "The final stage is the part people underestimate: language modelling. A good engine does not judge each letter in isolation; it weighs whether the resulting word and sentence are plausible, nudging an ambiguous reading toward something that makes linguistic sense. That is why clean printed prose recognises so well and why isolated codes, part numbers and unusual names recognise worse, there is no surrounding language for the model to lean on, so the guess stands or falls on the shape alone.",
         ],
       },
       {
@@ -95,7 +95,7 @@ const articles = [
         p: [
           "Once you have decided to run recognition, there is a second choice that shapes everything downstream: do you want a searchable PDF, or a fully editable document? They look similar at first, but they serve different needs, and picking the wrong one means redoing the job. A searchable PDF keeps the original page exactly as scanned and quietly tucks a recognised text layer underneath the image. The document looks unchanged, but now you can search it, select passages and copy from it, which is perfect when the priority is preserving the appearance of the original.",
           "A full conversion to a word processor format takes the opposite approach. Instead of hiding text beneath an image, it rebuilds the content as genuinely editable text you can rewrite, reformat and restructure. The trade-off is that the layout is reconstructed rather than preserved pixel for pixel, so it may not match the scan exactly. That is a price worth paying when the whole point is to change the content rather than merely read or quote it.",
-          "The deciding question is what you intend to do next. If you are building a searchable archive of records that must stay faithful to their originals — contracts, signed forms, historical files — the searchable PDF is the right call. If you need to lift the content into a new document, update old wording, or reuse the text somewhere else entirely, convert fully and accept the layout reconstruction. Knowing which outcome you are aiming for before you start saves the frustration of recognising a file twice.",
+          "The deciding question is what you intend to do next. If you are building a searchable archive of records that must stay faithful to their originals, contracts, signed forms, historical files, the searchable PDF is the right call. If you need to lift the content into a new document, update old wording, or reuse the text somewhere else entirely, convert fully and accept the layout reconstruction. Knowing which outcome you are aiming for before you start saves the frustration of recognising a file twice.",
         ],
       },
       {
@@ -145,8 +145,8 @@ const articles = [
       {
         h: "The frustration of numbers you cannot touch",
         p: [
-          "There is a particular kind of irritation that comes from staring at a perfectly good table inside a PDF — neat columns, clear totals, everything aligned — and realising you cannot do a single calculation with it. You cannot add a column, you cannot sort by date, you cannot drop the figures into a model. The table is right in front of you and completely inert. To a spreadsheet, a PDF table is not data; it is a drawing that happens to look like data.",
-          "Getting that table into Excel means reconstructing the rows and columns as real cells. The most reliable route is to extract the tabular data to CSV, which every spreadsheet opens natively, and then work with it in Excel exactly as if you had typed it yourself. Once the figures live in cells, the whole arsenal of spreadsheet tools — formulas, pivot tables, charts, filters — becomes available again.",
+          "There is a particular kind of irritation that comes from staring at a perfectly good table inside a PDF, neat columns, clear totals, everything aligned, and realising you cannot do a single calculation with it. You cannot add a column, you cannot sort by date, you cannot drop the figures into a model. The table is right in front of you and completely inert. To a spreadsheet, a PDF table is not data; it is a drawing that happens to look like data.",
+          "Getting that table into Excel means reconstructing the rows and columns as real cells. The most reliable route is to extract the tabular data to CSV, which every spreadsheet opens natively, and then work with it in Excel exactly as if you had typed it yourself. Once the figures live in cells, the whole arsenal of spreadsheet tools, formulas, pivot tables, charts, filters, becomes available again.",
         ],
       },
       {
@@ -167,7 +167,7 @@ const articles = [
         h: "Real situations where this matters",
         p: [
           "An accountant receives a bank statement as a PDF and needs the transactions in Excel to reconcile against the ledger; rebuilding the table beats keying in three hundred rows by hand. A procurement manager pulls a supplier's price list out of a PDF catalogue so the figures can be compared against three other vendors in one sheet. A financial analyst lifts the historical figures out of a published annual report to extend them with this year's projections.",
-          "Researchers do the same with data tables buried in papers, and operations teams do it with exported reports from systems that only offer PDF output. In all of these, the work is not really about Excel — it is about turning a static record into a calculable asset so the numbers can be questioned, combined and acted on.",
+          "Researchers do the same with data tables buried in papers, and operations teams do it with exported reports from systems that only offer PDF output. In all of these, the work is not really about Excel, it is about turning a static record into a calculable asset so the numbers can be questioned, combined and acted on.",
         ],
       },
       {
@@ -184,7 +184,7 @@ const articles = [
       {
         h: "Best practices for trustworthy results",
         p: [
-          "The structure of the original table decides how smoothly extraction goes. A PDF that was generated straight from a spreadsheet or database carries crisp, real text and rebuilds almost perfectly. A scanned table is an image, so it relies on recognition and deserves a closer look. Either way, open the extracted data and confirm the columns line up before you build anything on top of it — a single stray delimiter can nudge values one column to the left and quietly corrupt every calculation that follows.",
+          "The structure of the original table decides how smoothly extraction goes. A PDF that was generated straight from a spreadsheet or database carries crisp, real text and rebuilds almost perfectly. A scanned table is an image, so it relies on recognition and deserves a closer look. Either way, open the extracted data and confirm the columns line up before you build anything on top of it, a single stray delimiter can nudge values one column to the left and quietly corrupt every calculation that follows.",
           "Watch the awkward cases that spreadsheets handle in their own way: thousands separators, currency symbols, percentages, dates in regional formats and negative numbers shown in parentheses. After importing, set the cell formats deliberately so Excel treats your figures as numbers rather than text, since a column that looks numeric but is secretly text will refuse to sum and leave you puzzled.",
         ],
       },
@@ -192,15 +192,15 @@ const articles = [
         h: "From the Lexigenz desk: reconcile before you rely",
         p: [
           "Whenever we rebuild a financial table, the first thing we do in the new spreadsheet is re-total a column and compare it with the total printed in the source PDF. It takes half a minute and it is the most informative check there is. If the totals agree, the extraction is almost certainly clean from top to bottom. If they disagree, we have caught a problem before it ever reached a report or a decision.",
-          "We also resist the temptation to extract a giant document in one go and trust it wholesale. For anything important, we verify table by table. Extraction is a huge time-saver — it routinely turns an afternoon of typing into a couple of minutes — but the speed only helps if the numbers are right. A quick reconciliation is what separates a useful shortcut from a hidden liability.",
+          "We also resist the temptation to extract a giant document in one go and trust it wholesale. For anything important, we verify table by table. Extraction is a huge time-saver, it routinely turns an afternoon of typing into a couple of minutes, but the speed only helps if the numbers are right. A quick reconciliation is what separates a useful shortcut from a hidden liability.",
         ],
       },
       {
         h: "Choosing your route: CSV, Word or manual entry",
         p: [
-          "There is more than one way to get a table out of a PDF, and picking the right one saves a surprising amount of grief. The CSV route is the workhorse for genuine data — rows and columns of figures you intend to calculate with — because it lands cleanly in cells and lets the spreadsheet do what it does best. When a table is mostly numeric and reasonably regular, this is almost always the fastest path to a working sheet.",
+          "There is more than one way to get a table out of a PDF, and picking the right one saves a surprising amount of grief. The CSV route is the workhorse for genuine data, rows and columns of figures you intend to calculate with, because it lands cleanly in cells and lets the spreadsheet do what it does best. When a table is mostly numeric and reasonably regular, this is almost always the fastest path to a working sheet.",
           "Converting to Word makes sense when the table is really a hybrid: figures wrapped in explanatory text, merged headers, or a layout that is as much document as dataset. In Word you can see the structure, copy the part you need, and paste it into a spreadsheet with full context, which beats wrestling a messy CSV that the extractor struggled to delimit. It is the gentler option for irregular tables where strict row-and-column logic breaks down.",
-          "Manual entry still has a place, and it is worth being honest about when. For a tiny table — a handful of rows you can retype in under a minute — setting up an extraction can take longer than just keying it in. The decision is really about scale and risk: the more rows there are, the more extraction pays off and the more error-prone hand entry becomes. Reserve typing for the trivial cases and let the tools handle anything substantial.",
+          "Manual entry still has a place, and it is worth being honest about when. For a tiny table, a handful of rows you can retype in under a minute, setting up an extraction can take longer than just keying it in. The decision is really about scale and risk: the more rows there are, the more extraction pays off and the more error-prone hand entry becomes. Reserve typing for the trivial cases and let the tools handle anything substantial.",
         ],
       },
       {
@@ -218,7 +218,7 @@ const articles = [
       {
         h: "A real-world scenario: reconciling a month of statements",
         p: [
-          "Picture a bookkeeper at month end with a dozen bank and card statements, all delivered as PDFs, that must be reconciled against the accounting system. The transactions are all there on the page — dates, descriptions, amounts, running balances — but they are inert, a picture of a ledger rather than a ledger. Keying several hundred lines by hand is the obvious option, and it is also the one most likely to introduce a transposed digit that throws off the reconciliation and costs an hour to hunt down later.",
+          "Picture a bookkeeper at month end with a dozen bank and card statements, all delivered as PDFs, that must be reconciled against the accounting system. The transactions are all there on the page, dates, descriptions, amounts, running balances, but they are inert, a picture of a ledger rather than a ledger. Keying several hundred lines by hand is the obvious option, and it is also the one most likely to introduce a transposed digit that throws off the reconciliation and costs an hour to hunt down later.",
           "The faster, safer route is to extract each statement's transaction table to CSV and open it in the spreadsheet where the reconciliation lives. Before doing anything else, the bookkeeper re-totals the amount column and compares it with the closing figure printed on the statement. When the two agree, the extraction is trustworthy and the data can be matched against the ledger with confidence. When they disagree, the problem is caught immediately, while it is still a single statement rather than a tangled month-end discrepancy.",
           "With the figures living in real cells, the rest is ordinary spreadsheet work: filtering by date, matching transactions, flagging anything unexplained. The whole exercise that used to mean an afternoon of careful typing becomes a sequence of quick extractions and reconciliations. The point is not that the spreadsheet does anything magical; it is that turning a picture of numbers back into actual numbers lets the tools the bookkeeper already trusts do the heavy lifting accurately.",
         ],
@@ -265,13 +265,13 @@ const articles = [
     relatedTools: ["PDF to Editable PDF", "PDF to Word", "Word to PDF"],
     datePublished: "2026-02-19",
     excerpt:
-      "A flat PDF form makes people print, scribble and rescan. Making it editable lets recipients type their answers and send it straight back — cleaner for everyone.",
+      "A flat PDF form makes people print, scribble and rescan. Making it editable lets recipients type their answers and send it straight back, cleaner for everyone.",
     sections: [
       {
         h: "The print-sign-scan loop nobody enjoys",
         p: [
           "We have all received the form. It arrives as a PDF, it has fields for your name, address and signature, and there is absolutely no way to type into it. So you print it, fill it in with a pen, scan or photograph it, and email the crumpled result back. The process is slow, it wastes paper, and the returned document is often barely legible. Multiply that across a whole team or a customer base and the inefficiency becomes genuinely expensive.",
-          "The root cause is that the PDF is flat — it is a static image of a form rather than an interactive one. The fields are drawn on, not built in. Turning it into an editable or fillable form removes the printer from the loop entirely: recipients click into a field, type their answer, and send the document back clean and readable. Fixing a typo in your own published form follows the same idea — you need to reopen the content rather than fight the fixed page.",
+          "The root cause is that the PDF is flat, it is a static image of a form rather than an interactive one. The fields are drawn on, not built in. Turning it into an editable or fillable form removes the printer from the loop entirely: recipients click into a field, type their answer, and send the document back clean and readable. Fixing a typo in your own published form follows the same idea, you need to reopen the content rather than fight the fixed page.",
         ],
       },
       {
@@ -282,7 +282,7 @@ const articles = [
         ul: [
           "Step 1: Open PDFShuffl, go to Tools and choose PDF to Editable PDF to unlock the page for changes.",
           "Step 2: If you need to rework the wording or layout substantially, use PDF to Word instead to get a fully editable document.",
-          "Step 3: Make your edits — correct the text, adjust labels, or lay out clear answer areas for each field.",
+          "Step 3: Make your edits, correct the text, adjust labels, or lay out clear answer areas for each field.",
           "Step 4: Add fillable fields or clearly defined blank spaces where respondents should type.",
           "Step 5: When the form is ready, convert it back with Word to PDF so it locks into a clean, consistent file.",
           "Step 6: Test the form yourself by filling a copy before you send it to anyone.",
@@ -292,7 +292,7 @@ const articles = [
         h: "Where fillable forms change the experience",
         p: [
           "Human resources teams use editable onboarding packets so new hires complete everything on screen the night before they start, rather than arriving with a folder of paper. Clinics turn intake questionnaires into fillable PDFs so patients answer from home. Schools send permission slips that parents can complete on a phone. Finance teams circulate expense and reimbursement forms that staff fill out without ever touching a printer.",
-          "The pattern is consistent across every sector: any form that is currently printed, written on and rescanned is a candidate. The benefit is felt on both sides — the sender receives legible, complete responses they can process or copy directly, and the recipient avoids the irritation of the print-scan ritual entirely.",
+          "The pattern is consistent across every sector: any form that is currently printed, written on and rescanned is a candidate. The benefit is felt on both sides, the sender receives legible, complete responses they can process or copy directly, and the recipient avoids the irritation of the print-scan ritual entirely.",
         ],
       },
       {
@@ -310,21 +310,21 @@ const articles = [
         h: "Best practices for forms people can actually use",
         p: [
           "Design for the person on the other end. Make each field obviously a field, give answer areas enough room for real responses, and label everything clearly so there is no guessing about what goes where. If a question expects a date or a specific format, say so right next to it. A form that is ambiguous gets filled in inconsistently, which defeats the point of making it digital in the first place.",
-          "Always test the finished form before distributing it. Fill out a copy yourself on the device your recipients are likely to use, including a phone, and confirm that every field accepts input and that nothing overlaps or gets cut off. Once you are confident it works, convert it back to PDF so the final version is stable and looks identical for everyone — the editable stage is your workshop, and the PDF is what you ship.",
+          "Always test the finished form before distributing it. Fill out a copy yourself on the device your recipients are likely to use, including a phone, and confirm that every field accepts input and that nothing overlaps or gets cut off. Once you are confident it works, convert it back to PDF so the final version is stable and looks identical for everyone, the editable stage is your workshop, and the PDF is what you ship.",
         ],
       },
       {
         h: "From the Lexigenz desk: the form is a conversation, not a wall",
         p: [
           "The forms that frustrate people are almost always the ones designed for the sender's convenience rather than the filler's. Cramped boxes, vague labels and fields that cannot actually be typed into all signal that nobody tried completing the thing themselves. We treat every form as a short conversation: the document asks, the person answers, and our job is to make answering effortless.",
-          "Our practical test on the desk is to hand a draft form to someone who has never seen it and watch them fill it in without help. Every hesitation, every wrong box, every place they reach for a pen is a defect to fix. A form that a stranger can complete cleanly on a phone, with no instructions, is a form that will come back complete and correct from real recipients — and that is the entire goal.",
+          "Our practical test on the desk is to hand a draft form to someone who has never seen it and watch them fill it in without help. Every hesitation, every wrong box, every place they reach for a pen is a defect to fix. A form that a stranger can complete cleanly on a phone, with no instructions, is a form that will come back complete and correct from real recipients, and that is the entire goal.",
         ],
       },
       {
         h: "A real-world scenario: rescuing a paper intake form",
         p: [
           "Picture a small clinic that has used the same paper intake form for years. Patients arrive, sit in the waiting room with a clipboard, and fill in their details by hand. The receptionist then squints at the handwriting, types the answers into the practice system, and occasionally has to phone someone back because a digit in a date of birth was illegible. The form works, but it quietly costs staff time at every single visit and introduces errors that only surface later.",
-          "Turning it digital starts by reopening the existing PDF as editable content rather than redesigning from scratch. The wording is already approved and familiar, so the job is to convert the flat page, lay out generous answer areas, and add real input fields where patients used to write. Where a question needs a particular format — a date, a phone number, a yes-or-no choice — the digital version can make that explicit in a way a blank line on paper never could, which removes the ambiguity that caused the callbacks.",
+          "Turning it digital starts by reopening the existing PDF as editable content rather than redesigning from scratch. The wording is already approved and familiar, so the job is to convert the flat page, lay out generous answer areas, and add real input fields where patients used to write. Where a question needs a particular format, a date, a phone number, a yes-or-no choice, the digital version can make that explicit in a way a blank line on paper never could, which removes the ambiguity that caused the callbacks.",
           "The payoff appears immediately. Patients complete the form from home the evening before, or on a tablet in the waiting room, and the answers arrive typed and legible. The receptionist copies clean data straight across instead of deciphering handwriting, the callback problem largely disappears, and the same form that took years of small frictions becomes a smooth first step in every visit. Nothing about the questions changed; only the medium did, and that was enough.",
         ],
       },
@@ -344,7 +344,7 @@ const articles = [
         h: "Light fixes or a full rebuild: choosing your approach",
         p: [
           "Not every form needs the same treatment, and matching the effort to the job keeps the work efficient. When the form is fundamentally sound and you only need to correct a typo, swap a date or relabel a field, a light edit that keeps the existing layout intact is the right move. You reopen the PDF as editable content, make the targeted change, and lock it back to PDF. The structure everyone already knows stays exactly where it was, and nobody has to relearn a familiar document.",
-          "A full rebuild becomes worthwhile when the form itself is the problem — cramped boxes that never gave room to answer, a layout that confuses people, or a structure that no longer matches the questions you actually need to ask. In those cases, converting to a word processor gives you the freedom to redesign properly: regroup related fields, widen answer areas, clarify labels and rethink the flow. You are no longer patching a flawed form but replacing it with one that works, then exporting the result back to a stable PDF.",
+          "A full rebuild becomes worthwhile when the form itself is the problem, cramped boxes that never gave room to answer, a layout that confuses people, or a structure that no longer matches the questions you actually need to ask. In those cases, converting to a word processor gives you the freedom to redesign properly: regroup related fields, widen answer areas, clarify labels and rethink the flow. You are no longer patching a flawed form but replacing it with one that works, then exporting the result back to a stable PDF.",
           "The honest test is whether the form's bones are good. If the design is sound and only the details are wrong, edit lightly and preserve what works. If people consistently struggle with it, resist the urge to keep patching and rebuild it once, properly. A form is used over and over by many people, so an hour spent fixing its structure repays itself many times in cleaner responses and fewer queries from confused recipients.",
         ],
       },
@@ -353,7 +353,7 @@ const articles = [
         faq: [
           {
             q: "Why can I not type into a PDF form I received?",
-            a: "It is a flat PDF — the fields are drawn on, not interactive. Making it editable or fillable adds real input areas.",
+            a: "It is a flat PDF, the fields are drawn on, not interactive. Making it editable or fillable adds real input areas.",
           },
           {
             q: "Should I edit in editable PDF or in Word?",
@@ -408,7 +408,7 @@ const articles = [
           "Step 1: Open PDFShuffl, go to Tools and select PDF to Word to extract the document into editable form.",
           "Step 2: If you mainly need to lift a few clean passages or fix the source, PDF to Editable PDF can help instead.",
           "Step 3: From the editable document, copy the headings, key sentences and bullet-worthy points into your slides.",
-          "Step 4: Trim hard — slides need short phrases, not the dense paragraphs a report uses.",
+          "Step 4: Trim hard, slides need short phrases, not the dense paragraphs a report uses.",
           "Step 5: Rebuild each slide around one idea, using the extracted text as your raw material.",
           "Step 6: If you later need a shareable handout, export your finished deck and use PPT to PDF.",
         ],
@@ -417,7 +417,7 @@ const articles = [
         h: "Where this saves real time",
         p: [
           "A consultant who has delivered a detailed written assessment needs a boardroom deck of the same findings; extracting the structure gives an instant outline to build slides around. A researcher converts the key results of a paper into a conference talk. A product team turns a written spec into a stakeholder presentation. A teacher reshapes a dense set of notes into a lecture deck.",
-          "In each case the report and the presentation are two views of the same underlying ideas. One is built for careful reading, the other for being talked through on a screen. Extracting the content lets you move between those views without redoing the thinking — the argument is already made, and you are simply re-presenting it for a different audience and setting.",
+          "In each case the report and the presentation are two views of the same underlying ideas. One is built for careful reading, the other for being talked through on a screen. Extracting the content lets you move between those views without redoing the thinking, the argument is already made, and you are simply re-presenting it for a different audience and setting.",
         ],
       },
       {
@@ -434,14 +434,14 @@ const articles = [
       {
         h: "Best practices for slides that work",
         p: [
-          "Resist the urge to paste paragraphs onto slides. A report is written to be read closely, while a slide is glanced at while someone is speaking. The extracted text is your source material, not your final copy — your job is to compress each idea into a short phrase or a handful of bullets and let your narration carry the detail. A slide crammed with the original prose is harder to follow than no slide at all.",
+          "Resist the urge to paste paragraphs onto slides. A report is written to be read closely, while a slide is glanced at while someone is speaking. The extracted text is your source material, not your final copy, your job is to compress each idea into a short phrase or a handful of bullets and let your narration carry the detail. A slide crammed with the original prose is harder to follow than no slide at all.",
           "Let the document's heading structure do the heavy lifting for your outline. The sections of a well-organised report usually map neatly onto the sections of a talk, so use them as your skeleton and then decide which supporting points deserve a slide of their own. Pull charts and figures across as well, but rebuild any data table as a clean, simple visual rather than dropping in a dense grid that no one in the back row can read.",
         ],
       },
       {
         h: "From the Lexigenz desk: extract the ideas, then edit ruthlessly",
         p: [
-          "The most common mistake we see is people converting a PDF and then treating the output as if it were already a presentation. Extraction gives you the raw material; it does not give you a deck. The real work, and the part that makes a talk land, is editing — cutting the report's careful qualifications down to the one sentence that matters and choosing which points genuinely deserve airtime.",
+          "The most common mistake we see is people converting a PDF and then treating the output as if it were already a presentation. Extraction gives you the raw material; it does not give you a deck. The real work, and the part that makes a talk land, is editing, cutting the report's careful qualifications down to the one sentence that matters and choosing which points genuinely deserve airtime.",
           "Our habit is to extract everything first so nothing is lost, then build the slides from a deliberately short list of the points we actually intend to say out loud. Having the full text on hand means we can always go back for a figure or an exact phrase, but the deck itself stays lean. Starting from existing content saves the hours; editing it ruthlessly is what makes the presentation good.",
         ],
       },
@@ -468,9 +468,9 @@ const articles = [
       {
         h: "A real-world scenario: a written assessment becomes a board deck",
         p: [
-          "A consultant has just delivered a thorough written assessment to a client — twenty pages of analysis, recommendations and supporting figures, all signed off as a PDF. The next day the client asks for a thirty-minute board presentation of the same findings. Starting from a blank slide and rebuilding everything from memory would mean an evening of retyping headings, re-creating charts and second-guessing the exact wording that was already carefully agreed. None of that work needs repeating, because the content already exists in finished form.",
-          "Instead, the consultant extracts the assessment into an editable document and uses its heading structure as an instant outline. The major sections of the report become the major movements of the talk; the key recommendations become the slides that matter most; the figures are lifted across as approved numbers rather than retyped guesses. With the raw material in hand, the real work is subtraction — deciding which of the report's careful points the board actually needs to hear in half an hour, and cutting the rest down to a confident line or two.",
-          "The result is a deck built in a fraction of the time, faithful to a document the client has already accepted. Because the wording and figures came straight from the approved source, there is no risk of a slide contradicting the report it summarises. The consultant spends the saved hours on what genuinely improves the presentation — pacing, clarity and the story the numbers tell — rather than on recreating content that was finished the day before.",
+          "A consultant has just delivered a thorough written assessment to a client, twenty pages of analysis, recommendations and supporting figures, all signed off as a PDF. The next day the client asks for a thirty-minute board presentation of the same findings. Starting from a blank slide and rebuilding everything from memory would mean an evening of retyping headings, re-creating charts and second-guessing the exact wording that was already carefully agreed. None of that work needs repeating, because the content already exists in finished form.",
+          "Instead, the consultant extracts the assessment into an editable document and uses its heading structure as an instant outline. The major sections of the report become the major movements of the talk; the key recommendations become the slides that matter most; the figures are lifted across as approved numbers rather than retyped guesses. With the raw material in hand, the real work is subtraction, deciding which of the report's careful points the board actually needs to hear in half an hour, and cutting the rest down to a confident line or two.",
+          "The result is a deck built in a fraction of the time, faithful to a document the client has already accepted. Because the wording and figures came straight from the approved source, there is no risk of a slide contradicting the report it summarises. The consultant spends the saved hours on what genuinely improves the presentation, pacing, clarity and the story the numbers tell, rather than on recreating content that was finished the day before.",
         ],
       },
       {
@@ -478,7 +478,7 @@ const articles = [
         faq: [
           {
             q: "Can I convert a PDF directly into a finished slideshow?",
-            a: "Not cleanly — extract the content to an editable document first, then shape and trim it into slides yourself.",
+            a: "Not cleanly, extract the content to an editable document first, then shape and trim it into slides yourself.",
           },
           {
             q: "Should I use PDF to Word for this?",
@@ -486,7 +486,7 @@ const articles = [
           },
           {
             q: "How much text belongs on a slide?",
-            a: "As little as possible — short phrases or a few bullets, with the detail delivered through what you say aloud.",
+            a: "As little as possible, short phrases or a few bullets, with the detail delivered through what you say aloud.",
           },
           {
             q: "How do I share the final deck reliably?",
@@ -497,7 +497,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "When a finished PDF needs to become a presentation, do not start from a blank slide. Extract the existing content into editable form, lift the headings and key points, then edit them down to phrases that work on screen. You reuse the thinking that is already done and spend your time where it counts — making the deck clear and sharp.",
+          "When a finished PDF needs to become a presentation, do not start from a blank slide. Extract the existing content into editable form, lift the headings and key points, then edit them down to phrases that work on screen. You reuse the thinking that is already done and spend your time where it counts, making the deck clear and sharp.",
         ],
       },
     ],
@@ -521,7 +521,7 @@ const articles = [
         h: "Why screenshotting an image is the wrong instinct",
         p: [
           "When people want a photo, logo or diagram that lives inside a PDF, the first thing they usually do is take a screenshot. It works, sort of, but it quietly throws away quality. A screenshot only captures what is on screen at that zoom level, so you get a low-resolution copy of an image that may have been stored at much higher resolution inside the file. Print it or enlarge it and the softness and pixelation give it away immediately.",
-          "The better approach is to extract the embedded image itself — the original picture the document's author placed inside the PDF, at whatever resolution they used. Instead of photographing the page, you reach into the file and pull out the actual image data. The result is the genuine asset at full quality, suitable for reuse on the web, in print or in another document, with nothing degraded along the way.",
+          "The better approach is to extract the embedded image itself, the original picture the document's author placed inside the PDF, at whatever resolution they used. Instead of photographing the page, you reach into the file and pull out the actual image data. The result is the genuine asset at full quality, suitable for reuse on the web, in print or in another document, with nothing degraded along the way.",
         ],
       },
       {
@@ -542,7 +542,7 @@ const articles = [
         h: "Where full-quality extraction matters",
         p: [
           "A marketing team needs the high-resolution product photos from a supplier's PDF brochure for their own store listings; a screenshot would look amateurish, but the embedded originals are print-ready. A designer recovers a logo from an old PDF when the source file has vanished. A publisher pulls figures and charts out of a manuscript PDF to reuse in a new edition. A teacher extracts diagrams from a textbook PDF for a worksheet.",
-          "The thread running through all of these is that the image is going to be reused somewhere it will be seen properly — on a screen at full size, on a printed page, or enlarged in a layout. In those settings the difference between a degraded screenshot and the original asset is obvious, and extracting properly is what keeps the work looking professional.",
+          "The thread running through all of these is that the image is going to be reused somewhere it will be seen properly, on a screen at full size, on a printed page, or enlarged in a layout. In those settings the difference between a degraded screenshot and the original asset is obvious, and extracting properly is what keeps the work looking professional.",
         ],
       },
       {
@@ -559,21 +559,21 @@ const articles = [
       {
         h: "Best practices for reusing extracted images",
         p: [
-          "Always inspect an extracted image at one hundred percent before you trust it. The quality you get out can only ever be as good as the quality that was put in — if the author embedded a small, low-resolution picture, that is what you will recover, and no tool can invent detail that was never stored. Checking at full size tells you immediately whether the asset is good enough for your intended use or whether you need to source a better original.",
+          "Always inspect an extracted image at one hundred percent before you trust it. The quality you get out can only ever be as good as the quality that was put in, if the author embedded a small, low-resolution picture, that is what you will recover, and no tool can invent detail that was never stored. Checking at full size tells you immediately whether the asset is good enough for your intended use or whether you need to source a better original.",
           "Give a thought to rights as well as resolution. Extracting an image is a technical step, but reusing someone else's photo, logo or diagram may carry licensing or copyright obligations, especially for anything you publish. When the image is your own or you have permission, extract freely; when it belongs to someone else, make sure you are entitled to use it before it lands in your own materials.",
         ],
       },
       {
         h: "From the Lexigenz desk: the original is always better than the photo of it",
         p: [
-          "A principle we come back to constantly is that you should reach for the source asset, not a copy of a copy. A screenshot of an on-screen image is a copy of a copy — it has already lost information twice over by the time it reaches your clipboard. Extracting the embedded image skips that degradation entirely and hands you what the author actually placed in the file.",
+          "A principle we come back to constantly is that you should reach for the source asset, not a copy of a copy. A screenshot of an on-screen image is a copy of a copy, it has already lost information twice over by the time it reaches your clipboard. Extracting the embedded image skips that degradation entirely and hands you what the author actually placed in the file.",
           "We have rescued countless logos and product shots this way, often years after the original design files were lost, simply because a high-quality version was still sitting inside an old PDF. The lesson we draw from it is to treat PDFs as archives of assets, not just as flat pages. Before anyone recreates a graphic from scratch, it is always worth checking whether the original is still hiding inside a document somewhere.",
         ],
       },
       {
         h: "How images are actually stored inside a PDF",
         p: [
-          "Understanding why extraction beats screenshotting starts with how a PDF holds an image in the first place. When an author places a photo on a page, the file stores the picture as a self-contained block of image data — often the same compressed form, such as JPEG, that the original used — along with instructions on where to draw it and at what size on the page. The image you see is that stored data rendered to the screen, scaled to fit the layout the author chose.",
+          "Understanding why extraction beats screenshotting starts with how a PDF holds an image in the first place. When an author places a photo on a page, the file stores the picture as a self-contained block of image data, often the same compressed form, such as JPEG, that the original used, along with instructions on where to draw it and at what size on the page. The image you see is that stored data rendered to the screen, scaled to fit the layout the author chose.",
           "This separation between the stored asset and its on-page appearance is the whole reason extraction works. The page might display a logo at a modest size, but the file can easily contain a far larger, higher-resolution version that simply gets scaled down for display. A screenshot captures only the scaled-down rendering at your current zoom; extraction reaches past the rendering and pulls out the stored block at its true resolution, untouched by how small it happened to look on screen.",
           "It also explains the limits of extraction honestly. You can only recover what was stored, so if the author embedded a small, heavily compressed image to keep the file size down, that compressed version is the ceiling of what any tool can give you. Extraction never invents detail; it simply hands you the genuine asset instead of a degraded photograph of it. Knowing this lets you set the right expectation before you even open the file.",
         ],
@@ -593,7 +593,7 @@ const articles = [
       {
         h: "Choosing the right route for the images you need",
         p: [
-          "There is more than one way to get images out of a PDF, and the best choice depends on what you are after. When you want the pictures alone — a set of product photos, a logo, a handful of diagrams — converting the document to a format that separates its assets from its text is the cleanest path. You end up with the embedded image files themselves, ready to drop into a layout or upload to a store, without the surrounding words getting in the way.",
+          "There is more than one way to get images out of a PDF, and the best choice depends on what you are after. When you want the pictures alone, a set of product photos, a logo, a handful of diagrams, converting the document to a format that separates its assets from its text is the cleanest path. You end up with the embedded image files themselves, ready to drop into a layout or upload to a store, without the surrounding words getting in the way.",
           "When the images are tangled up with the text you also need, bringing the whole document into an editable form makes more sense. You get the pictures and the prose together, in context, so you can lift exactly the figure that belongs with a particular passage rather than guessing which loose image went where. This matters most for documents like reports and manuals, where a chart only means something alongside the paragraph that explains it.",
           "Volume changes the calculus too. Recovering a single graphic is a quick, targeted job; reclaiming every image from a large brochure or a stack of old documents is a project, and there it pays to think in terms of a consistent process rather than ad hoc grabs. Whichever route you take, the principle holds: reach for the embedded original, choose the conversion that isolates what you actually need, and check the result at full size before you rely on it.",
         ],
@@ -607,7 +607,7 @@ const articles = [
           },
           {
             q: "What quality will the extracted image be?",
-            a: "Exactly the quality the author embedded — high if they used a high-resolution picture, limited if they used a small one.",
+            a: "Exactly the quality the author embedded, high if they used a high-resolution picture, limited if they used a small one.",
           },
           {
             q: "Can I get the images and the text separately?",
@@ -645,7 +645,7 @@ const articles = [
       {
         h: "Why copy and paste from a PDF goes wrong",
         p: [
-          "Almost everyone has tried to copy a passage from a PDF and pasted in something disappointing: line breaks in the middle of sentences, words jammed together, columns interleaved, and any formatting gone. It feels like the PDF is fighting you, and in a sense it is. A PDF stores text as fragments positioned on a page for visual layout, not as flowing paragraphs, so when you drag to select and copy, you are grabbing those fragments in whatever order the file lists them — which is not always the order you read them.",
+          "Almost everyone has tried to copy a passage from a PDF and pasted in something disappointing: line breaks in the middle of sentences, words jammed together, columns interleaved, and any formatting gone. It feels like the PDF is fighting you, and in a sense it is. A PDF stores text as fragments positioned on a page for visual layout, not as flowing paragraphs, so when you drag to select and copy, you are grabbing those fragments in whatever order the file lists them, which is not always the order you read them.",
           "The good news is that copying text does not have to be a gamble. The right method depends on two things: how much you need and what kind of PDF you have. For a sentence or two from a normal digital PDF, ordinary selection is fine. For a whole document, a column layout, or a scanned file, a proper extraction tool produces a far cleaner result than dragging your cursor ever will.",
         ],
       },
@@ -655,7 +655,7 @@ const articles = [
           "Match the method to the job. The bigger or more complex the text you need, the more you benefit from extracting rather than manually selecting.",
         ],
         ul: [
-          "Step 1: For a short snippet from a digital PDF, select it directly and copy — that is genuinely enough.",
+          "Step 1: For a short snippet from a digital PDF, select it directly and copy, that is genuinely enough.",
           "Step 2: For a whole document of plain words, open PDFShuffl, go to Tools and use PDF to TXT for clean, unformatted text.",
           "Step 3: When you need the text with its structure and formatting intact, use PDF to Word instead.",
           "Step 4: If the PDF is scanned, run PDF to Editable PDF first so there is real text to copy at all.",
@@ -667,7 +667,7 @@ const articles = [
         h: "Where the right method makes a difference",
         p: [
           "A student gathering quotes from several reference PDFs needs the wording exact and clean, not riddled with stray breaks that have to be repaired by hand. A lawyer copying clauses from a contract into a new agreement cannot afford a single dropped word. A journalist pulling statements out of a report wants the text fast and faithful. A developer feeding document content into a tool needs plain text with no formatting noise at all.",
-          "Each of these has a different ideal method. The student and lawyer want structure preserved, so Word is the right target; the developer wants pure text, so TXT is. Recognising which situation you are in — and whether your PDF is digital or scanned — is what turns copying from a frustrating lottery into a predictable, reliable step.",
+          "Each of these has a different ideal method. The student and lawyer want structure preserved, so Word is the right target; the developer wants pure text, so TXT is. Recognising which situation you are in, and whether your PDF is digital or scanned, is what turns copying from a frustrating lottery into a predictable, reliable step.",
         ],
       },
       {
@@ -691,8 +691,8 @@ const articles = [
       {
         h: "From the Lexigenz desk: stop dragging, start extracting",
         p: [
-          "The single most useful habit we can pass on is to stop treating drag-and-select as the default for anything longer than a sentence. For a quick quote it is fine, but the moment you are copying a section, a page or a whole document, manual selection becomes a false economy — you spend more time repairing the mangled paste than the copying ever saved. Extraction tools exist precisely because copying at scale is a structural problem, not a user error.",
-          "We also keep reminding people that an empty clipboard usually means a scanned PDF, not a broken one. The first time it happens it is baffling; once you know the cause, the fix is obvious. Run recognition, then copy. Internalise those two reflexes — extract instead of drag for anything substantial, and recognise scans before expecting text — and copying from PDFs stops being a chore.",
+          "The single most useful habit we can pass on is to stop treating drag-and-select as the default for anything longer than a sentence. For a quick quote it is fine, but the moment you are copying a section, a page or a whole document, manual selection becomes a false economy, you spend more time repairing the mangled paste than the copying ever saved. Extraction tools exist precisely because copying at scale is a structural problem, not a user error.",
+          "We also keep reminding people that an empty clipboard usually means a scanned PDF, not a broken one. The first time it happens it is baffling; once you know the cause, the fix is obvious. Run recognition, then copy. Internalise those two reflexes, extract instead of drag for anything substantial, and recognise scans before expecting text, and copying from PDFs stops being a chore.",
         ],
       },
       {
@@ -719,7 +719,7 @@ const articles = [
         h: "Why a PDF scatters text the moment you copy it",
         p: [
           "It is worth understanding why copying misbehaves, because the explanation removes the mystery and points straight at the fix. A PDF was designed to look identical everywhere it is opened, and it achieves that by storing text as small fragments placed at precise coordinates on the page. The file does not really know that a paragraph is a paragraph; it knows that this run of characters sits here, that one sits there, and that together they form the appearance of flowing text when rendered.",
-          "When you drag to select, you are not selecting a paragraph in any meaningful sense — you are sweeping up those positioned fragments in whatever order the file happens to list them, which is not always the order your eye reads them. That is why columns interleave, why a heading sometimes lands in the middle of a sentence, and why line breaks appear where the text merely wrapped on the page rather than where a sentence actually ended. The page looks like a document; underneath, it is a careful arrangement of pieces.",
+          "When you drag to select, you are not selecting a paragraph in any meaningful sense, you are sweeping up those positioned fragments in whatever order the file happens to list them, which is not always the order your eye reads them. That is why columns interleave, why a heading sometimes lands in the middle of a sentence, and why line breaks appear where the text merely wrapped on the page rather than where a sentence actually ended. The page looks like a document; underneath, it is a careful arrangement of pieces.",
           "Extraction tools work precisely because they do more than grab fragments. They analyse the layout, infer the intended reading order, and reassemble the pieces into coherent text before handing it to you. That is the whole reason a proper extraction beats a raw drag for anything substantial: it is doing the reconstruction work that copy-and-paste skips. Once you see copying as a reconstruction problem rather than a simple grab, choosing the right tool for the job becomes obvious.",
         ],
       },
@@ -770,7 +770,7 @@ const articles = [
       {
         h: "The fixed page meets the small screen",
         p: [
-          "A PDF is built around a fixed page, usually the size of a sheet of paper. On a large monitor that is fine, but on a phone it becomes an exercise in pinching, zooming and dragging sideways to read a single line, then dragging back to find the start of the next one. The very thing that makes PDF reliable for printing — its unchanging layout — is what makes it hostile on a small screen. The text cannot shrink to fit; it simply stays put while you scroll around it.",
+          "A PDF is built around a fixed page, usually the size of a sheet of paper. On a large monitor that is fine, but on a phone it becomes an exercise in pinching, zooming and dragging sideways to read a single line, then dragging back to find the start of the next one. The very thing that makes PDF reliable for printing, its unchanging layout, is what makes it hostile on a small screen. The text cannot shrink to fit; it simply stays put while you scroll around it.",
           "Reflowing is the answer. Instead of forcing the reader to navigate a fixed page, you convert the content into a form that rearranges itself to fit whatever screen it is on. The words wrap to the width available, the layout collapses into a comfortable single column, and reading becomes a matter of scrolling straight down. The same shift that helps phone users also helps the assistive technology that many readers rely on.",
         ],
       },
@@ -817,13 +817,13 @@ const articles = [
         h: "From the Lexigenz desk: design for the screen people actually use",
         p: [
           "We often have to challenge a quiet assumption: that everyone reads documents on a big monitor the way the author wrote them. In reality a large and growing share of readers are on phones, and many depend on assistive technology, larger text, or both. A fixed PDF is built for none of them. When we audit how an organisation's content actually performs, the mobile and accessibility experience is almost always the weakest link.",
-          "Reflowing is one of the highest-return fixes available, because you are not rewriting anything — the content already exists, and you are simply freeing it from a rigid page so it can adapt. Our consistent advice is to stop publishing important information in a form that only works comfortably on a desktop. Convert it to something that reflows, check the reading order, and you have widened your audience without writing a single new word.",
+          "Reflowing is one of the highest-return fixes available, because you are not rewriting anything, the content already exists, and you are simply freeing it from a rigid page so it can adapt. Our consistent advice is to stop publishing important information in a form that only works comfortably on a desktop. Convert it to something that reflows, check the reading order, and you have widened your audience without writing a single new word.",
         ],
       },
       {
         h: "How reflow rebuilds a page for any screen",
         p: [
-          "A fixed PDF positions every word, line and image at exact coordinates on a page of a set size, which is precisely what makes it print identically everywhere and behave so badly on a phone. Reflowing throws away those fixed coordinates and reconstructs the content as a flowing sequence instead — a stream of headings, paragraphs, lists and images that a device can lay out fresh according to the space it has. The information is the same; the difference is that its arrangement becomes the reader's to decide rather than the author's to dictate.",
+          "A fixed PDF positions every word, line and image at exact coordinates on a page of a set size, which is precisely what makes it print identically everywhere and behave so badly on a phone. Reflowing throws away those fixed coordinates and reconstructs the content as a flowing sequence instead, a stream of headings, paragraphs, lists and images that a device can lay out fresh according to the space it has. The information is the same; the difference is that its arrangement becomes the reader's to decide rather than the author's to dictate.",
           "The crucial work happens in inferring the logical order. To reflow well, the conversion has to determine the sequence in which a human would actually read the page: this heading belongs to that section, this caption goes with that image, the left column comes before the right. From that understanding it builds a single linear flow that can wrap to any width. When the inference is right, the result reads naturally on any screen; when the original layout is ambiguous, this is exactly the stage where reading order can go astray.",
           "Once content is expressed as that flowing structure rather than a fixed page, adaptation becomes almost free. A narrow screen wraps the text into one comfortable column; a reader who enlarges the font simply gets longer wrapping with no horizontal scrolling; assistive technology can walk the structure heading by heading because the order and hierarchy are now explicit. The same reconstruction that helps a phone user is the very thing that makes the content accessible, which is why the two benefits always arrive together.",
         ],
@@ -843,7 +843,7 @@ const articles = [
       {
         h: "A real-world scenario: an employee handbook that works on phones",
         p: [
-          "A company keeps its employee handbook as a polished PDF, designed to look immaculate when printed. The problem surfaces the moment staff try to use it the way they actually work — on their phones, between tasks, looking up a single policy. The fixed pages do not fit the screen, so reading a clause means pinching, zooming and dragging sideways line by line. Most people give up and ask a colleague instead, which defeats the entire purpose of having a written reference everyone can consult.",
+          "A company keeps its employee handbook as a polished PDF, designed to look immaculate when printed. The problem surfaces the moment staff try to use it the way they actually work, on their phones, between tasks, looking up a single policy. The fixed pages do not fit the screen, so reading a clause means pinching, zooming and dragging sideways line by line. Most people give up and ask a colleague instead, which defeats the entire purpose of having a written reference everyone can consult.",
           "Reflowing the handbook fixes this without rewriting a word of policy. The content is converted into a flowing, web-friendly form that wraps to whatever screen it lands on, collapsing the rigid two-column print layout into a single comfortable column. Staff can now scroll straight down, search for the section they need, and read it at a sensible size on the device in their hand. The same conversion quietly serves employees who rely on screen readers or who enlarge text, a group the print PDF had always left behind.",
           "The crucial step in this scenario is checking the reading order after conversion, because the handbook's original columns and boxed callouts are exactly the kind of layout that can unwind in the wrong sequence. A careful read on a phone-sized screen confirms that headings, policies and notes still follow in the order a person would read them. With that verified, a document that was technically published but practically unreachable becomes genuinely usable by the whole workforce, on the screens they actually carry.",
         ],
@@ -865,7 +865,7 @@ const articles = [
           },
           {
             q: "Will the reflowed version look the same as the PDF?",
-            a: "No, and that is intentional — it trades a fixed print layout for a flexible flow that works on every screen.",
+            a: "No, and that is intentional, it trades a fixed print layout for a flexible flow that works on every screen.",
           },
         ],
       },
@@ -895,8 +895,8 @@ const articles = [
       {
         h: "Why Markdown has become the default for working text",
         p: [
-          "Markdown won by being simple. It is plain text with a handful of lightweight conventions — a hash for a heading, a dash for a list item, asterisks for emphasis — and from those few rules you get clean, readable, portable documents that convert effortlessly into web pages, slides, PDFs and more. Developers write documentation in it, note-takers build their personal knowledge bases in it, and entire static websites are generated from it. It is the connective tissue of a huge amount of modern writing.",
-          "A PDF sits awkwardly outside this world. Its content is locked in a fixed, formatting-heavy container that does not drop neatly into a Markdown-based workflow. Getting from PDF to Markdown means extracting the words and their structure into clean text that follows those lightweight conventions — so the content can live in a notes app, a documentation repository or a publishing pipeline alongside everything else, rather than stranded in a file nobody can easily reuse.",
+          "Markdown won by being simple. It is plain text with a handful of lightweight conventions, a hash for a heading, a dash for a list item, asterisks for emphasis, and from those few rules you get clean, readable, portable documents that convert effortlessly into web pages, slides, PDFs and more. Developers write documentation in it, note-takers build their personal knowledge bases in it, and entire static websites are generated from it. It is the connective tissue of a huge amount of modern writing.",
+          "A PDF sits awkwardly outside this world. Its content is locked in a fixed, formatting-heavy container that does not drop neatly into a Markdown-based workflow. Getting from PDF to Markdown means extracting the words and their structure into clean text that follows those lightweight conventions, so the content can live in a notes app, a documentation repository or a publishing pipeline alongside everything else, rather than stranded in a file nobody can easily reuse.",
         ],
       },
       {
@@ -909,7 +909,7 @@ const articles = [
           "Step 2: Open PDFShuffl, go to Tools and use PDF to TXT to pull out the clean, unformatted words.",
           "Step 3: If you want the heading and list structure made explicit, use PDF to HTML, which exposes those elements clearly.",
           "Step 4: For a richer editable source you can restructure, PDF to Word is an alternative starting point.",
-          "Step 5: Add the lightweight Markdown markers — hashes for headings, dashes for lists, asterisks for emphasis.",
+          "Step 5: Add the lightweight Markdown markers, hashes for headings, dashes for lists, asterisks for emphasis.",
           "Step 6: Drop the finished Markdown into your notes app, repository or publishing pipeline.",
         ],
       },
@@ -935,7 +935,7 @@ const articles = [
         h: "Best practices for clean Markdown",
         p: [
           "Start from the cleanest extraction you can get, because Markdown is at its best when it is uncluttered. Pulling the content to plain text strips away the formatting noise that would otherwise have to be deleted, leaving you free to add only the structure you actually want. If preserving the document's heading and list hierarchy matters, extracting to HTML first makes those elements explicit and easy to translate into the corresponding Markdown markers.",
-          "Expect to do a little hand-finishing, and treat that as normal rather than a failure of the tool. Tables, in particular, do not always map cleanly onto Markdown's simple table syntax and may need tidying; complex multi-column layouts can scramble reading order and should be checked. Keep your formatting restrained — Markdown rewards a light touch — and review the result so the headings sit at sensible levels and the lists are genuinely lists rather than runs of stray dashes.",
+          "Expect to do a little hand-finishing, and treat that as normal rather than a failure of the tool. Tables, in particular, do not always map cleanly onto Markdown's simple table syntax and may need tidying; complex multi-column layouts can scramble reading order and should be checked. Keep your formatting restrained, Markdown rewards a light touch, and review the result so the headings sit at sensible levels and the lists are genuinely lists rather than runs of stray dashes.",
         ],
       },
       {
@@ -949,7 +949,7 @@ const articles = [
         h: "Choosing the right starting format for your Markdown",
         p: [
           "The format you extract to first shapes how much hand-finishing the Markdown needs, so it is worth choosing deliberately rather than reaching for whichever is closest. Plain text is the leanest starting point: it strips every trace of formatting and hands you nothing but the words. That is ideal when the source is prose-heavy and you intend to impose a fresh, simple structure yourself, because there is no inherited markup to undo before you begin adding hashes and dashes.",
-          "Extracting to HTML suits documents whose structure is the point. Because HTML makes headings, lists and emphasis explicit as real elements, you can map them directly onto their Markdown equivalents — a second-level heading becomes two hashes, a bullet list becomes a run of dashes — rather than eyeballing the original and guessing at the hierarchy. For technical documentation or anything with a deliberate outline, starting from HTML preserves the skeleton you would otherwise have to rebuild by hand.",
+          "Extracting to HTML suits documents whose structure is the point. Because HTML makes headings, lists and emphasis explicit as real elements, you can map them directly onto their Markdown equivalents, a second-level heading becomes two hashes, a bullet list becomes a run of dashes, rather than eyeballing the original and guessing at the hierarchy. For technical documentation or anything with a deliberate outline, starting from HTML preserves the skeleton you would otherwise have to rebuild by hand.",
           "Word earns its place when the document needs reshaping before it becomes Markdown at all. If you intend to reorganise sections, merge passages or rewrite for a new audience, a rich editable copy gives you room to do that work first and reduce the content to clean structure second. The rule of thumb is simple: choose plain text for the cleanest words, HTML when the structure must survive, and Word when the content itself needs reworking on the way in.",
         ],
       },
@@ -968,8 +968,8 @@ const articles = [
       {
         h: "A real-world scenario: migrating old docs into a repository",
         p: [
-          "A development team inherits years of product documentation trapped in PDFs — release notes, integration guides, API references — while everything new lives in a Markdown-based documentation site generated straight from the project repository. The old material is genuinely useful, but it sits outside the toolchain entirely. Nobody can edit it alongside the code, it does not appear in the site's search, and it cannot be reviewed through the same pull-request workflow as everything else. The content is valuable and effectively stranded.",
-          "Bringing it in starts with extracting each PDF to clean text or, where the structure matters, to HTML that exposes the headings and lists explicitly. From that neutral base the team adds Markdown markers deliberately: hashes for the section headings, dashes for the lists, fenced blocks for the code samples that the guides are full of. The mindset is translation, not photocopying — the goal is an idiomatic Markdown file that fits the repository, not a pixel-faithful echo of the original print layout.",
+          "A development team inherits years of product documentation trapped in PDFs, release notes, integration guides, API references, while everything new lives in a Markdown-based documentation site generated straight from the project repository. The old material is genuinely useful, but it sits outside the toolchain entirely. Nobody can edit it alongside the code, it does not appear in the site's search, and it cannot be reviewed through the same pull-request workflow as everything else. The content is valuable and effectively stranded.",
+          "Bringing it in starts with extracting each PDF to clean text or, where the structure matters, to HTML that exposes the headings and lists explicitly. From that neutral base the team adds Markdown markers deliberately: hashes for the section headings, dashes for the lists, fenced blocks for the code samples that the guides are full of. The mindset is translation, not photocopying, the goal is an idiomatic Markdown file that fits the repository, not a pixel-faithful echo of the original print layout.",
           "The tables and code blocks are where the hand-finishing concentrates, since Markdown's simple table syntax rarely absorbs a complex grid cleanly and code needs careful fencing to render correctly. Once tidied, each former PDF becomes a proper repository file: versioned, searchable, reviewable and editable by anyone on the team. Documentation that used to be a dead-end attachment now lives in the same workflow as the code it describes, which is the entire reason for converting it in the first place.",
         ],
       },
@@ -1020,7 +1020,7 @@ const articles = [
       {
         h: "Why complex layouts trip up conversion",
         p: [
-          "Most conversion problems people complain about are really layout problems. A simple, single-column report converts back to editable form almost flawlessly, because the reading order is obvious — top to bottom, one line after another. But the moment a document uses columns, sidebars, pull quotes, captions and text boxes, the picture changes. The human eye effortlessly knows to read down the left column before jumping to the right, but a conversion tool has to infer that order from positions on a page, and it does not always guess the way you would.",
+          "Most conversion problems people complain about are really layout problems. A simple, single-column report converts back to editable form almost flawlessly, because the reading order is obvious, top to bottom, one line after another. But the moment a document uses columns, sidebars, pull quotes, captions and text boxes, the picture changes. The human eye effortlessly knows to read down the left column before jumping to the right, but a conversion tool has to infer that order from positions on a page, and it does not always guess the way you would.",
           "The classic symptom is text that comes out interleaved: a line from the left column, then a line from the right, then back again, until the whole thing reads like nonsense. This is not the tool being broken; it is the inherent difficulty of unwinding a two-dimensional visual arrangement into a one-dimensional stream of text. Knowing that the challenge is the layout, not the content, is the first step to handling it well.",
         ],
       },
@@ -1042,7 +1042,7 @@ const articles = [
         h: "Where these layouts show up",
         p: [
           "Anyone working with newsletters knows the pain: two or three columns, boxed announcements and captions, all of which a naive conversion can blend together. Academic journals are similar, with dense two-column articles, footnotes and figures. Marketing brochures scatter text across a designed page in a way that looks great in print and converts awkwardly. Magazines, annual reports and government bulletins all share the same complex-layout DNA.",
-          "These are exactly the documents people most often need to reuse — repurposing a newsletter article, quoting a journal paper, updating last year's brochure copy. Because the content is valuable and the layout is complex, they are both the hardest to convert and the most worth converting. A little extra care turns a frustrating scramble into clean, reusable, correctly ordered text.",
+          "These are exactly the documents people most often need to reuse, repurposing a newsletter article, quoting a journal paper, updating last year's brochure copy. Because the content is valuable and the layout is complex, they are both the hardest to convert and the most worth converting. A little extra care turns a frustrating scramble into clean, reusable, correctly ordered text.",
         ],
       },
       {
@@ -1059,15 +1059,15 @@ const articles = [
       {
         h: "Best practices for tricky documents",
         p: [
-          "Set your expectations by the complexity of the page and review accordingly. A multi-column or boxed layout demands a careful read-through after conversion, because the most likely error — text from different columns interleaved — is invisible until you actually read the output. Do not assume a complex document converted correctly just because it produced something; confirm that each column and box reads as a continuous, sensible block before you build on it.",
+          "Set your expectations by the complexity of the page and review accordingly. A multi-column or boxed layout demands a careful read-through after conversion, because the most likely error, text from different columns interleaved, is invisible until you actually read the output. Do not assume a complex document converted correctly just because it produced something; confirm that each column and box reads as a continuous, sensible block before you build on it.",
           "When a page is especially intricate, divide and conquer. Converting and checking one column, article or section at a time is far more manageable than wrestling with a scrambled whole, and it makes any reordering you need to do much easier to track. And choose your target format for the job: if you need the structure, Word is the better bet; if you only want the words and intend to lay them out fresh anyway, plain text frees you from fighting the original arrangement entirely.",
         ],
       },
       {
         h: "From the Lexigenz desk: read the output, do not just generate it",
         p: [
-          "The mistake we see most with complex documents is people generating a conversion and trusting it without reading it. With a simple report that is usually safe; with a multi-column journal article it is asking for trouble. We treat the conversion of any complex layout as producing a draft that must be read, not a finished result that can be filed. The interleaving error in particular hides well — the text looks plausible at a glance and only reveals itself as nonsense when you actually read a paragraph through.",
-          "Our working method for the hardest documents is unglamorous but dependable: convert in pieces, read every piece, and reorder as we go. It is slower than hitting one button, but it produces genuinely usable text from documents that a single careless pass would mangle. The principle is simple — for complex layouts, the value is created in the review, not in the conversion. Generating the text is the easy part; making sure it reads correctly is the work that matters.",
+          "The mistake we see most with complex documents is people generating a conversion and trusting it without reading it. With a simple report that is usually safe; with a multi-column journal article it is asking for trouble. We treat the conversion of any complex layout as producing a draft that must be read, not a finished result that can be filed. The interleaving error in particular hides well, the text looks plausible at a glance and only reveals itself as nonsense when you actually read a paragraph through.",
+          "Our working method for the hardest documents is unglamorous but dependable: convert in pieces, read every piece, and reorder as we go. It is slower than hitting one button, but it produces genuinely usable text from documents that a single careless pass would mangle. The principle is simple, for complex layouts, the value is created in the review, not in the conversion. Generating the text is the easy part; making sure it reads correctly is the work that matters.",
         ],
       },
       {
@@ -1075,7 +1075,7 @@ const articles = [
         p: [
           "Consider an editor who needs to repurpose a ten-page article from an academic journal. The original is a classic two-column layout dense with footnotes, figure captions and a couple of boxed asides. A single careless conversion produces text that looks plausible for a sentence or two and then dissolves into nonsense, because a line from the left column is followed by a line from the right, footnotes are spliced into the body, and a caption lands in the middle of an argument. Read aloud, none of it holds together.",
           "The disciplined approach treats the article as a set of pieces rather than one block. The editor converts to Word to keep as much structure as possible, then works section by section: the abstract first, then each column of the first page, confirming that each block reads as a continuous passage before moving on. Footnotes are pulled out and kept together rather than left embedded, and figure captions are reunited with the figures they describe. Where a page is especially tangled, converting just that page on its own makes the reordering far easier to track.",
-          "What emerges after that careful pass is clean, correctly sequenced text that genuinely reflects the article — quotable, reusable and faithful to the original argument. The work took longer than a single button-press, but it produced something usable instead of a scramble that would have had to be retyped from scratch anyway. The scenario captures the whole philosophy of complex layouts: the conversion gets you a draft, and the patient review is what turns that draft into a result you can actually rely on.",
+          "What emerges after that careful pass is clean, correctly sequenced text that genuinely reflects the article, quotable, reusable and faithful to the original argument. The work took longer than a single button-press, but it produced something usable instead of a scramble that would have had to be retyped from scratch anyway. The scenario captures the whole philosophy of complex layouts: the conversion gets you a draft, and the patient review is what turns that draft into a result you can actually rely on.",
         ],
       },
       {
@@ -1094,7 +1094,7 @@ const articles = [
         h: "Choosing your target format for tricky layouts",
         p: [
           "The format you convert into shapes how much fight a complex layout puts up, so choose it for the job rather than out of habit. Word is the natural default for intricate documents because it preserves the most structure: headings stay as headings, lists stay as lists, and much of the visual organisation survives in a form you can tidy. When you need the converted document to resemble the original and want to keep its formatting, Word gives you the richest starting point to work from.",
-          "Plain text takes the opposite stance, and that is sometimes exactly what you want. It throws away the layout entirely and hands you the raw words, which sounds like a loss until you realise that for a badly tangled multi-column page, the layout was the problem in the first place. If you intend to lay the content out fresh anyway — rewriting it into a new document with its own structure — starting from clean text frees you from fighting an arrangement you were going to discard regardless.",
+          "Plain text takes the opposite stance, and that is sometimes exactly what you want. It throws away the layout entirely and hands you the raw words, which sounds like a loss until you realise that for a badly tangled multi-column page, the layout was the problem in the first place. If you intend to lay the content out fresh anyway, rewriting it into a new document with its own structure, starting from clean text frees you from fighting an arrangement you were going to discard regardless.",
           "There is also the question of whether the source is digital or scanned, which comes before the format choice entirely. A scanned complex layout has no real text to convert until recognition has run, so that step is non-negotiable for those files. Once you have real text, the decision is straightforward: reach for Word when structure matters and you want to preserve the document's shape, and reach for plain text when you only want the words and plan to rebuild the arrangement yourself.",
         ],
       },
@@ -1115,7 +1115,7 @@ const articles = [
           },
           {
             q: "Any tip for very intricate documents?",
-            a: "Convert and check one section or column at a time — it is far more manageable than tackling the whole file at once.",
+            a: "Convert and check one section or column at a time, it is far more manageable than tackling the whole file at once.",
           },
         ],
       },
@@ -1147,7 +1147,7 @@ const articles = [
         p: [
           "Converting a single PDF back into an editable format is a non-event. You upload it, you pick a target, you download the result, and the whole thing takes under a minute. The trouble starts when one file becomes fifty, or a folder of two hundred, or the entire output of a system that only ever produces PDFs. Suddenly the per-file friction that did not matter at all becomes the dominant cost, and an afternoon disappears into uploading, clicking, waiting and renaming the same way over and over.",
           "This is the moment batch conversion earns its place. Instead of treating each document as a separate task, you treat the whole collection as one job: a defined set of inputs, a single chosen output format, and one consistent set of expectations applied across everything. The mental shift matters as much as the time saved. You stop thinking like someone processing files and start thinking like someone running a pipeline, which is exactly the mindset that keeps a large conversion organised and trustworthy.",
-          "Batch work is not only about speed, either. Doing the same operation by hand hundreds of times is precisely where human error creeps in — a file skipped, a wrong format chosen, an inconsistent naming scheme that makes the results impossible to track later. Converting a set as a deliberate batch, with the same settings applied uniformly, removes that variability. The outputs are consistent because they were produced the same way, which is something a tired person clicking through two hundred files individually can never quite guarantee.",
+          "Batch work is not only about speed, either. Doing the same operation by hand hundreds of times is precisely where human error creeps in, a file skipped, a wrong format chosen, an inconsistent naming scheme that makes the results impossible to track later. Converting a set as a deliberate batch, with the same settings applied uniformly, removes that variability. The outputs are consistent because they were produced the same way, which is something a tired person clicking through two hundred files individually can never quite guarantee.",
         ],
       },
       {
@@ -1157,7 +1157,7 @@ const articles = [
         ],
         ul: [
           "Step 1: Gather every PDF you need to convert into a single, clearly named source folder so nothing is missed or duplicated.",
-          "Step 2: Decide on one target format for the batch — for fully editable documents, open PDFShuffl, go to Tools and choose PDF to Word.",
+          "Step 2: Decide on one target format for the batch, for fully editable documents, open PDFShuffl, go to Tools and choose PDF to Word.",
           "Step 3: If the files are scanned, run them through PDF to Editable PDF first so there is real recognised text before you convert further.",
           "Step 4: Convert a small representative sample of three or four files first to confirm the settings produce the result you expect.",
           "Step 5: Process the full set with those confirmed settings, keeping the output in its own dated folder separate from the originals.",
@@ -1171,7 +1171,7 @@ const articles = [
         ul: [
           "Turns a repetitive afternoon of clicking into a single deliberate operation.",
           "Applies identical settings across every file, so the outputs are consistent by construction.",
-          "Removes the human errors — skipped files, wrong formats, muddled names — that creep into manual repetition.",
+          "Removes the human errors, skipped files, wrong formats, muddled names, that creep into manual repetition.",
           "Makes large archives of legacy PDFs usable again without retyping a word.",
           "Frees your attention for the part that actually needs judgement: reviewing the results.",
           "Scales the same way whether you have ten files or a thousand.",
@@ -1182,15 +1182,15 @@ const articles = [
         h: "Preparing your files before you press go",
         p: [
           "The quality of a batch is decided before any conversion runs. The first job is to know what is actually in your collection, because a folder of PDFs is rarely uniform. Some will be clean, digitally generated documents that convert almost perfectly; others will be scans that need recognition first; a few will have multi-column layouts or heavy tables that deserve extra scrutiny. Sorting the collection by type up front lets you apply the right treatment to each group instead of forcing one approach onto files that do not suit it.",
-          "Naming and structure are the next concern, and they pay off enormously later. Give the source folder a clear name, and plan where the outputs will land before you start — ideally a separate, dated folder so you never confuse a converted file with its original. A naming convention that ties each output back to its source means that when you spot a problem in file 147, you can find and reconvert exactly the right document rather than hunting through a heap of similarly named results.",
-          "Finally, think about size. Large scanned PDFs can be heavy, and a big batch of them is heavier still, which slows uploads and eats storage. Running the source files through compression first keeps the whole operation nimble without meaningfully affecting the text you are about to extract. A few minutes of preparation — sorting, naming, compressing — repays itself many times over once the batch is actually running.",
+          "Naming and structure are the next concern, and they pay off enormously later. Give the source folder a clear name, and plan where the outputs will land before you start, ideally a separate, dated folder so you never confuse a converted file with its original. A naming convention that ties each output back to its source means that when you spot a problem in file 147, you can find and reconvert exactly the right document rather than hunting through a heap of similarly named results.",
+          "Finally, think about size. Large scanned PDFs can be heavy, and a big batch of them is heavier still, which slows uploads and eats storage. Running the source files through compression first keeps the whole operation nimble without meaningfully affecting the text you are about to extract. A few minutes of preparation, sorting, naming, compressing, repays itself many times over once the batch is actually running.",
         ],
       },
       {
         h: "Where batch conversion pays off",
         p: [
-          "A records team digitising a filing cabinet of historical documents is the archetypal case. They have hundreds or thousands of scanned PDFs that need to become searchable, editable records, and converting them individually is simply not feasible. Batching the job — recognition first, then conversion — turns weeks of manual work into a managed process that one person can supervise. The same pattern shows up whenever an organisation decides to make its back catalogue usable rather than merely stored.",
-          "Operational teams hit it from the other direction. A system that exports reports only as PDFs produces a steady stream of files that someone downstream needs in an editable form, and handling each one by hand is a recurring tax on their time. A law firm migrating case files, a publisher converting a back catalogue, a finance team that needs every monthly statement as a working document — all share the same shape: many similar files, one consistent transformation, and a strong incentive to do it as a batch rather than a grind.",
+          "A records team digitising a filing cabinet of historical documents is the archetypal case. They have hundreds or thousands of scanned PDFs that need to become searchable, editable records, and converting them individually is simply not feasible. Batching the job, recognition first, then conversion, turns weeks of manual work into a managed process that one person can supervise. The same pattern shows up whenever an organisation decides to make its back catalogue usable rather than merely stored.",
+          "Operational teams hit it from the other direction. A system that exports reports only as PDFs produces a steady stream of files that someone downstream needs in an editable form, and handling each one by hand is a recurring tax on their time. A law firm migrating case files, a publisher converting a back catalogue, a finance team that needs every monthly statement as a working document, all share the same shape: many similar files, one consistent transformation, and a strong incentive to do it as a batch rather than a grind.",
           "Even smaller teams benefit more than they expect. The threshold where batching wins is lower than most people assume; by the time you are facing a dozen near-identical conversions, setting up a consistent batch is already faster and less error-prone than working through them one by one. Once you have run a batch deliberately, going back to manual repetition for any sizeable set feels needlessly painful.",
         ],
       },
@@ -1198,8 +1198,8 @@ const articles = [
         h: "From the Lexigenz desk: batch the work, but never the judgement",
         p: [
           "Our hard-won rule for large conversions is that you can automate the labour but not the verification. It is tempting to run a batch, see that it produced files, and tick the task off. We have learned to resist that. The whole point of batching is consistency, which cuts both ways: if a setting is wrong, it is wrong across every single file, and a batch can therefore multiply a single mistake into hundreds of flawed outputs just as efficiently as it produces good ones.",
-          "So we always convert a small sample first and read it properly before committing the full set. That sample tells us whether the format choice is right, whether the scanned files need recognition, and whether the layouts are surviving the conversion. Only once the sample is genuinely good do we let the rest run. Afterwards we spot-check across the batch rather than assuming uniformity guarantees correctness — and we look hardest at the files we already know are risky, the scans and the complex layouts.",
-          "The mindset that serves us best is to treat a batch as a managed process with checkpoints, not a fire-and-forget button. Prepare deliberately, validate on a sample, run the bulk, and verify the result. Done that way, batch conversion is one of the highest-leverage operations there is — it can turn an archive that nobody could face touching into a living, editable resource in a fraction of the time, without sacrificing the trust that makes the output worth having.",
+          "So we always convert a small sample first and read it properly before committing the full set. That sample tells us whether the format choice is right, whether the scanned files need recognition, and whether the layouts are surviving the conversion. Only once the sample is genuinely good do we let the rest run. Afterwards we spot-check across the batch rather than assuming uniformity guarantees correctness, and we look hardest at the files we already know are risky, the scans and the complex layouts.",
+          "The mindset that serves us best is to treat a batch as a managed process with checkpoints, not a fire-and-forget button. Prepare deliberately, validate on a sample, run the bulk, and verify the result. Done that way, batch conversion is one of the highest-leverage operations there is, it can turn an archive that nobody could face touching into a living, editable resource in a fraction of the time, without sacrificing the trust that makes the output worth having.",
         ],
       },
       {
@@ -1207,7 +1207,7 @@ const articles = [
         faq: [
           {
             q: "How many files make a batch worthwhile?",
-            a: "Fewer than you might think — by a dozen or so near-identical conversions, a consistent batch is already faster and less error-prone than one-by-one work.",
+            a: "Fewer than you might think, by a dozen or so near-identical conversions, a consistent batch is already faster and less error-prone than one-by-one work.",
           },
           {
             q: "Should I convert scanned and digital PDFs in the same batch?",
@@ -1226,7 +1226,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "Converting one PDF is nothing; converting hundreds by hand is a waste of an afternoon and an invitation to error. Treat the collection as a single managed job: sort the files, choose one format, validate on a small sample, then run the full batch and spot-check the result. Done deliberately, batch conversion turns an unusable archive into editable, reusable content quickly — and keeps the judgement where it belongs, on a sample and a careful review rather than on every weary click.",
+          "Converting one PDF is nothing; converting hundreds by hand is a waste of an afternoon and an invitation to error. Treat the collection as a single managed job: sort the files, choose one format, validate on a small sample, then run the full batch and spot-check the result. Done deliberately, batch conversion turns an unusable archive into editable, reusable content quickly, and keeps the judgement where it belongs, on a sample and a careful review rather than on every weary click.",
         ],
       },
     ],

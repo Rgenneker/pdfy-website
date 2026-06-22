@@ -37,14 +37,14 @@ const articles = [
         h: "Where image-to-PDF conversion is essential",
         p: [
           "Application portals are a major driver: visa applications, job applications, loan and grant submissions and government forms routinely demand supporting documents as PDF, and the documents themselves are often photographs of physical papers. Expense systems expect receipts as a single document. Estate agents and conveyancers bundle photographed paperwork into PDFs. Anyone submitting evidence of any kind ends up converting images to PDF.",
-          "It is just as useful for everyday organisation. Photographing the pages of a notebook and converting them to a single PDF turns scattered images into a document you can name, file and find later — far more useful than dozens of nearly identical photos buried in a gallery.",
+          "It is just as useful for everyday organisation. Photographing the pages of a notebook and converting them to a single PDF turns scattered images into a document you can name, file and find later, far more useful than dozens of nearly identical photos buried in a gallery.",
         ],
       },
       {
         h: "Why PDF beats sending the images directly",
         p: [
           "Sending several JPGs means the recipient has to download each one, work out the order, and view them in an image viewer that offers no sense of a document. Worse, many upload forms accept only a single file, so a multi-photo document simply cannot be submitted as images at all. A PDF collapses all of that friction into one accept-anywhere file.",
-          "A PDF also presents the images as pages, with the implicit order and structure of a document. That structure communicates seriousness — a single, ordered PDF reads as a considered submission, while a batch of loose photos reads as something improvised.",
+          "A PDF also presents the images as pages, with the implicit order and structure of a document. That structure communicates seriousness, a single, ordered PDF reads as a considered submission, while a batch of loose photos reads as something improvised.",
         ],
       },
       {
@@ -69,13 +69,13 @@ const articles = [
         h: "From the Lexigenz desk: the submission that gets accepted",
         p: [
           "We have watched countless online submissions bounce because the applicant uploaded a string of photos where a single PDF was required, or sent images so dark and skewed that a reviewer rejected them. The content was fine; the packaging failed. In nearly every case, a few seconds of better capture and a conversion to a clean, cropped PDF would have made the difference between acceptance and rejection.",
-          "The lesson we draw is that how a document is packaged is part of the document. A well-lit, properly ordered, single-file PDF does not just satisfy the technical requirement — it signals competence to whoever opens it. For anything that matters, treat the conversion to PDF as the final, non-optional step.",
+          "The lesson we draw is that how a document is packaged is part of the document. A well-lit, properly ordered, single-file PDF does not just satisfy the technical requirement, it signals competence to whoever opens it. For anything that matters, treat the conversion to PDF as the final, non-optional step.",
         ],
       },
       {
         h: "What actually happens when an image becomes a page",
         p: [
-          "It helps to understand what the conversion does under the surface. A JPG is a single rectangular grid of pixels with no concept of a page, a margin or a reading order. When you convert it to PDF, the tool wraps that grid inside a page container: it chooses a page size, places the image on it, and records the order so that page two always follows page one. The pixels themselves are not redrawn or sharpened — they are simply mounted onto a document framework that readers and portals know how to handle.",
+          "It helps to understand what the conversion does under the surface. A JPG is a single rectangular grid of pixels with no concept of a page, a margin or a reading order. When you convert it to PDF, the tool wraps that grid inside a page container: it chooses a page size, places the image on it, and records the order so that page two always follows page one. The pixels themselves are not redrawn or sharpened, they are simply mounted onto a document framework that readers and portals know how to handle.",
           "This is why the quality of your source photo carries straight through. The conversion cannot add detail that the camera never captured, so a blurry or underexposed shot becomes a blurry, underexposed page. What conversion does add is structure: consistent page dimensions, a fixed sequence, and a single file boundary around everything. That structure is precisely what an image viewer lacks and what every document workflow assumes.",
           "Knowing this changes how you work. Because the framework is added at conversion and the content is fixed at capture, the highest-leverage moment is the photograph, not the conversion. Get the capture right and the conversion has an easy job; get it wrong and no setting downstream will fully recover it.",
         ],
@@ -97,7 +97,7 @@ const articles = [
       {
         h: "A real-world scenario: assembling an application bundle",
         p: [
-          "Picture someone preparing a visa application at the kitchen table the night before a deadline. They have a passport, two bank statements, a letter of employment and a tenancy agreement, all on paper, and a portal that demands a single PDF per requirement and rejects loose images outright. The instinct is to snap each page and upload the photos directly — and that is exactly where applications stall.",
+          "Picture someone preparing a visa application at the kitchen table the night before a deadline. They have a passport, two bank statements, a letter of employment and a tenancy agreement, all on paper, and a portal that demands a single PDF per requirement and rejects loose images outright. The instinct is to snap each page and upload the photos directly, and that is exactly where applications stall.",
           "The reliable approach is to photograph every page on a plain, well-lit surface, square to the camera, then group the images by document and convert each group with JPG to PDF so a four-page statement becomes one four-page file. A quick crop tightens each page to the paper, and a pass through Compress PDF brings the bank statements under the portal's size cap without making the figures unreadable.",
           "The difference is night and day. Instead of a reviewer squinting at a dozen disconnected snapshots, they open a small set of clean, ordered, properly named PDFs that map exactly to the checklist. The content was always there; the conversion is what turned it into a submission that gets accepted on the first try.",
         ],
@@ -150,12 +150,12 @@ const articles = [
     relatedTools: ["HTML to PDF", "PDF to HTML", "Compress PDF"],
     datePublished: "2026-03-01",
     excerpt:
-      "Web pages change and disappear. Converting HTML to PDF captures a page exactly as it is — a permanent, shareable, archivable record.",
+      "Web pages change and disappear. Converting HTML to PDF captures a page exactly as it is, a permanent, shareable, archivable record.",
     sections: [
       {
         h: "The web is not a permanent record",
         p: [
-          "Web pages are living things. They are edited, redesigned, paywalled and deleted, often without warning. A page you rely on today — an order confirmation, a published article, a terms-of-service notice, a competitor's pricing — may look entirely different next week or vanish entirely. For anything you need to keep, prove or refer back to, the live web is an unreliable archive.",
+          "Web pages are living things. They are edited, redesigned, paywalled and deleted, often without warning. A page you rely on today, an order confirmation, a published article, a terms-of-service notice, a competitor's pricing, may look entirely different next week or vanish entirely. For anything you need to keep, prove or refer back to, the live web is an unreliable archive.",
           "Converting HTML to PDF captures a page exactly as it appears at a moment in time and freezes it into a fixed document. That snapshot does not change when the website does, cannot be edited out from under you, and can be filed, shared and printed like any other PDF.",
         ],
       },
@@ -173,7 +173,7 @@ const articles = [
         h: "Where capturing web pages matters",
         p: [
           "Record-keeping is the biggest driver. People save order confirmations, booking details and payment receipts as PDF so they have proof independent of the website. Professionals archive published terms, policies and disclosures as they stood on a given date. Researchers and journalists preserve online sources before they can change or disappear. Anyone who has ever lost an important confirmation to a site redesign understands the value instantly.",
-          "It is also a clean way to share web content. Rather than sending a link that might break, require a login, or render differently for the recipient, you send a self-contained PDF of exactly what you saw — no surprises, no dead links.",
+          "It is also a clean way to share web content. Rather than sending a link that might break, require a login, or render differently for the recipient, you send a self-contained PDF of exactly what you saw, no surprises, no dead links.",
         ],
       },
       {
@@ -204,16 +204,16 @@ const articles = [
       {
         h: "From the Lexigenz desk: capture now, not later",
         p: [
-          "The most common regret we hear about web records is temporal: people meant to save a confirmation or a page and assumed it would still be there, only to find it changed or gone when they finally needed it. The web rewards immediacy. The moment a page contains something you might need to prove or refer to, that is the moment to convert it to PDF — not after the dispute, the redesign or the deletion.",
-          "We treat HTML-to-PDF capture as a reflex for anything transactional or time-sensitive. It costs seconds, and it converts the web's greatest weakness as a record — its impermanence — into a non-issue. A captured page is a kept page.",
+          "The most common regret we hear about web records is temporal: people meant to save a confirmation or a page and assumed it would still be there, only to find it changed or gone when they finally needed it. The web rewards immediacy. The moment a page contains something you might need to prove or refer to, that is the moment to convert it to PDF, not after the dispute, the redesign or the deletion.",
+          "We treat HTML-to-PDF capture as a reflex for anything transactional or time-sensitive. It costs seconds, and it converts the web's greatest weakness as a record, its impermanence, into a non-issue. A captured page is a kept page.",
         ],
       },
       {
         h: "What a web-to-PDF capture actually preserves",
         p: [
-          "A web page is not a fixed object the way a printed sheet is. It is assembled live in the browser from HTML for structure, CSS for layout, images pulled from various servers, and often scripts that fill in content after the page first loads. When you capture that page to PDF, the tool renders this assembled result — the page as it has been laid out at that instant — and flattens it into static pages with fixed dimensions.",
+          "A web page is not a fixed object the way a printed sheet is. It is assembled live in the browser from HTML for structure, CSS for layout, images pulled from various servers, and often scripts that fill in content after the page first loads. When you capture that page to PDF, the tool renders this assembled result, the page as it has been laid out at that instant, and flattens it into static pages with fixed dimensions.",
           "That flattening is the whole value. The dynamic ingredients that made the page changeable are resolved once and frozen: text becomes text on a page, images are embedded into the file, and the layout stops depending on a server that might serve something different tomorrow. What you keep is a faithful rendering of the visible page, self-contained and no longer reaching out to the live web to redraw itself.",
-          "It also explains the occasional surprise. Content that only appears after interaction — a section behind a click, items loaded as you scroll, a cookie banner covering the page — is captured in whatever state it was in when you converted. Understanding that the capture freezes the rendered moment, not some idealised version of the page, is the key to capturing exactly what you intend.",
+          "It also explains the occasional surprise. Content that only appears after interaction, a section behind a click, items loaded as you scroll, a cookie banner covering the page, is captured in whatever state it was in when you converted. Understanding that the capture freezes the rendered moment, not some idealised version of the page, is the key to capturing exactly what you intend.",
         ],
       },
       {
@@ -241,7 +241,7 @@ const articles = [
         h: "Building a simple web-archiving habit",
         p: [
           "The hardest part of web capture is not the conversion but remembering to do it at the right moment. A light personal routine turns it from an afterthought into a reflex. The trigger is straightforward: any time a page contains something you might need to prove, refer back to, or rely on later, capture it before you navigate away.",
-          "Give your captures a consistent home and a consistent naming pattern so they are findable months later. A name that includes the source, the subject and the date you captured it tells you everything at a glance and sorts neatly alongside related files. Keep transactional records — confirmations, receipts, agreed terms — together so the proof is where you expect it when a question arises.",
+          "Give your captures a consistent home and a consistent naming pattern so they are findable months later. A name that includes the source, the subject and the date you captured it tells you everything at a glance and sorts neatly alongside related files. Keep transactional records, confirmations, receipts, agreed terms, together so the proof is where you expect it when a question arises.",
           "Done consistently, this habit quietly builds a personal archive of exactly the online information that matters to you, immune to redesigns, paywalls and deletions. It is the difference between trusting that a page will still be there and knowing that you already hold it.",
         ],
       },
@@ -286,13 +286,13 @@ const articles = [
     relatedTools: ["Sign PDF", "Request Signing", "Sign a Locked PDF"],
     datePublished: "2026-03-04",
     excerpt:
-      "Printing, signing and scanning a document is a relic. Signing a PDF directly is faster, cleaner and — done properly — every bit as valid.",
+      "Printing, signing and scanning a document is a relic. Signing a PDF directly is faster, cleaner and, done properly, every bit as valid.",
     sections: [
       {
         h: "The end of print-sign-scan",
         p: [
-          "For years the standard way to sign a document was absurd: receive a PDF, print it, sign it with a pen, scan it back in, and email the result — degrading the document's quality and wasting a remarkable amount of time at every step. Signing a PDF directly eliminates this ritual entirely. You add your signature to the digital file itself, with no printer, scanner or paper involved.",
-          "Beyond convenience, electronic signing is now widely recognised. In most jurisdictions, electronic signatures carry legal weight for the vast majority of everyday agreements, which is why so much business — from employment contracts to rental agreements to consent forms — has moved to signing PDFs on screen.",
+          "For years the standard way to sign a document was absurd: receive a PDF, print it, sign it with a pen, scan it back in, and email the result, degrading the document's quality and wasting a remarkable amount of time at every step. Signing a PDF directly eliminates this ritual entirely. You add your signature to the digital file itself, with no printer, scanner or paper involved.",
+          "Beyond convenience, electronic signing is now widely recognised. In most jurisdictions, electronic signatures carry legal weight for the vast majority of everyday agreements, which is why so much business, from employment contracts to rental agreements to consent forms, has moved to signing PDFs on screen.",
         ],
       },
       {
@@ -336,23 +336,23 @@ const articles = [
       {
         h: "Best practices for signing",
         p: [
-          "Always read before you sign, and make sure the version you are signing is final — signing the wrong draft is a real and avoidable error. Keep the signed PDF in a safe, backed-up location, since it is now your record of the agreement. For documents involving multiple parties, use a request-signing workflow so each person signs the same authoritative copy in turn, rather than circulating divergent versions.",
+          "Always read before you sign, and make sure the version you are signing is final, signing the wrong draft is a real and avoidable error. Keep the signed PDF in a safe, backed-up location, since it is now your record of the agreement. For documents involving multiple parties, use a request-signing workflow so each person signs the same authoritative copy in turn, rather than circulating divergent versions.",
           "Match the method to the stakes. For an internal acknowledgement or a routine confirmation, on-platform signing is perfect. For a high-value, regulated or disputed agreement, use a dedicated e-signature service that provides identity verification and a tamper-evident audit trail, so the signature stands up if it is ever challenged.",
         ],
       },
       {
         h: "From the Lexigenz desk: the friction that quietly costs deals",
         p: [
-          "When we examined where agreements stalled, the culprit was often not the terms but the signing step. A prospect ready to commit would receive a document that required printing and scanning, hit that friction, and set it aside — and momentum drained away with every day it sat unsigned. The deal did not fail on its merits; it failed on logistics.",
-          "Removing that friction by signing PDFs directly recovers those lost agreements. The lesson is that the ease of signing is not a minor convenience — it materially affects whether things get signed at all. Make signing effortless, and far more documents actually cross the finish line.",
+          "When we examined where agreements stalled, the culprit was often not the terms but the signing step. A prospect ready to commit would receive a document that required printing and scanning, hit that friction, and set it aside, and momentum drained away with every day it sat unsigned. The deal did not fail on its merits; it failed on logistics.",
+          "Removing that friction by signing PDFs directly recovers those lost agreements. The lesson is that the ease of signing is not a minor convenience, it materially affects whether things get signed at all. Make signing effortless, and far more documents actually cross the finish line.",
         ],
       },
       {
         h: "What an electronic signature actually is",
         p: [
-          "The phrase 'electronic signature' covers more ground than most people realise, and understanding the spectrum helps you choose the right approach. At the simplest end, an electronic signature is any clear, recorded indication that a person intends to agree to a document — a typed name, a drawn mark, or a click of an accept button. What gives it weight is not how fancy it looks but the evidence that a specific person knowingly agreed to that specific content.",
+          "The phrase 'electronic signature' covers more ground than most people realise, and understanding the spectrum helps you choose the right approach. At the simplest end, an electronic signature is any clear, recorded indication that a person intends to agree to a document, a typed name, a drawn mark, or a click of an accept button. What gives it weight is not how fancy it looks but the evidence that a specific person knowingly agreed to that specific content.",
           "Further along the spectrum sit signatures backed by identity verification and cryptographic protection. These bind the signature to a verified individual and seal the document so that any later alteration is detectable. That tamper-evidence is what distinguishes a robust signature from a decorative one: the signed file can prove not only who agreed but that the agreed text has not changed since.",
-          "For everyday business, a clear electronic signature applied to a final PDF is both practical and widely accepted. For regulated, high-value or contested agreements, the verified, sealed end of the spectrum is worth the extra step, because the question that matters in a dispute is always the same — can you prove who signed what, and that it has not been changed?",
+          "For everyday business, a clear electronic signature applied to a final PDF is both practical and widely accepted. For regulated, high-value or contested agreements, the verified, sealed end of the spectrum is worth the extra step, because the question that matters in a dispute is always the same, can you prove who signed what, and that it has not been changed?",
         ],
       },
       {
@@ -372,8 +372,8 @@ const articles = [
       {
         h: "Choosing between on-platform signing and a dedicated provider",
         p: [
-          "The practical question is rarely whether to sign electronically but which level of formality the document deserves. On-platform signing is fast and frictionless, ideal for the high volume of routine documents that simply need a clear, recorded agreement — internal approvals, acknowledgements, confirmations and everyday two-party arrangements where trust between the parties is already established.",
-          "A dedicated e-signature provider such as DocuSign or Adobe Sign earns its place when the stakes rise. If a document is regulated, financially significant, likely to be scrutinised, or signed by parties who do not yet trust one another, the verified identity and tamper-evident audit trail those services provide are not overkill — they are the evidence that protects everyone if the agreement is ever questioned.",
+          "The practical question is rarely whether to sign electronically but which level of formality the document deserves. On-platform signing is fast and frictionless, ideal for the high volume of routine documents that simply need a clear, recorded agreement, internal approvals, acknowledgements, confirmations and everyday two-party arrangements where trust between the parties is already established.",
+          "A dedicated e-signature provider such as DocuSign or Adobe Sign earns its place when the stakes rise. If a document is regulated, financially significant, likely to be scrutinised, or signed by parties who do not yet trust one another, the verified identity and tamper-evident audit trail those services provide are not overkill, they are the evidence that protects everyone if the agreement is ever questioned.",
           "A simple test helps you decide: imagine the signature being challenged later and ask what you would need to defend it. If a clear record of agreement is plainly enough, sign on the platform and move on. If you would want proof of identity and an unbroken trail showing the document was unaltered, route it through a dedicated provider from the outset rather than wishing you had afterwards.",
         ],
       },
@@ -381,7 +381,7 @@ const articles = [
         h: "Where signed PDFs replace paper across an organisation",
         p: [
           "The reach of electronic signing becomes clear when you trace it through a single organisation. In hiring, offer letters, contracts and policy acknowledgements are signed on screen, and onboarding proceeds without anyone touching a printer. In finance and procurement, purchase approvals and supplier agreements move at the speed of email rather than the speed of the postal service. In operations, internal sign-offs and authorisations that once queued for a physical signature clear in minutes.",
-          "Customer-facing teams feel it most directly. A quote that can be signed and returned the moment a client is ready captures intent before enthusiasm cools, where a document requiring print-sign-scan invites delay and second thoughts. Schools collect consent forms, property managers gather lease signatures, and professional services firms close engagement letters — all without the friction of paper.",
+          "Customer-facing teams feel it most directly. A quote that can be signed and returned the moment a client is ready captures intent before enthusiasm cools, where a document requiring print-sign-scan invites delay and second thoughts. Schools collect consent forms, property managers gather lease signatures, and professional services firms close engagement letters, all without the friction of paper.",
           "The common thread is that signing is no longer the step that forces a digital process back onto paper. Once an organisation adopts electronic signing as the default, the whole rhythm of getting things agreed accelerates, and the occasional document that genuinely needs a dedicated provider stands out as the deliberate exception rather than the rule.",
         ],
       },
@@ -431,7 +431,7 @@ const articles = [
       {
         h: "The hidden complexity of getting others to sign",
         p: [
-          "Signing a document yourself is simple. Getting someone else to sign it — reliably, on the correct version, in good time — is where things get complicated. The naive approach of emailing a PDF and asking the recipient to 'sign and send it back' breaks down constantly: people sign the wrong version, forget entirely, return an unsigned copy, or print-sign-scan it into an unusable blur. Multiply that across several signers and the process can drag on for weeks.",
+          "Signing a document yourself is simple. Getting someone else to sign it, reliably, on the correct version, in good time, is where things get complicated. The naive approach of emailing a PDF and asking the recipient to 'sign and send it back' breaks down constantly: people sign the wrong version, forget entirely, return an unsigned copy, or print-sign-scan it into an unusable blur. Multiply that across several signers and the process can drag on for weeks.",
           "A request-signing workflow replaces that chaos with a defined process. Instead of hoping a recipient figures out what to do, you send a structured request that guides them to sign the right document the right way, and that lets you see where things stand.",
         ],
       },
@@ -451,7 +451,7 @@ const articles = [
       {
         h: "Where request-signing transforms a process",
         p: [
-          "Hiring is a prime example: an offer goes out, the candidate signs, and onboarding proceeds — all without a single printed page. Sales teams send contracts and statements of work for client signature and close faster because the signing step no longer stalls. Property managers send leases to tenants. Agencies get sign-off on deliverables. Anywhere a document must be signed by someone outside your immediate control, a request workflow brings order.",
+          "Hiring is a prime example: an offer goes out, the candidate signs, and onboarding proceeds, all without a single printed page. Sales teams send contracts and statements of work for client signature and close faster because the signing step no longer stalls. Property managers send leases to tenants. Agencies get sign-off on deliverables. Anywhere a document must be signed by someone outside your immediate control, a request workflow brings order.",
           "The benefit grows with the number of signers. Coordinating three or four signatures by email is a scheduling nightmare; a structured workflow that routes the document to each signer in turn turns it into a predictable sequence.",
         ],
       },
@@ -459,14 +459,14 @@ const articles = [
         h: "Why a workflow beats an email attachment",
         p: [
           "An emailed attachment puts all the burden on the recipient and gives you no visibility. You do not know if they opened it, you cannot be sure they signed the right version, and you have no record of the request beyond a sent email. A request-signing workflow flips this: it sends the correct, authoritative document, makes the required action obvious, and gives you a clear status.",
-          "It also protects against the most common failure mode — version confusion. When everyone signs through the same request rather than circulating their own copies, there is one authoritative document and one signed result, not a scatter of near-identical files no one can reconcile.",
+          "It also protects against the most common failure mode, version confusion. When everyone signs through the same request rather than circulating their own copies, there is one authoritative document and one signed result, not a scatter of near-identical files no one can reconcile.",
         ],
       },
       {
         h: "Benefits of request signing",
         ul: [
           "One authoritative document, eliminating version confusion.",
-          "A clear, guided action for the recipient — fewer mistakes.",
+          "A clear, guided action for the recipient, fewer mistakes.",
           "Faster turnaround with less chasing and back-and-forth.",
           "A predictable sequence when multiple parties must sign.",
           "A clean digital record of the signed result.",
@@ -477,13 +477,13 @@ const articles = [
         h: "Best practices for requesting signatures",
         p: [
           "Send only the final version. The most common cause of signing delays is sending a document that then changes, forcing the whole request to start over. Finalise the wording, confirm the figures, and only then send for signature. Make clear to the recipient what they are signing and by when, so the request does not languish in an inbox.",
-          "For anything involving more than one signer or any real legal weight, use a workflow that routes to each party and keeps a record, and step up to a dedicated e-signature provider when you need verified identity and a tamper-evident trail. Always store the returned signed document somewhere safe and backed up — it is now the evidence of the agreement.",
+          "For anything involving more than one signer or any real legal weight, use a workflow that routes to each party and keeps a record, and step up to a dedicated e-signature provider when you need verified identity and a tamper-evident trail. Always store the returned signed document somewhere safe and backed up, it is now the evidence of the agreement.",
         ],
       },
       {
         h: "From the Lexigenz desk: visibility is the real upgrade",
         p: [
-          "When teams move from emailing attachments to structured signing requests, the benefit they rave about is not speed — it is visibility. Knowing exactly where a document is in the signing process removes a whole category of anxiety and chasing. No more wondering whether the client received it, no more awkward 'just following up' emails sent into the void.",
+          "When teams move from emailing attachments to structured signing requests, the benefit they rave about is not speed, it is visibility. Knowing exactly where a document is in the signing process removes a whole category of anxiety and chasing. No more wondering whether the client received it, no more awkward 'just following up' emails sent into the void.",
           "That visibility also changes behaviour. When a request makes the next action obvious and the sender can see the status, documents get signed faster simply because nothing falls silently into a gap. The structure does not just record the process; it actively moves it forward.",
         ],
       },
@@ -491,7 +491,7 @@ const articles = [
         h: "How a signing request moves through its stages",
         p: [
           "A signing request is best understood as a short sequence of defined stages rather than a single event. It begins with preparation: you fix the final document and identify exactly who needs to sign and in what order. Locking the content at this stage matters, because everything that follows assumes the document will not change underneath the signers.",
-          "Next comes dispatch and notification. The request goes out to the recipient with a clear indication of what they are being asked to do, so there is no ambiguity about whether they should read, comment or sign. From the sender's side the document is now 'out', and from the recipient's side a specific, guided action is waiting — a far cry from a vague email asking them to handle an attachment.",
+          "Next comes dispatch and notification. The request goes out to the recipient with a clear indication of what they are being asked to do, so there is no ambiguity about whether they should read, comment or sign. From the sender's side the document is now 'out', and from the recipient's side a specific, guided action is waiting, a far cry from a vague email asking them to handle an attachment.",
           "Then comes the act of signing and the return. The recipient signs the authoritative copy, and the completed document comes back to you as a single signed result rather than a forwarded variant. The final stage is custody: the signed file is stored somewhere safe and backed up, becoming the record of the agreement. Seeing the process as these stages makes it obvious where a request can stall and where attention keeps it moving.",
         ],
       },
@@ -512,9 +512,9 @@ const articles = [
       {
         h: "A real-world scenario: closing a multi-signer contract",
         p: [
-          "Imagine an agency finalising a project contract that needs three signatures: the client's procurement lead, the client's budget holder, and the agency's own director. Handled by email, this is a familiar mess — one person signs an old draft, another replies with a scanned copy, the third never receives it, and a week disappears into reconciling which file is the real one.",
+          "Imagine an agency finalising a project contract that needs three signatures: the client's procurement lead, the client's budget holder, and the agency's own director. Handled by email, this is a familiar mess, one person signs an old draft, another replies with a scanned copy, the third never receives it, and a week disappears into reconciling which file is the real one.",
           "Run as a structured request, the same contract moves cleanly. The final document is uploaded once, the signers are specified, and the request routes the single authoritative copy to each party in turn. Nobody is signing their own divergent version, the sender can see how far along the chain the document has travelled, and a gentle nudge can be aimed precisely at whoever is holding things up.",
-          "The result is one signed contract, agreed by everyone, with a clear record of the process — completed in a fraction of the time the email approach would have taken. The more signatures a document needs, the more dramatic this difference becomes, which is exactly why request-signing earns its keep on the agreements that matter most.",
+          "The result is one signed contract, agreed by everyone, with a clear record of the process, completed in a fraction of the time the email approach would have taken. The more signatures a document needs, the more dramatic this difference becomes, which is exactly why request-signing earns its keep on the agreements that matter most.",
         ],
       },
       {
@@ -522,7 +522,7 @@ const articles = [
         p: [
           "A signing request succeeds or stalls partly on how it is framed. The recipient is often busy and unfamiliar with the document, so the request should remove every excuse to defer. State plainly what the document is, that you need their signature specifically, and the date by which it matters. Ambiguity is the enemy: a recipient who is unsure whether to read, comment or sign will usually do nothing.",
           "Keep the path to signing as short as possible. The fewer steps between opening the request and applying the signature, the more likely it is to happen in one sitting rather than being set aside for a quieter moment that never comes. When a deadline genuinely exists, say so and say why, because a concrete reason carries far more weight than a vague request to act soon.",
-          "If a request does go quiet, a single, polite, specific follow-up aimed at the exact person holding things up usually does the job — far better than a broad reminder to everyone. The aim throughout is to make signing the easiest thing the recipient could do next, so that inertia works for you rather than against you.",
+          "If a request does go quiet, a single, polite, specific follow-up aimed at the exact person holding things up usually does the job, far better than a broad reminder to everyone. The aim throughout is to make signing the easiest thing the recipient could do next, so that inertia works for you rather than against you.",
         ],
       },
       {
@@ -571,7 +571,7 @@ const articles = [
       {
         h: "The clutter at the edges of your pages",
         p: [
-          "Many PDFs carry visual baggage around their edges. A scanned page shows the grey of the scanner lid or the desk beneath it. A photographed document includes the surface it was lying on. A converted slide or web page has excessive whitespace. None of this is the content — it is clutter that frames the content and quietly makes the document look unpolished.",
+          "Many PDFs carry visual baggage around their edges. A scanned page shows the grey of the scanner lid or the desk beneath it. A photographed document includes the surface it was lying on. A converted slide or web page has excessive whitespace. None of this is the content, it is clutter that frames the content and quietly makes the document look unpolished.",
           "Cropping a PDF removes that clutter. By trimming the page boundaries inward, you focus each page on the actual content and discard the distracting margins, backgrounds and stray edges. The result looks deliberate and professional rather than improvised.",
         ],
       },
@@ -588,7 +588,7 @@ const articles = [
       {
         h: "Where cropping makes a real difference",
         p: [
-          "Cropping is the natural partner of image-to-PDF conversion. After turning photographed receipts, IDs or forms into a PDF, cropping removes the surrounding desk and tightens each page to the document itself — the single biggest improvement you can make to a phone-scanned PDF. It is equally useful for scanned books and articles, where trimming the wide margins makes the text larger and more readable, especially on small screens.",
+          "Cropping is the natural partner of image-to-PDF conversion. After turning photographed receipts, IDs or forms into a PDF, cropping removes the surrounding desk and tightens each page to the document itself, the single biggest improvement you can make to a phone-scanned PDF. It is equally useful for scanned books and articles, where trimming the wide margins makes the text larger and more readable, especially on small screens.",
           "It also helps when repurposing content. A PDF exported from a presentation or a web page often has awkward whitespace; cropping reframes it for reuse. And for reading on phones and e-readers, cropping away margins is one of the most effective ways to make a dense PDF comfortable.",
         ],
       },
@@ -614,13 +614,13 @@ const articles = [
         h: "Best practices for cropping",
         p: [
           "Crop consistently across pages so the document feels uniform; a PDF where every page is trimmed slightly differently looks more chaotic than one left uncropped. Leave a small, even margin around the content rather than cropping flush to the text, which can feel claustrophobic and risks clipping descenders or edge characters.",
-          "Always review after cropping to confirm you have not cut off anything meaningful — page numbers, footnotes, signatures and marginal notes are easy to lose if the crop is too aggressive. Cropping is hard to undo cleanly once the file is finalised, so a careful check before you commit is worth the moment it takes.",
+          "Always review after cropping to confirm you have not cut off anything meaningful, page numbers, footnotes, signatures and marginal notes are easy to lose if the crop is too aggressive. Cropping is hard to undo cleanly once the file is finalised, so a careful check before you commit is worth the moment it takes.",
         ],
       },
       {
         h: "From the Lexigenz desk: the cheapest professionalism upgrade",
         p: [
-          "Of all the small adjustments that make a document look more professional, cropping photographed and scanned pages is the highest-return one we know. The raw output of a phone scan — content floating in a field of desk and shadow — reads as careless, and reviewers notice even if they cannot articulate why. Cropping to the page transforms that impression instantly, at almost no effort.",
+          "Of all the small adjustments that make a document look more professional, cropping photographed and scanned pages is the highest-return one we know. The raw output of a phone scan, content floating in a field of desk and shadow, reads as careless, and reviewers notice even if they cannot articulate why. Cropping to the page transforms that impression instantly, at almost no effort.",
           "We have come to treat cropping as a default finishing step for any document built from images. It is the difference between a submission that looks like a hurried snapshot and one that looks like a scanned document, and that difference shapes how seriously the content is taken.",
         ],
       },
@@ -628,7 +628,7 @@ const articles = [
         h: "How cropping changes the page behind the scenes",
         p: [
           "It is worth knowing what cropping does and does not do to your file. Every PDF page has defined boundaries that tell readers and printers how big the page is and where its edges fall. Cropping adjusts those boundaries inward, telling the reader to display and print only the area you have chosen. The page appears smaller and tighter because the visible window has been narrowed to the content you want.",
-          "What cropping typically does not do is physically delete the pixels that now sit outside the visible area — it changes which part of the page is shown rather than rebuilding the underlying content. That distinction has two practical consequences. First, cropping alone rarely shrinks the file much, because the data beyond the crop may still be carried along. Second, an over-aggressive crop can sometimes be eased back, but you should never rely on that; treat each crop as a decision to commit to.",
+          "What cropping typically does not do is physically delete the pixels that now sit outside the visible area, it changes which part of the page is shown rather than rebuilding the underlying content. That distinction has two practical consequences. First, cropping alone rarely shrinks the file much, because the data beyond the crop may still be carried along. Second, an over-aggressive crop can sometimes be eased back, but you should never rely on that; treat each crop as a decision to commit to.",
           "Because cropping reframes rather than rebuilds, it pairs naturally with compression. Crop to remove the desk and background, then compress to actually reduce the size of the remaining content. The crop decides what the reader sees; the compression decides how heavy the file is. Used together in that order, they give you a page that is both clean to look at and light to send.",
         ],
       },
@@ -637,7 +637,7 @@ const articles = [
         p: [
           "There is no single correct crop, because the ideal framing depends on what the document is and how it will be read. A photographed receipt or form wants a tight crop right to the edge of the paper, removing every trace of the surface it was lying on, so the page reads as a clean scan rather than a snapshot. Here, aggressive trimming is exactly right.",
           "A scanned book or article calls for a gentler hand. You want to remove the wide outer margins that waste space and shrink the text on small screens, but you must leave the running heads, page numbers and footnotes that belong to the document. Crop to the text block plus a comfortable margin, not flush to the first and last lines, so the page still breathes and nothing meaningful is clipped.",
-          "Repurposed content — a slide exported to PDF, a captured web page — sits somewhere in between. The goal there is to reframe the useful content and discard awkward whitespace or interface chrome, keeping the result balanced rather than lopsided. In every case the question is the same: what does the reader actually need to see, and what is merely framing it? Crop to the former and remove the latter.",
+          "Repurposed content, a slide exported to PDF, a captured web page, sits somewhere in between. The goal there is to reframe the useful content and discard awkward whitespace or interface chrome, keeping the result balanced rather than lopsided. In every case the question is the same: what does the reader actually need to see, and what is merely framing it? Crop to the former and remove the latter.",
         ],
       },
       {
@@ -657,7 +657,7 @@ const articles = [
       {
         h: "Cropping as the finishing touch on a scanned workflow",
         p: [
-          "Cropping rarely works alone; it is the middle step in a short sequence that turns raw captures into polished documents. The sequence usually begins with conversion — photographs become PDF pages through JPG to PDF — at which point each page is technically a document but visually still a snapshot, surrounded by whatever was in frame when the photo was taken.",
+          "Cropping rarely works alone; it is the middle step in a short sequence that turns raw captures into polished documents. The sequence usually begins with conversion, photographs become PDF pages through JPG to PDF, at which point each page is technically a document but visually still a snapshot, surrounded by whatever was in frame when the photo was taken.",
           "Cropping is what closes that gap. Trimming each page to the document itself removes the desk, the shadows and the stray edges, and suddenly the file reads as a deliberate scan rather than a hurried series of pictures. This is the single step that does the most to lift the perceived quality of a phone-scanned document, and it costs only the moments it takes to set the crop and review the pages.",
           "Compression then completes the sequence by bringing the file down to a sensible size for sending or uploading, with the bonus that there is less leftover image area to carry once the crop has framed the content. Convert, crop, compress, check: run that loop on any document built from images and you consistently produce clean, light, professional PDFs from nothing more than photographs.",
         ],
@@ -686,7 +686,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "Cropping focuses a PDF on what matters and strips away the clutter at its edges. Trim consistently, leave a small even margin, and check nothing important is lost. It is the cheapest, fastest way to make a document — especially a scanned one — look genuinely professional.",
+          "Cropping focuses a PDF on what matters and strips away the clutter at its edges. Trim consistently, leave a small even margin, and check nothing important is lost. It is the cheapest, fastest way to make a document, especially a scanned one, look genuinely professional.",
         ],
       },
     ],
@@ -703,13 +703,13 @@ const articles = [
     relatedTools: ["Compress PDF", "JPG to PDF", "Crop PDF"],
     datePublished: "2026-03-13",
     excerpt:
-      "A PDF that is too big to email or upload is a PDF that fails at the last step. Compression shrinks it while keeping it readable — if you do it thoughtfully.",
+      "A PDF that is too big to email or upload is a PDF that fails at the last step. Compression shrinks it while keeping it readable, if you do it thoughtfully.",
     sections: [
       {
         h: "Why PDFs get too big in the first place",
         p: [
           "A document that is mostly text should be small, so when a PDF balloons to many megabytes, the culprit is almost always images. High-resolution photos, scanned pages, screenshots and embedded graphics carry enormous amounts of data, and a single full-resolution phone photo can be larger than hundreds of pages of text. Stack several of those into a document and you have a file that bounces off email limits and stalls on upload forms.",
-          "Compression tackles this by reducing the data those images carry, shrinking the overall file. Done thoughtfully, it produces a PDF that is dramatically smaller yet still perfectly readable — the goal is a file that is light enough to send without looking degraded.",
+          "Compression tackles this by reducing the data those images carry, shrinking the overall file. Done thoughtfully, it produces a PDF that is dramatically smaller yet still perfectly readable, the goal is a file that is light enough to send without looking degraded.",
         ],
       },
       {
@@ -725,14 +725,14 @@ const articles = [
       {
         h: "Where compression is the deciding factor",
         p: [
-          "Email is the classic wall: most services cap attachments at a size that a few scanned pages can easily exceed, and a document that cannot be attached cannot be sent. Upload forms are stricter still — job portals, government systems and application sites frequently impose tight size limits and reject anything larger. Compression is often the only thing standing between you and a successful submission.",
+          "Email is the classic wall: most services cap attachments at a size that a few scanned pages can easily exceed, and a document that cannot be attached cannot be sent. Upload forms are stricter still, job portals, government systems and application sites frequently impose tight size limits and reject anything larger. Compression is often the only thing standing between you and a successful submission.",
           "It matters for storage and speed too. Across an organisation, compressed PDFs consume far less storage and sync and download faster. For anyone sharing documents with people on slow or metered connections, a smaller file is simply more considerate and more likely to actually be opened.",
         ],
       },
       {
         h: "Why thoughtful compression matters",
         p: [
-          "The risk with compression is overdoing it. Push too hard and text can blur, images can turn muddy, and the document starts to look cheap — which can be worse than a file that is merely large. The aim is the smallest size that still serves the document's purpose, and that purpose dictates how far you can go.",
+          "The risk with compression is overdoing it. Push too hard and text can blur, images can turn muddy, and the document starts to look cheap, which can be worse than a file that is merely large. The aim is the smallest size that still serves the document's purpose, and that purpose dictates how far you can go.",
           "A document destined for screen reading tolerates more compression than one that will be printed at full size, where image detail matters more. Matching the level of compression to how the document will be used is the difference between a file that is both small and good and one that is small but disappointing.",
         ],
       },
@@ -751,14 +751,14 @@ const articles = [
         h: "Best practices for compression",
         p: [
           "Tackle the cause before you compress. If a PDF is large because of full-resolution phone photos, cropping away the surrounding background first removes pixels you never needed, so the compression has less to do and the result is cleaner. Combining crop and compress consistently produces the best balance of size and quality.",
-          "Always open the compressed file and judge it against its actual use. If it is for email and on-screen reading, a smaller, slightly softer file is fine. If it will be printed or examined closely, be more conservative. And keep the original — compression discards data, so you want the full-quality version preserved in case you need to produce a higher-fidelity copy later.",
+          "Always open the compressed file and judge it against its actual use. If it is for email and on-screen reading, a smaller, slightly softer file is fine. If it will be printed or examined closely, be more conservative. And keep the original, compression discards data, so you want the full-quality version preserved in case you need to produce a higher-fidelity copy later.",
         ],
       },
       {
         h: "From the Lexigenz desk: size is a feature, not an afterthought",
         p: [
           "A pattern we see repeatedly is people treating file size as something to worry about only when an upload fails. By then they are stuck, often at a deadline, trying to force a bloated file under a limit. The teams that never hit this wall treat size as part of preparing a document, not a last-minute emergency.",
-          "Building compression into the finishing routine — especially for anything containing images or scans — means documents are always ready to send. The discipline is small: crop, compress, check, keep the original. Adopt it and the 'attachment too large' error simply stops happening.",
+          "Building compression into the finishing routine, especially for anything containing images or scans, means documents are always ready to send. The discipline is small: crop, compress, check, keep the original. Adopt it and the 'attachment too large' error simply stops happening.",
         ],
       },
       {
@@ -766,7 +766,7 @@ const articles = [
         p: [
           "Compression is less mysterious once you know where the weight in a PDF lives. The text and layout instructions in a document take up very little space; the bulk is almost always the images. A photo or scanned page stores a value for every pixel, and at full phone-camera resolution that runs to millions of pixels per page. Compression goes after this data specifically, because that is where the savings are.",
           "It works mainly by reducing how much image data the file carries. An image captured at a far higher resolution than it will ever be displayed at contains detail no reader will ever see, so compression resamples it to a sensible resolution and re-encodes it more efficiently. Because the discarded detail was redundant for the document's purpose, the page can look essentially identical while the file becomes a fraction of the size.",
-          "The trade-off lives in that word 'sensible'. Reduce the image data modestly and the eye notices nothing; push it too far and the resampling becomes visible as softness, blockiness or muddy colour. This is why compression is a judgement rather than a switch: you are choosing how much invisible detail to remove before the removal starts to show. Understanding that the savings come from images also tells you where to look when a 'text' document is mysteriously large — it is almost always carrying images you forgot about.",
+          "The trade-off lives in that word 'sensible'. Reduce the image data modestly and the eye notices nothing; push it too far and the resampling becomes visible as softness, blockiness or muddy colour. This is why compression is a judgement rather than a switch: you are choosing how much invisible detail to remove before the removal starts to show. Understanding that the savings come from images also tells you where to look when a 'text' document is mysteriously large, it is almost always carrying images you forgot about.",
         ],
       },
       {
@@ -796,7 +796,7 @@ const articles = [
         p: [
           "The value of compression is easiest to appreciate at the moments it prevents failure. Email is the everyday wall: most services cap attachments at a size that just a few scanned pages can exceed, and a document that will not attach simply cannot be sent. A quick compression pass is often the only thing standing between a finished file and a delivered one.",
           "Upload portals are stricter still. Job applications, government systems and grant submissions routinely impose tight limits and reject anything larger without explanation, usually at the worst possible moment against a deadline. Anyone assembling scanned supporting documents into a portal learns to compress as a matter of course, because the alternative is a submission that bounces with no second chance.",
-          "Beyond these hard limits, compressed files are simply better citizens. They consume less storage, sync and download faster, and respect recipients on slow or metered connections who might otherwise leave a heavy attachment unopened. A document that is light is a document that is more likely to actually be received, opened and read — which is, after all, the entire point of sending it.",
+          "Beyond these hard limits, compressed files are simply better citizens. They consume less storage, sync and download faster, and respect recipients on slow or metered connections who might otherwise leave a heavy attachment unopened. A document that is light is a document that is more likely to actually be received, opened and read, which is, after all, the entire point of sending it.",
         ],
       },
       {
@@ -812,7 +812,7 @@ const articles = [
           },
           {
             q: "Should I crop before compressing?",
-            a: "Yes, especially for photographed documents — cropping removes pixels you do not need before compression runs.",
+            a: "Yes, especially for photographed documents, cropping removes pixels you do not need before compression runs.",
           },
           {
             q: "Should I keep the original?",
@@ -823,7 +823,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "A PDF that is too big fails at the final step. Compress it thoughtfully — address the cause, match the level to the use, check the result and keep the original — and you get a file that is light enough to send and still good enough to be taken seriously.",
+          "A PDF that is too big fails at the final step. Compress it thoughtfully, address the cause, match the level to the use, check the result and keep the original, and you get a file that is light enough to send and still good enough to be taken seriously.",
         ],
       },
     ],
@@ -846,13 +846,13 @@ const articles = [
         h: "The sensitive life of a document",
         p: [
           "Think about what passes through your documents: financial statements, identity papers, contracts, medical information, payroll, legal correspondence. Documents are where the most sensitive details of our personal and professional lives are written down, and once a file leaves your device it can be forwarded, copied and stored anywhere. PDF security exists to keep that information protected as it travels.",
-          "Understanding the basics of how PDFs can be secured — and the limits of that security — lets you protect sensitive documents appropriately, without either leaving them exposed or locking them down so hard that legitimate recipients cannot use them.",
+          "Understanding the basics of how PDFs can be secured, and the limits of that security, lets you protect sensitive documents appropriately, without either leaving them exposed or locking them down so hard that legitimate recipients cannot use them.",
         ],
       },
       {
         h: "The layers of PDF protection",
         p: [
-          "PDF security generally comes in a few forms. Password protection requires anyone opening the file to enter a password, which is the most direct way to keep a document out of the wrong hands. Permission controls restrict what a reader can do — printing, copying text, or editing — even after they open it. And digital signatures provide tamper-evidence, so a reader can tell whether a document has been altered since it was signed.",
+          "PDF security generally comes in a few forms. Password protection requires anyone opening the file to enter a password, which is the most direct way to keep a document out of the wrong hands. Permission controls restrict what a reader can do, printing, copying text, or editing, even after they open it. And digital signatures provide tamper-evidence, so a reader can tell whether a document has been altered since it was signed.",
           "These layers serve different goals. A password controls who can read; permissions control what they can do; signatures establish integrity and authenticity. Strong document security often combines them: a confidential contract might be password-protected, restrict editing, and carry a signature confirming it is genuine.",
         ],
       },
@@ -869,7 +869,7 @@ const articles = [
       {
         h: "Why security has to be balanced",
         p: [
-          "Security always trades against convenience, and the art is in the balance. Lock a document too lightly and you risk exposing sensitive information; lock it too tightly and you create friction that tempts people to work around it — emailing the password in the same message as the file, or sharing an unprotected copy because the protected one was too inconvenient. Either extreme undermines the goal.",
+          "Security always trades against convenience, and the art is in the balance. Lock a document too lightly and you risk exposing sensitive information; lock it too tightly and you create friction that tempts people to work around it, emailing the password in the same message as the file, or sharing an unprotected copy because the protected one was too inconvenient. Either extreme undermines the goal.",
           "The right level depends on the document. A routine internal memo needs little. A file containing identity or financial details deserves real protection. Match the protection to the sensitivity, and deliver it in a way that legitimate recipients can actually use, or the security will be quietly defeated by the people it was meant to help.",
         ],
       },
@@ -887,14 +887,14 @@ const articles = [
       {
         h: "Best practices for document security",
         p: [
-          "Never send a password in the same channel as the protected file; if an email is intercepted, a password sitting right beside the attachment protects nothing. Share credentials separately — a different channel or a quick message — so the file and its key never travel together. Use strong, unique passwords for genuinely sensitive documents rather than a memorable one reused everywhere.",
+          "Never send a password in the same channel as the protected file; if an email is intercepted, a password sitting right beside the attachment protects nothing. Share credentials separately, a different channel or a quick message, so the file and its key never travel together. Use strong, unique passwords for genuinely sensitive documents rather than a memorable one reused everywhere.",
           "Apply protection proportionate to the content, and remember that the strongest technical security is undone by careless handling. The most common breaches are not broken encryption but human ones: a confidential file sent to the wrong person, or a password shared too freely. Treat secured documents with the same care you would a physical original of the same information.",
         ],
       },
       {
         h: "From the Lexigenz desk: the password in the same email",
         p: [
-          "The security failure we encounter most often is almost comically simple: people protect a document with a password and then email the password in the very same message, or in an immediate follow-up to the same inbox. It feels helpful, but it defeats the entire purpose — anyone who can read the email already has both the locked file and its key.",
+          "The security failure we encounter most often is almost comically simple: people protect a document with a password and then email the password in the very same message, or in an immediate follow-up to the same inbox. It feels helpful, but it defeats the entire purpose, anyone who can read the email already has both the locked file and its key.",
           "The fix is a habit, not a technology: send the document one way and the password another. That single discipline does more for real-world document security than any amount of stronger encryption, because it closes the gap that careless convenience opens. Protect the file, then protect the key just as deliberately.",
         ],
       },
@@ -923,16 +923,16 @@ const articles = [
       {
         h: "A real-world scenario: sending a confidential offer letter",
         p: [
-          "Consider an HR manager sending a job offer that contains a salary figure, a home address and a start date — exactly the kind of personal and financial detail that should never travel unprotected. The temptation is to attach the PDF to an email and add a line at the bottom: 'the password is the candidate's date of birth.' It feels secure, and it is anything but.",
-          "The sound approach separates the file from its key and matches the protection to the sensitivity. The offer is saved as a password-protected PDF with a strong, unique password, and the document is sent in one channel while the password is shared through another — a text message or a phone call rather than the same email thread. If editing needs to be prevented, permission controls restrict it; if the candidate must sign, a tool for locked documents lets them sign without the protection being removed.",
-          "Handled this way, an intercepted email yields only an encrypted file with no key beside it, and the candidate still receives a document they can open, read and sign with ease. The information is protected in transit, the recipient is not frustrated into insecure workarounds, and the manager has matched the level of protection to what the document actually contains — which is the entire goal of document security.",
+          "Consider an HR manager sending a job offer that contains a salary figure, a home address and a start date, exactly the kind of personal and financial detail that should never travel unprotected. The temptation is to attach the PDF to an email and add a line at the bottom: 'the password is the candidate's date of birth.' It feels secure, and it is anything but.",
+          "The sound approach separates the file from its key and matches the protection to the sensitivity. The offer is saved as a password-protected PDF with a strong, unique password, and the document is sent in one channel while the password is shared through another, a text message or a phone call rather than the same email thread. If editing needs to be prevented, permission controls restrict it; if the candidate must sign, a tool for locked documents lets them sign without the protection being removed.",
+          "Handled this way, an intercepted email yields only an encrypted file with no key beside it, and the candidate still receives a document they can open, read and sign with ease. The information is protected in transit, the recipient is not frustrated into insecure workarounds, and the manager has matched the level of protection to what the document actually contains, which is the entire goal of document security.",
         ],
       },
       {
         h: "Matching protection to the sensitivity of the document",
         p: [
           "Not every document deserves the same lock, and treating them all alike causes problems at both extremes. Over-protect routine material and you bury colleagues in passwords for things that never needed them, training everyone to find shortcuts. Under-protect genuinely sensitive files and you expose exactly the information that most needed care. The skill is calibration: apply protection in proportion to what the document contains and who might see it.",
-          "A useful way to think about it is to grade documents by consequence. Material with no real sensitivity — published information, internal notices, general reference — needs little or nothing. Documents holding personal, financial, contractual or health information sit a level up and warrant a strong password and careful sharing. The most sensitive material, where exposure would cause real harm, justifies combining encryption with permission controls and, where authenticity matters, a signature that makes tampering evident.",
+          "A useful way to think about it is to grade documents by consequence. Material with no real sensitivity, published information, internal notices, general reference, needs little or nothing. Documents holding personal, financial, contractual or health information sit a level up and warrant a strong password and careful sharing. The most sensitive material, where exposure would cause real harm, justifies combining encryption with permission controls and, where authenticity matters, a signature that makes tampering evident.",
           "Calibrating this way keeps security credible. When protection appears only where it is genuinely needed, people take it seriously and handle the locked files with appropriate care, rather than treating every password as an annoyance to be circumvented. Proportionate security is not weaker security; it is the version that actually holds up in daily use.",
         ],
       },

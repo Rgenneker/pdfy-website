@@ -4,257 +4,257 @@
   "url": "https://pdfshuffl.com",
   "llms_txt": "https://pdfshuffl.com/llms.txt",
   "sitemap": "https://pdfshuffl.com/sitemap-index.xml",
-  "generated_at": "2026-06-22T12:07:31.611Z",
+  "generated_at": "2026-06-22T12:30:03.893Z",
   "tools": [
     {
       "name": "PDF Converter",
       "slug": "pdf-converter",
-      "description": "PDF Converter online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF Converter online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert PDF to Word",
       "slug": "convert-pdf-to-word",
-      "description": "Convert PDF to Word online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert PDF to Word online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert Word to PDF",
       "slug": "convert-word-to-pdf",
-      "description": "Convert Word to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert Word to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert PDF to Excel",
       "slug": "convert-pdf-to-excel",
-      "description": "Convert PDF to Excel online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert PDF to Excel online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert Excel to PDF",
       "slug": "convert-excel-to-pdf",
-      "description": "Convert Excel to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert Excel to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert PDF to JPG",
       "slug": "convert-pdf-to-jpg",
-      "description": "Convert PDF to JPG online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert PDF to JPG online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert JPG to PDF",
       "slug": "convert-jpg-to-pdf",
-      "description": "Convert JPG to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert JPG to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert PDF to PNG",
       "slug": "convert-pdf-to-png",
-      "description": "Convert PDF to PNG online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert PDF to PNG online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert PDF to PowerPoint",
       "slug": "convert-pdf-to-powerpoint",
-      "description": "Convert PDF to PowerPoint online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert PDF to PowerPoint online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert PowerPoint to PDF",
       "slug": "convert-powerpoint-to-pdf",
-      "description": "Convert PowerPoint to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert PowerPoint to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Compress PDF",
       "slug": "compress-pdf",
-      "description": "Compress PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Compress PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Merge PDF",
       "slug": "merge-pdf",
-      "description": "Merge PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Merge PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Split PDF",
       "slug": "split-pdf",
-      "description": "Split PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Split PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Edit PDF",
       "slug": "edit-pdf",
-      "description": "Edit PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Edit PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Sign PDF",
       "slug": "sign-pdf",
-      "description": "Sign PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Sign PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Rotate PDF",
       "slug": "rotate-pdf",
-      "description": "Rotate PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Rotate PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Crop PDF",
       "slug": "crop-pdf",
-      "description": "Crop PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Crop PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Unlock PDF",
       "slug": "unlock-pdf",
-      "description": "Unlock PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Unlock PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Protect PDF",
       "slug": "protect-pdf",
-      "description": "Protect PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Protect PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF to Text",
       "slug": "pdf-to-text",
-      "description": "PDF to Text online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF to Text online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Text to PDF",
       "slug": "text-to-pdf",
-      "description": "Text to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Text to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF to HTML",
       "slug": "pdf-to-html",
-      "description": "PDF to HTML online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF to HTML online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "HTML to PDF",
       "slug": "html-to-pdf",
-      "description": "HTML to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "HTML to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF to CSV",
       "slug": "pdf-to-csv",
-      "description": "PDF to CSV online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF to CSV online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "CSV to PDF",
       "slug": "csv-to-pdf",
-      "description": "CSV to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "CSV to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Scan to PDF",
       "slug": "scan-to-pdf",
-      "description": "Scan to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Scan to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Fill PDF Forms",
       "slug": "fill-pdf-forms",
-      "description": "Fill PDF Forms online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Fill PDF Forms online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Annotate PDF",
       "slug": "annotate-pdf",
-      "description": "Annotate PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Annotate PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Add Watermark to PDF",
       "slug": "add-watermark-to-pdf",
-      "description": "Add Watermark to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Add Watermark to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Remove Watermark from PDF",
       "slug": "remove-watermark-from-pdf",
-      "description": "Remove Watermark from PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Remove Watermark from PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Delete PDF Pages",
       "slug": "delete-pdf-pages",
-      "description": "Delete PDF Pages online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Delete PDF Pages online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Reorder PDF Pages",
       "slug": "reorder-pdf-pages",
-      "description": "Reorder PDF Pages online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Reorder PDF Pages online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Extract PDF Pages",
       "slug": "extract-pdf-pages",
-      "description": "Extract PDF Pages online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Extract PDF Pages online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "OCR PDF",
       "slug": "ocr-pdf",
-      "description": "OCR PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "OCR PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Flatten PDF",
       "slug": "flatten-pdf",
-      "description": "Flatten PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Flatten PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Reduce PDF Size",
       "slug": "reduce-pdf-size",
-      "description": "Reduce PDF Size online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Reduce PDF Size online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Combine PDF Files",
       "slug": "combine-pdf-files",
-      "description": "Combine PDF Files online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Combine PDF Files online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF to Editable PDF",
       "slug": "pdf-to-editable-pdf",
-      "description": "PDF to Editable PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF to Editable PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "ODT to PDF",
       "slug": "odt-to-pdf",
-      "description": "ODT to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "ODT to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "ODS to PDF",
       "slug": "ods-to-pdf",
-      "description": "ODS to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "ODS to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "ODP to PDF",
       "slug": "odp-to-pdf",
-      "description": "ODP to PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "ODP to PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF to ODT",
       "slug": "pdf-to-odt",
-      "description": "PDF to ODT online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF to ODT online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "eSign PDF",
       "slug": "esign-pdf",
-      "description": "eSign PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "eSign PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Redact PDF",
       "slug": "redact-pdf",
-      "description": "Redact PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Redact PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Number PDF Pages",
       "slug": "number-pdf-pages",
-      "description": "Number PDF Pages online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Number PDF Pages online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Convert Scanned PDF",
       "slug": "convert-scanned-pdf",
-      "description": "Convert Scanned PDF online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Convert Scanned PDF online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF Page Organizer",
       "slug": "pdf-page-organizer",
-      "description": "PDF Page Organizer online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF Page Organizer online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Make PDF Searchable",
       "slug": "make-pdf-searchable",
-      "description": "Make PDF Searchable online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Make PDF Searchable online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "PDF Form Filler",
       "slug": "pdf-form-filler",
-      "description": "PDF Form Filler online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "PDF Form Filler online with PDFShuffl, free, secure and browser-based, no installation required."
     },
     {
       "name": "Online PDF Editor",
       "slug": "online-pdf-editor",
-      "description": "Online PDF Editor online with PDFShuffl — free, secure and browser-based, no installation required."
+      "description": "Online PDF Editor online with PDFShuffl, free, secure and browser-based, no installation required."
     }
   ]
 }

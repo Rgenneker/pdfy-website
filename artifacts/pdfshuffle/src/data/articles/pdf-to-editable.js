@@ -20,7 +20,7 @@ const articles = [
       {
         h: "Why editing a PDF directly is so frustrating",
         p: [
-          "PDF was invented to be a finished format. Its whole purpose is to fix text and layout in place so they cannot drift, which is wonderful for sharing and terrible for editing. When you open a PDF and try to change a sentence, you quickly discover that the text is not arranged in paragraphs the way it is in a word processor — it is positioned as fragments on a page. That is why even small edits feel like fighting the file.",
+          "PDF was invented to be a finished format. Its whole purpose is to fix text and layout in place so they cannot drift, which is wonderful for sharing and terrible for editing. When you open a PDF and try to change a sentence, you quickly discover that the text is not arranged in paragraphs the way it is in a word processor, it is positioned as fragments on a page. That is why even small edits feel like fighting the file.",
           "The sensible solution is not to wrestle with the PDF but to convert it back into an editable Word document. Once it is a .docx, you are working in the environment built for editing: real paragraphs, styles, spell-check and track changes. You make your revisions there, then convert back to PDF when the document is final again.",
         ],
       },
@@ -37,7 +37,7 @@ const articles = [
       {
         h: "Where this conversion saves the day",
         p: [
-          "The classic scenario is a document whose original is lost. Someone sends you a contract, a form or a proposal as a PDF, you need to update a clause or a figure, and the editable source is nowhere to be found — it was created by a former colleague, a different department, or an external party. Converting the PDF to Word recovers an editable version so you do not have to rebuild the document from scratch.",
+          "The classic scenario is a document whose original is lost. Someone sends you a contract, a form or a proposal as a PDF, you need to update a clause or a figure, and the editable source is nowhere to be found, it was created by a former colleague, a different department, or an external party. Converting the PDF to Word recovers an editable version so you do not have to rebuild the document from scratch.",
           "It is equally useful for repurposing content. A report you published last quarter can become the starting point for this quarter's by converting it back to Word, updating the numbers and narrative, and re-exporting. The conversion turns a finished artefact back into a working draft.",
         ],
       },
@@ -69,14 +69,14 @@ const articles = [
       {
         h: "From the Lexigenz desk: the round trip is the point",
         p: [
-          "The mistake we see most often is treating PDF-to-Word as a one-way escape hatch and then sharing the resulting Word file. That reintroduces every problem PDF was meant to solve — the recipient's software re-renders it, formatting drifts, and edits creep in. The conversion is meant to be one half of a round trip.",
+          "The mistake we see most often is treating PDF-to-Word as a one-way escape hatch and then sharing the resulting Word file. That reintroduces every problem PDF was meant to solve, the recipient's software re-renders it, formatting drifts, and edits creep in. The conversion is meant to be one half of a round trip.",
           "Think of it as a loop: PDF to Word to edit, then Word back to PDF to share. The editable format is your workspace; the PDF is your delivery format. Teams that internalise this loop stop losing source files and stop sending fragile documents, because they always have a clear path between the two states.",
         ],
       },
       {
         h: "What the conversion is actually doing under the hood",
         p: [
-          "It helps to understand what happens between upload and download, because it explains why some conversions are flawless and others need a little tidying. A digital PDF stores text as a long list of glyphs, each placed at precise coordinates on the page. There are no paragraphs, no headings and no table cells in the file itself — only characters with positions. The conversion engine has to look at those positions and infer the structure a human reads automatically: which fragments belong to the same line, which lines form a paragraph, where a column ends and the next begins, and which grid of aligned text is really a table.",
+          "It helps to understand what happens between upload and download, because it explains why some conversions are flawless and others need a little tidying. A digital PDF stores text as a long list of glyphs, each placed at precise coordinates on the page. There are no paragraphs, no headings and no table cells in the file itself, only characters with positions. The conversion engine has to look at those positions and infer the structure a human reads automatically: which fragments belong to the same line, which lines form a paragraph, where a column ends and the next begins, and which grid of aligned text is really a table.",
           "Word, by contrast, is a flow-based format. It does not place characters by coordinate; it stores logical paragraphs and styles and lets the application lay them out. So the conversion is essentially a translation from a coordinate model into a flow model. That translation is where the intelligence lives, and it is also why a clean, well-built source converts almost perfectly while a densely designed brochure with overlapping text boxes takes more interpretation.",
           "Knowing this gives you a useful mental model: the more clearly the original document expressed its structure, the more faithfully it comes back. Straightforward reports and letters reconstruct beautifully because their structure is obvious. Heavily designed layouts ask the engine to guess more, so they are the ones worth reviewing most closely.",
         ],
@@ -85,7 +85,7 @@ const articles = [
         h: "Common mistakes to avoid",
         ul: [
           "Sharing the converted Word file instead of re-exporting to PDF, which reintroduces formatting drift on the recipient's machine.",
-          "Assuming a scanned PDF will convert like a digital one — it needs text recognition first and always warrants a closer proofread.",
+          "Assuming a scanned PDF will convert like a digital one, it needs text recognition first and always warrants a closer proofread.",
           "Skipping the comparison against the original, particularly for numbers, dates and anything inside tables or columns.",
           "Editing the file before checking that headings imported as real heading styles rather than as plain bold text.",
           "Deleting the original PDF before confirming the conversion captured everything you need.",
@@ -132,7 +132,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "When you need to change a PDF, do not fight the file — convert it back to Word, edit it properly, and re-export to PDF. That round trip recovers lost sources, saves hours of retyping, and keeps your shared documents clean and final.",
+          "When you need to change a PDF, do not fight the file, convert it back to Word, edit it properly, and re-export to PDF. That round trip recovers lost sources, saves hours of retyping, and keeps your shared documents clean and final.",
         ],
       },
     ],
@@ -149,13 +149,13 @@ const articles = [
     relatedTools: ["PDF to CSV", "CSV to PDF", "PDF to Word"],
     datePublished: "2026-02-08",
     excerpt:
-      "The data you need is often locked inside a PDF table. Converting to CSV frees it for spreadsheets, analysis and import — no manual re-keying.",
+      "The data you need is often locked inside a PDF table. Converting to CSV frees it for spreadsheets, analysis and import, no manual re-keying.",
     sections: [
       {
         h: "The data trapped inside PDFs",
         p: [
           "An enormous amount of the world's structured data lives inside PDFs: bank statements, invoices, price lists, scientific tables, government reports, supplier catalogues. The information is right there on the page, neatly arranged in rows and columns, and yet it is maddeningly hard to use. You cannot sum a column in a PDF, sort it, filter it or import it into another system. To a computer, a PDF table is usually just text positioned to look like a table, not actual data.",
-          "Converting PDF to CSV unlocks that data. It reads the rows and columns and writes them out as comma-separated values — the universal format that spreadsheets, databases and analytics tools all understand. Suddenly the numbers you could only look at become numbers you can work with.",
+          "Converting PDF to CSV unlocks that data. It reads the rows and columns and writes them out as comma-separated values, the universal format that spreadsheets, databases and analytics tools all understand. Suddenly the numbers you could only look at become numbers you can work with.",
         ],
       },
       {
@@ -178,7 +178,7 @@ const articles = [
       {
         h: "Why CSV is the right target format",
         p: [
-          "CSV is deliberately plain, and that is its strength. Because it carries only the data and not the formatting, it imports cleanly into virtually any system — every spreadsheet program, every database, every analytics platform reads CSV. If your goal is to do something with the numbers rather than just display them, CSV is the format that opens the most doors.",
+          "CSV is deliberately plain, and that is its strength. Because it carries only the data and not the formatting, it imports cleanly into virtually any system, every spreadsheet program, every database, every analytics platform reads CSV. If your goal is to do something with the numbers rather than just display them, CSV is the format that opens the most doors.",
           "If, after extracting, you find you want a presentable version of the data again, you can clean it up in a spreadsheet and convert it back with CSV to PDF. The two tools are natural partners: one frees the data, the other re-presents it.",
         ],
       },
@@ -196,7 +196,7 @@ const articles = [
       {
         h: "Best practices for clean extraction",
         p: [
-          "Results depend heavily on how the table was built. A PDF generated from a spreadsheet or database, where the table is real text, extracts cleanly. A scanned table is an image and needs recognition, so expect to verify the output more carefully. Either way, always open the resulting CSV and check the column alignment before you trust it — a single misread separator can shift values into the wrong columns.",
+          "Results depend heavily on how the table was built. A PDF generated from a spreadsheet or database, where the table is real text, extracts cleanly. A scanned table is an image and needs recognition, so expect to verify the output more carefully. Either way, always open the resulting CSV and check the column alignment before you trust it, a single misread separator can shift values into the wrong columns.",
           "Pay particular attention to numbers that include thousands separators, currency symbols or negative signs in parentheses, as these are the values most likely to need a quick tidy after extraction. A short verification pass against the source page is far cheaper than discovering a misaligned figure after you have already built analysis on top of it.",
         ],
       },
@@ -210,9 +210,9 @@ const articles = [
       {
         h: "How table detection actually works",
         p: [
-          "A PDF table is an illusion of structure. To the file, there are no rows, no columns and no cells — only text fragments and, sometimes, drawn lines, all positioned by coordinate to look like a grid. The extraction engine has to rebuild the grid from those clues. It looks for runs of text that share the same vertical position to identify rows, and for consistent horizontal gaps or ruling lines to identify column boundaries. From that analysis it reconstructs cells and writes them out in order, separated by commas.",
+          "A PDF table is an illusion of structure. To the file, there are no rows, no columns and no cells, only text fragments and, sometimes, drawn lines, all positioned by coordinate to look like a grid. The extraction engine has to rebuild the grid from those clues. It looks for runs of text that share the same vertical position to identify rows, and for consistent horizontal gaps or ruling lines to identify column boundaries. From that analysis it reconstructs cells and writes them out in order, separated by commas.",
           "This is why some tables extract perfectly and others fight back. A table with clear ruling lines and generous, even spacing gives the engine strong signals, so the columns land exactly where they should. A table that uses only whitespace to separate tightly packed columns, or one where a single cell wraps across several lines, gives weaker signals and may need a manual nudge afterwards. Merged cells and nested headers are the hardest case, because the visual grid no longer maps cleanly onto a simple rectangular set of rows and columns.",
-          "The practical upshot is that the cleaner and more regular the original table, the cleaner the CSV. When you have a choice of source — say, a report available both as a tidy data appendix and as a designed infographic — always extract from the plainer version.",
+          "The practical upshot is that the cleaner and more regular the original table, the cleaner the CSV. When you have a choice of source, say, a report available both as a tidy data appendix and as a designed infographic, always extract from the plainer version.",
         ],
       },
       {
@@ -238,7 +238,7 @@ const articles = [
         h: "How it compares to copying tables by hand",
         p: [
           "Faced with a table in a PDF, most people first try to select it and paste it into a spreadsheet. For a handful of cells that can work, but for any real table it tends to collapse the columns into a single jumbled column, or scatter values in ways that take longer to untangle than retyping would. The paste carries the visual arrangement, not the underlying grid, so the spreadsheet has no idea where one column ends and the next begins.",
-          "Retyping is the other common fallback, and it is the most error-prone of all. Long columns of figures are exactly the kind of data where the eye slips, a digit transposes, or a row is skipped — and unlike a wrong word, a wrong number can sit undetected until it distorts a report. The manual effort scales painfully with the size of the table, too.",
+          "Retyping is the other common fallback, and it is the most error-prone of all. Long columns of figures are exactly the kind of data where the eye slips, a digit transposes, or a row is skipped, and unlike a wrong word, a wrong number can sit undetected until it distorts a report. The manual effort scales painfully with the size of the table, too.",
           "A dedicated PDF to CSV conversion sidesteps both problems by reconstructing the grid itself and writing it out as clean data. You still verify the result, but you start from a structured spreadsheet rather than a jumble or a blank page. For anything larger than a few cells, it is consistently faster and safer than the manual alternatives.",
         ],
       },
@@ -313,7 +313,7 @@ const articles = [
         h: "Why HTML serves readers and search engines better",
         p: [
           "HTML is the native language of the web, and everything in the web ecosystem is optimised for it. Search engines parse headings, links and structure to understand and rank a page. Browsers reflow it to fit any screen. Assistive technologies navigate it by its semantic elements. A PDF participates in none of this fully; it is a foreign object embedded in a web context.",
-          "There is also a speed and friction benefit. A reader who clicks a link expecting a page, and instead triggers a multi-megabyte PDF download, often simply leaves. HTML content loads in place, instantly, with no download step — which keeps readers engaged.",
+          "There is also a speed and friction benefit. A reader who clicks a link expecting a page, and instead triggers a multi-megabyte PDF download, often simply leaves. HTML content loads in place, instantly, with no download step, which keeps readers engaged.",
         ],
       },
       {
@@ -322,7 +322,7 @@ const articles = [
           "Content becomes indexable and discoverable by search engines.",
           "Pages reflow to fit phones and tablets with no pinching or zooming.",
           "Better accessibility for screen readers and assistive tools.",
-          "No download friction — content loads in place.",
+          "No download friction, content loads in place.",
           "Text is selectable, linkable and easy to update.",
           "Legacy PDF libraries can be brought back into the live web.",
         ],
@@ -331,20 +331,20 @@ const articles = [
         h: "Best practices after conversion",
         p: [
           "Treat the converted HTML as a starting point rather than a finished page. The conversion gives you the content and basic structure; you will want to apply your own site's styling so it matches your design and reads well. Review the heading hierarchy so search engines and screen readers can follow it, and check that any links inside the document still point where they should.",
-          "If the original PDF was image-heavy or had a complex multi-column layout, expect to do some tidying. The goal of the conversion is to liberate the content into web-ready form, not to perfectly replicate a print layout — and on the web, a clean single-column flow usually serves readers better than a faithful reproduction of a print page anyway.",
+          "If the original PDF was image-heavy or had a complex multi-column layout, expect to do some tidying. The goal of the conversion is to liberate the content into web-ready form, not to perfectly replicate a print layout, and on the web, a clean single-column flow usually serves readers better than a faithful reproduction of a print page anyway.",
         ],
       },
       {
         h: "From the Lexigenz desk: stop hiding content in downloads",
         p: [
           "One pattern we consistently flag is organisations burying their best content in downloadable PDFs and then wondering why no one finds it. The information might be excellent, but if it only exists as a PDF behind a download link, search engines under-index it and mobile users skip it. It is, in effect, hidden in plain sight.",
-          "Converting that material to HTML is one of the highest-return content tasks available, precisely because the content already exists — you are not writing anything new, only moving it into a form the web can actually use. Every PDF you convert is content rescued from obscurity.",
+          "Converting that material to HTML is one of the highest-return content tasks available, precisely because the content already exists, you are not writing anything new, only moving it into a form the web can actually use. Every PDF you convert is content rescued from obscurity.",
         ],
       },
       {
         h: "What the conversion produces under the hood",
         p: [
-          "It is worth knowing what you actually receive when you convert a PDF to HTML, because it shapes how you use the output. The engine reads the document's text and structure and emits markup: paragraphs become paragraph elements, headings become heading elements where they can be identified, lists become list elements, and links become anchors. The result is semantic content — the meaning of the document expressed in the web's own vocabulary — rather than a pixel-perfect snapshot of the page.",
+          "It is worth knowing what you actually receive when you convert a PDF to HTML, because it shapes how you use the output. The engine reads the document's text and structure and emits markup: paragraphs become paragraph elements, headings become heading elements where they can be identified, lists become list elements, and links become anchors. The result is semantic content, the meaning of the document expressed in the web's own vocabulary, rather than a pixel-perfect snapshot of the page.",
           "This is a deliberate and helpful difference from a PDF's fixed layout. A PDF pins everything to coordinates so it looks identical everywhere; HTML describes content and lets each device decide how to display it. That is exactly why HTML reflows onto a phone, why screen readers can navigate it, and why search engines can parse it. The conversion is translating a fixed-position document into a flexible, meaning-first one.",
           "Because the output is semantic content rather than styling, it arrives largely unstyled or lightly styled, ready to inherit your site's design. That is a feature, not a shortcoming: you want your published page to match the rest of your site, not to carry over the print document's margins and fonts. Treat the markup as clean raw material that your stylesheet will dress.",
         ],
@@ -363,9 +363,9 @@ const articles = [
       {
         h: "A real-world scenario: migrating a knowledge base",
         p: [
-          "Imagine a software company whose support team has spent years writing setup guides, troubleshooting steps and policy documents — all published as downloadable PDFs linked from a help page. Customers complain they cannot find answers through search, and the analytics show most visitors never open the downloads at all. The content is good; the format is burying it.",
+          "Imagine a software company whose support team has spent years writing setup guides, troubleshooting steps and policy documents, all published as downloadable PDFs linked from a help page. Customers complain they cannot find answers through search, and the analytics show most visitors never open the downloads at all. The content is good; the format is burying it.",
           "The team works through the library with PDF to HTML, one document at a time. Each guide comes back as structured markup, which they drop into the help centre's template so it instantly matches the rest of the site. They review the heading order so each article has a sensible outline, add alt text to the screenshots, and update a handful of internal links that previously pointed to other PDFs so they now point to the new pages.",
-          "The payoff is immediate and compounding. Search engines begin indexing individual articles, so customers arrive directly on the exact answer they searched for. Mobile users read comfortably without downloading anything. Support tickets for the most-documented issues fall, because people can finally find the documentation that always existed. No new content was written — it was simply moved into a form the web could surface.",
+          "The payoff is immediate and compounding. Search engines begin indexing individual articles, so customers arrive directly on the exact answer they searched for. Mobile users read comfortably without downloading anything. Support tickets for the most-documented issues fall, because people can finally find the documentation that always existed. No new content was written, it was simply moved into a form the web could surface.",
         ],
       },
       {
@@ -373,7 +373,7 @@ const articles = [
         p: [
           "There are two popular shortcuts that try to put a PDF on the web without converting it, and both fall short for different reasons. The first is simply linking to the file, which forces every visitor through a download step, hands them a non-reflowing document, and leaves the content largely opaque to search. It is the path of least effort and the worst outcome for readers.",
           "The second is embedding the PDF in a viewer on the page so it appears inline. This looks more integrated, but under the surface it is still a PDF: the embedded viewer adds weight and complexity, the content remains hard for search engines to index properly, and the experience on a small screen is still cramped because the document does not truly reflow. You have hidden the download step without solving the underlying format problem.",
-          "Converting to HTML is the only one of the three that addresses the cause rather than the symptom. The content becomes native web content — light, reflowable, indexable and accessible — because it genuinely is a web page now, not a document wearing a web costume. When the goal is reach and readability rather than preserving an exact print layout, conversion wins decisively.",
+          "Converting to HTML is the only one of the three that addresses the cause rather than the symptom. The content becomes native web content, light, reflowable, indexable and accessible, because it genuinely is a web page now, not a document wearing a web costume. When the goal is reach and readability rather than preserving an exact print layout, conversion wins decisively.",
         ],
       },
       {
@@ -417,13 +417,13 @@ const articles = [
     relatedTools: ["PDF to TXT", "TXT to PDF", "PDF to Word"],
     datePublished: "2026-02-14",
     excerpt:
-      "Sometimes you do not want the layout — you want the words. PDF to TXT strips away everything but the text, ready for search, analysis or reuse.",
+      "Sometimes you do not want the layout, you want the words. PDF to TXT strips away everything but the text, ready for search, analysis or reuse.",
     sections: [
       {
         h: "When you need words, not pages",
         p: [
           "Most PDF conversions try to preserve layout, but there is a large class of tasks where layout is exactly what gets in the way. If you want to feed a document's content into a search index, run text analysis, copy passages into another system, or simply pull the raw words out of a heavily formatted file, the formatting is noise. PDF to TXT exists for these moments: it extracts the plain text and discards everything else.",
-          "The output is a clean .txt file — just the words, in reading order, with no fonts, images, columns or styling to interfere. It is the most portable, most processable form your content can take.",
+          "The output is a clean .txt file, just the words, in reading order, with no fonts, images, columns or styling to interfere. It is the most portable, most processable form your content can take.",
         ],
       },
       {
@@ -433,7 +433,7 @@ const articles = [
           "Step 2: Open PDFShuffl, go to Tools and select PDF to TXT.",
           "Step 3: Upload the file.",
           "Step 4: Download the .txt file containing the document's plain text.",
-          "Step 5: Use the text wherever you need it — search, analysis, scripts or reuse in another document.",
+          "Step 5: Use the text wherever you need it, search, analysis, scripts or reuse in another document.",
         ],
       },
       {
@@ -471,7 +471,7 @@ const articles = [
       {
         h: "From the Lexigenz desk: plain text as the universal intermediate",
         p: [
-          "In data and content pipelines, we have come to treat plain text as the universal intermediate format — the neutral ground that everything can convert to and from. When you are not sure what you will eventually do with a document's content, extracting it to text first keeps every option open. From text, you can index it, analyse it, search it, or rebuild it into any richer format later.",
+          "In data and content pipelines, we have come to treat plain text as the universal intermediate format, the neutral ground that everything can convert to and from. When you are not sure what you will eventually do with a document's content, extracting it to text first keeps every option open. From text, you can index it, analyse it, search it, or rebuild it into any richer format later.",
           "The discipline of capturing content as text early, before committing to a particular presentation, has saved us from many dead ends. Layout is a decision you can always make later; the words are what you must preserve, and text preserves them with no strings attached.",
         ],
       },
@@ -480,7 +480,7 @@ const articles = [
         p: [
           "Extracting plain text sounds trivial, but there is real work happening beneath the surface. A digital PDF stores each character with a position on the page rather than in reading order, so the extractor has to walk those positions and decide the sequence a human would actually read. It groups characters into words by their spacing, words into lines by their vertical alignment, and lines into a flowing stream of text. For a simple single-column page this is straightforward and the output matches the page exactly.",
           "Complex layouts are where the engine has to make judgement calls. With two newspaper-style columns, it must recognise that the left column should be read top to bottom before jumping to the right, rather than reading straight across both. Headers, footers, page numbers and footnotes also have to be slotted in sensibly. Most of the time the reading order the document declares internally is correct, but unusual designs can produce a sequence that surprises you, which is why a quick scan of the output is wise for anything elaborate.",
-          "Scanned PDFs add another layer entirely. There are no characters to read, only an image, so recognition has to infer the letters from their shapes before any of the ordering work can begin. That is why digital sources give pristine text while scans carry the occasional misread — the two go through fundamentally different pipelines to reach the same .txt file.",
+          "Scanned PDFs add another layer entirely. There are no characters to read, only an image, so recognition has to infer the letters from their shapes before any of the ordering work can begin. That is why digital sources give pristine text while scans carry the occasional misread, the two go through fundamentally different pipelines to reach the same .txt file.",
         ],
       },
       {
@@ -488,7 +488,7 @@ const articles = [
         ul: [
           "Assuming a multi-column document will read in visual order when extraction follows the document's internal reading order.",
           "Treating recognised text from a scan as final without proofreading numbers, names and unusual terms.",
-          "Expecting tables to survive as data — for that, PDF to CSV is the right tool, not plain text.",
+          "Expecting tables to survive as data, for that, PDF to CSV is the right tool, not plain text.",
           "Overlooking that headers, footers and page numbers may appear inline in the extracted stream.",
           "Forgetting that ligatures or unusual fonts can occasionally merge or drop characters that need a quick fix.",
           "Discarding the original PDF before confirming the extraction captured every section you needed.",
@@ -499,15 +499,15 @@ const articles = [
         p: [
           "Consider a researcher who has gathered two hundred policy papers as PDFs and needs to find every document that discusses a specific funding mechanism. Opening and skimming each file would take days, and the PDFs sitting in a folder are effectively opaque to search beyond their filenames. The content is there, but it might as well be locked.",
           "By running each PDF through PDF to TXT, the researcher turns the whole collection into plain-text files that ordinary search tools can sweep through in seconds. A single command across the folder surfaces every paper mentioning the term, with the surrounding sentences for context. What was an unsearchable pile becomes a queryable corpus, and the same text files feed straight into word-frequency and topic analysis later.",
-          "Because the source papers were digitally produced, the extracted text is clean and the searches are reliable. Had some been scans, the researcher would have planned a verification pass on those few, knowing recognition introduces the odd misread. Either way, the plain-text layer is what transforms a static archive into a research instrument — and the original PDFs remain untouched as the formal record.",
+          "Because the source papers were digitally produced, the extracted text is clean and the searches are reliable. Had some been scans, the researcher would have planned a verification pass on those few, knowing recognition introduces the odd misread. Either way, the plain-text layer is what transforms a static archive into a research instrument, and the original PDFs remain untouched as the formal record.",
         ],
       },
       {
         h: "How it compares to richer conversions",
         p: [
-          "PDF to TXT sits at one end of a spectrum of conversions, and choosing it is really a choice about how much structure you want to keep. PDF to Word preserves paragraphs, headings, tables and images so a human can keep editing the document. PDF to CSV preserves the grid of a table so a spreadsheet can compute on it. PDF to TXT deliberately keeps none of that — only the words — because for its intended jobs the structure is exactly what gets in the way.",
+          "PDF to TXT sits at one end of a spectrum of conversions, and choosing it is really a choice about how much structure you want to keep. PDF to Word preserves paragraphs, headings, tables and images so a human can keep editing the document. PDF to CSV preserves the grid of a table so a spreadsheet can compute on it. PDF to TXT deliberately keeps none of that, only the words, because for its intended jobs the structure is exactly what gets in the way.",
           "That makes the decision straightforward once you know your destination. If a person will read or edit the result, you want Word's structure. If a spreadsheet or database will consume tabular figures, you want CSV. If a search index, a script or an analysis tool will process the content, you want the friction-free stream of plain text that TXT provides.",
-          "Trying to use the wrong one is where people get frustrated: extracting to text and then complaining that the tables fell apart, or converting to Word when all a script needed was raw words. Match the format to what happens next, and each conversion does its job perfectly. Plain text is not a lesser conversion — it is the right one whenever a machine, not a person, is the reader.",
+          "Trying to use the wrong one is where people get frustrated: extracting to text and then complaining that the tables fell apart, or converting to Word when all a script needed was raw words. Match the format to what happens next, and each conversion does its job perfectly. Plain text is not a lesser conversion, it is the right one whenever a machine, not a person, is the reader.",
         ],
       },
       {
@@ -523,7 +523,7 @@ const articles = [
           },
           {
             q: "What can I do with the text afterwards?",
-            a: "Search it, analyse it, feed it into scripts, or rebuild it into a document — even back to PDF with TXT to PDF.",
+            a: "Search it, analyse it, feed it into scripts, or rebuild it into a document, even back to PDF with TXT to PDF.",
           },
           {
             q: "Why is the order slightly off on some pages?",
@@ -534,7 +534,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "When you need the words and not the wrapping, PDF to TXT is the cleanest tool for the job. Extract the plain text, and you have content that any system can search, analyse or reuse — in the most portable, durable form there is.",
+          "When you need the words and not the wrapping, PDF to TXT is the cleanest tool for the job. Extract the plain text, and you have content that any system can search, analyse or reuse, in the most portable, durable form there is.",
         ],
       },
     ],
@@ -557,7 +557,7 @@ const articles = [
         h: "Editing without an expensive licence",
         p: [
           "Editing PDF content is often associated with costly software, which puts it out of reach for students, non-profits, small businesses and anyone on a tight budget. But the capability does not actually require an expensive licence. By converting a PDF into LibreOffice's OpenDocument format, you can reopen its content in a free, full-featured office suite and edit it just as you would any other document.",
-          "This matters because the need to edit a received PDF is universal — everyone occasionally has to update a form, correct a figure or repurpose a document — while the budget for premium tools is not. PDF to LibreOffice closes that gap.",
+          "This matters because the need to edit a received PDF is universal, everyone occasionally has to update a form, correct a figure or repurpose a document, while the budget for premium tools is not. PDF to LibreOffice closes that gap.",
         ],
       },
       {
@@ -580,7 +580,7 @@ const articles = [
       {
         h: "Why LibreOffice is a serious editing environment",
         p: [
-          "LibreOffice is not a stripped-down compromise; it is a mature office suite with the styles, tables, spell-check and review features you need to edit documents properly. Once a PDF's content is in OpenDocument form, you have the full power of a real word processor to restructure, revise and reformat it — far more control than any in-PDF editing affords.",
+          "LibreOffice is not a stripped-down compromise; it is a mature office suite with the styles, tables, spell-check and review features you need to edit documents properly. Once a PDF's content is in OpenDocument form, you have the full power of a real word processor to restructure, revise and reformat it, far more control than any in-PDF editing affords.",
           "And because LibreOffice exports cleanly back to PDF, the workflow is complete and self-contained: convert in, edit, convert out. You never need to leave the free toolchain, and the document you ultimately share is a clean, final PDF.",
         ],
       },
@@ -631,7 +631,7 @@ const articles = [
       {
         h: "A real-world scenario: a non-profit updating its intake forms",
         p: [
-          "Picture a small charity that runs entirely on donated laptops with LibreOffice installed. Each year it has to update its client intake form — new fields, a revised privacy notice, a different logo — but the only copy anyone can find is last year's PDF. There is no budget for premium editing software, and rebuilding the form from a blank page would mean re-creating its careful layout from memory.",
+          "Picture a small charity that runs entirely on donated laptops with LibreOffice installed. Each year it has to update its client intake form, new fields, a revised privacy notice, a different logo, but the only copy anyone can find is last year's PDF. There is no budget for premium editing software, and rebuilding the form from a blank page would mean re-creating its careful layout from memory.",
           "The coordinator converts the PDF with PDF to Libre and opens the resulting .odt in Writer. The form reappears as an editable document: the field labels, the consent paragraph and the table of contact details all in place. Using styles rather than manual formatting, the coordinator adds the new fields, rewrites the privacy notice to match current rules, and swaps in the updated logo. A quick comparison against last year's PDF confirms nothing in the layout slipped.",
           "Finally, Libre to PDF produces a clean form ready to print and hand to clients, while the .odt is saved to the shared drive as the master for next year. The charity has updated a professional document at no software cost and, more importantly, will never again be stuck with only a flattened copy. The free toolchain handled the whole task end to end.",
         ],
@@ -639,9 +639,9 @@ const articles = [
       {
         h: "How it compares to the paid route",
         p: [
-          "It is fair to ask what you give up by editing through LibreOffice rather than a premium suite, and for the conversion-and-edit workflow the honest answer is very little. The capabilities that matter for editing a recovered document — styles, tables, lists, spell-check, track changes and a clean export back to PDF — are all present and mature in the free suite. For the great majority of everyday editing tasks, the result is indistinguishable from what a paid tool produces.",
+          "It is fair to ask what you give up by editing through LibreOffice rather than a premium suite, and for the conversion-and-edit workflow the honest answer is very little. The capabilities that matter for editing a recovered document, styles, tables, lists, spell-check, track changes and a clean export back to PDF, are all present and mature in the free suite. For the great majority of everyday editing tasks, the result is indistinguishable from what a paid tool produces.",
           "There is also a compatibility question worth addressing, since some worry that choosing OpenDocument over Word's format will isolate them. In practice LibreOffice reads and writes Word files comfortably, so you can collaborate with colleagues who use Word and still deliver a final PDF that looks the same to everyone. The choice of editor does not lock anyone out of the conversation.",
-          "Where premium tools justify their cost is in specialised, high-volume or tightly integrated workflows — advanced automation, niche enterprise features, or deep integration with other paid products. For the common need of reopening a PDF, fixing it and re-exporting, that premium is simply not required. The free path delivers the outcome, and that is what matters to the person with a document to update and no licence to spare.",
+          "Where premium tools justify their cost is in specialised, high-volume or tightly integrated workflows, advanced automation, niche enterprise features, or deep integration with other paid products. For the common need of reopening a PDF, fixing it and re-exporting, that premium is simply not required. The free path delivers the outcome, and that is what matters to the person with a document to update and no licence to spare.",
         ],
       },
       {
@@ -690,8 +690,8 @@ const articles = [
       {
         h: "The difference between a real PDF and a picture of one",
         p: [
-          "Not all PDFs are equal. Some contain real, selectable text — these are 'digital' PDFs created from documents. Others are essentially photographs: a scanned contract, a flattened form, a faxed page saved as PDF. These 'flat' PDFs look identical on screen, but there is a crucial difference. In a digital PDF you can select the text; in a flat one, your cursor finds nothing, because the page is just an image.",
-          "This distinction is the source of endless frustration. People try to edit a scanned PDF, discover they cannot select a single character, and conclude that PDFs are impossible to edit. The real issue is that there is no text there to edit yet — only an image of text. Making it editable means recovering the text from that image.",
+          "Not all PDFs are equal. Some contain real, selectable text, these are 'digital' PDFs created from documents. Others are essentially photographs: a scanned contract, a flattened form, a faxed page saved as PDF. These 'flat' PDFs look identical on screen, but there is a crucial difference. In a digital PDF you can select the text; in a flat one, your cursor finds nothing, because the page is just an image.",
+          "This distinction is the source of endless frustration. People try to edit a scanned PDF, discover they cannot select a single character, and conclude that PDFs are impossible to edit. The real issue is that there is no text there to edit yet, only an image of text. Making it editable means recovering the text from that image.",
         ],
       },
       {
@@ -708,7 +708,7 @@ const articles = [
         h: "Where this rescues a stuck workflow",
         p: [
           "The need arises constantly in document-heavy fields. A legal team receives a scanned agreement and needs to amend a clause. An HR department inherits paper personnel files digitised as flat PDFs. An administrator must update a form that only exists as a scan. In each case the document is unusable for editing until the text inside it is recovered.",
-          "It is also essential for accessibility and search. A scanned PDF is invisible to screen readers and to search, because there is no text to read or index. Adding a recognised text layer makes the document both editable and accessible — two problems solved by one conversion.",
+          "It is also essential for accessibility and search. A scanned PDF is invisible to screen readers and to search, because there is no text to read or index. Adding a recognised text layer makes the document both editable and accessible, two problems solved by one conversion.",
         ],
       },
       {
@@ -733,14 +733,14 @@ const articles = [
         h: "Best practices for scanned documents",
         p: [
           "Recognition quality depends on input quality. A clean, high-resolution, straight scan produces far better results than a crooked, low-resolution photo taken on a phone in poor light. When you control the scan, aim for good lighting, a flat page and adequate resolution; it dramatically reduces the cleanup needed afterwards.",
-          "Always proofread recognised text, especially numbers, names and anything where a single wrong character matters. Recognition is impressive but not perfect, and the errors it makes — a '0' read as 'O', a '1' as 'l' — are exactly the kind that cause trouble if they slip through. A careful read against the original image is the essential final step.",
+          "Always proofread recognised text, especially numbers, names and anything where a single wrong character matters. Recognition is impressive but not perfect, and the errors it makes, a '0' read as 'O', a '1' as 'l', are exactly the kind that cause trouble if they slip through. A careful read against the original image is the essential final step.",
         ],
       },
       {
         h: "From the Lexigenz desk: scan quality is destiny",
         p: [
           "If there is one lesson we would press on anyone digitising documents, it is that the quality of the original scan determines almost everything that follows. We have seen pristine scans recognise with near-perfect accuracy, and we have seen hurried phone snapshots produce text so garbled it was faster to retype. The conversion tool can only work with what it is given.",
-          "So the highest-leverage moment is not the conversion at all — it is the scan. A few extra seconds spent flattening the page, improving the lighting and raising the resolution pays back many times over in cleaner, more editable, more searchable results. Treat scanning as the foundation, and editability follows naturally.",
+          "So the highest-leverage moment is not the conversion at all, it is the scan. A few extra seconds spent flattening the page, improving the lighting and raising the resolution pays back many times over in cleaner, more editable, more searchable results. Treat scanning as the foundation, and editability follows naturally.",
         ],
       },
       {
@@ -748,7 +748,7 @@ const articles = [
         p: [
           "It is worth looking a little closer at what recognition does, because understanding the process explains both its power and its limits. The engine begins by examining the image of the page and isolating the regions that contain text from those that are pictures, lines or blank space. Within each text region it identifies individual character shapes, then matches those shapes against its model of what letters look like, taking the surrounding context into account to resolve ambiguous cases.",
           "Crucially, the output is not just a transcript dropped into a separate file. The recognised characters are written back as an invisible text layer positioned directly over the original image, aligned with the words you see. That is what produces a searchable, selectable PDF that still looks exactly like the scan: the picture stays on top for the eye, while the text layer underneath does the work for search, selection and screen readers.",
-          "This layered design is why recognition is so useful. You keep the visual fidelity of the original document — signatures, stamps, the texture of the page — while gaining all the capabilities of real text. The image and the text coexist, each doing the job it is best at, and onward conversions to Word or text then draw from that recovered text layer.",
+          "This layered design is why recognition is so useful. You keep the visual fidelity of the original document, signatures, stamps, the texture of the page, while gaining all the capabilities of real text. The image and the text coexist, each doing the job it is best at, and onward conversions to Word or text then draw from that recovered text layer.",
         ],
       },
       {
@@ -756,7 +756,7 @@ const articles = [
         ul: [
           "Working from a crooked or low-resolution scan when a few seconds of care at capture would have transformed the result.",
           "Trusting recognised numbers, names and codes without proofreading them against the original image.",
-          "Assuming every PDF needs recognition — a digital PDF already has real text and should skip this step.",
+          "Assuming every PDF needs recognition, a digital PDF already has real text and should skip this step.",
           "Recognising a multi-column or form-heavy page without checking that the reading order came out sensibly.",
           "Forgetting that better lighting and a flat page reduce cleanup far more than any post-conversion fix.",
           "Treating the recovered text layer as flawless rather than as an excellent draft that deserves a final read.",
@@ -765,9 +765,9 @@ const articles = [
       {
         h: "A real-world scenario: digitising a filing cabinet",
         p: [
-          "Imagine an HR team that inherits a filing cabinet of paper personnel records when two companies merge. Someone has already scanned them all to PDF, but every file is a flat image — no text to search, no way to update a record, and invisible to the new system's search. The information is captured but unusable, which in some ways is worse than paper, because it gives a false sense of being digital.",
-          "The team runs the scans through PDF to Editable PDF in batches. Each file comes back looking identical to the original — the same letterhead, the same handwritten-looking signatures preserved as image — but now with a recognised text layer underneath. Suddenly the records are searchable: HR can find every document mentioning a particular role or date in seconds, and screen readers can read them aloud for accessibility compliance.",
-          "Where a record needs amending, the now-editable file can be converted onward to Word for proper revision. The team proofreads recognised employee IDs and dates carefully, knowing those are the fields where a single misread matters most, and re-scans the handful of crooked originals that came through poorly. What was a dead archive becomes a living, searchable, editable record system — without anyone retyping a single file.",
+          "Imagine an HR team that inherits a filing cabinet of paper personnel records when two companies merge. Someone has already scanned them all to PDF, but every file is a flat image, no text to search, no way to update a record, and invisible to the new system's search. The information is captured but unusable, which in some ways is worse than paper, because it gives a false sense of being digital.",
+          "The team runs the scans through PDF to Editable PDF in batches. Each file comes back looking identical to the original, the same letterhead, the same handwritten-looking signatures preserved as image, but now with a recognised text layer underneath. Suddenly the records are searchable: HR can find every document mentioning a particular role or date in seconds, and screen readers can read them aloud for accessibility compliance.",
+          "Where a record needs amending, the now-editable file can be converted onward to Word for proper revision. The team proofreads recognised employee IDs and dates carefully, knowing those are the fields where a single misread matters most, and re-scans the handful of crooked originals that came through poorly. What was a dead archive becomes a living, searchable, editable record system, without anyone retyping a single file.",
         ],
       },
       {
@@ -809,7 +809,7 @@ const articles = [
   },
   {
     title:
-      "When to Convert a PDF Back to an Editable Format — and When Not To",
+      "When to Convert a PDF Back to an Editable Format, and When Not To",
     categoryId: "pdf-to-editable",
     keyword: "convert pdf to editable",
     secondaryKeywords: [
@@ -839,7 +839,7 @@ const articles = [
       {
         h: "When you should not bother converting",
         p: [
-          "For tiny, surface-level changes, a full conversion is overkill. If you only need to add a signature, stamp a date, fill a form field, highlight a passage or add a comment, those are annotation tasks that should be done directly on the PDF — converting it back, editing, and re-exporting would be slower and risk degrading the layout for no benefit.",
+          "For tiny, surface-level changes, a full conversion is overkill. If you only need to add a signature, stamp a date, fill a form field, highlight a passage or add a comment, those are annotation tasks that should be done directly on the PDF, converting it back, editing, and re-exporting would be slower and risk degrading the layout for no benefit.",
           "You should also think twice before converting documents that are legally or formally fixed. A signed contract, an official certificate or a stamped record is meant to be immutable; converting it to an editable format and back can undermine its integrity and is rarely appropriate. When a document's fixedness is the point, leave it fixed.",
         ],
       },
@@ -856,30 +856,30 @@ const articles = [
       {
         h: "Why the distinction protects you",
         p: [
-          "Every conversion is a small risk to fidelity. Even excellent tools can shift a complex layout slightly, and a scanned source always needs verification. When the change you need is trivial, you take on that risk for almost no reward. When the change is substantial, the risk is worth it because the alternative — retyping or wrestling the PDF — is worse.",
+          "Every conversion is a small risk to fidelity. Even excellent tools can shift a complex layout slightly, and a scanned source always needs verification. When the change you need is trivial, you take on that risk for almost no reward. When the change is substantial, the risk is worth it because the alternative, retyping or wrestling the PDF, is worse.",
           "Matching the method to the task keeps your documents clean and your time well spent. The goal is not to convert as much as possible, but to convert when it genuinely helps and to leave well-made, finished documents alone when it does not.",
         ],
       },
       {
         h: "Best practices for choosing a path",
         p: [
-          "Ask two questions before you convert: how big is the change, and does this document need to stay fixed? Big change plus no fixedness requirement means convert freely. Small change means annotate instead. A fixedness requirement — signatures, certification, legal status — means preserve the original regardless of the change size.",
+          "Ask two questions before you convert: how big is the change, and does this document need to stay fixed? Big change plus no fixedness requirement means convert freely. Small change means annotate instead. A fixedness requirement, signatures, certification, legal status, means preserve the original regardless of the change size.",
           "When you do convert, follow the round trip discipline: edit in the editable format, then re-export to PDF for sharing, and keep the editable file privately as your master. That way the next change, however large, starts from a real source rather than another conversion.",
         ],
       },
       {
         h: "From the Lexigenz desk: the right tool for the size of the job",
         p: [
-          "We have noticed that the most efficient document workers are not the ones who know the most tools — they are the ones who instinctively match the tool to the size of the job. They annotate when annotation is enough and convert only when conversion is warranted. The result is less rework, fewer layout problems and faster turnaround.",
+          "We have noticed that the most efficient document workers are not the ones who know the most tools, they are the ones who instinctively match the tool to the size of the job. They annotate when annotation is enough and convert only when conversion is warranted. The result is less rework, fewer layout problems and faster turnaround.",
           "The habit worth building is a momentary pause before reaching for conversion: is this really an editing job, or just an annotation? Answering that one question correctly, every time, eliminates a surprising amount of unnecessary work and keeps finished documents from being needlessly disturbed.",
         ],
       },
       {
         h: "The hidden costs of an unnecessary conversion",
         p: [
-          "It is easy to see the benefit of a conversion and miss its costs, because the costs are quieter. The first is fidelity risk: every translation from a fixed PDF into a flowing editable format involves interpretation, and a complex layout can shift in subtle ways — a table re-wraps, a column reflows, a font substitutes. For a heavy edit you accept that risk because the payoff is large, but for a trivial change you have spent fidelity for almost nothing.",
+          "It is easy to see the benefit of a conversion and miss its costs, because the costs are quieter. The first is fidelity risk: every translation from a fixed PDF into a flowing editable format involves interpretation, and a complex layout can shift in subtle ways, a table re-wraps, a column reflows, a font substitutes. For a heavy edit you accept that risk because the payoff is large, but for a trivial change you have spent fidelity for almost nothing.",
           "The second cost is time, and not just the minutes spent converting. Once a document is editable, it invites fiddling; people tidy things that did not need tidying, and a five-second annotation becomes a half-hour reformatting session. There is also the re-export step, which is easy to forget, leaving a fragile Word or ODT file circulating where a fixed PDF should be.",
-          "The third and least visible cost is integrity. Converting a document that was meant to be final — and then sharing the converted version — can quietly strip away the very fixedness that gave it authority. A reader cannot tell whether a freely editable copy has been altered. When you weigh a conversion, weigh all three of these against the benefit, not just the convenience of the moment.",
+          "The third and least visible cost is integrity. Converting a document that was meant to be final, and then sharing the converted version, can quietly strip away the very fixedness that gave it authority. A reader cannot tell whether a freely editable copy has been altered. When you weigh a conversion, weigh all three of these against the benefit, not just the convenience of the moment.",
         ],
       },
       {
@@ -890,7 +890,7 @@ const articles = [
         ],
         ul: [
           "Default to annotating the PDF; reach for conversion only when the edit is genuinely substantial.",
-          "Never convert signed, certified or legally fixed documents — preserve them as they are.",
+          "Never convert signed, certified or legally fixed documents, preserve them as they are.",
           "Store editable masters in one agreed location so conversions are rarely needed to recover a source.",
           "Always deliver the final, shared copy as a PDF rather than an editable file.",
           "When in doubt, ask whether the change is an edit or an annotation, and let the answer decide.",
@@ -900,15 +900,15 @@ const articles = [
         h: "A real-world scenario: a shared drive with no source files",
         p: [
           "Consider a marketing team that has produced dozens of one-page sell sheets over the years. The shared drive holds the final PDFs, but the editable originals were scattered across former employees' laptops and are long gone. Now the brand is being refreshed, and every sheet needs a new logo, a new colour and updated contact details. This is precisely the situation where the conversion question gets interesting, because the answer differs by document.",
-          "For the sheets needing only the new logo and phone number, the team initially reaches for full conversion out of habit — but a quick look shows these are really annotation-scale changes that risk disturbing carefully designed layouts. Where the refresh demands restructured copy and new sections, conversion to an editable format is clearly justified, and the team converts those, edits them properly, and saves the resulting editable files as the new masters.",
-          "The lesson the team takes away is the one this guide argues for: the decision is per document, not per project. By matching the method to the size of each job — annotating the light touch-ups, converting the substantial rewrites, and establishing proper masters as they go — they finish the refresh faster, keep their best layouts intact, and never have to face a sourceless shared drive again.",
+          "For the sheets needing only the new logo and phone number, the team initially reaches for full conversion out of habit, but a quick look shows these are really annotation-scale changes that risk disturbing carefully designed layouts. Where the refresh demands restructured copy and new sections, conversion to an editable format is clearly justified, and the team converts those, edits them properly, and saves the resulting editable files as the new masters.",
+          "The lesson the team takes away is the one this guide argues for: the decision is per document, not per project. By matching the method to the size of each job, annotating the light touch-ups, converting the substantial rewrites, and establishing proper masters as they go, they finish the refresh faster, keep their best layouts intact, and never have to face a sourceless shared drive again.",
         ],
       },
       {
         h: "Frequently asked questions",
         faq: [
           {
-            q: "I just need to sign a PDF — should I convert it?",
+            q: "I just need to sign a PDF, should I convert it?",
             a: "No. Use a signing tool directly on the PDF; converting back and forth is unnecessary and risks the layout.",
           },
           {
@@ -928,7 +928,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "Converting a PDF back to an editable format is powerful when the change is real and the document has a future — and unnecessary or even harmful when the change is trivial or the document must stay fixed. Match the method to the task, and you will work faster while keeping your documents clean.",
+          "Converting a PDF back to an editable format is powerful when the change is real and the document has a future, and unnecessary or even harmful when the change is trivial or the document must stay fixed. Match the method to the task, and you will work faster while keeping your documents clean.",
         ],
       },
     ],

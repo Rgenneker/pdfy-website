@@ -24,7 +24,11 @@ import {
   GEO_SITEMAP_START,
   URLS_PER_SITEMAP,
 } from "../src/data/geo-config.js";
-import { articles } from "../src/data/articles/index.js";
+import {
+  articles,
+  articleCategories,
+  getArticlesByCategory,
+} from "../src/data/articles/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
@@ -139,7 +143,7 @@ const totalIndexed = pdfKeywords.length + uniqueGeoSlugs.length;
 console.log(`Wrote sitemap-index.xml (${sitemapFiles.length + 1} sitemaps).`);
 
 // ---------------------------------------------------------------------------
-// 4. robots.txt — AI-crawler friendly
+// 4. robots.txt (AI-crawler friendly)
 // ---------------------------------------------------------------------------
 const aiBots = [
   "GPTBot",
@@ -164,7 +168,7 @@ const aiBots = [
 ];
 
 const robots = [
-  "# PDFShuffl — open to search engines and AI assistants.",
+  "# PDFShuffl, open to search engines and AI assistants.",
   "User-agent: *",
   "Allow: /",
   "",
@@ -179,7 +183,7 @@ writeFileSync(resolve(PUBLIC, "robots.txt"), robots);
 console.log("Wrote robots.txt");
 
 // ---------------------------------------------------------------------------
-// 5. api/tools.json — machine-readable tool registry
+// 5. api/tools.json (machine-readable tool registry)
 // ---------------------------------------------------------------------------
 const toolsRegistry = {
   name: "PDFShuffl",
@@ -195,7 +199,7 @@ const toolsRegistry = {
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, ""),
-    description: `${name} online with PDFShuffl — free, secure and browser-based, no installation required.`,
+    description: `${name} online with PDFShuffl, free, secure and browser-based, no installation required.`,
   })),
 };
 writeFileSync(
@@ -205,28 +209,47 @@ writeFileSync(
 console.log(`Wrote api/tools.json (${toolsRegistry.tools.length} tools)`);
 
 // ---------------------------------------------------------------------------
-// 6. llms.txt — LLM-readable site summary (https://llmstxt.org)
+// 6. llms.txt (LLM-readable site summary) (https://llmstxt.org)
 // ---------------------------------------------------------------------------
-const featuredTools = geoTools.slice(0, 20);
 const llms = [
   "# PDFShuffl",
   "",
-  "> PDFShuffl is a free, fast, privacy-friendly suite of browser-based PDF tools. Convert, edit, compress, merge, split, sign and organise PDF files online from any device — no installation or signup required.",
+  "> PDFShuffl is a free, fast, privacy-friendly suite of browser-based PDF tools. Convert, edit, compress, merge, split, sign and organise PDF files online from any device, with no installation or signup required.",
   "",
-  "PDFShuffl runs entirely in the browser. Files are processed securely and are not shared. The service is available worldwide, including geo-targeted landing pages for major countries and cities.",
+  "PDFShuffl runs entirely in the browser. Files are processed securely and are not shared. The service is available worldwide, including geo-targeted landing pages for major countries and cities, and a growing library of in-depth guides written by the Lexigenz Authors editorial desk.",
+  "",
+  "## What you can do",
+  "",
+  "- Convert documents into PDF from Word, LibreOffice, PowerPoint, Excel, CSV, plain text, HTML and images.",
+  "- Convert PDF back into editable Word, LibreOffice, HTML, CSV and plain text.",
+  "- Compress, merge, split, crop, rotate and reorganise PDF files.",
+  "- Sign PDFs, sign locked PDFs and send signing requests to other people.",
+  "- Protect, unlock and secure PDF documents with passwords and permissions.",
+  "- Learn how every tool works through the Playbook course and the article library.",
   "",
   "## Core tools",
   "",
-  ...featuredTools.map(
+  ...geoTools.map(
     (name) =>
-      `- [${name}](${SITE_URL}/tools): ${name} online — free, secure, no signup.`
+      `- [${name}](${SITE_URL}/tools): ${name} online, free, secure, no signup.`
   ),
   "",
+  "## Learning library",
+  "",
+  ...articleCategories.flatMap((category) => [
+    `### ${category.title}`,
+    "",
+    ...getArticlesByCategory(category.id).map(
+      (article) => `- [${article.title}](${SITE_URL}/articles/${article.slug})`
+    ),
+    "",
+  ]),
   "## Key pages",
   "",
   `- [Home](${SITE_URL}/): Full PDF toolkit and uploader.`,
   `- [All tools](${SITE_URL}/tools): Browse every PDF conversion and editing tool.`,
   `- [Articles](${SITE_URL}/articles): Guides and how-tos for working with PDFs.`,
+  `- [Playbook](${SITE_URL}/playbook): A guided course on navigating PDFShuffl and how the PDF tools work, with a cheat sheet and a quiz.`,
   `- [About](${SITE_URL}/about): What PDFShuffl is and how it works.`,
   `- [Contact](${SITE_URL}/contact): Get in touch with the PDFShuffl team.`,
   "",
@@ -235,7 +258,7 @@ const llms = [
   `- [Tool registry (JSON)](${SITE_URL}/api/tools.json): Machine-readable list of all PDFShuffl tools.`,
   `- [Sitemap index](${SITE_URL}/sitemap-index.xml): All indexed pages.`,
   "",
-  `_Indexed pages: ${totalIndexed.toLocaleString()} (PDF keyword pages + geo-targeted pages)._`,
+  `_Indexed pages: ${totalIndexed.toLocaleString()} (${pdfKeywords.length.toLocaleString()} PDF keyword pages plus ${uniqueGeoSlugs.length.toLocaleString()} geo-targeted pages)._`,
   "",
 ].join("\n");
 writeFileSync(resolve(PUBLIC, "llms.txt"), llms);

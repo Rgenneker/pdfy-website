@@ -20,7 +20,7 @@ const articles = [
       {
         h: "Why a locked document is the one you most need to sign",
         p: [
-          "There is an irony at the heart of secured PDFs. The documents that arrive locked — loan agreements, regulated disclosures, vendor contracts, official forms — are precisely the ones that demand a signature before anything can move forward. Yet the protection that makes those files trustworthy is the same protection that stops a casual editor from dropping a signature onto the page. People hit that wall and assume they have only bad options: beg the sender for an unlocked copy, or print, sign and scan the thing back into a murky image.",
+          "There is an irony at the heart of secured PDFs. The documents that arrive locked, loan agreements, regulated disclosures, vendor contracts, official forms, are precisely the ones that demand a signature before anything can move forward. Yet the protection that makes those files trustworthy is the same protection that stops a casual editor from dropping a signature onto the page. People hit that wall and assume they have only bad options: beg the sender for an unlocked copy, or print, sign and scan the thing back into a murky image.",
           "Neither is necessary. A locked PDF can be signed properly, and the goal is to do it in a way that adds your signature while leaving the document's security intact. Breaking the lock to sign defeats the purpose of the lock; the right approach respects the restriction and works within it, so the signed result is every bit as authoritative as the original you received.",
         ],
       },
@@ -49,15 +49,15 @@ const articles = [
         h: "Where signing locked PDFs comes up",
         p: [
           "Finance is full of it. Mortgage paperwork, credit agreements and account-opening forms routinely arrive locked, because the lender needs assurance that the terms cannot be quietly altered before signature. Legal documents behave the same way: settlement agreements and engagement letters are finalised, secured and sent out for signing. Procurement teams receive locked vendor contracts. Patients and clients sign secured consent forms.",
-          "In each case the sender locked the file deliberately and would be alarmed to receive it back with the protection stripped away. Signing within the lock keeps faith with that intent. You return a document that is signed and still secured — which is exactly what the other party expects and what keeps the agreement defensible later.",
+          "In each case the sender locked the file deliberately and would be alarmed to receive it back with the protection stripped away. Signing within the lock keeps faith with that intent. You return a document that is signed and still secured, which is exactly what the other party expects and what keeps the agreement defensible later.",
         ],
       },
       {
         h: "Common mistakes when handling secured documents",
         p: [
           "The first and most damaging mistake is treating the lock as an obstacle to demolish rather than a feature to preserve. People reach for tools that strip protection, sign the now-unsecured file, and send back a document stripped of the very safeguard the sender relied on. Even when the signing itself is valid, the returned file no longer matches the security posture the other party expects, and that mismatch can raise doubts about whether the document was altered. The whole advantage of signing within the lock is that nothing about the protection changes; the only addition is your signature in the place it belongs.",
-          "A second frequent error is signing before confirming the version. Secured documents are usually locked because they are considered final, which means a correction after signing is more painful than with an ordinary file — you cannot simply tweak the page and re-sign. Read the complete document, verify the figures and the terms, and only then apply your signature. If something is wrong, raise it with the sender and ask for a corrected, re-secured copy rather than signing in the hope the discrepancy is harmless.",
-          "The third pitfall is credential carelessness. Treating the password to a locked document as casual information — pasting it into the same email as the file, sharing it in a group chat, or storing it in a plain note — quietly undermines the protection. If you receive credentials for a secured document, handle them with the same discipline you would expect of your own sensitive files: keep them out of the channel that carries the document, and discard them when they are no longer needed. Respecting the lock is not only about the technical act of signing within it but about behaving, throughout, as though the security matters, because it does.",
+          "A second frequent error is signing before confirming the version. Secured documents are usually locked because they are considered final, which means a correction after signing is more painful than with an ordinary file, you cannot simply tweak the page and re-sign. Read the complete document, verify the figures and the terms, and only then apply your signature. If something is wrong, raise it with the sender and ask for a corrected, re-secured copy rather than signing in the hope the discrepancy is harmless.",
+          "The third pitfall is credential carelessness. Treating the password to a locked document as casual information, pasting it into the same email as the file, sharing it in a group chat, or storing it in a plain note, quietly undermines the protection. If you receive credentials for a secured document, handle them with the same discipline you would expect of your own sensitive files: keep them out of the channel that carries the document, and discard them when they are no longer needed. Respecting the lock is not only about the technical act of signing within it but about behaving, throughout, as though the security matters, because it does.",
         ],
       },
       {
@@ -74,7 +74,7 @@ const articles = [
       {
         h: "Best practices for signing secured documents",
         p: [
-          "Only sign what you are authorised to sign, and only with credentials you legitimately hold. The point of working within the lock is to respect the security model, not to find a clever way around it. If you do not have the password and the sender intended the file to stay closed to you, the correct move is to ask them — not to look for a workaround. Confirm you are signing the final version, because re-signing a corrected secured document is more cumbersome than re-signing an ordinary one.",
+          "Only sign what you are authorised to sign, and only with credentials you legitimately hold. The point of working within the lock is to respect the security model, not to find a clever way around it. If you do not have the password and the sender intended the file to stay closed to you, the correct move is to ask them, not to look for a workaround. Confirm you are signing the final version, because re-signing a corrected secured document is more cumbersome than re-signing an ordinary one.",
           "Keep the signed, still-secured PDF in a safe, backed-up location, since it is now your record of a protected agreement. For high-value or regulated documents that need identity verification and a tamper-evident audit trail, route the signing through a dedicated e-signature provider connected to PDFShuffl. And when several people must sign the same locked document, use a request-signing flow so each party signs the one authoritative secured copy rather than spawning divergent versions.",
         ],
       },
@@ -123,7 +123,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "A locked PDF is not a dead end — it is a document asking to be signed with care. Use Sign a Locked PDF to add your signature within the existing protection, keep the secured result safe, and reach for a dedicated provider when the stakes demand it. You get a signed document that honours the security the sender built in, and the agreement moves forward without anyone ever breaking the lock.",
+          "A locked PDF is not a dead end, it is a document asking to be signed with care. Use Sign a Locked PDF to add your signature within the existing protection, keep the secured result safe, and reach for a dedicated provider when the stakes demand it. You get a signed document that honours the security the sender built in, and the agreement moves forward without anyone ever breaking the lock.",
         ],
       },
     ],
@@ -175,7 +175,7 @@ const articles = [
         h: "Why one PDF beats many attachments",
         p: [
           "Sending ten separate images forces the recipient to download each one, guess the intended order, and view them in an image viewer that gives no sense of a document. Many upload forms make it worse by accepting only a single file, which means a multi-image submission is impossible until you combine it. A single PDF removes all of that: one download, one fixed order, one file the recipient can page through like any document.",
-          "There is a perception effect too. A neat, ordered PDF reads as a considered piece of work, while a bundle of loose images reads as something thrown together. When you want to be taken seriously — a claim, a report, an application — packaging the images as one document quietly raises the impression you make.",
+          "There is a perception effect too. A neat, ordered PDF reads as a considered piece of work, while a bundle of loose images reads as something thrown together. When you want to be taken seriously, a claim, a report, an application, packaging the images as one document quietly raises the impression you make.",
         ],
       },
       {
@@ -200,7 +200,7 @@ const articles = [
       {
         h: "Best practices for image sets",
         p: [
-          "Order before you convert. The single most important quality factor is sequence, because the order you upload becomes the order of the pages, and a document whose pages run out of order undermines its own credibility. Take a moment to arrange the images logically — chronologically, room by room, page by page — before combining them. It is far easier to get this right up front than to reshuffle afterwards.",
+          "Order before you convert. The single most important quality factor is sequence, because the order you upload becomes the order of the pages, and a document whose pages run out of order undermines its own credibility. Take a moment to arrange the images logically, chronologically, room by room, page by page, before combining them. It is far easier to get this right up front than to reshuffle afterwards.",
           "Tidy each page once the PDF exists. Crop away the desk, floor or background so every page shows only what matters, and compress the result if the originals were high-resolution phone photos. A merged file made of raw, uncropped images can be both visually messy and unnecessarily heavy; a cropped, compressed version looks deliberate and uploads without complaint. The few seconds of cleanup are what separate a usable document from a dumped folder.",
         ],
       },
@@ -208,7 +208,7 @@ const articles = [
         h: "From the Lexigenz desk: the claim that read like a story",
         p: [
           "We once compared two insurance submissions covering nearly identical incidents. One was a folder of fourteen loose images with cryptic camera filenames; the reviewer had to open each, infer the order, and reconstruct what happened. The other was a single PDF whose pages walked through the damage in a clear sequence, each cropped to the relevant detail. The second claim was understood and processed far more smoothly, not because the evidence was better but because it was readable.",
-          "That contrast stuck with us. Evidence that has to be assembled by the reader is evidence working against itself. When you merge images into an ordered PDF, you do the interpretive work once, on your side, and hand over something that tells its own story. For anything where being understood matters, that ordering is not a nicety — it is the difference between a submission that lands and one that frustrates.",
+          "That contrast stuck with us. Evidence that has to be assembled by the reader is evidence working against itself. When you merge images into an ordered PDF, you do the interpretive work once, on your side, and hand over something that tells its own story. For anything where being understood matters, that ordering is not a nicety, it is the difference between a submission that lands and one that frustrates.",
         ],
       },
       {
@@ -277,7 +277,7 @@ const articles = [
       {
         h: "The scanner in your pocket",
         p: [
-          "Dedicated scanners used to be the only way to get a paper document into a usable digital form. They were slow, tethered to a desk, and often the reason a simple task — submitting a form, filing a receipt — turned into an expedition to find working hardware. The phone in your hand has quietly made all of that optional. Its camera captures more than enough detail to render text crisp and legible, and it is always with you.",
+          "Dedicated scanners used to be the only way to get a paper document into a usable digital form. They were slow, tethered to a desk, and often the reason a simple task, submitting a form, filing a receipt, turned into an expedition to find working hardware. The phone in your hand has quietly made all of that optional. Its camera captures more than enough detail to render text crisp and legible, and it is always with you.",
           "The catch is that a raw photo of a document is not the same as a scan. A scan is cropped to the page, oriented correctly, and saved as a document rather than a snapshot. Scanning to PDF with your phone is really a two-part move: capture a good image, then convert and clean it into a proper document. Get both halves right and the result rivals anything a flatbed produces.",
         ],
       },
@@ -306,14 +306,14 @@ const articles = [
         h: "Why a converted scan beats a bare photo",
         p: [
           "A bare photo betrays its origins. It includes the desk around the page, sits at a slight angle, opens in an image viewer, and often cannot be submitted to systems that demand a PDF. It reads as a snapshot of a document, not as the document itself, and recipients treat it accordingly.",
-          "A converted, cropped PDF erases those tells. It shows only the page, behaves like a document, and meets the file-type requirements that loose images fail. The content is identical, but the presentation moves from improvised to professional — and for forms, claims and submissions, that presentation is frequently the difference between acceptance and a request to resend.",
+          "A converted, cropped PDF erases those tells. It shows only the page, behaves like a document, and meets the file-type requirements that loose images fail. The content is identical, but the presentation moves from improvised to professional, and for forms, claims and submissions, that presentation is frequently the difference between acceptance and a request to resend.",
         ],
       },
       {
         h: "Getting more from your phone scans",
         p: [
-          "A few habits separate people who occasionally photograph a document from those who reliably produce scans good enough to submit anywhere. The most important is a stable, repeatable capture setup. You do not need anything elaborate — a window for natural light, a dark surface to contrast with white paper, and the discipline of holding the phone directly above the page rather than at an angle. Some people prop the phone against a stack of books or use both hands braced on the table to avoid the slight blur that creeps in when you shoot one-handed. The steadier and squarer the capture, the less correction the page needs afterwards.",
-          "It helps to think in terms of consistency across a multi-page document. If page one is captured close and bright but page three is shot from further away in shadow, the finished PDF feels disjointed even when every page is legible. Establishing a rhythm — same height, same lighting, same orientation for every page — produces a document whose pages look like they belong together, which is exactly the impression a real scanner gives. When you are capturing several pages, it is worth doing them in one sitting under the same conditions rather than piecemeal over hours.",
+          "A few habits separate people who occasionally photograph a document from those who reliably produce scans good enough to submit anywhere. The most important is a stable, repeatable capture setup. You do not need anything elaborate, a window for natural light, a dark surface to contrast with white paper, and the discipline of holding the phone directly above the page rather than at an angle. Some people prop the phone against a stack of books or use both hands braced on the table to avoid the slight blur that creeps in when you shoot one-handed. The steadier and squarer the capture, the less correction the page needs afterwards.",
+          "It helps to think in terms of consistency across a multi-page document. If page one is captured close and bright but page three is shot from further away in shadow, the finished PDF feels disjointed even when every page is legible. Establishing a rhythm, same height, same lighting, same orientation for every page, produces a document whose pages look like they belong together, which is exactly the impression a real scanner gives. When you are capturing several pages, it is worth doing them in one sitting under the same conditions rather than piecemeal over hours.",
           "Finally, consider what the document will be used for before you finish it. A scan destined for an official submission deserves tight cropping and a careful check that every word is sharp, because a reviewer will scrutinise it. A quick scan of a note for your own files can be more relaxed. Matching the effort to the purpose keeps you from over-polishing throwaway captures while ensuring the documents that matter are clean enough to pass inspection. The conversion to PDF is the same either way; the care you take at capture is what scales with the stakes.",
         ],
       },
@@ -386,7 +386,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "Phone scanning to PDF retires the desktop scanner for nearly every everyday need. Capture each page cleanly in good light, convert with JPG to PDF, then crop and compress. What comes out is a sharp, properly framed document you produced anywhere — proof that the best scanner you own is already in your pocket.",
+          "Phone scanning to PDF retires the desktop scanner for nearly every everyday need. Capture each page cleanly in good light, convert with JPG to PDF, then crop and compress. What comes out is a sharp, properly framed document you produced anywhere, proof that the best scanner you own is already in your pocket.",
         ],
       },
     ],
@@ -410,7 +410,7 @@ const articles = [
         h: "Why screenshots deserve better than a folder",
         p: [
           "The screenshot has become one of the most-used tools in modern work. We capture error messages to send to support, chat threads to preserve a decision, dashboards to report a number, and step-by-step instructions to teach a colleague. Each capture lands as a PNG, and before long a folder fills with images named after timestamps, with no order and no obvious relationship to one another.",
-          "As a way to communicate, a heap of PNGs is poor. The recipient cannot tell which screenshot comes first, has to open each one individually, and gets no sense that they form a single explanation. Converting those PNGs to PDF is what turns a screenshot dump into a document — ordered pages that walk a reader through whatever you captured, in one file they can open and follow.",
+          "As a way to communicate, a heap of PNGs is poor. The recipient cannot tell which screenshot comes first, has to open each one individually, and gets no sense that they form a single explanation. Converting those PNGs to PDF is what turns a screenshot dump into a document, ordered pages that walk a reader through whatever you captured, in one file they can open and follow.",
         ],
       },
       {
@@ -446,7 +446,7 @@ const articles = [
         p: [
           "A screenshot PDF becomes far more useful when each capture carries a little context. A raw screen grab shows what happened but rarely says why it matters or where to look. Before you convert, it is worth adding brief labels or arrows to the images using whatever annotation feature your device offers, so that a reader's eye is drawn to the relevant button, error or figure rather than scanning the whole screen. A single highlighted region can save the recipient minutes of hunting and removes the ambiguity that loose, unmarked captures so often create.",
           "Sequencing deserves the same care you would give any document. The most effective screenshot PDFs read like a narrative: the starting state, the action taken, the result, and any error that followed, in that order. Because the upload order becomes the page order, arranging the captures into that logical flow before converting is what turns a set of images into a walkthrough someone can actually follow. If a step needs explanation that a screenshot cannot convey, a captured slide or a text image placed between the grabs can bridge the gap.",
-          "Think too about how the finished PDF will be stored and found later. A descriptive, dated filename turns a screenshot document into something you can retrieve months on, when the details have faded from memory. Teams that capture a lot of screen evidence — support desks, QA testers, trainers — benefit enormously from a simple, shared convention for naming and filing these PDFs. The conversion takes seconds, but the organising habits around it are what make the resulting documents an asset rather than another layer of digital clutter.",
+          "Think too about how the finished PDF will be stored and found later. A descriptive, dated filename turns a screenshot document into something you can retrieve months on, when the details have faded from memory. Teams that capture a lot of screen evidence, support desks, QA testers, trainers, benefit enormously from a simple, shared convention for naming and filing these PDFs. The conversion takes seconds, but the organising habits around it are what make the resulting documents an asset rather than another layer of digital clutter.",
         ],
       },
       {
@@ -542,14 +542,14 @@ const articles = [
       {
         h: "The attachment that bounces back",
         p: [
-          "Few small frustrations are as universal as composing an email, attaching the document, hitting send, and watching it rebound with a message that the file is too large. Mail systems cap attachment sizes — often around twenty or twenty-five megabytes, sometimes less on the receiving end — and plenty of PDFs sail past that limit without their owners realising. Upload portals are stricter still, frequently rejecting anything over a few megabytes.",
+          "Few small frustrations are as universal as composing an email, attaching the document, hitting send, and watching it rebound with a message that the file is too large. Mail systems cap attachment sizes, often around twenty or twenty-five megabytes, sometimes less on the receiving end, and plenty of PDFs sail past that limit without their owners realising. Upload portals are stricter still, frequently rejecting anything over a few megabytes.",
           "The instinct is to assume the document is simply big and there is nothing to be done, but that is rarely true. Most oversized PDFs are heavy for avoidable reasons, and reducing them to a sendable size is usually a matter of compression rather than cutting content. Once you understand why a file is large, getting it under the limit becomes routine.",
         ],
       },
       {
         h: "What actually makes a PDF heavy",
         p: [
-          "Text is tiny; images are not. The overwhelming majority of bloated PDFs are bloated because of pictures — scanned pages saved at high resolution, photographs dropped in at full size, or screenshots from high-density displays. A document that is mostly words can run to many pages and still be small, while a single full-resolution photo can dwarf it. This is why scanned documents and image-heavy reports are the usual offenders.",
+          "Text is tiny; images are not. The overwhelming majority of bloated PDFs are bloated because of pictures, scanned pages saved at high resolution, photographs dropped in at full size, or screenshots from high-density displays. A document that is mostly words can run to many pages and still be small, while a single full-resolution photo can dwarf it. This is why scanned documents and image-heavy reports are the usual offenders.",
           "Knowing this points straight at the fix. Reducing a PDF for email is mostly about bringing image data down to a size appropriate for the screen and email, where the original capture resolution was far more than anyone viewing the document will ever need. Compression targets exactly that excess, shedding weight the reader will not miss.",
         ],
       },
@@ -578,7 +578,7 @@ const articles = [
         h: "Balancing quality against size",
         p: [
           "The art of compression is finding the point where a file is small enough to send but still good enough for its purpose, and that point shifts with what the document is for. A contract that will only ever be read on screen can tolerate aggressive compression, because nobody will scrutinise the fine grain of its images. A portfolio of design work or a document destined for high-quality print needs a gentler hand, since over-compression there shows up as soft text and muddy pictures. Knowing the document's destination tells you how hard you can push.",
-          "It also pays to understand what compression does and does not touch. Reducing a PDF mainly works on image data — downsampling high-resolution pictures and storing them more efficiently — while the text remains crisp because text is already tiny and lossless. This is reassuring news for the most common heavy files, which are scans and image-rich reports: the very thing making them large is the very thing compression handles best, so you usually get a dramatic size reduction with no perceptible loss in the parts that carry meaning.",
+          "It also pays to understand what compression does and does not touch. Reducing a PDF mainly works on image data, downsampling high-resolution pictures and storing them more efficiently, while the text remains crisp because text is already tiny and lossless. This is reassuring news for the most common heavy files, which are scans and image-rich reports: the very thing making them large is the very thing compression handles best, so you usually get a dramatic size reduction with no perceptible loss in the parts that carry meaning.",
           "When a single pass is not enough, resist the urge to compress the same file repeatedly, which can degrade images without shedding much more weight. Better to attack the cause: crop away blank space and unnecessary pages, and if the document was built from oversized photos, rebuild it from sensibly sized images and compress once. Thinking about size at the point a document is created, rather than only when it refuses to send, consistently produces cleaner, lighter files than trying to rescue a bloated one at the last minute.",
         ],
       },
@@ -597,14 +597,14 @@ const articles = [
         h: "Best practices for sending PDFs",
         p: [
           "Compress as a default habit for anything image-heavy, not only when a file bounces. A scan or a photo-rich export is almost always larger than it needs to be, and shrinking it up front spares both you and the recipient slow uploads and downloads. After compressing, open the file and confirm the text is still sharp and the images are still clear enough for their purpose; the aim is the smallest size that still looks right, not the smallest size possible.",
-          "Address the source when you can. If a PDF is heavy because it was built from enormous phone photos, rebuilding it from reasonably sized images before compressing yields a far better result than squeezing an already-bloated file. Trim away blank or irrelevant pages, since each image-bearing page adds weight. And know the specific limit you are targeting — an email server and an upload portal can have very different ceilings, and compressing to comfortably clear the stricter of the two saves a second round.",
+          "Address the source when you can. If a PDF is heavy because it was built from enormous phone photos, rebuilding it from reasonably sized images before compressing yields a far better result than squeezing an already-bloated file. Trim away blank or irrelevant pages, since each image-bearing page adds weight. And know the specific limit you are targeting, an email server and an upload portal can have very different ceilings, and compressing to comfortably clear the stricter of the two saves a second round.",
         ],
       },
       {
         h: "From the Lexigenz desk: the application saved at the deadline",
         p: [
           "The most stressful size problems we encounter arrive against a clock. Someone finishes a grant or job application minutes before the deadline, hits upload, and the portal rejects the file for being a megabyte over its limit. Panic sets in, because there is no time to re-scan everything. In nearly every one of these cases the file was a stack of high-resolution scans, and a single pass through compression brought it comfortably under the cap with the text still perfectly legible.",
-          "What we take from this is that file size deserves to be checked before the deadline, not discovered at it. Compressing a document the moment it is assembled — rather than the moment it is rejected — removes a whole category of last-minute emergencies. The technology is not the hard part; the timing is. Build compression into your routine for anything you will send or upload, and the file-too-large message stops being a crisis and becomes something you have already prevented.",
+          "What we take from this is that file size deserves to be checked before the deadline, not discovered at it. Compressing a document the moment it is assembled, rather than the moment it is rejected, removes a whole category of last-minute emergencies. The technology is not the hard part; the timing is. Build compression into your routine for anything you will send or upload, and the file-too-large message stops being a crisis and becomes something you have already prevented.",
         ],
       },
       {
@@ -626,7 +626,7 @@ const articles = [
         faq: [
           {
             q: "Why is my PDF so large in the first place?",
-            a: "Almost always because of images — high-resolution scans, photos or screenshots. Text contributes very little to file size.",
+            a: "Almost always because of images, high-resolution scans, photos or screenshots. Text contributes very little to file size.",
           },
           {
             q: "Will compressing ruin the quality?",
@@ -668,7 +668,7 @@ const articles = [
       {
         h: "Why an unprotected PDF is a quiet risk",
         p: [
-          "A PDF is, by default, an open door. Anyone who receives the file, finds it on a shared drive, or stumbles onto a forwarded email can open it and read every word. For a marketing brochure that is exactly what you want. For a payslip, a medical letter, a contract, or a file full of personal data, that openness is a liability waiting to surface — and these sensitive files move through inboxes and cloud folders constantly.",
+          "A PDF is, by default, an open door. Anyone who receives the file, finds it on a shared drive, or stumbles onto a forwarded email can open it and read every word. For a marketing brochure that is exactly what you want. For a payslip, a medical letter, a contract, or a file full of personal data, that openness is a liability waiting to surface, and these sensitive files move through inboxes and cloud folders constantly.",
           "Password protection closes that door. Encrypting a PDF with a password means the content is unreadable until the correct password is supplied, so even if the file ends up somewhere it should not, it stays sealed to anyone without the key. It is the difference between a document that protects itself and one that relies entirely on no one untrusted ever getting near it.",
         ],
       },
@@ -703,9 +703,9 @@ const articles = [
       {
         h: "Layers of protection beyond a password",
         p: [
-          "A password is the foundation, but real document security is usually a combination of measures rather than a single switch. Encryption controls who can open a file at all, and that is the most important layer for sensitive material. Beyond it sit permission settings that govern what someone can do once the document is open — whether they can copy text, edit the contents, or print. For many documents the open password alone is enough, but understanding that these controls are distinct helps you protect a file precisely rather than relying on one blunt setting.",
+          "A password is the foundation, but real document security is usually a combination of measures rather than a single switch. Encryption controls who can open a file at all, and that is the most important layer for sensitive material. Beyond it sit permission settings that govern what someone can do once the document is open, whether they can copy text, edit the contents, or print. For many documents the open password alone is enough, but understanding that these controls are distinct helps you protect a file precisely rather than relying on one blunt setting.",
           "It is also worth recognising what a password cannot do. Encryption protects a document at rest and in transit, but it offers no protection once a legitimate recipient has opened it and can read, screenshot or re-share the contents. For information that must be removed entirely before sharing, redaction is the right tool, not a password. For asserting ownership across copies that will circulate, a watermark does work encryption does not. Thinking of these as complementary layers, each suited to a different threat, leads to far better decisions than treating a password as a cure-all.",
-          "Delivery is the layer people most often neglect. The strongest encryption is undone by emailing the password alongside the file, or by storing both together in a shared folder anyone can browse. Treat the file and its key as two things that must travel separately and be stored separately. For a small team, agreeing a simple convention — passwords shared by a different channel, sensitive files kept in a restricted location, credentials held in a password manager rather than a spreadsheet — turns ad hoc protection into a habit that actually holds up when a document strays.",
+          "Delivery is the layer people most often neglect. The strongest encryption is undone by emailing the password alongside the file, or by storing both together in a shared folder anyone can browse. Treat the file and its key as two things that must travel separately and be stored separately. For a small team, agreeing a simple convention, passwords shared by a different channel, sensitive files kept in a restricted location, credentials held in a password manager rather than a spreadsheet, turns ad hoc protection into a habit that actually holds up when a document strays.",
         ],
       },
       {
@@ -722,7 +722,7 @@ const articles = [
       {
         h: "Best practices for protecting PDFs",
         p: [
-          "A password is only as good as how you handle it. Choose a strong, unguessable password rather than something predictable, and never send the password in the same email as the file — that defeats the entire purpose, since anyone who intercepts the message gets both the lock and the key. Deliver the password by a separate route, such as a phone call or a different messaging channel, so the two never travel together.",
+          "A password is only as good as how you handle it. Choose a strong, unguessable password rather than something predictable, and never send the password in the same email as the file, that defeats the entire purpose, since anyone who intercepts the message gets both the lock and the key. Deliver the password by a separate route, such as a phone call or a different messaging channel, so the two never travel together.",
           "Plan for the long term. Store the password somewhere you will not lose it, ideally a password manager, because an encrypted file with a forgotten password is as inaccessible to you as to an attacker. Keep a secure backup of the protected document, and when sending to others, confirm they actually need the file before adding them to the circle of people who hold the key. Protection is partly technical and partly disciplined habit; both have to be present for it to mean anything.",
         ],
       },
@@ -730,7 +730,7 @@ const articles = [
         h: "From the Lexigenz desk: the email that went to the wrong Sarah",
         p: [
           "One of the most instructive incidents we have seen involved nothing more exotic than autocomplete. An HR coordinator typed Sarah into the recipient field, picked the wrong Sarah from the suggestions, and sent a payslip to a customer instead of an employee. It was an ordinary, human mistake of the kind everyone makes eventually. The only thing that determined whether it became a serious data breach was whether that PDF had been password protected.",
-          "That single case reshaped how we think about document security. The question is not whether someone will eventually send a sensitive file to the wrong person — they will — but whether the file is protected when it happens. Encryption converts an alarming breach into a harmless non-event, because the wrong recipient simply cannot open it. We came to treat password protection as insurance against inevitable human error, not as a special measure for unusually secret documents. If a file would embarrass or harm anyone in the wrong hands, it should be locked before it is ever sent.",
+          "That single case reshaped how we think about document security. The question is not whether someone will eventually send a sensitive file to the wrong person, they will, but whether the file is protected when it happens. Encryption converts an alarming breach into a harmless non-event, because the wrong recipient simply cannot open it. We came to treat password protection as insurance against inevitable human error, not as a special measure for unusually secret documents. If a file would embarrass or harm anyone in the wrong hands, it should be locked before it is ever sent.",
         ],
       },
       {
@@ -789,19 +789,19 @@ const articles = [
     relatedTools: ["Crop PDF", "Compress PDF", "JPG to PDF"],
     datePublished: "2026-04-07",
     excerpt:
-      "Drawing a black box over text does not delete it — the words often sit untouched underneath. Real redaction removes the data so it can never be recovered.",
+      "Drawing a black box over text does not delete it, the words often sit untouched underneath. Real redaction removes the data so it can never be recovered.",
     sections: [
       {
         h: "The dangerous illusion of the black rectangle",
         p: [
           "Redaction looks simple. You have a document, some of it is sensitive, so you cover the sensitive parts with black rectangles and send it on. The page looks redacted, the eye sees solid black where the secret used to be, and everyone assumes the information is gone. This intuition is the source of some of the most damaging document leaks on record.",
-          "The problem is that a black box drawn on top of text is exactly that — a shape sitting above the words, not a deletion of them. In many PDFs the original text remains in the file, fully intact, hidden only visually. Anyone who copies the page, opens it in the right tool, or removes the overlay can read what you thought you had hidden. True redaction is not about covering information; it is about removing it so completely that nothing remains to recover.",
+          "The problem is that a black box drawn on top of text is exactly that, a shape sitting above the words, not a deletion of them. In many PDFs the original text remains in the file, fully intact, hidden only visually. Anyone who copies the page, opens it in the right tool, or removes the overlay can read what you thought you had hidden. True redaction is not about covering information; it is about removing it so completely that nothing remains to recover.",
         ],
       },
       {
         h: "Why fake redaction keeps failing",
         p: [
-          "The reason black-box redaction leaks so reliably is structural. A PDF stores text, images and graphics as separate objects layered together. Adding a black rectangle simply adds another object on top; it does not touch the text object underneath, which still contains the very words you meant to hide. Selecting and copying the page, or stripping the layers, exposes them. The same flaw afflicts the trick of changing text colour to match the background — invisible to the eye, perfectly readable to a machine.",
+          "The reason black-box redaction leaks so reliably is structural. A PDF stores text, images and graphics as separate objects layered together. Adding a black rectangle simply adds another object on top; it does not touch the text object underneath, which still contains the very words you meant to hide. Selecting and copying the page, or stripping the layers, exposes them. The same flaw afflicts the trick of changing text colour to match the background, invisible to the eye, perfectly readable to a machine.",
           "Real redaction has to operate at the level of the content itself. The sensitive text must be genuinely deleted from the file, and the area replaced with a mark that contains nothing recoverable. One robust, low-tech way to guarantee this is to flatten the document into an image of its pages, so that everything becomes pixels and the original text objects cease to exist. Once a page is an image, blacked-out areas are truly just black pixels, with no hidden text lurking beneath them.",
         ],
       },
@@ -813,7 +813,7 @@ const articles = [
         ul: [
           "Step 1: Identify every piece of sensitive information across all pages, including headers, footers and metadata.",
           "Step 2: Mark or cover the sensitive areas on the document.",
-          "Step 3: Flatten the pages into images so the text layer no longer exists — export the pages as images and rebuild with JPG to PDF.",
+          "Step 3: Flatten the pages into images so the text layer no longer exists, export the pages as images and rebuild with JPG to PDF.",
           "Step 4: Confirm the result by trying to select or copy text in the redacted areas; nothing should be selectable.",
           "Step 5: Use Crop PDF to remove any margins or sections that exposed sensitive detail.",
           "Step 6: Compress the final PDF with Compress PDF so the flattened, image-based file stays a sensible size.",
@@ -823,7 +823,7 @@ const articles = [
         h: "Where real redaction is non-negotiable",
         p: [
           "Legal disclosure is the classic arena. Documents released in litigation or under freedom-of-information requests routinely need names, account numbers or privileged passages removed, and a botched redaction in this setting can expose protected information to opposing parties or the public. Government bodies publishing records face the same exposure. Journalists protecting sources must be certain that a leaked document, once published, reveals nothing it should not.",
-          "It reaches ordinary business too. Sharing a contract as a reference while hiding the price, sending a bank statement with the account number removed, or circulating a report with personal data stripped out all depend on the redaction being real. In every one of these cases the cost of a fake redaction is not cosmetic — it is the very disclosure the redaction was meant to prevent, often discovered only after the document has spread beyond recall.",
+          "It reaches ordinary business too. Sharing a contract as a reference while hiding the price, sending a bank statement with the account number removed, or circulating a report with personal data stripped out all depend on the redaction being real. In every one of these cases the cost of a fake redaction is not cosmetic, it is the very disclosure the redaction was meant to prevent, often discovered only after the document has spread beyond recall.",
         ],
       },
       {
@@ -832,7 +832,7 @@ const articles = [
           "Because the consequences of a botched redaction are so severe and so hard to reverse, it helps to treat the final review as a fixed checklist rather than a matter of judgement in the moment. Run through the same steps every time, and you remove the chance that pressure or familiarity leads you to skip the very check that would have caught a leak. The discipline matters more than any single tool, because the failures almost always come from omission rather than from a technical fault.",
         ],
         ul: [
-          "Confirm every instance of each sensitive item is covered, not just the most obvious one — names and numbers often recur across pages.",
+          "Confirm every instance of each sensitive item is covered, not just the most obvious one, names and numbers often recur across pages.",
           "Check the parts of the document people forget: headers, footers, captions, comments and the file name itself.",
           "Inspect the metadata, which can carry an author name, edit history or other identifying detail invisible on the page.",
           "Flatten the pages to images so the underlying text objects cease to exist rather than merely being hidden.",
@@ -855,7 +855,7 @@ const articles = [
         h: "Best practices for trustworthy redaction",
         p: [
           "Always verify, never assume. After redacting, attempt to select and copy text in the blacked-out areas; if anything comes through, the redaction is fake and the document is unsafe to release. Flattening the pages to images is the surest way to be confident the underlying text is gone, because it eliminates the text objects entirely rather than hiding them. Treat that select-and-copy test as a mandatory final check, not an optional one.",
-          "Be thorough about scope. Sensitive information hides in places people forget — document metadata, headers and footers, comments, the names of attached files, and earlier mentions of a redacted name elsewhere in the text. Redacting one occurrence while leaving three others defeats the exercise. Work through the whole document systematically, and when the stakes are high, have a second person review the redacted version before it leaves your hands, since a fresh pair of eyes catches what the author's familiarity glosses over.",
+          "Be thorough about scope. Sensitive information hides in places people forget, document metadata, headers and footers, comments, the names of attached files, and earlier mentions of a redacted name elsewhere in the text. Redacting one occurrence while leaving three others defeats the exercise. Work through the whole document systematically, and when the stakes are high, have a second person review the redacted version before it leaves your hands, since a fresh pair of eyes catches what the author's familiarity glosses over.",
         ],
       },
       {
@@ -926,7 +926,7 @@ const articles = [
       {
         h: "The message a watermark carries",
         p: [
-          "A watermark is a small piece of text or imagery laid across the pages of a document — a company name, a logo, a word like DRAFT or CONFIDENTIAL. It seems decorative, but it is really a communication channel that travels on every page no matter how far the file spreads. Long after a document is forwarded, downloaded and printed, the watermark keeps saying who owns it and how it is meant to be used.",
+          "A watermark is a small piece of text or imagery laid across the pages of a document, a company name, a logo, a word like DRAFT or CONFIDENTIAL. It seems decorative, but it is really a communication channel that travels on every page no matter how far the file spreads. Long after a document is forwarded, downloaded and printed, the watermark keeps saying who owns it and how it is meant to be used.",
           "That persistence is the point. Documents escape their original context constantly: a proposal gets forwarded, a sample gets shared, a draft gets mistaken for a final. A watermark anchors meaning to the page itself, so the ownership and status of the document cannot be separated from it. For anything you send out into the world, that anchoring is a quiet but powerful form of protection and branding.",
         ],
       },
@@ -934,7 +934,7 @@ const articles = [
         h: "What watermarks are good at",
         p: [
           "Watermarks do two jobs especially well. The first is ownership and deterrence: stamping your name or logo across a document signals authorship and discourages casual misuse, because anyone who passes off or reuses the file carries your mark with them. It will not stop a determined bad actor, but it raises the friction and makes unauthorised use obviously traceable, which is enough to discourage most.",
-          "The second job is status and context. A bold DRAFT prevents an unfinished document from being treated as final; a SAMPLE or SPECIMEN keeps a template from being mistaken for a live record; a CONFIDENTIAL mark reminds every reader how the file should be handled. These status watermarks prevent expensive misunderstandings — acting on the wrong version, distributing something that was never meant to circulate — that are far harder to undo after the fact.",
+          "The second job is status and context. A bold DRAFT prevents an unfinished document from being treated as final; a SAMPLE or SPECIMEN keeps a template from being mistaken for a live record; a CONFIDENTIAL mark reminds every reader how the file should be handled. These status watermarks prevent expensive misunderstandings, acting on the wrong version, distributing something that was never meant to circulate, that are far harder to undo after the fact.",
         ],
       },
       {
@@ -943,7 +943,7 @@ const articles = [
           "A watermark can be applied as a text or image overlay, and PDFShuffl's image and document tools support building branded, marked files.",
         ],
         ul: [
-          "Step 1: Decide the watermark's purpose — ownership, status, or both — and the exact text or logo to use.",
+          "Step 1: Decide the watermark's purpose, ownership, status, or both, and the exact text or logo to use.",
           "Step 2: Prepare a logo image if you are using one; convert image-based pages with JPG to PDF as needed.",
           "Step 3: Apply the watermark across the pages so it appears consistently on every page.",
           "Step 4: Position and size it so it is clearly visible without obscuring the content.",
@@ -954,7 +954,7 @@ const articles = [
       {
         h: "Where watermarks prove their worth",
         p: [
-          "Creative and professional services rely on them. Photographers send watermarked proofs so clients can choose images without receiving usable, unpaid-for files. Designers and agencies share watermarked concepts. Consultants stamp proposals with their name so the ideas remain visibly theirs as the document circulates among decision-makers. The watermark protects the work in exactly the window when it is most exposed — before any deal is signed.",
+          "Creative and professional services rely on them. Photographers send watermarked proofs so clients can choose images without receiving usable, unpaid-for files. Designers and agencies share watermarked concepts. Consultants stamp proposals with their name so the ideas remain visibly theirs as the document circulates among decision-makers. The watermark protects the work in exactly the window when it is most exposed, before any deal is signed.",
           "Status watermarks earn their place across every kind of organisation. Legal and finance teams mark drafts so no one acts on an unsigned version. Publishers and educators distribute review copies stamped accordingly. Internal teams flag confidential material so its handling is never in doubt. In each setting the watermark is doing preventive work, heading off the version-confusion and misuse that cause real problems downstream.",
         ],
       },
@@ -962,8 +962,8 @@ const articles = [
         h: "Watermarks within a wider document strategy",
         p: [
           "A watermark works best when you are clear about which job you are asking it to do, because the two main purposes call for different choices. A deterrence or ownership mark wants to be present on every page and impossible to crop out easily, which argues for placing it across the body of the page rather than tucked in a corner. A status mark like DRAFT wants to be instantly readable at a glance, so boldness and clarity matter more than coverage. Deciding the purpose first prevents the muddled middle ground where a watermark is too faint to deter and too intrusive to ignore.",
-          "It is equally important to see where watermarking stops and other tools begin. A watermark is a visible signal, not a barrier; it announces ownership and status but does nothing to stop a determined person from reading or reusing the underlying content. When the requirement is to keep content from being read at all, a password and encryption are the right answer. When information must be permanently removed before sharing, redaction is. The most robust documents often combine these — a watermarked, password-protected proof, or a signed report stamped CONFIDENTIAL — each layer covering what the others cannot.",
-          "Consistency across your output turns watermarking from a one-off gesture into part of a recognisable identity. When every proposal, proof or report carries the same mark in the same place, the watermark becomes shorthand for your brand and your standards, and recipients come to associate it with your work. For a team, agreeing a simple, shared approach — which documents get watermarked, with what text or logo, positioned where — ensures the output looks coherent no matter who produced it, and spares everyone from reinventing the decision each time a document goes out the door.",
+          "It is equally important to see where watermarking stops and other tools begin. A watermark is a visible signal, not a barrier; it announces ownership and status but does nothing to stop a determined person from reading or reusing the underlying content. When the requirement is to keep content from being read at all, a password and encryption are the right answer. When information must be permanently removed before sharing, redaction is. The most robust documents often combine these, a watermarked, password-protected proof, or a signed report stamped CONFIDENTIAL, each layer covering what the others cannot.",
+          "Consistency across your output turns watermarking from a one-off gesture into part of a recognisable identity. When every proposal, proof or report carries the same mark in the same place, the watermark becomes shorthand for your brand and your standards, and recipients come to associate it with your work. For a team, agreeing a simple, shared approach, which documents get watermarked, with what text or logo, positioned where, ensures the output looks coherent no matter who produced it, and spares everyone from reinventing the decision each time a document goes out the door.",
         ],
       },
       {
@@ -980,7 +980,7 @@ const articles = [
       {
         h: "Best practices for effective watermarks",
         p: [
-          "Balance visibility against readability. A watermark that is too faint fails to deter or inform; one that is too heavy renders the content unreadable and annoys legitimate readers. The usual sweet spot is a semi-transparent mark, large enough to be unmistakable and spread across the page, but light enough that the underlying text and images remain perfectly clear. Match the prominence to the purpose — a deterrent watermark on proofs can be bolder than a subtle brand mark on a polished report.",
+          "Balance visibility against readability. A watermark that is too faint fails to deter or inform; one that is too heavy renders the content unreadable and annoys legitimate readers. The usual sweet spot is a semi-transparent mark, large enough to be unmistakable and spread across the page, but light enough that the underlying text and images remain perfectly clear. Match the prominence to the purpose, a deterrent watermark on proofs can be bolder than a subtle brand mark on a polished report.",
           "Keep the message clean and consistent. Use a short, unambiguous word or a recognisable logo rather than a cluttered stamp, and apply the same watermark style across a document and across related documents so your output looks coherent. Remember that a watermark is an overlay, not a security control: it protects against casual misuse and confusion, not against a determined adversary, so pair it with password protection or proper redaction when the content genuinely needs to be secured rather than merely marked.",
         ],
       },
@@ -1014,7 +1014,7 @@ const articles = [
           },
           {
             q: "How visible should a watermark be?",
-            a: "Visible enough to be unmistakable but transparent enough that the content stays readable — a semi-transparent mark across the page usually strikes the balance.",
+            a: "Visible enough to be unmistakable but transparent enough that the content stays readable, a semi-transparent mark across the page usually strikes the balance.",
           },
           {
             q: "Can I use my logo as a watermark?",
@@ -1029,7 +1029,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "A watermark is a small mark that does a large amount of quiet work — asserting ownership, signalling status, and carrying your brand onto every page a document reaches. Choose a clear message, balance visibility with readability, and apply it consistently. For documents that need real security rather than a visible reminder, combine the watermark with protection or redaction. Marked well, your documents announce who they belong to and how they should be used, wherever they end up.",
+          "A watermark is a small mark that does a large amount of quiet work, asserting ownership, signalling status, and carrying your brand onto every page a document reaches. Choose a clear message, balance visibility with readability, and apply it consistently. For documents that need real security rather than a visible reminder, combine the watermark with protection or redaction. Marked well, your documents announce who they belong to and how they should be used, wherever they end up.",
         ],
       },
     ],
@@ -1052,7 +1052,7 @@ const articles = [
       {
         h: "Two terms that are not the same thing",
         p: [
-          "People use electronic signature and digital signature as if they were synonyms, and most of the time it does not cause trouble. But they describe different ideas, and the gap between them matters whenever a document is high-value, regulated, or likely to be disputed. Choosing the wrong one — or assuming any on-screen mark is equally robust — can leave an agreement weaker than its signers believe.",
+          "People use electronic signature and digital signature as if they were synonyms, and most of the time it does not cause trouble. But they describe different ideas, and the gap between them matters whenever a document is high-value, regulated, or likely to be disputed. Choosing the wrong one, or assuming any on-screen mark is equally robust, can leave an agreement weaker than its signers believe.",
           "The short version is that an electronic signature is a broad legal concept about intent to agree, while a digital signature is a specific technical method that uses cryptography to prove identity and integrity. Every digital signature is a kind of electronic signature, but not every electronic signature is digital. Understanding which you have, and which the situation calls for, is what this distinction is really about.",
         ],
       },
@@ -1060,7 +1060,7 @@ const articles = [
         h: "What an electronic signature is",
         p: [
           "An electronic signature is, in essence, any electronic indication that a person intends to agree to a document. That covers a typed name at the bottom of an email, a signature drawn with a mouse or finger, a clicked I agree button, or a name applied to a PDF. The category is deliberately broad because the law in many jurisdictions focuses on intent and consent rather than on a particular technology.",
-          "Crucially, electronic signatures carry real legal weight. In most jurisdictions they are valid and enforceable for the vast majority of everyday agreements — employment contracts, rental agreements, service terms, consent forms and countless routine transactions. The law generally treats a clearly intended electronic signature as binding, which is why so much ordinary business is conducted entirely on screen without anyone reaching for specialised cryptography.",
+          "Crucially, electronic signatures carry real legal weight. In most jurisdictions they are valid and enforceable for the vast majority of everyday agreements, employment contracts, rental agreements, service terms, consent forms and countless routine transactions. The law generally treats a clearly intended electronic signature as binding, which is why so much ordinary business is conducted entirely on screen without anyone reaching for specialised cryptography.",
         ],
       },
       {
@@ -1076,7 +1076,7 @@ const articles = [
           "Match the method to the risk, then use the appropriate tool. PDFShuffl handles everyday signing directly and connects to dedicated providers when stronger assurance is needed.",
         ],
         ul: [
-          "Step 1: Assess the document's stakes — routine confirmation, or regulated and high-value.",
+          "Step 1: Assess the document's stakes, routine confirmation, or regulated and high-value.",
           "Step 2: For everyday agreements, open PDFShuffl and use Sign PDF to apply an electronic signature.",
           "Step 3: When others must sign, use Request Signing so each party signs the one authoritative copy.",
           "Step 4: For a secured document, use Sign a Locked PDF to sign within its protection.",
@@ -1087,7 +1087,7 @@ const articles = [
       {
         h: "Where the distinction actually matters",
         p: [
-          "For the overwhelming bulk of daily agreements, an electronic signature is entirely sufficient. Approving a quote, acknowledging a policy, signing an internal form, agreeing to standard terms — these are low-risk, rarely disputed, and well served by a straightforward on-screen signature. Insisting on cryptographic digital signatures for everything would add friction with no real benefit.",
+          "For the overwhelming bulk of daily agreements, an electronic signature is entirely sufficient. Approving a quote, acknowledging a policy, signing an internal form, agreeing to standard terms, these are low-risk, rarely disputed, and well served by a straightforward on-screen signature. Insisting on cryptographic digital signatures for everything would add friction with no real benefit.",
           "The distinction bites at the high-value, regulated and contested end. Significant financial agreements, certain legal instruments, regulated filings, and anything you can foresee being challenged benefit from the identity verification and tamper-evidence a digital signature provides. The cost of being wrong there is not inconvenience but enforceability: if a signature's validity or the document's integrity is questioned, you want the assurance that only the stronger method delivers.",
         ],
       },
@@ -1106,13 +1106,13 @@ const articles = [
         h: "Best practices for valid signing",
         p: [
           "Make intent and integrity clear regardless of method. Even with a simple electronic signature, ensure the signer genuinely consents, signs the final version, and that the signed file is preserved unchanged as the record of the agreement. Use a request workflow for multi-party documents so everyone signs one authoritative copy rather than circulating divergent versions, which is a frequent and avoidable source of later disputes about what was actually agreed.",
-          "Do not over-engineer the routine or under-protect the critical. Reserve full digital signatures and their providers for the documents whose stakes justify them, and use straightforward electronic signing for the daily flow. When in genuine doubt about a particular document's requirements — a regulated filing, a cross-border contract, anything with specific statutory rules — confirm what that context demands rather than assuming, because a few minutes of certainty up front is far cheaper than a signature that fails when it is finally tested.",
+          "Do not over-engineer the routine or under-protect the critical. Reserve full digital signatures and their providers for the documents whose stakes justify them, and use straightforward electronic signing for the daily flow. When in genuine doubt about a particular document's requirements, a regulated filing, a cross-border contract, anything with specific statutory rules, confirm what that context demands rather than assuming, because a few minutes of certainty up front is far cheaper than a signature that fails when it is finally tested.",
         ],
       },
       {
         h: "From the Lexigenz desk: the signature nobody questioned until they did",
         p: [
-          "We have seen agreements signed casually for years, with a typed name on a PDF, sail through without anyone giving the signature a second thought — right up until one of them was contested. At that point the questions arrived all at once: can we prove who actually signed this, and can we prove the document was not altered afterwards? For a routine arrangement those questions were answerable enough. For a high-value deal that had been treated just as casually, they were uncomfortably hard.",
+          "We have seen agreements signed casually for years, with a typed name on a PDF, sail through without anyone giving the signature a second thought, right up until one of them was contested. At that point the questions arrived all at once: can we prove who actually signed this, and can we prove the document was not altered afterwards? For a routine arrangement those questions were answerable enough. For a high-value deal that had been treated just as casually, they were uncomfortably hard.",
           "What that pattern taught us is that the time to choose the right kind of signature is when you sign, not when someone challenges it. The convenience of a simple electronic signature is exactly right for the ninety-odd percent of documents that will never be disputed, and exactly wrong for the few that will be. We now make a deliberate, quick judgement at signing time about which category a document falls into, and reach for a verified digital signature on the ones that matter most. It is a small habit that quietly prevents a large class of nasty surprises.",
         ],
       },
@@ -1190,7 +1190,7 @@ const articles = [
       {
         h: "The anatomy of a signing workflow",
         p: [
-          "Every signing task, however casual it looks, contains the same handful of stages, and naming them is the first step to making them reliable. A document is prepared and finalised; it is sent to the right people; it is signed; it comes back; and it is stored where it can be found again. Ad hoc signing fails because one of these stages is improvised each time — the wrong version goes out, the request is forgotten, the signed file is lost in an inbox.",
+          "Every signing task, however casual it looks, contains the same handful of stages, and naming them is the first step to making them reliable. A document is prepared and finalised; it is sent to the right people; it is signed; it comes back; and it is stored where it can be found again. Ad hoc signing fails because one of these stages is improvised each time, the wrong version goes out, the request is forgotten, the signed file is lost in an inbox.",
           "A workflow simply makes each stage deliberate and consistent. There is a clear point at which a document is considered final and ready to send. There is one defined way signatures are requested. There is a known place the signed result lands. The point is not bureaucracy; it is removing the small decisions and dropped balls that turn a five-minute task into a multi-day saga. For a small team, that consistency is the whole game.",
         ],
       },
@@ -1204,14 +1204,14 @@ const articles = [
           "Step 2: For documents you sign yourself, standardise on PDFShuffl's Sign PDF tool.",
           "Step 3: For documents others must sign, use Request Signing so each party signs the single authoritative copy.",
           "Step 4: For secured documents, use Sign a Locked PDF to sign within their protection.",
-          "Step 5: Agree one consistent place — a shared, backed-up folder — where every signed document is stored with a clear naming convention.",
+          "Step 5: Agree one consistent place, a shared, backed-up folder, where every signed document is stored with a clear naming convention.",
           "Step 6: For regulated or high-value agreements, route signing through a connected provider such as DocuSign or Adobe Sign for identity verification and an audit trail.",
         ],
       },
       {
         h: "Where a defined workflow changes the day",
         p: [
-          "Client onboarding is transformed by it. A new client receives a clean signing request, signs in minutes from any device, and the signed agreement lands in a known folder ready for work to begin — no printing, no posting, no chasing. Hiring runs the same way: an offer goes out, the candidate signs, onboarding proceeds, all without paper crossing a desk. Recurring approvals and authorisations slot into the same predictable channel.",
+          "Client onboarding is transformed by it. A new client receives a clean signing request, signs in minutes from any device, and the signed agreement lands in a known folder ready for work to begin, no printing, no posting, no chasing. Hiring runs the same way: an offer goes out, the candidate signs, onboarding proceeds, all without paper crossing a desk. Recurring approvals and authorisations slot into the same predictable channel.",
           "The benefit compounds as the team grows and as documents accumulate. Because every signed file is stored consistently, anyone can find last year's contract without excavating an inbox. Because every request goes out the same way, a colleague covering for someone on leave can run the process without a handover briefing. A workflow that felt like over-formalisation when the team was three people becomes the thing that lets the team scale to ten without descending into chaos.",
         ],
       },
@@ -1230,7 +1230,7 @@ const articles = [
         h: "Best practices for a paperless process",
         p: [
           "Standardise ruthlessly and document the process simply. The value of a workflow comes from everyone doing it the same way, so agree on one signing route, one storage location, and one naming convention, and write them down in a few lines anyone can follow. Resist the temptation to let each person sign however they prefer; the inconsistency is precisely what reintroduces lost files and version muddles. Make sending only the final version a firm rule, since a changed document forces the whole request to start again.",
-          "Keep security and recoverability in the design, not as afterthoughts. Store signed documents somewhere backed up, so a lost laptop never means a lost contract, and protect anything sensitive with a password before it travels. Match the signing method to the stakes — straightforward on-screen signing for routine documents, a dedicated provider with an audit trail for the high-value ones. Review the workflow occasionally as the team grows, because a process that fitted three people may need a tweak at ten, and a small adjustment in good time beats a breakdown later.",
+          "Keep security and recoverability in the design, not as afterthoughts. Store signed documents somewhere backed up, so a lost laptop never means a lost contract, and protect anything sensitive with a password before it travels. Match the signing method to the stakes, straightforward on-screen signing for routine documents, a dedicated provider with an audit trail for the high-value ones. Review the workflow occasionally as the team grows, because a process that fitted three people may need a tweak at ten, and a small adjustment in good time beats a breakdown later.",
         ],
       },
       {

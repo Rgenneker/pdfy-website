@@ -36,7 +36,7 @@ const articles = [
           "Step 1: Convert the written sections with Word to PDF so headings, tables and page breaks are preserved.",
           "Step 2: Convert the financial workbook with Excel to PDF after setting its print area, so the figures sit neatly on the page.",
           "Step 3: Convert the visual summary with PPT to PDF so each slide becomes a full page.",
-          "Step 4: Decide the reading order — usually cover, narrative, numbers, then visuals — and assemble the PDFs in that sequence.",
+          "Step 4: Decide the reading order, usually cover, narrative, numbers, then visuals, and assemble the PDFs in that sequence.",
           "Step 5: Run the combined file through Compress PDF so the merged document, with all its images and charts, stays small enough to email.",
         ],
       },
@@ -78,7 +78,7 @@ const articles = [
       {
         h: "From the Lexigenz desk: the order is the argument",
         p: [
-          "When we reviewed how winning proposals differed from losing ones, the surprise was not the quality of the writing — it was the sequencing. The strong submissions led the reader through a deliberate arc: here is the problem, here is our approach, here are the numbers that prove it, here is the picture that ties it together. The weak ones presented the same materials in whatever order the files happened to attach.",
+          "When we reviewed how winning proposals differed from losing ones, the surprise was not the quality of the writing, it was the sequencing. The strong submissions led the reader through a deliberate arc: here is the problem, here is our approach, here are the numbers that prove it, here is the picture that ties it together. The weak ones presented the same materials in whatever order the files happened to attach.",
           "Merging to PDF forces you to make that sequencing decision consciously. You cannot combine files without choosing what comes first, and that small act of curation often improves the argument more than another round of editing. We have come to treat the merge step not as admin, but as the final edit of the whole submission.",
         ],
       },
@@ -156,7 +156,7 @@ const articles = [
         h: "The hidden risk of sharing a Google Docs link",
         p: [
           "Google Workspace made collaboration effortless, and that is exactly where the trouble starts when a document is finished. A shared link is wonderful for drafting together, but it is the wrong way to deliver final work. Permissions get set too loosely and a client can edit your contract; they get set too tightly and the recipient sees a request-access screen instead of your proposal.",
-          "There is also the question of permanence. A Google Doc is a living thing. If you edit it after sharing the link, the reader sees your later changes, not the version they were meant to review. For anything that needs to stand as a fixed record — a signed-off quote, a submitted assignment, a dated policy — that fluidity is a liability rather than a feature.",
+          "There is also the question of permanence. A Google Doc is a living thing. If you edit it after sharing the link, the reader sees your later changes, not the version they were meant to review. For anything that needs to stand as a fixed record, a signed-off quote, a submitted assignment, a dated policy, that fluidity is a liability rather than a feature.",
           "Exporting to PDF turns the living document into a snapshot. It captures the content as it stood at the moment of export, with no live link, no permission puzzle and no risk of the reader stumbling into edit mode.",
         ],
       },
@@ -176,7 +176,7 @@ const articles = [
       {
         h: "Where exporting Google files to PDF matters most",
         p: [
-          "Remote teams that build everything in Google Workspace eventually have to hand work to someone outside that bubble — a client on Microsoft Office, a printer who needs a fixed file, a portal that only accepts PDF uploads. The export-to-PDF step is the bridge between the collaborative cloud and the wider world that still expects a portable document.",
+          "Remote teams that build everything in Google Workspace eventually have to hand work to someone outside that bubble, a client on Microsoft Office, a printer who needs a fixed file, a portal that only accepts PDF uploads. The export-to-PDF step is the bridge between the collaborative cloud and the wider world that still expects a portable document.",
           "Freelancers feel this constantly. They draft proposals and invoices in Google Docs because it is free and fast, then send them as PDF because that is what looks professional and cannot be edited. Students draft essays collaboratively in Docs, then export to PDF because the submission system demands it. In every case the cloud is for making the work and the PDF is for delivering it.",
         ],
       },
@@ -208,7 +208,7 @@ const articles = [
       {
         h: "From the Lexigenz desk: the link that became an edit",
         p: [
-          "One incident shaped how we think about this. A small agency sent a client an estimate as an editable Google Sheets link, trusting that nobody would touch the formulas. The client, meaning well, adjusted a quantity to see how the total would change — and then forgot they had done it. Two weeks later both sides were arguing over a number that had been altered by accident, with no clean record of the original figure.",
+          "One incident shaped how we think about this. A small agency sent a client an estimate as an editable Google Sheets link, trusting that nobody would touch the formulas. The client, meaning well, adjusted a quantity to see how the total would change, and then forgot they had done it. Two weeks later both sides were arguing over a number that had been altered by accident, with no clean record of the original figure.",
           "Had that estimate gone out as a PDF, the number would have been fixed and undisputed. Since then our rule has been blunt: collaborate in the cloud, but deliver in PDF. The moment a Google Doc or Sheet stops being a draft, it should leave the building as a flattened, uneditable file.",
         ],
       },
@@ -294,7 +294,7 @@ const articles = [
         h: "Why a dead link undermines a polished document",
         p: [
           "You have written a report with a careful table of contents, footnoted references that point to source pages, and a call to action that links to a sign-up form. Then you convert it badly, and every one of those links becomes plain blue text. The reader who tries to click goes nowhere. The professionalism you built evaporates at the exact moment you wanted the document to act on your behalf.",
-          "Hyperlinks and bookmarks are functional content. An internal link that jumps from the contents page to chapter four is the navigation system of a long document. An external link to your website or a citation is a bridge to more information. When a conversion flattens those into static text, it does not just lose a feature — it breaks the document's ability to do its job.",
+          "Hyperlinks and bookmarks are functional content. An internal link that jumps from the contents page to chapter four is the navigation system of a long document. An external link to your website or a citation is a bridge to more information. When a conversion flattens those into static text, it does not just lose a feature, it breaks the document's ability to do its job.",
           "The good news is that a properly handled conversion preserves them. Modern office files store links as live objects, and a careful conversion to PDF carries those objects across so they remain clickable in the finished file.",
         ],
       },
@@ -321,7 +321,7 @@ const articles = [
       {
         h: "Why links break in the first place",
         p: [
-          "Links usually die for one of two reasons. The first is that the document was turned into an image before conversion — for example, by exporting slides as pictures or by scanning a printout. An image has no link objects to preserve, only pixels that happen to look like text. The second is a conversion route that prints the page rather than translating its structure, discarding the interactive layer in the process.",
+          "Links usually die for one of two reasons. The first is that the document was turned into an image before conversion, for example, by exporting slides as pictures or by scanning a printout. An image has no link objects to preserve, only pixels that happen to look like text. The second is a conversion route that prints the page rather than translating its structure, discarding the interactive layer in the process.",
           "Avoiding both is straightforward. Start from a live document whose links are real objects, and use a conversion path designed to carry that structure across. That is the difference between a PDF that merely looks like your document and one that behaves like it.",
         ],
       },
@@ -339,7 +339,7 @@ const articles = [
       {
         h: "Best practices for link-rich PDFs",
         p: [
-          "Use your application's real linking features rather than typing a web address and hoping it becomes clickable. In Word and LibreOffice, that means the Insert Link command and the automatic table-of-contents tool, which create the bookmark structure a PDF can preserve. Write descriptive link text — 'view the full pricing table' rather than 'click here' — because that text becomes the accessible label in the PDF.",
+          "Use your application's real linking features rather than typing a web address and hoping it becomes clickable. In Word and LibreOffice, that means the Insert Link command and the automatic table-of-contents tool, which create the bookmark structure a PDF can preserve. Write descriptive link text, 'view the full pricing table' rather than 'click here', because that text becomes the accessible label in the PDF.",
           "Always test after converting. Open the PDF, click a sample of internal and external links, and follow a contents entry to its target. Thirty seconds of testing catches the rare link that did not survive, and it is the only way to be certain that the document behaves as well as it reads.",
         ],
       },
@@ -355,7 +355,7 @@ const articles = [
         p: [
           "A hyperlink in a modern office document is not part of the visible text at all. It is a separate object: a defined rectangle on the page, paired with a destination, that the application stores alongside the words it sits over. A bookmark works the same way, marking a named target that other links can point to.",
           "A faithful conversion to PDF copies those objects across as the PDF's own native link annotations, mapping each clickable region onto the same area of the finished page. Because PDF has its own first-class concept of links and bookmarks, there is a clean place for every one of them to land. The text you see and the link beneath it arrive together, still bound to each other.",
-          "This is why the source matters so much. If the link object exists, conversion can preserve it; if the document was flattened to pixels first, there is simply no object left to carry. The interactivity is not added during conversion — it is inherited from a source that still has it.",
+          "This is why the source matters so much. If the link object exists, conversion can preserve it; if the document was flattened to pixels first, there is simply no object left to carry. The interactivity is not added during conversion, it is inherited from a source that still has it.",
         ],
       },
       {
@@ -378,9 +378,9 @@ const articles = [
       {
         h: "A walk-through: a clickable annual report",
         p: [
-          "Imagine a non-profit producing its annual report in Word — fifty pages spanning programmes, finances and acknowledgements. The communications lead builds a proper automatic contents page, links each funding source to its website, and cross-references the financial tables from the narrative that discusses them.",
+          "Imagine a non-profit producing its annual report in Word, fifty pages spanning programmes, finances and acknowledgements. The communications lead builds a proper automatic contents page, links each funding source to its website, and cross-references the financial tables from the narrative that discusses them.",
           "Converted directly with Word to PDF, every one of those connections survives. A board member skimming on a tablet taps a contents entry and lands on the right section; a donor clicks a programme name and arrives at its dedicated page; a reviewer jumps from a claim in the text to the table that backs it up.",
-          "The same report, had it been stitched together from exported images, would have looked identical and behaved like a brochure under glass. The difference is invisible until someone tries to interact with it — which, for a document meant to be explored, is the whole point.",
+          "The same report, had it been stitched together from exported images, would have looked identical and behaved like a brochure under glass. The difference is invisible until someone tries to interact with it, which, for a document meant to be explored, is the whole point.",
         ],
       },
       {
@@ -407,7 +407,7 @@ const articles = [
       {
         h: "Conclusion",
         p: [
-          "Hyperlinks and bookmarks are content, and a good conversion treats them that way. Build your links and contents with real document features, convert the live file with the matching PDFShuffl tool, and test the result. Do that, and your PDF will not just look like the original — it will navigate, link and act exactly as you designed it to.",
+          "Hyperlinks and bookmarks are content, and a good conversion treats them that way. Build your links and contents with real document features, convert the live file with the matching PDFShuffl tool, and test the result. Do that, and your PDF will not just look like the original, it will navigate, link and act exactly as you designed it to.",
         ],
       },
     ],
@@ -431,7 +431,7 @@ const articles = [
       {
         h: "Why accessibility belongs in every document",
         p: [
-          "Roughly one in six people lives with a disability, and a large share of them rely on assistive technology to read. A screen reader announces text aloud, but only if the document tells it what that text is — which is a heading, which is a list, what an image depicts, and in what order everything should be read. A PDF that lacks this structure is, to a screen reader, an undifferentiated blur or a locked box.",
+          "Roughly one in six people lives with a disability, and a large share of them rely on assistive technology to read. A screen reader announces text aloud, but only if the document tells it what that text is, which is a heading, which is a list, what an image depicts, and in what order everything should be read. A PDF that lacks this structure is, to a screen reader, an undifferentiated blur or a locked box.",
           "Beyond the human case, accessibility is increasingly a legal and procurement requirement. Public-sector bodies, universities and large enterprises now routinely demand accessible documents, and a PDF that fails an accessibility check can disqualify an otherwise excellent submission. Building accessibility in is no longer optional polish; it is part of doing the job properly.",
           "The encouraging truth is that an accessible PDF is mostly made before you ever convert. If the source office file is structured well, that structure flows into a tagged PDF that assistive technology can navigate.",
         ],
@@ -452,14 +452,14 @@ const articles = [
       {
         h: "Where accessible PDFs are essential",
         p: [
-          "Government and education lead the way because they serve the whole public and are held to clear standards. A council publishing a planning notice, a university posting course readings, a hospital sharing patient information — all of these reach people who use assistive technology, and an inaccessible file simply excludes some of them.",
+          "Government and education lead the way because they serve the whole public and are held to clear standards. A council publishing a planning notice, a university posting course readings, a hospital sharing patient information, all of these reach people who use assistive technology, and an inaccessible file simply excludes some of them.",
           "Employers feel it internally. HR policies, training materials and contracts must be readable by every member of staff, including colleagues with visual impairments. Customer-facing businesses feel it too: an inaccessible statement or manual is both a poor experience and a reputational risk. Wherever a document is meant for a broad audience, accessibility is part of reaching that audience completely.",
         ],
       },
       {
         h: "Why structure beats appearance",
         p: [
-          "Sighted readers infer structure from appearance — they see that bigger, bolder text is a heading. A screen reader cannot see; it depends entirely on the underlying tags. This is why making text large and bold does not create a heading in any meaningful sense, and why using the real heading style does. The visual result may look identical, but only one of them is navigable.",
+          "Sighted readers infer structure from appearance, they see that bigger, bolder text is a heading. A screen reader cannot see; it depends entirely on the underlying tags. This is why making text large and bold does not create a heading in any meaningful sense, and why using the real heading style does. The visual result may look identical, but only one of them is navigable.",
           "The same principle runs through the whole document. A list typed with hyphens looks like a list but is not one to assistive technology; a list made with the list tool is. A table laid out with tabs falls apart when read aloud; a true table with header cells reads logically. Accessibility is the discipline of making the structure real, not merely visible.",
         ],
       },
@@ -484,14 +484,14 @@ const articles = [
       {
         h: "From the Lexigenz desk: the audit that failed on headings",
         p: [
-          "A client once asked us why their carefully designed report kept failing a procurement accessibility check. The document looked immaculate. The problem was that every heading had been styled by hand — selected, enlarged, made bold — rather than using the heading styles. To the checking tool, the entire forty-page report was one long unstructured block with no navigable outline at all.",
+          "A client once asked us why their carefully designed report kept failing a procurement accessibility check. The document looked immaculate. The problem was that every heading had been styled by hand, selected, enlarged, made bold, rather than using the heading styles. To the checking tool, the entire forty-page report was one long unstructured block with no navigable outline at all.",
           "The fix was unglamorous and complete: reapply real heading styles throughout, add the missing alt text, and reconvert. The visible document barely changed, but it went from failing to passing. The episode crystallised something we now repeat often: accessibility is invisible to the eye and obvious to the machine, so it has to be built with structure, not styling.",
         ],
       },
       {
         h: "How a screen reader moves through a tagged PDF",
         p: [
-          "To understand why tags matter, it helps to picture how a screen reader experiences a document. It does not see the page; it walks a tree of structural elements in a defined order, announcing each one — heading level two, list with five items, table with three columns — and letting the user jump between them. The visual layout is irrelevant to it; the tag tree is everything.",
+          "To understand why tags matter, it helps to picture how a screen reader experiences a document. It does not see the page; it walks a tree of structural elements in a defined order, announcing each one, heading level two, list with five items, table with three columns, and letting the user jump between them. The visual layout is irrelevant to it; the tag tree is everything.",
           "A well-structured source builds that tree automatically. Each heading style becomes a navigable heading node, each real list becomes a list node, each properly built table exposes its header cells so a value can be announced as 'revenue, second quarter' rather than a lonely number. The reading order follows the document's logical flow, not the accident of where boxes happen to sit on the page.",
           "When that structure is missing, the tree collapses into one undifferentiated block of text, and the reader loses every shortcut. This is the concrete reason that styling text to look like a heading achieves nothing for accessibility: it adds no node to the tree the screen reader actually follows.",
         ],
@@ -530,7 +530,7 @@ const articles = [
           },
           {
             q: "What is a tagged PDF?",
-            a: "It is a PDF that carries structural tags — headings, lists, tables, reading order — that assistive technology uses to navigate and read the content correctly.",
+            a: "It is a PDF that carries structural tags, headings, lists, tables, reading order, that assistive technology uses to navigate and read the content correctly.",
           },
           {
             q: "Is making text bold and big enough for a heading?",
@@ -569,7 +569,7 @@ const articles = [
       {
         h: "Why charts deserve special care on conversion",
         p: [
-          "Numbers persuade slowly; a good chart persuades at a glance. A trend line that climbs, a pie that shows where the budget really goes, a bar chart that exposes the underperforming region — these carry the meaning of a spreadsheet far better than the cells behind them. So when you convert a workbook to PDF, the charts are often the most important thing on the page, not a decorative extra.",
+          "Numbers persuade slowly; a good chart persuades at a glance. A trend line that climbs, a pie that shows where the budget really goes, a bar chart that exposes the underperforming region, these carry the meaning of a spreadsheet far better than the cells behind them. So when you convert a workbook to PDF, the charts are often the most important thing on the page, not a decorative extra.",
           "Yet charts are also where conversions go wrong most visibly. A graph can land split across two pages, shrink until its labels are illegible, drift away from the data it explains, or render as a blurry image that looks unprofessional. Because charts draw the eye first, any of these flaws is the first thing a reader notices.",
           "Handled properly, the conversion keeps each chart crisp, whole and beside the figures it illustrates. The difference between a careful and a careless conversion is the difference between a dashboard that informs and one that embarrasses.",
         ],
@@ -616,13 +616,13 @@ const articles = [
         h: "Best practices for chart-rich PDFs",
         p: [
           "Design charts for the page, not just the screen. A graph that is readable on a wide monitor may have labels too small to read once it is scaled onto an A4 page, so size your fonts and data labels generously. Give each chart a clear title within the chart itself, so it stands on its own when a reader skims the PDF.",
-          "Lay out the worksheet with conversion in mind. Group each chart with its related table, leave a little breathing room around it, and use Page Layout view to confirm nothing important sits on a fold. If a single chart deserves a page of its own — say, the headline metric in a board pack — give it one rather than crowding it next to everything else.",
+          "Lay out the worksheet with conversion in mind. Group each chart with its related table, leave a little breathing room around it, and use Page Layout view to confirm nothing important sits on a fold. If a single chart deserves a page of its own, say, the headline metric in a board pack, give it one rather than crowding it next to everything else.",
         ],
       },
       {
         h: "From the Lexigenz desk: the chart cut in half",
         p: [
-          "A finance manager once sent us a board pack to review the morning before a meeting. The analysis was strong, but the centrepiece — a twelve-month revenue trend — had landed precisely across a page break. The top half of the line sat on page three and the bottom half on page four, so the single most important chart in the document was impossible to read as one picture.",
+          "A finance manager once sent us a board pack to review the morning before a meeting. The analysis was strong, but the centrepiece, a twelve-month revenue trend, had landed precisely across a page break. The top half of the line sat on page three and the bottom half on page four, so the single most important chart in the document was impossible to read as one picture.",
           "Nobody had done anything careless; the chart had simply been left where it fell, and the print area had not been checked. Five minutes in Page Layout view, nudging the chart onto one page and fitting the width, fixed it completely. We now treat that quick visual check as mandatory for any spreadsheet with charts: look at where the pages break before you convert, because the reader certainly will.",
         ],
       },
@@ -736,7 +736,7 @@ const articles = [
         h: "What font substitution actually does to a page",
         p: [
           "Substitution is rarely just an aesthetic swap. Different fonts have different letter widths and spacing, so when one font replaces another the text takes up more or less room. That changes where lines break, which changes where paragraphs end, which changes where pages break. A one-page letter can become a page and a half; a neatly balanced two-column layout can develop awkward gaps.",
-          "This cascade is why font problems are so disproportionate to their apparent size. A single missing typeface does not just look slightly different — it can reflow an entire document. Embedding fonts in a PDF stops the cascade before it starts, because there is no substitution to trigger it.",
+          "This cascade is why font problems are so disproportionate to their apparent size. A single missing typeface does not just look slightly different, it can reflow an entire document. Embedding fonts in a PDF stops the cascade before it starts, because there is no substitution to trigger it.",
         ],
       },
       {
@@ -767,7 +767,7 @@ const articles = [
       {
         h: "How font embedding works under the hood",
         p: [
-          "When a PDF embeds a font, it does something an office file never does: it copies the actual glyph outlines — the precise vector shapes of each letter — inside the document. The PDF no longer asks the reader's computer for the typeface; it carries its own copy and draws the text from that, so the result is identical whether or not the font is installed anywhere else.",
+          "When a PDF embeds a font, it does something an office file never does: it copies the actual glyph outlines, the precise vector shapes of each letter, inside the document. The PDF no longer asks the reader's computer for the typeface; it carries its own copy and draws the text from that, so the result is identical whether or not the font is installed anywhere else.",
           "Embedding can be full or subset. A subset includes only the characters the document actually uses, which keeps the file smaller while still guaranteeing that every glyph on the page renders correctly. Either way, the connection between your chosen typeface and the page is made permanent at the moment of conversion.",
           "This is why the machine you convert on matters. Embedding can only capture a font that is present to be copied, so finishing the document where its typefaces live is what allows the PDF to seal them in. Convert somewhere those fonts are missing and the file embeds the substitute instead, locking in the very problem you were trying to avoid.",
         ],
@@ -792,7 +792,7 @@ const articles = [
       {
         h: "A walk-through: a brand-led proposal that holds its shape",
         p: [
-          "Picture a studio whose identity rests on a single licensed display face used across every heading. A proposal set in that face looks unmistakably theirs — until it is sent as an editable file to a client who has never heard of the font, at which point the headings collapse into a flat default and the carefully tuned spacing unravels.",
+          "Picture a studio whose identity rests on a single licensed display face used across every heading. A proposal set in that face looks unmistakably theirs, until it is sent as an editable file to a client who has never heard of the font, at which point the headings collapse into a flat default and the carefully tuned spacing unravels.",
           "Handled correctly, the studio finishes the proposal on a machine where the licensed font is installed and converts it with Word to PDF, embedding the typeface in the file. The client opens a document whose headings, weights and line breaks are exactly as designed, on a computer that has never seen the font and never needs to.",
           "If the embedded display face makes the file heavy, a pass through Compress PDF trims it without touching how the text looks. The brand arrives intact, the layout holds to the line, and nothing about the delivery betrays how much depended on a single typeface travelling safely.",
         ],
@@ -857,7 +857,7 @@ const articles = [
         ],
         ul: [
           "Step 1: Build and refine your template in Word for letters and certificates, or in Excel for invoices and quotations with calculations.",
-          "Step 2: Fill in the details for a specific use — the client, the amount, the recipient's name.",
+          "Step 2: Fill in the details for a specific use, the client, the amount, the recipient's name.",
           "Step 3: Convert that copy with Word to PDF or Excel to PDF so the layout and branding are locked.",
           "Step 4: For documents that need a signature, run the PDF through Sign PDF to add yours before sending.",
           "Step 5: Keep finished image-heavy certificates lean with Compress PDF so they email and download quickly.",
@@ -893,7 +893,7 @@ const articles = [
         h: "Best practices for template-to-PDF workflows",
         p: [
           "Invest in the master once and protect it. Get the spacing, logo placement and typography exactly right, then store the editable version somewhere it will not be casually overwritten. Mark placeholder fields clearly so whoever fills the template knows precisely what to change and what to leave alone, which prevents the slow drift that creeps into reused documents.",
-          "Standardise your file naming so the generated PDFs stay organised — including the client and date in an invoice file name, for instance, makes the archive searchable later. And convert immediately after filling in each copy rather than emailing the working file, so the recipient never sees the editable version with its placeholders and formulas exposed.",
+          "Standardise your file naming so the generated PDFs stay organised, including the client and date in an invoice file name, for instance, makes the archive searchable later. And convert immediately after filling in each copy rather than emailing the working file, so the recipient never sees the editable version with its placeholders and formulas exposed.",
         ],
       },
       {
@@ -923,15 +923,15 @@ const articles = [
       {
         h: "Choosing the right base application for each template",
         p: [
-          "Not every template belongs in the same program, and choosing the right one before you build pays off every time you reuse it. Documents driven by layout and prose — letterheads, formal letters, certificates and award designs — are happiest in Word, where text flow, headings and image placement are easy to control and convert predictably with Word to PDF.",
+          "Not every template belongs in the same program, and choosing the right one before you build pays off every time you reuse it. Documents driven by layout and prose, letterheads, formal letters, certificates and award designs, are happiest in Word, where text flow, headings and image placement are easy to control and convert predictably with Word to PDF.",
           "Anything driven by numbers belongs in a spreadsheet. Invoices, quotations and order forms that need to total line items, apply tax or vary by quantity are far more reliable when the arithmetic lives in Excel and the finished copy is sealed with Excel to PDF. Trying to fake calculations in a word processor, or force a prose-heavy certificate into a spreadsheet grid, creates friction you will feel on every use.",
-          "Where a template needs a signature — an issued certificate, a counter-signed letter — plan for it from the start by leaving room for the mark and adding it after conversion with Sign PDF. Matching the template to the application at the design stage is what makes the whole reusable workflow feel effortless later.",
+          "Where a template needs a signature, an issued certificate, a counter-signed letter, plan for it from the start by leaving room for the mark and adding it after conversion with Sign PDF. Matching the template to the application at the design stage is what makes the whole reusable workflow feel effortless later.",
         ],
       },
       {
         h: "A walk-through: issuing a month of invoices",
         p: [
-          "Consider a small consultancy billing fifteen clients at the end of each month from a single Excel invoice template that totals line items automatically. The risk is the familiar one — editing last month's file, nudging a column, overwriting a formula — until the invoices no longer match each other or the brand.",
+          "Consider a small consultancy billing fifteen clients at the end of each month from a single Excel invoice template that totals line items automatically. The risk is the familiar one, editing last month's file, nudging a column, overwriting a formula, until the invoices no longer match each other or the brand.",
           "The disciplined version is simple. The master invoice is stored untouched. For each client, the bookkeeper opens a copy, enters the line items and lets the spreadsheet calculate the total, then converts that copy with Excel to PDF so the figures are locked. Files are named with the client and date, and a pass through Compress PDF keeps any logo-heavy ones light.",
           "Fifteen identical, branded, uneditable invoices go out, each regenerated from the same master rather than mutated from the last one. When the consultancy's address changes the following quarter, only the master is edited, and every future invoice inherits the change while the issued ones stay valid.",
         ],
@@ -984,7 +984,7 @@ const articles = [
       {
         h: "Why the page is set before you convert, not after",
         p: [
-          "A surprising share of the problems people blame on PDF conversion are nothing of the sort. The cut-off table, the stray blank page, the cramped margins, the document that prints half an inch off-centre — these are almost always page-setup decisions that were never made in the source file. The conversion faithfully reproduced a layout that was wrong to begin with.",
+          "A surprising share of the problems people blame on PDF conversion are nothing of the sort. The cut-off table, the stray blank page, the cramped margins, the document that prints half an inch off-centre, these are almost always page-setup decisions that were never made in the source file. The conversion faithfully reproduced a layout that was wrong to begin with.",
           "This matters because a PDF is fixed. Once you convert, the page geometry is locked, and adjusting margins or orientation afterwards is awkward at best. The cheap, easy moment to get the page right is in Word, Excel or LibreOffice, where a few clicks reshape the whole document before it is frozen.",
           "Treating page setup as the first step rather than an afterthought turns conversion from a gamble into a formality. When the source is laid out properly, the PDF simply captures what is already correct.",
         ],
@@ -995,7 +995,7 @@ const articles = [
           "Walk through the page settings deliberately before you reach for the conversion tool. The few minutes spent here save far more time than fixing a flawed PDF later.",
         ],
         ul: [
-          "Step 1: Choose the right page size and orientation — portrait for letters and reports, landscape for wide tables and dashboards.",
+          "Step 1: Choose the right page size and orientation, portrait for letters and reports, landscape for wide tables and dashboards.",
           "Step 2: Set sensible, consistent margins so text is not cramped against the edge or floating in too much white space.",
           "Step 3: In Excel, define the print area precisely so only the cells you want appear, and turn on repeating header rows.",
           "Step 4: Use Print Preview or Page Layout view to see exactly where pages break before you commit.",
@@ -1012,7 +1012,7 @@ const articles = [
       {
         h: "Why blank pages and cut-offs really happen",
         p: [
-          "The phantom blank page at the end of a converted document is almost always caused by content extending a fraction beyond the page edge — a table one column too wide, a paragraph with trailing empty lines, a margin set too generously. The application pushes the overflow onto a new page, and the conversion dutifully includes it.",
+          "The phantom blank page at the end of a converted document is almost always caused by content extending a fraction beyond the page edge, a table one column too wide, a paragraph with trailing empty lines, a margin set too generously. The application pushes the overflow onto a new page, and the conversion dutifully includes it.",
           "Cut-off tables follow the same logic. When a spreadsheet is wider than the page and scaling is left off, the extra columns are simply chopped at the boundary, and the reader sees a table that ends mid-sentence. Both problems are solved in the source by fitting content to the page and defining what should print, not by editing the PDF afterwards.",
         ],
       },
@@ -1044,9 +1044,9 @@ const articles = [
       {
         h: "How pagination is actually decided",
         p: [
-          "It helps to understand that the application, not the converter, decides where pages break. As you type, the program flows content into the current page until it runs out of room, then starts a new one — a continuous calculation based on page size, margins, font metrics and the dimensions of every table and image. The PDF conversion simply photographs the result of that calculation.",
+          "It helps to understand that the application, not the converter, decides where pages break. As you type, the program flows content into the current page until it runs out of room, then starts a new one, a continuous calculation based on page size, margins, font metrics and the dimensions of every table and image. The PDF conversion simply photographs the result of that calculation.",
           "This is why blaming the converter for a bad layout misses the point. A phantom blank page exists because content, often invisible whitespace, has spilled a fraction past the boundary and triggered a new page in the source. A cut-off table exists because its width exceeded the printable area and scaling was never applied. The converter faithfully reproduced both.",
-          "Once you see pagination as something the source decides and the PDF records, the fix becomes obvious: change the inputs to that calculation — margins, orientation, scaling, print area — and the breaks fall where you want before anything is frozen.",
+          "Once you see pagination as something the source decides and the PDF records, the fix becomes obvious: change the inputs to that calculation, margins, orientation, scaling, print area, and the breaks fall where you want before anything is frozen.",
         ],
       },
       {
@@ -1071,7 +1071,7 @@ const articles = [
         p: [
           "Consider a designer laying out a 24-page booklet that will be professionally printed and saddle-stitched. On screen the spreads look balanced, but printing introduces constraints the screen never showed: the inner margin must be wide enough that text does not disappear into the fold, and the outer margins must match so the trimmed pages look intentional.",
           "Before converting, the designer sets a generous inner margin, confirms the page size matches the printer's specification, and steps through Print Preview spread by spread to catch any heading orphaned at the foot of a page. Wide reference tables are rotated to landscape so they keep all their columns. Only then does the file go through Word to PDF.",
-          "The printer receives a PDF whose geometry matches their requirements exactly, with no last-minute reflow and no column lost to the page edge. Where a single page needs a hair trimmed from one side, Crop PDF handles the fine adjustment — but the structural decisions were all made in the source, which is where page geometry is cheap to change.",
+          "The printer receives a PDF whose geometry matches their requirements exactly, with no last-minute reflow and no column lost to the page edge. Where a single page needs a hair trimmed from one side, Crop PDF handles the fine adjustment, but the structural decisions were all made in the source, which is where page geometry is cheap to change.",
         ],
       },
       {
@@ -1150,7 +1150,7 @@ const articles = [
       {
         h: "Why a self-contained PDF resists time",
         p: [
-          "An ordinary office file is full of external dependencies. It points to fonts it expects to find on the machine, it may reference linked images or data, and it relies on a specific application to interpret its proprietary structure. Remove any of those supports — a discontinued font, a moved image, an obsolete program — and the document degrades or fails to open.",
+          "An ordinary office file is full of external dependencies. It points to fonts it expects to find on the machine, it may reference linked images or data, and it relies on a specific application to interpret its proprietary structure. Remove any of those supports, a discontinued font, a moved image, an obsolete program, and the document degrades or fails to open.",
           "An archival PDF deliberately severs those dependencies by pulling everything inside. The fonts are embedded, the content is fixed, and the format is openly documented rather than tied to one vendor. That self-sufficiency is precisely what gives it a fighting chance of opening, complete and faithful, far into the future. It is the difference between storing a plant that needs constant watering and pressing it permanently between glass.",
         ],
       },
@@ -1183,7 +1183,7 @@ const articles = [
         h: "What makes a format survive the decades",
         p: [
           "Durability is less about the medium and more about dependencies. A format survives when a document can be rendered using only what is inside the file and a publicly documented specification, with no reliance on a particular vendor's software still existing. The fewer external things a file needs, the longer it stays readable.",
-          "This is the principle behind a self-contained archival PDF. By embedding its fonts, fixing its content and avoiding links to resources that may move or vanish, it removes the supports that ordinary files quietly depend on. And because the PDF specification is openly published, anyone, decades from now, can build software that reads it — the format is not hostage to one company's commercial decisions.",
+          "This is the principle behind a self-contained archival PDF. By embedding its fonts, fixing its content and avoiding links to resources that may move or vanish, it removes the supports that ordinary files quietly depend on. And because the PDF specification is openly published, anyone, decades from now, can build software that reads it, the format is not hostage to one company's commercial decisions.",
           "Contrast that with a proprietary office format whose full behaviour is known only to its maker. The day that maker drops support, every file in that format inherits a slow expiry date. Self-containment plus open documentation is what buys a document its long future.",
         ],
       },
@@ -1207,9 +1207,9 @@ const articles = [
       {
         h: "A walk-through: archiving a signed contract for the long term",
         p: [
-          "Consider a legal team that must keep an executed services contract readable and faithful for the full retention period, which may stretch well beyond the life of the software it was drafted in. The working file is a Word document with the firm's letterhead fonts and an embedded logo — exactly the kind of file that ages badly if left as-is.",
+          "Consider a legal team that must keep an executed services contract readable and faithful for the full retention period, which may stretch well beyond the life of the software it was drafted in. The working file is a Word document with the firm's letterhead fonts and an embedded logo, exactly the kind of file that ages badly if left as-is.",
           "For the archive, the team converts the final, signed version with Word to PDF, choosing settings that embed the fonts so the letterhead and body text are sealed into the file. The result is given a clear, dated name that identifies the parties and the agreement, run through Compress PDF to keep the store manageable, and saved with a duplicate copy held in a separate location.",
-          "Years later, when the matter is reviewed on systems that no longer run the original word processor, the archived PDF opens complete — fonts, layout and signature intact — with no dependence on the dead application. The contract is not merely stored; it is genuinely future-proof, which for a document of record is the only standard that counts.",
+          "Years later, when the matter is reviewed on systems that no longer run the original word processor, the archived PDF opens complete, fonts, layout and signature intact, with no dependence on the dead application. The contract is not merely stored; it is genuinely future-proof, which for a document of record is the only standard that counts.",
         ],
       },
       {

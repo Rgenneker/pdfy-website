@@ -34,7 +34,9 @@ _Describe the high-level user-facing capabilities of this app once they exist._
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- No em-dash or en-dash characters (— or –) anywhere on the site. Use commas, periods, colons, or hyphens instead. Applies to all authored content, components, and generated SEO files.
+- Content must read as humanised and original (no obvious AI-marker filler).
+- Keep AdSense (publisher ca-pub-9774952664394142). Do not add Adsterra or other ad networks.
 
 ## Gotchas
 

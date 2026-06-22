@@ -25,7 +25,7 @@ export default function GeoKeywordPage() {
   const { tool, location, modifier } = page;
   const heading = `${tool} in ${location} ${titleCase(modifier)}`.trim();
   const title = `${tool} in ${location} | PDFShuffl`;
-  const description = `${tool} in ${location} ${modifier}. PDFShuffl is a fast, secure, browser-based PDF tool for users in ${location} — convert, edit, compress, merge and sign PDF files online.`;
+  const description = `${tool} in ${location} ${modifier}. PDFShuffl is a fast, secure, browser-based PDF tool for users in ${location}, convert, edit, compress, merge and sign PDF files online.`;
   const canonical = `${SITE_URL}/geo/${slug}`;
   const related = relatedGeoLinks(tool, location, modifier, 10);
 
@@ -49,7 +49,7 @@ export default function GeoKeywordPage() {
     "@graph": [
       {
         "@type": "WebApplication",
-        name: `${tool} in ${location} — PDFShuffl`,
+        name: `${tool} in ${location}, PDFShuffl`,
         url: canonical,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
@@ -118,7 +118,7 @@ export default function GeoKeywordPage() {
         <p className="text-lg mb-6">
           Looking for {tool.toLowerCase()} in {location}? PDFShuffl gives users
           across {location} a fast, secure way to convert, edit, compress, merge,
-          split and sign PDF files online — {modifier}, with nothing to install.
+          split and sign PDF files online, {modifier}, with nothing to install.
         </p>
 
         <section className="mb-8">
