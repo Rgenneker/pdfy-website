@@ -239,18 +239,126 @@ router.post("/request-signing", upload.single("file"), async (req, res) => {
   }
 });
 
-// Stubs for routes requiring system tools (soffice/ghostscript) - return informative error
-router.post("/ppt-to-pdf", upload.single("file"), (_req, res) => {
-  res.status(501).send("PPT to PDF requires LibreOffice — not available in this environment.");
+router.post("/ppt-to-pdf", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).send("No file uploaded");
+    // @ts-ignore
+    const JSZip = (await import("jszip")).default;
+    const zip = await JSZip.loadAsync(req.file.buffer);
+    const slideFiles = Object.keys(zip.files)
+      .filter((f) => f.match(/^ppt\/slides\/slide\d+\.xml$/))
+      .sort((a, b) => {
+        const na = parseInt(a.match(/slide(\d+)/)?.[1] ?? "0");
+        const nb = parseInt(b.match(/slide(\d+)/)?.[1] ?? "0");
+        return na - nb;
+      });
+    const pdfDoc = await PDFDocument.create();
+    const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    if (slideFiles.length === 0) {
+      const page = pdfDoc.addPage([842, 595]);
+      page.drawText("No slides found in this presentation.", { x: 50, y: 300, size: 14, font, color: rgb(0.3, 0.3, 0.3) });
+    }
+    for (let si = 0; si < slideFiles.length; si++) {
+      const xmlStr = await zip.files[slideFiles[si]].async("string");
+      const texts: string[] = [];
+      const tagRe = /<a:t[^>]*>([^<]*)<\/a:t>/g;
+      let m;
+      while ((m = tagRe.exec(xmlStr)) !== null) {
+        const t = m[1].trim();
+        if (t) texts.push(t);
+      }
+      const page = pdfDoc.addPage([842, 595]);
+      page.drawText(`Slide ${si + 1}`, { x: 40, y: 560, size: 14, font: titleFont, color: rgb(0.88, 0.08, 0.24) });
+      let y = 530;
+      for (const line of texts) {
+        const wrapped = line.match(/.{1,100}/g) || [line];
+        for (const chunk of wrapped) {
+          if (y < 40) break;
+          page.drawText(chunk, { x: 50, y, size: 11, font, color: rgb(0.1, 0.1, 0.1) });
+          y -= 18;
+        }
+        if (y < 40) break;
+      }
+    }
+    const pdfBytes = await pdfDoc.save();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-presentation.pdf");
+    res.send(Buffer.from(pdfBytes));
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("PPT to PDF conversion failed");
+  }
 });
+
+router.post("/excel-to-pdf", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).send("No file uploaded");
+    // @ts-ignore
+    const XLSX = await import("xlsx");
+    const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
+    const pdfDoc = await PDFDocument.create();
+    const headerFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    for (const sheetName of workbook.SheetNames) {
+      const sheet = workbook.Sheets[sheetName];
+      const rows: string[][] = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" }) as string[][];
+      if (rows.length === 0) continue;
+      let page = pdfDoc.addPage([842, 595]);
+      page.drawText(sheetName, { x: 40, y: 560, size: 14, font: headerFont, color: rgb(0.88, 0.08, 0.24) });
+      let y = 530;
+      const colCount = Math.max(...rows.map((r) => r.length));
+      const colWidth = Math.min(130, Math.floor(760 / Math.max(colCount, 1)));
+      const startX = 40;
+      for (let ri = 0; ri < rows.length; ri++) {
+        if (y < 40) { page = pdfDoc.addPage([842, 595]); y = 560; }
+        const rowFont = ri === 0 ? headerFont : font;
+        const color = ri === 0 ? rgb(0.1, 0.1, 0.5) : rgb(0.1, 0.1, 0.1);
+        rows[ri].slice(0, Math.floor(760 / colWidth)).forEach((cell, ci) => {
+          const text = String(cell ?? "").slice(0, 18);
+          page.drawText(text, { x: startX + ci * colWidth, y, size: 9, font: rowFont, color });
+        });
+        y -= 18;
+      }
+    }
+    const pdfBytes = await pdfDoc.save();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-excel.pdf");
+    res.send(Buffer.from(pdfBytes));
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Excel to PDF conversion failed");
+  }
+});
+
+router.post("/compress-pdf", upload.single("file"), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).send("No PDF file uploaded");
+    const pdfDoc = await PDFDocument.load(req.file.buffer, { ignoreEncryption: true });
+    pdfDoc.setTitle("");
+    pdfDoc.setAuthor("");
+    pdfDoc.setSubject("");
+    pdfDoc.setKeywords([]);
+    pdfDoc.setProducer("PDFShuffl");
+    pdfDoc.setCreator("PDFShuffl");
+    const pdfBytes = await pdfDoc.save({ useObjectStreams: true, addDefaultPage: false });
+    const originalSize = req.file.buffer.length;
+    const compressedSize = pdfBytes.length;
+    const savings = Math.max(0, Math.round((1 - compressedSize / originalSize) * 100));
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-compressed.pdf");
+    res.setHeader("X-Original-Size", String(originalSize));
+    res.setHeader("X-Compressed-Size", String(compressedSize));
+    res.setHeader("X-Size-Savings-Percent", String(savings));
+    res.send(Buffer.from(pdfBytes));
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Compress PDF failed");
+  }
+});
+
 router.post("/libre-to-pdf", upload.single("file"), (_req, res) => {
   res.status(501).send("Libre to PDF requires LibreOffice — not available in this environment.");
-});
-router.post("/excel-to-pdf", upload.single("file"), (_req, res) => {
-  res.status(501).send("Excel to PDF requires LibreOffice — not available in this environment.");
-});
-router.post("/compress-pdf", upload.single("file"), (_req, res) => {
-  res.status(501).send("Compress PDF requires Ghostscript — not available in this environment.");
 });
 router.post("/html-to-pdf", upload.single("file"), (_req, res) => {
   res.status(501).send("HTML to PDF requires Puppeteer — not available in this environment.");
