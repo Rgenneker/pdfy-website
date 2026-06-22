@@ -1822,9 +1822,9 @@ Notes: ${note}`
             <div className="mt-6"><h4 className="mb-3 font-black text-slate-950">Best used for</h4><div className="grid gap-2 text-sm text-slate-600"><p>• Applications and forms</p><p>• Contracts and signing</p><p>• Reports and statements</p><p>• School and business submissions</p><p>• Customer service document support</p></div></div>
           </aside>
         </div>
-      </section>
 
-      <RelatedArticles toolName={tool.name} />
+        <RelatedArticles toolName={tool.name} />
+      </section>
     </main>
   );
 }
@@ -1833,7 +1833,7 @@ function RelatedArticles({ toolName }) {
   const related = getArticlesForTool(toolName, 3);
   if (!related || related.length === 0) return null;
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-16 lg:px-8">
+    <section className="mt-8">
       <div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-sm">
         <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
           <div>
