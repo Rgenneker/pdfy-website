@@ -1,0 +1,43 @@
+# PDFShuffl
+
+> PDFShuffl is a free, fast, privacy-friendly suite of browser-based PDF tools. Convert, edit, compress, merge, split, sign and organise PDF files online from any device — no installation or signup required.
+
+PDFShuffl runs entirely in the browser. Files are processed securely and are not shared. The service is available worldwide, including geo-targeted landing pages for major countries and cities.
+
+## Core tools
+
+- [PDF Converter](https://pdfshuffl.com/tools): PDF Converter online — free, secure, no signup.
+- [Convert PDF to Word](https://pdfshuffl.com/tools): Convert PDF to Word online — free, secure, no signup.
+- [Convert Word to PDF](https://pdfshuffl.com/tools): Convert Word to PDF online — free, secure, no signup.
+- [Convert PDF to Excel](https://pdfshuffl.com/tools): Convert PDF to Excel online — free, secure, no signup.
+- [Convert Excel to PDF](https://pdfshuffl.com/tools): Convert Excel to PDF online — free, secure, no signup.
+- [Convert PDF to JPG](https://pdfshuffl.com/tools): Convert PDF to JPG online — free, secure, no signup.
+- [Convert JPG to PDF](https://pdfshuffl.com/tools): Convert JPG to PDF online — free, secure, no signup.
+- [Convert PDF to PNG](https://pdfshuffl.com/tools): Convert PDF to PNG online — free, secure, no signup.
+- [Convert PDF to PowerPoint](https://pdfshuffl.com/tools): Convert PDF to PowerPoint online — free, secure, no signup.
+- [Convert PowerPoint to PDF](https://pdfshuffl.com/tools): Convert PowerPoint to PDF online — free, secure, no signup.
+- [Compress PDF](https://pdfshuffl.com/tools): Compress PDF online — free, secure, no signup.
+- [Merge PDF](https://pdfshuffl.com/tools): Merge PDF online — free, secure, no signup.
+- [Split PDF](https://pdfshuffl.com/tools): Split PDF online — free, secure, no signup.
+- [Edit PDF](https://pdfshuffl.com/tools): Edit PDF online — free, secure, no signup.
+- [Sign PDF](https://pdfshuffl.com/tools): Sign PDF online — free, secure, no signup.
+- [Rotate PDF](https://pdfshuffl.com/tools): Rotate PDF online — free, secure, no signup.
+- [Crop PDF](https://pdfshuffl.com/tools): Crop PDF online — free, secure, no signup.
+- [Unlock PDF](https://pdfshuffl.com/tools): Unlock PDF online — free, secure, no signup.
+- [Protect PDF](https://pdfshuffl.com/tools): Protect PDF online — free, secure, no signup.
+- [PDF to Text](https://pdfshuffl.com/tools): PDF to Text online — free, secure, no signup.
+
+## Key pages
+
+- [Home](https://pdfshuffl.com/): Full PDF toolkit and uploader.
+- [All tools](https://pdfshuffl.com/tools): Browse every PDF conversion and editing tool.
+- [Articles](https://pdfshuffl.com/articles): Guides and how-tos for working with PDFs.
+- [About](https://pdfshuffl.com/about): What PDFShuffl is and how it works.
+- [Contact](https://pdfshuffl.com/contact): Get in touch with the PDFShuffl team.
+
+## Machine-readable data
+
+- [Tool registry (JSON)](https://pdfshuffl.com/api/tools.json): Machine-readable list of all PDFShuffl tools.
+- [Sitemap index](https://pdfshuffl.com/sitemap-index.xml): All indexed pages.
+
+_Indexed pages: 550,000 (PDF keyword pages + geo-targeted pages)._

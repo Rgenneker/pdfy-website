@@ -1,4 +1,5 @@
 import PdfKeywordPage from "./pages/PdfKeywordPage";
+import GeoKeywordPage from "./pages/GeoKeywordPage";
 import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
@@ -2459,6 +2460,7 @@ const toolRoutes = [
   <Route path="/tools" element={<ToolsLandingPage />} />
   <Route path="/tools/pdf-to-word" element={<PdfToWordPage />} />
   <Route path="/pdf/:slug" element={<PdfKeywordPage />} />
+  <Route path="/geo/:slug" element={<GeoKeywordPage />} />
   {toolRoutes.map((route) => (
   <Route
     key={route.path}
