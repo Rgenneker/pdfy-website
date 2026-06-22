@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "hCC7ldkayFud50U4zbOlK"
+uri = "file://artifacts/pdfshuffle-mobile/assets/images/icon.png"
+type = "image"
+title = "pdfshuffle app icon"
