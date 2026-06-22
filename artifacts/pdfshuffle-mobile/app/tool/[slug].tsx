@@ -20,6 +20,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import PreviewModal from "@/components/PreviewModal";
 import { useColors } from "@/hooks/useColors";
 import { apiUrl } from "@/lib/api";
 import { getToolBySlug } from "@/lib/tools";
@@ -47,6 +48,7 @@ export default function ToolScreen() {
   const [loading, setLoading] = useState(false);
   const [resultPath, setResultPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [previewVisible, setPreviewVisible] = useState(false);
 
   const [cameraPermission, requestCameraPermission] =
     ImagePicker.useCameraPermissions();
@@ -509,6 +511,23 @@ export default function ToolScreen() {
       color: "#ffffff",
       fontFamily: "Inter_700Bold",
     },
+    previewButton: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 8,
+      backgroundColor: colors.card,
+      borderWidth: 1.5,
+      borderColor: "#16a34a",
+      borderRadius: 50,
+      paddingVertical: 12,
+    },
+    previewButtonText: {
+      fontSize: 14,
+      fontWeight: "700" as const,
+      color: "#16a34a",
+      fontFamily: "Inter_700Bold",
+    },
   });
 
   return (
@@ -714,21 +733,36 @@ export default function ToolScreen() {
             <Text style={styles.successDesc}>
               {resultPath === "downloaded"
                 ? "Your file has been downloaded."
-                : "Your file is ready. Tap below to save or share it."}
+                : "Your file is ready. Tap below to preview, save, or share it."}
             </Text>
             {resultPath !== "downloaded" && (
-              <Pressable
-                style={({ pressed }) => [
-                  styles.shareButton,
-                  { opacity: pressed ? 0.85 : 1 },
-                ]}
-                onPress={handleShare}
-              >
-                <Ionicons name="share-outline" size={18} color="#fff" />
-                <Text style={styles.shareButtonText}>
-                  Save / Share {tool.outputExtension.toUpperCase()}
-                </Text>
-              </Pressable>
+              <>
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.previewButton,
+                    { opacity: pressed ? 0.85 : 1 },
+                  ]}
+                  onPress={() => setPreviewVisible(true)}
+                  testID="preview-button"
+                >
+                  <Ionicons name="eye-outline" size={18} color="#16a34a" />
+                  <Text style={styles.previewButtonText}>
+                    Preview {tool.outputExtension.toUpperCase()}
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.shareButton,
+                    { opacity: pressed ? 0.85 : 1 },
+                  ]}
+                  onPress={handleShare}
+                >
+                  <Ionicons name="share-outline" size={18} color="#fff" />
+                  <Text style={styles.shareButtonText}>
+                    Save / Share {tool.outputExtension.toUpperCase()}
+                  </Text>
+                </Pressable>
+              </>
             )}
           </View>
         )}
@@ -761,6 +795,16 @@ export default function ToolScreen() {
           </LinearGradient>
         </Pressable>
       </ScrollView>
+
+      {resultPath && resultPath !== "downloaded" && (
+        <PreviewModal
+          visible={previewVisible}
+          onClose={() => setPreviewVisible(false)}
+          filePath={resultPath}
+          outputExtension={tool.outputExtension}
+          fileName={`PDFShuffl-result.${tool.outputExtension}`}
+        />
+      )}
     </View>
   );
 }
