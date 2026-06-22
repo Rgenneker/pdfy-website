@@ -113,6 +113,34 @@ router.post("/jpg-to-pdf", upload.single("file"), async (req, res) => {
   }
 });
 
+router.post("/images-to-pdf", upload.array("files", 50), async (req, res) => {
+  try {
+    const files = (req.files as { buffer: Buffer; mimetype: string }[] | undefined) ?? [];
+    if (files.length === 0) return res.status(400).send("No images uploaded");
+
+    const pdfDoc = await PDFDocument.create();
+    for (const file of files) {
+      let image;
+      if (file.mimetype === "image/png") {
+        image = await pdfDoc.embedPng(new Uint8Array(file.buffer));
+      } else {
+        image = await pdfDoc.embedJpg(new Uint8Array(file.buffer));
+      }
+      const { width, height } = image.scale(1);
+      const page = pdfDoc.addPage([width, height]);
+      page.drawImage(image, { x: 0, y: 0, width, height });
+    }
+
+    const pdfBytes = await pdfDoc.save();
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-scan.pdf");
+    res.send(Buffer.from(pdfBytes));
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send("Image conversion failed");
+  }
+});
+
 router.post("/word-to-pdf", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) return res.status(400).send("No file uploaded");

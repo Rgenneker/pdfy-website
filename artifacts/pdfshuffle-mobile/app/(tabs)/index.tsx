@@ -1,13 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
-import { documentDirectory, EncodingType, writeAsStringAsync } from "expo-file-system/legacy";
 import * as Haptics from "expo-haptics";
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import * as Sharing from "expo-sharing";
-import React, { useState } from "react";
+import React from "react";
 import {
-  ActivityIndicator,
   Alert,
   Platform,
   Pressable,
@@ -83,7 +80,6 @@ export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const isWeb = Platform.OS === "web";
 
-  const [scanLoading, setScanLoading] = useState(false);
   const [cameraPermission, requestCameraPermission] =
     ImagePicker.useCameraPermissions();
 
@@ -92,17 +88,6 @@ export default function HomeScreen() {
     { label: "Formats", value: "8+" },
     { label: "Free", value: "100%" },
   ];
-
-  const blobToBase64 = (blob: Blob): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        resolve(result.split(",")[1] ?? "");
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
 
   const scanAndConvert = async () => {
     if (Platform.OS === "web") {
@@ -124,64 +109,8 @@ export default function HomeScreen() {
       }
     }
 
-    try {
-      const result = await ImagePicker.launchCameraAsync({
-        mediaTypes: ["images"],
-        quality: 0.92,
-        allowsEditing: false,
-      });
-
-      if (result.canceled || !result.assets.length) return;
-
-      const asset = result.assets[0];
-      setScanLoading(true);
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-
-      const formData = new FormData();
-      formData.append("file", {
-        uri: asset.uri,
-        type: "image/jpeg",
-        name: `scan-${Date.now()}.jpg`,
-      } as any);
-
-      const response = await fetch(apiUrl("/jpg-to-pdf"), {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const msg = await response.text();
-        throw new Error(msg || `Server error ${response.status}`);
-      }
-
-      const blob = await response.blob();
-      const base64 = await blobToBase64(blob);
-      const fileName = `PDFShuffl-scan-${Date.now()}.pdf`;
-      const filePath = `${documentDirectory}${fileName}`;
-      await writeAsStringAsync(filePath, base64, {
-        encoding: EncodingType.Base64,
-      });
-
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-
-      const canShare = await Sharing.isAvailableAsync();
-      if (canShare) {
-        await Sharing.shareAsync(filePath, {
-          mimeType: "application/pdf",
-          dialogTitle: "Save scanned PDF",
-        });
-      } else {
-        Alert.alert("Scan complete!", "Your scanned PDF has been saved.");
-      }
-    } catch (err: any) {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      Alert.alert(
-        "Scan failed",
-        err?.message ?? "Could not convert the photo to PDF. Please try again."
-      );
-    } finally {
-      setScanLoading(false);
-    }
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    router.push("/scan" as any);
   };
 
   const styles = StyleSheet.create({
@@ -420,21 +349,14 @@ export default function HomeScreen() {
 
             <Pressable
               onPress={scanAndConvert}
-              disabled={scanLoading}
               style={({ pressed }) => [
                 styles.scanButton,
-                { opacity: pressed || scanLoading ? 0.7 : 1 },
+                { opacity: pressed ? 0.7 : 1 },
               ]}
               testID="scan-document-button"
             >
-              {scanLoading ? (
-                <ActivityIndicator size="small" color={colors.primary} />
-              ) : (
-                <Ionicons name="camera" size={16} color={colors.primary} />
-              )}
-              <Text style={styles.scanButtonText}>
-                {scanLoading ? "Converting…" : "Scan Document"}
-              </Text>
+              <Ionicons name="camera" size={16} color={colors.primary} />
+              <Text style={styles.scanButtonText}>Scan Document</Text>
             </Pressable>
           </View>
 

@@ -24,6 +24,7 @@ function RootLayoutNav() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="tool/[slug]" options={{ headerShown: false }} />
+      <Stack.Screen name="scan" options={{ headerShown: false }} />
     </Stack>
   );
 }

@@ -629,16 +629,19 @@ export default function ToolScreen() {
                       styles.scanButton,
                       { opacity: pressed ? 0.7 : 1 },
                     ]}
-                    onPress={scanFromCamera}
+                    onPress={() => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                      router.push("/scan" as any);
+                    }}
                     testID="scan-camera-button"
                   >
                     <Ionicons
-                      name="camera"
+                      name="documents"
                       size={26}
                       color={colors.primary}
                     />
                     <Text style={styles.scanButtonText}>
-                      Scan Document
+                      Scan Pages
                     </Text>
                   </Pressable>
                 </View>
