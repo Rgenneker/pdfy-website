@@ -981,6 +981,12 @@ function ToolsPage({ selectedTool, setSelectedTool }) {
   const [status, setStatus] = useState("Ready");
   const inputRef = useRef(null);
 
+  function formatFileSize(bytes) {
+    if (!bytes || bytes < 1024) return `${bytes || 0} B`;
+    if (bytes < 1048576) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / 1048576).toFixed(1)} MB`;
+  }
+
   function processTool() {
     if (tool.name === "Create PDF") {
   fetch("/api/create-pdf", {
@@ -1505,6 +1511,8 @@ if (tool.name === "Compress PDF" && file) {
   const formData = new FormData();
   formData.append("file", file);
 
+  let sizeSummary = "";
+
   fetch("/api/compress-pdf", {
     method: "POST",
     body: formData,
@@ -1512,6 +1520,17 @@ if (tool.name === "Compress PDF" && file) {
     .then((response) => {
       if (!response.ok) {
         throw new Error("Compress PDF failed");
+      }
+
+      const originalSize = Number(response.headers.get("X-Original-Size"));
+      const compressedSize = Number(response.headers.get("X-Compressed-Size"));
+      const savings = Number(response.headers.get("X-Size-Savings-Percent"));
+
+      if (originalSize > 0 && compressedSize > 0) {
+        sizeSummary =
+          savings > 0
+            ? `Your file shrank from ${formatFileSize(originalSize)} to ${formatFileSize(compressedSize)} (${savings}% smaller).`
+            : `Your file was already well optimised, so it stayed at ${formatFileSize(compressedSize)}.`;
       }
 
       return response.blob();
@@ -1526,7 +1545,11 @@ if (tool.name === "Compress PDF" && file) {
 
       window.URL.revokeObjectURL(url);
 
-      setStatus("PDF compressed successfully.");
+      setStatus(
+        sizeSummary
+          ? `PDF compressed successfully. ${sizeSummary}`
+          : "PDF compressed successfully."
+      );
     })
     .catch((error) => {
       console.error(error);

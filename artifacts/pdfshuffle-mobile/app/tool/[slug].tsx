@@ -49,6 +49,7 @@ export default function ToolScreen() {
   const [resultPath, setResultPath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [previewVisible, setPreviewVisible] = useState(false);
+  const [sizeSummary, setSizeSummary] = useState<string | null>(null);
 
   const [cameraPermission, requestCameraPermission] =
     ImagePicker.useCameraPermissions();
@@ -153,6 +154,7 @@ export default function ToolScreen() {
   const handleConvert = async () => {
     setError(null);
     setResultPath(null);
+    setSizeSummary(null);
     setLoading(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 
@@ -198,6 +200,19 @@ export default function ToolScreen() {
       if (!response.ok) {
         const msg = await response.text();
         throw new Error(msg || `Server error ${response.status}`);
+      }
+
+      if (tool.slug === "compress-pdf") {
+        const originalSize = Number(response.headers.get("X-Original-Size"));
+        const compressedSize = Number(response.headers.get("X-Compressed-Size"));
+        const savings = Number(response.headers.get("X-Size-Savings-Percent"));
+        if (originalSize > 0 && compressedSize > 0) {
+          setSizeSummary(
+            savings > 0
+              ? `Your file shrank from ${formatBytes(originalSize)} to ${formatBytes(compressedSize)} (${savings}% smaller).`
+              : `Your file was already well optimised, so it stayed at ${formatBytes(compressedSize)}.`
+          );
+        }
       }
 
       if (isWeb) {
@@ -496,6 +511,22 @@ export default function ToolScreen() {
       fontFamily: "Inter_400Regular",
       opacity: 0.8,
     },
+    sizeSummaryRow: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      gap: 8,
+      backgroundColor: "#dcfce7",
+      borderRadius: 10,
+      padding: 12,
+    },
+    sizeSummaryText: {
+      flex: 1,
+      fontSize: 13,
+      fontWeight: "700" as const,
+      color: "#166534",
+      fontFamily: "Inter_700Bold",
+      lineHeight: 18,
+    },
     shareButton: {
       flexDirection: "row",
       alignItems: "center",
@@ -735,6 +766,12 @@ export default function ToolScreen() {
                 ? "Your file has been downloaded."
                 : "Your file is ready. Tap below to preview, save, or share it."}
             </Text>
+            {sizeSummary && (
+              <View style={styles.sizeSummaryRow}>
+                <Ionicons name="trending-down" size={18} color="#166534" />
+                <Text style={styles.sizeSummaryText}>{sizeSummary}</Text>
+              </View>
+            )}
             {resultPath !== "downloaded" && (
               <>
                 <Pressable

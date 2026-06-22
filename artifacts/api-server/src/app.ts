@@ -25,7 +25,15 @@ app.use(
     },
   }),
 );
-app.use(cors());
+app.use(
+  cors({
+    exposedHeaders: [
+      "X-Original-Size",
+      "X-Compressed-Size",
+      "X-Size-Savings-Percent",
+    ],
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
