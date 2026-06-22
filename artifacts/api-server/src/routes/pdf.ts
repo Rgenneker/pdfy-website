@@ -299,46 +299,8 @@ router.post("/request-signing", upload.single("file"), async (req, res) => {
 router.post("/ppt-to-pdf", upload.single("file"), async (req, res) => {
   try {
     if (!req.file) return res.status(400).send("No file uploaded");
-    // @ts-ignore
-    const JSZip = (await import("jszip")).default;
-    const zip = await JSZip.loadAsync(req.file.buffer);
-    const slideFiles = Object.keys(zip.files)
-      .filter((f) => f.match(/^ppt\/slides\/slide\d+\.xml$/))
-      .sort((a, b) => {
-        const na = parseInt(a.match(/slide(\d+)/)?.[1] ?? "0");
-        const nb = parseInt(b.match(/slide(\d+)/)?.[1] ?? "0");
-        return na - nb;
-      });
-    const pdfDoc = await PDFDocument.create();
-    const titleFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    if (slideFiles.length === 0) {
-      const page = pdfDoc.addPage([842, 595]);
-      page.drawText("No slides found in this presentation.", { x: 50, y: 300, size: 14, font, color: rgb(0.3, 0.3, 0.3) });
-    }
-    for (let si = 0; si < slideFiles.length; si++) {
-      const xmlStr = await zip.files[slideFiles[si]].async("string");
-      const texts: string[] = [];
-      const tagRe = /<a:t[^>]*>([^<]*)<\/a:t>/g;
-      let m;
-      while ((m = tagRe.exec(xmlStr)) !== null) {
-        const t = m[1].trim();
-        if (t) texts.push(t);
-      }
-      const page = pdfDoc.addPage([842, 595]);
-      page.drawText(`Slide ${si + 1}`, { x: 40, y: 560, size: 14, font: titleFont, color: rgb(0.88, 0.08, 0.24) });
-      let y = 530;
-      for (const line of texts) {
-        const wrapped = line.match(/.{1,100}/g) || [line];
-        for (const chunk of wrapped) {
-          if (y < 40) break;
-          page.drawText(chunk, { x: 50, y, size: 11, font, color: rgb(0.1, 0.1, 0.1) });
-          y -= 18;
-        }
-        if (y < 40) break;
-      }
-    }
-    const pdfBytes = await pdfDoc.save();
+    const { renderPptxToPdf } = await import("../lib/pptx");
+    const pdfBytes = await renderPptxToPdf(req.file.buffer);
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", "attachment; filename=PDFShuffl-presentation.pdf");
     res.send(Buffer.from(pdfBytes));

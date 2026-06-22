@@ -17,6 +17,7 @@
     "docx": "^9.7.1",
     "drizzle-orm": "catalog:",
     "express": "^5.2.1",
+    "jimp-compact": "^0.16.1",
     "jszip": "^3.10.1",
     "mammoth": "^1.12.0",
     "multer": "^2.2.0",

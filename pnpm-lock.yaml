@@ -187,6 +187,9 @@ importers:
       express:
         specifier: ^5.2.1
         version: 5.2.1
+      jimp-compact:
+        specifier: ^0.16.1
+        version: 0.16.1
       jszip:
         specifier: ^3.10.1
         version: 3.10.1
