@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import {
@@ -27,6 +28,10 @@ function formatDate(value) {
 }
 
 export default function ArticleView({ article }) {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [article.slug]);
+
   const category = getCategory(article.categoryId);
   const related = getRelatedArticles(article, 4);
   const minutes = readTimeMinutes(article);
