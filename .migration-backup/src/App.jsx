@@ -1,5 +1,4 @@
 import PdfKeywordPage from "./pages/PdfKeywordPage";
-import NativeBannerAd from "./Components/NativeBannerAd";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -2475,7 +2474,7 @@ const toolRoutes = [
   <Route path="*" element={page} />
 </Routes>
 
-    <NativeBannerAd />
+    
     <Footer
       setActivePage={setActivePage}
       setSelectedTool={setSelectedTool}
